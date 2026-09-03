@@ -54,26 +54,69 @@
     <p>Exactly equation (0.6.2) from last chapter, reversed. Whenever you see "something squared minus something squared," this pattern applies immediately.</p>
   </div>
 
+  <div class="live-diagram-controls">
+    <label>b: <input type="range" id="dos-b" min="1" max="8" step="1" value="3"></label>
+  </div>
   <div class="svg-wrap">
-    <svg viewBox="0 0 460 150" width="460" role="img" aria-label="Geometric proof: an a by a square with a b by b corner removed has the same area as an (a-b) by (a+b) rectangle">
-      <g transform="translate(15,15)">
-        <path d="M0,0 L60,0 L60,40 L100,40 L100,100 L0,100 Z" style="fill:var(--accent); fill-opacity:.18; stroke:var(--accent); stroke-width:2"/>
-        <text x="50" y="118" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">a</text>
-        <text x="-12" y="55" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">a</text>
-        <text x="80" y="34" text-anchor="middle" style="font-size:11px; fill:var(--text-dim); font-family:sans-serif">b</text>
-        <text x="30" y="-6" text-anchor="middle" style="font-size:11px; fill:var(--text-dim); font-family:sans-serif">a−b</text>
-        <text x="50" y="140" text-anchor="middle" style="font-size:11px; fill:var(--text); font-family:sans-serif">area = a² − b²</text>
+    <svg viewBox="0 0 460 175" width="460" role="img" aria-label="Interactive geometric proof: an a by a square with a b by b corner removed has the same area as an (a-b) by (a+b) rectangle, with a live numeric check as b changes">
+      <g transform="translate(25,15)">
+        <path id="dos-lshape" d="M0,0 L70,0 L70,30 L100,30 L100,100 L0,100 Z" style="fill:var(--accent); fill-opacity:.18; stroke:var(--accent); stroke-width:2"/>
+        <text x="50" y="118" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">a = 10</text>
+        <text x="-8" y="55" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif" transform="rotate(-90 -8 55)">a = 10</text>
+        <text id="dos-label-b" x="85" y="21" text-anchor="middle" style="font-size:11px; fill:var(--text-dim); font-family:sans-serif">b = 3</text>
+        <text id="dos-label-amb" x="35" y="-6" text-anchor="middle" style="font-size:11px; fill:var(--text-dim); font-family:sans-serif">a−b = 7</text>
+        <text id="dos-label-area1" x="50" y="140" text-anchor="middle" style="font-size:11px; fill:var(--text); font-family:sans-serif">a² − b² = 91</text>
       </g>
-      <text x="150" y="75" text-anchor="middle" style="font-size:20px; fill:var(--text-dim); font-family:sans-serif">=</text>
-      <g transform="translate(190,15)">
-        <rect x="0" y="0" width="140" height="60" style="fill:var(--accent); fill-opacity:.18; stroke:var(--accent); stroke-width:2"/>
-        <text x="70" y="-8" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">(a+b)</text>
-        <text x="-14" y="34" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">(a−b)</text>
-        <text x="70" y="90" text-anchor="middle" style="font-size:11px; fill:var(--text); font-family:sans-serif">area = (a−b)(a+b)</text>
+      <text x="160" y="80" text-anchor="middle" style="font-size:20px; fill:var(--text-dim); font-family:sans-serif">=</text>
+      <g transform="translate(200,15)">
+        <rect id="dos-rect" x="0" y="0" width="130" height="70" style="fill:var(--accent); fill-opacity:.18; stroke:var(--accent); stroke-width:2"/>
+        <text id="dos-label-apb" x="65" y="-8" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">(a+b) = 13</text>
+        <text id="dos-label-amb2" x="-10" y="39" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif" transform="rotate(-90 -10 39)">(a−b) = 7</text>
+        <text id="dos-label-area2" x="65" y="90" text-anchor="middle" style="font-size:11px; fill:var(--text); font-family:sans-serif">(a−b)(a+b) = 91</text>
       </g>
     </svg>
   </div>
-  <p class="subtitle" style="text-align:center; margin-top:-.5rem;">Cut the corner off a big square, and the leftover L-shape rearranges exactly into a rectangle — same area, two different-looking forms.</p>
+  <p class="subtitle" style="text-align:center; margin-top:-.5rem;">Drag the slider — cut the corner off a big square, and the leftover L-shape always rearranges into a rectangle of exactly the same area. Watch both numbers at the bottom stay equal.</p>
+  <script>
+  (function () {
+    const bInput = document.getElementById("dos-b");
+    const A = 10, SCALE = 10;
+    function update() {
+      const b = parseInt(bInput.value, 10);
+      const aPx = A * SCALE, bPx = b * SCALE, cut = aPx - bPx;
+      document.getElementById("dos-lshape").setAttribute("d",
+        "M0,0 L" + cut + ",0 L" + cut + "," + bPx + " L" + aPx + "," + bPx + " L" + aPx + "," + aPx + " L0," + aPx + " Z");
+      const bLabel = document.getElementById("dos-label-b");
+      bLabel.setAttribute("x", (cut + aPx) / 2);
+      bLabel.setAttribute("y", Math.max(bPx / 2 + 4, 14));
+      bLabel.textContent = "b = " + b;
+      const ambLabel = document.getElementById("dos-label-amb");
+      ambLabel.setAttribute("x", cut / 2);
+      ambLabel.textContent = "a−b = " + (A - b);
+      const area = A * A - b * b;
+      document.getElementById("dos-label-area1").textContent = "a² − b² = " + area;
+
+      const rectW = (A + b) * SCALE, rectH = (A - b) * SCALE;
+      const rect = document.getElementById("dos-rect");
+      rect.setAttribute("width", rectW);
+      rect.setAttribute("height", rectH);
+      const apbLabel = document.getElementById("dos-label-apb");
+      apbLabel.setAttribute("x", rectW / 2);
+      apbLabel.textContent = "(a+b) = " + (A + b);
+      const amb2Label = document.getElementById("dos-label-amb2");
+      const amb2Y = rectH / 2 + 4;
+      amb2Label.setAttribute("y", amb2Y);
+      amb2Label.setAttribute("transform", "rotate(-90 -10 " + amb2Y + ")");
+      amb2Label.textContent = "(a−b) = " + (A - b);
+      const area2Label = document.getElementById("dos-label-area2");
+      area2Label.setAttribute("x", rectW / 2);
+      area2Label.setAttribute("y", rectH + 20);
+      area2Label.textContent = "(a−b)(a+b) = " + area;
+    }
+    bInput.addEventListener("input", update);
+    update();
+  })();
+  </script>
 
   <div class="block example">
     <div class="label">Worked example — the exact diagnostic problem, done correctly</div>
@@ -87,6 +130,16 @@
     <details class="step"><summary>Result</summary>
       <div class="step-body"><div class="eqn"><div class="eq-body">\[ \frac{x^2-9}{x-3} = x+3 \quad (x\neq3) \]</div><div class="eq-num" id="eq-0-7-3">(0.7.3)</div></div>
       <p>The original guesswork approach — splitting the fraction term-by-term — doesn't work for division the way it works for a numerator that's already a single product. Factor first, <em>then</em> cancel.</p></div></details>
+  </div>
+
+  <div class="block practice checker" data-answers="x+3,3+x">
+    <div class="label">Try it yourself</div>
+    <p>Simplified form of <code>(x² − 9)/(x − 3)</code> — type it exactly (e.g. <code>x+3</code>):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. x+3" aria-label="Simplified form">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
   </div>
 
   <div class="block mistake">
@@ -134,6 +187,6 @@
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
 <script src="../../assets/app.js"></script>
-<script>MC.renderMath(document.body);</script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
 </body>
 </html>

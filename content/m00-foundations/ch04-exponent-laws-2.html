@@ -54,6 +54,16 @@
       <div class="step-body"><div class="eqn"><div class="eq-body">\[ (a^2b^3)^2 = a^4b^6 \]</div><div class="eq-num" id="eq-0-4-3">(0.4.3)</div></div></div></details>
   </div>
 
+  <div class="block practice checker" data-answers="4">
+    <div class="label">Try it yourself</div>
+    <p>In the fully simplified form of <code>(a²b³)²</code>, what's the exponent on <code>a</code> (the digit that got miscounted on the diagnostic)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="Exponent of a in simplified form">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
   <h2>Zero and negative exponents</h2>
   <div class="block definition">
     <div class="label">Definition — Zero exponent (\(a \neq 0\))</div>
@@ -122,6 +132,6 @@
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
 <script src="../../assets/app.js"></script>
-<script>MC.renderMath(document.body);</script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
 </body>
 </html>

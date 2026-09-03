@@ -39,22 +39,56 @@
     <p>Take half of \(b\), square it, add and subtract it. This turns \(x^2+bx\) into a perfect square (Chapter 6) minus a constant.</p>
   </div>
 
+  <div class="live-diagram-controls">
+    <label>b: <input type="range" id="cts-b" min="2" max="8" step="2" value="6"></label>
+  </div>
   <div class="svg-wrap">
-    <svg viewBox="0 0 210 190" width="320" role="img" aria-label="Geometric picture of completing the square: an x by x square, plus two (b/2) by x strips, plus a small (b/2) by (b/2) corner square added to complete a larger square of side x plus b over 2">
+    <svg viewBox="0 0 210 190" width="320" role="img" aria-label="Interactive geometric picture of completing the square, with an adjustable b showing the added corner square growing and shrinking">
       <rect x="10" y="10" width="120" height="120" style="fill:var(--def-bg); stroke:var(--def-border); stroke-width:2"/>
-      <rect x="130" y="10" width="30" height="120" style="fill:var(--int-bg); stroke:var(--int-border); stroke-width:2"/>
-      <rect x="10" y="130" width="120" height="30" style="fill:var(--int-bg); stroke:var(--int-border); stroke-width:2"/>
-      <rect x="130" y="130" width="30" height="30" style="fill:var(--mis-bg); stroke:var(--mis-border); stroke-width:2; stroke-dasharray:4 2"/>
+      <rect id="cts-right" x="130" y="10" width="30" height="120" style="fill:var(--int-bg); stroke:var(--int-border); stroke-width:2"/>
+      <rect id="cts-bottom" x="10" y="130" width="120" height="30" style="fill:var(--int-bg); stroke:var(--int-border); stroke-width:2"/>
+      <rect id="cts-corner" x="130" y="130" width="30" height="30" style="fill:var(--mis-bg); stroke:var(--mis-border); stroke-width:2; stroke-dasharray:4 2"/>
       <text x="70" y="76" text-anchor="middle" style="font-size:16px; fill:var(--def-text); font-family:sans-serif">x²</text>
-      <text x="145" y="76" text-anchor="middle" style="font-size:9px; fill:var(--int-text); font-family:sans-serif" transform="rotate(90 145 76)">(b/2)x</text>
-      <text x="70" y="149" text-anchor="middle" style="font-size:9px; fill:var(--int-text); font-family:sans-serif">(b/2)x</text>
-      <text x="145" y="150" text-anchor="middle" style="font-size:7px; fill:var(--mis-text); font-family:sans-serif">+(b/2)²</text>
-      <text x="70" y="-2" y2="0" text-anchor="middle" style="font-size:10px; fill:var(--text-dim); font-family:sans-serif" transform="translate(0,8)">x</text>
+      <text id="cts-right-label" x="145" y="76" text-anchor="middle" style="font-size:9px; fill:var(--int-text); font-family:sans-serif" transform="rotate(90 145 76)">(b/2)x</text>
+      <text id="cts-bottom-label" x="70" y="149" text-anchor="middle" style="font-size:9px; fill:var(--int-text); font-family:sans-serif">(b/2)x</text>
+      <text id="cts-corner-label" x="145" y="150" text-anchor="middle" style="font-size:7px; fill:var(--mis-text); font-family:sans-serif">+(b/2)²</text>
+      <text x="70" y="-2" text-anchor="middle" style="font-size:10px; fill:var(--text-dim); font-family:sans-serif" transform="translate(0,8)">x</text>
       <text x="0" y="76" text-anchor="middle" style="font-size:10px; fill:var(--text-dim); font-family:sans-serif" transform="rotate(-90 8 76)">x + b/2</text>
-      <text x="90" y="188" text-anchor="middle" style="font-size:11px; fill:var(--text); font-family:sans-serif">(x + b/2)² = x² + bx + (b/2)²</text>
+      <text id="cts-readout" x="90" y="188" text-anchor="middle" style="font-size:11px; fill:var(--text); font-family:sans-serif">b = 6 → (b/2)² = 3² = 9</text>
     </svg>
   </div>
-  <p class="subtitle" style="text-align:center; margin-top:-.5rem;">The dashed corner is the piece you add to turn an "almost square" shape into an actual square — that's why it's called completing the square.</p>
+  <p class="subtitle" style="text-align:center; margin-top:-.5rem;">The dashed corner is the piece you add to turn an "almost square" shape into an actual square — that's why it's called completing the square. Drag the slider to see the corner's exact area track "half of b, squared" as b changes.</p>
+  <script>
+  (function () {
+    const bInput = document.getElementById("cts-b");
+    const SCALE = 10;
+    function update() {
+      const b = parseInt(bInput.value, 10);
+      const half = b / 2;
+      const halfPx = half * SCALE;
+      document.getElementById("cts-right").setAttribute("x", 130);
+      document.getElementById("cts-right").setAttribute("width", halfPx);
+      document.getElementById("cts-bottom").setAttribute("height", halfPx);
+      document.getElementById("cts-bottom").setAttribute("y", 130);
+      document.getElementById("cts-corner").setAttribute("x", 130);
+      document.getElementById("cts-corner").setAttribute("y", 130);
+      document.getElementById("cts-corner").setAttribute("width", halfPx);
+      document.getElementById("cts-corner").setAttribute("height", halfPx);
+      const rightLabel = document.getElementById("cts-right-label");
+      rightLabel.setAttribute("x", 130 + halfPx / 2);
+      rightLabel.setAttribute("transform", "rotate(90 " + (130 + halfPx / 2) + " 76)");
+      const bottomLabel = document.getElementById("cts-bottom-label");
+      bottomLabel.setAttribute("y", 130 + halfPx / 2 + 4);
+      const cornerLabel = document.getElementById("cts-corner-label");
+      cornerLabel.setAttribute("x", 130 + halfPx / 2);
+      cornerLabel.setAttribute("y", 130 + halfPx / 2 + 4);
+      document.getElementById("cts-readout").textContent =
+        "b = " + b + " → (b/2)² = " + half + "² = " + (half * half);
+    }
+    bInput.addEventListener("input", update);
+    update();
+  })();
+  </script>
 
   <div class="block example">
     <div class="label">Worked example</div>
@@ -99,6 +133,62 @@
     <details class="step"><summary>Result</summary>
       <div class="step-body"><p>\(x = \dfrac{6}{2}=3\) or \(x=\dfrac{4}{2}=2\) — matching both the factoring method (Chapter 8) and your original diagnostic answer.</p></div></details>
   </div>
+
+  <div class="block practice checker" data-answers="1">
+    <div class="label">Try it yourself</div>
+    <p>For <code>x² − 5x + 6 = 0</code>, compute just the discriminant <code>b² − 4ac</code> — the exact number that went wrong on the diagnostic.</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="Discriminant value">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Tool</div>
+    <h3 style="margin-top:.2rem;">Quadratic formula solver — check your own work</h3>
+    <p class="subtitle">Enter a, b, c from any quadratic you're solving by hand. It shows the discriminant computed in the same two separate mini-steps this chapter teaches, then the roots — use it to check your work afterward, not to skip doing it yourself.</p>
+    <div class="tool-inputs">
+      <label>a <input type="number" id="qf-a" value="1" step="any"></label>
+      <label>b <input type="number" id="qf-b" value="-5" step="any"></label>
+      <label>c <input type="number" id="qf-c" value="6" step="any"></label>
+    </div>
+    <button class="btn" id="qf-solve" type="button">Solve</button>
+    <div class="tool-output" id="qf-output"></div>
+  </div>
+  <script>
+  (function () {
+    const aI = document.getElementById("qf-a");
+    const bI = document.getElementById("qf-b");
+    const cI = document.getElementById("qf-c");
+    const out = document.getElementById("qf-output");
+    function fmt(n) { return Math.round(n * 1000) / 1000; }
+    function solve() {
+      const a = parseFloat(aI.value), b = parseFloat(bI.value), c = parseFloat(cI.value);
+      if (!isFinite(a) || !isFinite(b) || !isFinite(c) || a === 0) {
+        out.innerHTML = '<p class="step-line" style="color:var(--mis-border)">Enter numbers, with a ≠ 0.</p>';
+        return;
+      }
+      const bSq = b * b, fourAC = 4 * a * c, disc = bSq - fourAC;
+      let html = "";
+      html += '<p class="step-line">b² = ' + fmt(bSq) + "</p>";
+      html += '<p class="step-line">4ac = ' + fmt(fourAC) + "</p>";
+      html += '<p class="step-line">discriminant = b² − 4ac = ' + fmt(bSq) + " − " + fmt(fourAC) + " = " + fmt(disc) + "</p>";
+      if (disc < 0) {
+        html += '<p class="step-line">Discriminant is negative → no real solutions.</p>';
+      } else if (disc === 0) {
+        html += '<p class="step-line">Discriminant is 0 → one repeated real root: x = ' + fmt(-b / (2 * a)) + "</p>";
+      } else {
+        const sq = Math.sqrt(disc);
+        html += '<p class="step-line">√discriminant = ' + fmt(sq) + "</p>";
+        html += '<p class="step-line"><strong>x = ' + fmt((-b + sq) / (2 * a)) + " or x = " + fmt((-b - sq) / (2 * a)) + "</strong></p>";
+      }
+      out.innerHTML = html;
+    }
+    document.getElementById("qf-solve").addEventListener("click", solve);
+    solve();
+  })();
+  </script>
 
   <div class="block mistake">
     <div class="label">Common mistake — the exact one from the diagnostic</div>
@@ -145,6 +235,6 @@
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
 <script src="../../assets/app.js"></script>
-<script>MC.renderMath(document.body);</script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
 </body>
 </html>

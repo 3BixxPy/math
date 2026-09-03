@@ -216,6 +216,37 @@ ol.problems .tag {
   color: var(--text-dim); margin-left: .4rem;
 }
 
+/* ---- interactive: instant-check widgets ---- */
+.checker input.checker-input {
+  padding: .5rem .65rem; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); font: inherit; width: 140px;
+}
+.checker .checker-feedback { min-height: 1.2em; font-weight: 600; font-size: .88rem; margin: .4rem 0 0; }
+.checker.checker-solved { border-color: var(--ex-border); }
+
+/* ---- interactive: sliders on live diagrams ---- */
+.live-diagram-controls {
+  display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center;
+  margin: .6rem 0; font-size: .88rem;
+}
+.live-diagram-controls label { display: flex; align-items: center; gap: .5rem; }
+.live-diagram-controls input[type="range"] { width: 140px; accent-color: var(--accent); }
+.live-readout {
+  text-align: center; font-size: .92rem; margin: .3rem 0 1rem; padding: .5rem .7rem;
+  background: var(--code-bg); border-radius: 8px; display: inline-block;
+}
+.live-readout-wrap { text-align: center; }
+
+/* ---- interactive: tool blocks (solvers/calculators) ---- */
+.tool-inputs { display: flex; gap: .7rem; flex-wrap: wrap; margin: .6rem 0; }
+.tool-inputs label { display: flex; flex-direction: column; gap: .25rem; font-size: .82rem; color: var(--text-dim); }
+.tool-inputs input {
+  padding: .5rem .6rem; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); font: inherit; width: 90px;
+}
+.tool-output { margin-top: .8rem; }
+.tool-output .step-line { margin: .3rem 0; }
+
 /* ---- misc ---- */
 code, .code { background: var(--code-bg); border-radius: 5px; padding: .05rem .35rem; font-size: .9em; }
 hr.div { border: none; border-top: 1px solid var(--border); margin: 2.2rem 0; }

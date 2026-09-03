@@ -174,6 +174,47 @@ const MC = (() => {
     reader.readAsText(file);
   }
 
+  // ---- instant-check widgets: type an answer, get feedback, no backend ----
+  function normalizeAnswer(s) {
+    return String(s).trim().toLowerCase().replace(/\s+/g, "").replace(/^\+/, "");
+  }
+
+  function initCheckers(root) {
+    const boxes = (root || document).querySelectorAll(".checker");
+    boxes.forEach((box) => {
+      const input = box.querySelector(".checker-input");
+      const btn = box.querySelector(".checker-btn");
+      const feedback = box.querySelector(".checker-feedback");
+      if (!input || !btn || !feedback) return;
+      const accepted = (box.dataset.answers || "").split(",").map(normalizeAnswer).filter(Boolean);
+      const tolerance = box.dataset.tolerance !== undefined ? parseFloat(box.dataset.tolerance) : null;
+
+      function check() {
+        const norm = normalizeAnswer(input.value);
+        if (!norm) return;
+        let correct = accepted.includes(norm);
+        if (!correct && tolerance !== null && !isNaN(parseFloat(norm))) {
+          const val = parseFloat(norm);
+          correct = accepted.some((a) => !isNaN(parseFloat(a)) && Math.abs(parseFloat(a) - val) <= tolerance);
+        }
+        if (correct) {
+          feedback.textContent = "✓ Correct.";
+          feedback.style.color = "var(--ex-border)";
+          input.disabled = true;
+          btn.disabled = true;
+          box.classList.add("checker-solved");
+        } else {
+          feedback.textContent = "Not quite — try again.";
+          feedback.style.color = "var(--mis-border)";
+        }
+      }
+      btn.addEventListener("click", check);
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") check();
+      });
+    });
+  }
+
   function renderMath(root) {
     if (window.renderMathInElement) {
       window.renderMathInElement(root || document.body, {
@@ -206,6 +247,7 @@ const MC = (() => {
     resolveEquation,
     exportState,
     importState,
+    initCheckers,
     renderMath
   };
 })();
