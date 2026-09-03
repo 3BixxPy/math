@@ -92,18 +92,12 @@ const MC = (() => {
     return state;
   }
 
-  // A brand-new chapter can only be marked done once per calendar day —
-  // deliberate: reading ahead is unrestricted, but "done" (what advances
-  // the streak/progress) is capped so a click-happy session can't
-  // accidentally skip several days' worth of chapters at once.
-  function canMarkToday(state) {
-    return state.streak.lastDate !== todayISO();
-  }
-
   // Wires up the "mark this chapter done" card at the bottom of a chapter
   // page. `key` is this chapter's own day key (e.g. "m00:5") — independent
-  // of whatever the dashboard currently considers "today's" entry, so
-  // chapters can be completed out of order (read ahead, catch up, redo).
+  // of whatever the dashboard currently shows, so chapters can be marked
+  // in any order and any number per day (the streak itself still only
+  // advances once per calendar day, however many get marked — that's
+  // handled in markDayComplete, not here, so it never needs to block you).
   async function initChapterDone(key, chapterFile) {
     const container = document.getElementById("chapter-done-card");
     if (!container) return;
@@ -120,12 +114,6 @@ const MC = (() => {
       if (entry) {
         container.innerHTML =
           '<div class="card"><p><strong>✓ Chapter marked done</strong> <span class="subtitle">— ' + entry.date + "</span></p></div>";
-        return;
-      }
-      if (!canMarkToday(state)) {
-        container.innerHTML =
-          '<div class="card"><p><strong>Already marked a chapter done today.</strong></p>' +
-          '<p class="subtitle">One new chapter counts per day, by design — keep reading if you like, it\'ll still be here to mark tomorrow.</p></div>';
         return;
       }
       container.innerHTML =
@@ -285,7 +273,6 @@ const MC = (() => {
     completedCount,
     totalAuthoredDays,
     markDayComplete,
-    canMarkToday,
     initChapterDone,
     introduceConcept,
     introduceConceptsForFile,

@@ -138,7 +138,8 @@
     }
 
     const last = flat[lastIndex];
-    const capped = !MC.canMarkToday(state);
+    const today = MC.todayISO();
+    const doneToday = Object.values(state.completedDays).filter((e) => e.date === today).length;
     box.innerHTML =
       '<div class="card">' +
         '<div class="eyebrow">Last completed — Module ' + last.moduleNumber + ' · Day ' + last.day + '</div>' +
@@ -146,8 +147,8 @@
         '<div class="row" style="margin-top:.8rem;">' +
           '<a class="btn" href="' + last.moduleFolder + '/' + last.file + '">Open chapter</a>' +
         '</div>' +
-        '<p class="subtitle" style="margin-top:.8rem;">Use that chapter\'s own "Next chapter →" link to keep going, or pick anything from the <a href="roadmap.html">roadmap</a>. Mark a new chapter done from the bottom of that chapter\'s own page.</p>' +
-        '<p class="subtitle">' + (capped ? '✓ You\'ve marked a chapter done today.' : 'You haven\'t marked a chapter done today yet.') + '</p>' +
+        '<p class="subtitle" style="margin-top:.8rem;">Use that chapter\'s own "Next chapter →" link to keep going, or pick anything from the <a href="roadmap.html">roadmap</a>. Mark a new chapter done from the bottom of that chapter\'s own page — as many as you get through today.</p>' +
+        (doneToday > 0 ? '<p class="subtitle">✓ ' + doneToday + ' chapter' + (doneToday === 1 ? '' : 's') + ' marked done today.</p>' : '') +
       '</div>';
   }
 
