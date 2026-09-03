@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Transformations I: Shifts | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 6 of 15</div>
+  <div class="eyebrow">Day 6 · concept:vertical-shift, concept:horizontal-shift</div>
+  <h1>Transformations I — Shifts</h1>
+  <p class="subtitle">The diagnostic asked, roughly, how <code>y=(x−2)²+1</code> relates to <code>y=x²</code>. This chapter answers that exactly — and lets you drag it and watch.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Once you know how <code>+k</code> and <code>-h</code> move a graph, you can sketch <em>any</em> transformed version of a shape you already know — a parabola, later a sine wave, later still an exponential — without plotting a single new point. It's the reductionist move applied to graphing: one base shape, reused everywhere.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Vertical shift</div>
+    <div class="eqn"><div class="eq-body">\[ y = f(x) + k \]</div><div class="eq-num" id="eq-1-6-1">(1.6.1)</div></div>
+    <p>Adding <code>k</code> outside the function moves the whole graph up (k &gt; 0) or down (k &lt; 0) by <code>k</code> units. This one works exactly the way it looks.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Horizontal shift</div>
+    <div class="eqn"><div class="eq-body">\[ y = f(x - h) \]</div><div class="eq-num" id="eq-1-6-2">(1.6.2)</div></div>
+    <p>Subtracting <code>h</code> <em>inside</em> the function moves the graph <strong>right</strong> by <code>h</code> units (for h &gt; 0) — the opposite of what the minus sign suggests. <code>f(x+3)</code> shifts <em>left</em> 3.</p>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake — the sign flip nobody expects</div>
+    <p><code>y = f(x-2)</code> shifts <strong>right</strong>, not left, even though it's "minus 2." Think about why: the new graph reaches its old value of \(f(0)\) when \(x-2=0\), i.e. when \(x=2\) — two steps to the <em>right</em> of where it used to happen. Whatever used to occur at <code>x=0</code> now occurs at <code>x=h</code>. The inside of the function moves opposite to what the sign looks like; the outside (the <code>+k</code>) moves exactly as it looks.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the exact diagnostic question</div>
+    <p>How does <code>y = (x-2)² + 1</code> relate to <code>y = x²</code>?</p>
+    <details class="step" open><summary>Step 1 — identify h and k by comparing to y = (x-h)² + k</summary>
+      <div class="step-body"><p>\(h = 2\), \(k = 1\)</p></div></details>
+    <details class="step"><summary>Step 2 — apply the horizontal shift rule</summary>
+      <div class="step-body"><p>\((x-2)\) inside → shift <strong>right</strong> 2</p></div></details>
+    <details class="step"><summary>Step 3 — apply the vertical shift rule</summary>
+      <div class="step-body"><p>\(+1\) outside → shift <strong>up</strong> 1</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The graph of <code>y=(x-2)²+1</code> is the graph of <code>y=x²</code>, moved right 2 and up 1 — same shape, new location. Its lowest point (the vertex) moves from \((0,0)\) to \((2,1)\).</p></div></details>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>h (horizontal): <input type="range" id="shift-h" min="-4" max="4" step="1" value="2"></label>
+    <label>k (vertical): <input type="range" id="shift-k" min="-4" max="4" step="1" value="1"></label>
+  </div>
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--ex-border)"></span>y = x² (baseline)</span><span><span class="swatch" style="background:var(--accent)"></span>y = (x−h)² + k</span></div>
+  <div class="plot-wrap"><svg id="shift-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="shift-readout">y = (x−2)² + 1 — vertex at (2, 1)</span></div>
+  <script>
+  (function () {
+    const hInput = document.getElementById("shift-h");
+    const kInput = document.getElementById("shift-k");
+    const opts = { xMin: -8, xMax: 8, yMin: -6, yMax: 10, width: 320, height: 320, pad: 26, xStep: 2, yStep: 2 };
+    const svg = document.getElementById("shift-svg");
+    function update() {
+      const h = parseInt(hInput.value, 10);
+      const k = parseInt(kInput.value, 10);
+      MCPlot.drawAxes(svg, opts);
+      MCPlot.plotFunction(svg, (x) => x * x, opts, "plot-curve-alt");
+      MCPlot.plotFunction(svg, (x) => (x - h) * (x - h) + k, opts, "plot-curve");
+      MCPlot.plotPoints(svg, [[h, k]], opts, "plot-point");
+      document.getElementById("shift-readout").textContent =
+        "y = (x" + (h >= 0 ? "−" + h : "+" + Math.abs(h)) + ")² " + (k >= 0 ? "+ " + k : "− " + Math.abs(k)) +
+        " — vertex at (" + h + ", " + k + ")";
+    }
+    hInput.addEventListener("input", update);
+    kInput.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block practice checker" data-answers="left3down4">
+    <div class="label">Try it yourself</div>
+    <p>Describe how <code>y = (x+3)² − 4</code> relates to <code>y = x²</code> (type e.g. <code>left3down4</code>, no spaces):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. left3down4" aria-label="Describe the shift">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Describe how <code>y = x² + 5</code> relates to <code>y = x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Shifted up 5.</div></details></li>
+    <li>Describe how <code>y = (x-3)²</code> relates to <code>y = x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Shifted right 3.</div></details></li>
+    <li>Describe how <code>y = (x+1)² - 2</code> relates to <code>y = x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Shifted left 1, down 2.</div></details></li>
+    <li>What is the vertex of <code>y = (x-5)² + 3</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\((5, 3)\)</div></details></li>
+    <li>What is the vertex of <code>y = (x+2)² - 7</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\((-2, -7)\)</div></details></li>
+    <li>If a graph's lowest point moves from \((0,0)\) to \((-4, 6)\), what are h and k in \(y=(x-h)^2+k\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(h=-4, k=6\)</div></details></li>
+    <li class="tag">bonus — Describe how <code>y = √(x-4) + 2</code> relates to <code>y = √x</code> (the shift rules apply to any function, not just parabolas).
+      <details class="answer"><summary></summary><div class="ans-body">Shifted right 4, up 2.</div></details></li>
+    <li class="tag">bonus — Write the equation of <code>y = x²</code> shifted left 6 and down 1.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=(x+6)^2-1\)</div></details></li>
+    <li class="tag">bonus — Two students disagree: one says <code>y=(x-2)²</code> shifts left, the other says right. Settle it by checking a specific value — evaluate both graphs at their own vertex and explain.
+      <details class="answer"><summary></summary><div class="ans-body">The vertex of \(y=(x-2)^2\) is where \(x-2=0\), i.e. \(x=2\) — to the right of the original vertex at \(x=0\). So: right.</div></details></li>
+    <li class="tag">bonus — Does the shape of a parabola change under a shift? What changes and what doesn't?
+      <details class="answer"><summary></summary><div class="ans-body">The shape (width, whether it opens up or down) stays identical — only its position moves.</div></details></li>
+    <li class="tag">challenge — A parabola \(y=x^2\) is shifted so its vertex lands exactly on the point where the line \(y=2x-1\) crosses the y-axis, and also shifted an extra 3 units to the right of that. Find the resulting equation.
+      <details class="answer"><summary></summary><div class="ans-body">The line's y-intercept is \((0,-1)\); shifting 3 more right puts the vertex at \((3,-1)\): \(y=(x-3)^2-1\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch07-transformations-stretch-reflect.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 6 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

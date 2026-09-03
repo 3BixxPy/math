@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — Inverse Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 11 of 15</div>
+  <div class="eyebrow">Day 11 · concept:inverse-functions</div>
+  <h1>Inverse Functions</h1>
+  <p class="subtitle">A function that undoes another function. This exact idea, applied to exponentials, is how logarithms get defined in Module 3.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Addition undoes subtraction. Squaring (sort of) undoes a square root. An inverse function is that same "undo" relationship made formal and general. Logarithms — the whole subject of Module 3 — are defined as nothing more than "the inverse of an exponential function," so this chapter's algebra (swap and solve) is the exact procedure that will define them.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Inverse function</div>
+    <div class="eqn"><div class="eq-body">\[ f(f^{-1}(x)) = x \qquad f^{-1}(f(x)) = x \]</div><div class="eq-num" id="eq-1-11-1">(1.11.1)</div></div>
+    <p><code>f⁻¹</code> ("f inverse") is the function that reverses whatever <code>f</code> did. Feed a value through <code>f</code>, then through <code>f⁻¹</code>, and you get your original value back.</p>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>The <code>-1</code> in <code>f⁻¹(x)</code> is <strong>not an exponent</strong>. <code>f⁻¹(x) ≠ 1/f(x)</code>. For <code>f(x)=2x+3</code>: \(1/f(x) = 1/(2x+3)\), but the actual inverse (worked out below) is \((x-3)/2\) — completely different functions. Read <code>f⁻¹</code> as its own symbol, "the inverse of f," not as "f to the power -1."</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — Finding an inverse algebraically</div>
+    <ol>
+      <li>Write the function as <code>y = ...</code></li>
+      <li><strong>Swap</strong> x and y</li>
+      <li>Solve the result for y — that's <code>f⁻¹(x)</code></li>
+    </ol>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the inverse of <code>f(x) = 2x + 3</code>.</p>
+    <details class="step" open><summary>Step 1 — write as y = ...</summary>
+      <div class="step-body"><p>\(y = 2x+3\)</p></div></details>
+    <details class="step"><summary>Step 2 — swap x and y</summary>
+      <div class="step-body"><p>\(x = 2y+3\)</p></div></details>
+    <details class="step"><summary>Step 3 — solve for y</summary>
+      <div class="step-body"><p>\(x-3 = 2y \Rightarrow y = \dfrac{x-3}{2}\)</p></div></details>
+    <details class="step"><summary>Step 4 — verify using the definition</summary>
+      <div class="step-body"><p>\(f(f^{-1}(x)) = 2\left(\dfrac{x-3}{2}\right)+3 = (x-3)+3 = x\) ✓</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ f^{-1}(x) = \frac{x-3}{2} \]</div><div class="eq-num" id="eq-1-11-2">(1.11.2)</div></div></div></details>
+  </div>
+
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--accent)"></span>f(x) = 2x+3</span><span><span class="swatch" style="background:var(--ex-border)"></span>f⁻¹(x)</span></div>
+  <div class="plot-wrap"><svg id="inv-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">The dashed line is y=x. f and f⁻¹ are always mirror images of each other across it — because swapping x and y is exactly what reflecting over y=x does to a point.</p>
+  <script>
+  (function () {
+    const opts = { xMin: -8, xMax: 8, yMin: -8, yMax: 8, width: 320, height: 320, pad: 26, xStep: 2, yStep: 2 };
+    const svg = document.getElementById("inv-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => 2 * x + 3, opts, "plot-curve");
+    MCPlot.plotFunction(svg, (x) => (x - 3) / 2, opts, "plot-curve-alt");
+    MCPlot.plotFunction(svg, (x) => x, opts, "plot-dashed");
+  })();
+  </script>
+
+  <div class="block intuition">
+    <div class="label">One catch — not every function has an inverse that's a function</div>
+    <p>Just like the vertical line test decided whether a graph was a function of x, a "horizontal line test" decides whether that function has an inverse that's also a function: if any horizontal line crosses the graph more than once, the outputs repeat, and swapping x/y would break the function definition (one input, one output) for the inverse. <code>f(x)=x²</code> fails this — \(f(2)=f(-2)=4\) — which is exactly why Module 3's inverse (the logarithm) is built from exponential functions, which don't have this problem.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2">
+    <div class="label">Try it yourself</div>
+    <p>If <code>f(2) = 9</code>, what must <code>f⁻¹(9)</code> equal? (no algebra needed — use the definition directly)</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="f inverse of 9">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the inverse of <code>f(x) = x + 5</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f^{-1}(x)=x-5\)</div></details></li>
+    <li>Find the inverse of <code>f(x) = 3x - 1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f^{-1}(x)=(x+1)/3\)</div></details></li>
+    <li>Find the inverse of <code>f(x) = -2x + 6</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f^{-1}(x)=(6-x)/2\)</div></details></li>
+    <li>Verify your answer to problem 1 satisfies <code>f(f⁻¹(x)) = x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\((x-5)+5=x\) ✓</div></details></li>
+    <li>If <code>f(4) = -1</code>, what is <code>f⁻¹(-1)</code>?
+      <details class="answer"><summary></summary><div class="ans-body">4</div></details></li>
+    <li>Does <code>f(x) = x²</code> (full domain, all real numbers) have an inverse that's a function? Why not?
+      <details class="answer"><summary></summary><div class="ans-body">No — it fails the horizontal line test (e.g. f(2)=f(-2)=4), so swapping x,y wouldn't give one output per input.</div></details></li>
+    <li class="tag">bonus — Find the inverse of <code>f(x) = x³</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f^{-1}(x)=\sqrt[3]{x}\) (cube root — x³ passes the horizontal line test, unlike x²)</div></details></li>
+    <li class="tag">bonus — Find the inverse of <code>f(x) = (2x-1)/3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f^{-1}(x)=(3x+1)/2\)</div></details></li>
+    <li class="tag">bonus — If the point <code>(3, 7)</code> is on the graph of f, what point must be on the graph of f⁻¹?
+      <details class="answer"><summary></summary><div class="ans-body">\((7,3)\) — coordinates swap.</div></details></li>
+    <li class="tag">bonus — Explain, using coordinate-swapping, why the graph of f⁻¹ is always the reflection of f's graph over the line y=x.
+      <details class="answer"><summary></summary><div class="ans-body">Reflecting a point (a,b) over y=x gives (b,a) — exactly the coordinate swap that defines the inverse. Every point transforms the same way, so the whole graph reflects.</div></details></li>
+    <li class="tag">challenge — Find the inverse of <code>f(x) = 1/(x-2)</code>, and state any domain restriction on f⁻¹ itself.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=1/(x-2) \Rightarrow x=1/(y-2) \Rightarrow y-2=1/x \Rightarrow y=2+1/x\). So \(f^{-1}(x)=2+\dfrac1x\), with \(x\neq0\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch12-increasing-decreasing-even-odd.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 11 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

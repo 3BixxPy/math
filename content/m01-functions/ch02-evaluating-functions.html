@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Evaluating Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 2 of 15</div>
+  <div class="eyebrow">Day 2 · concept:function-evaluation</div>
+  <h1>Evaluating Functions</h1>
+  <p class="subtitle">This is the exact skill the diagnostic tested with <code>f(x)=2x²−3, f(−2)</code>. One rule, applied carefully.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Evaluating a function is "plug in and simplify" — nothing new mechanically beyond Module 0's order-of-operations and signed-arithmetic chapters. The only new thing is the notation. Get comfortable here and derivatives later (which are built entirely out of repeated function evaluation) will feel like a small step, not a leap.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Evaluating f(a)</div>
+    <p>To find <code>f(a)</code>, replace every occurrence of <code>x</code> in the rule for <code>f</code> with <code>a</code>, then simplify using order of operations. That's the whole procedure.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the exact diagnostic problem</div>
+    <p>If <code>f(x) = 2x² − 3</code>, find <code>f(−2)</code>.</p>
+    <details class="step" open><summary>Step 1 — substitute −2 for every x</summary>
+      <div class="step-body"><p>\(f(-2) = 2(-2)^2 - 3\)</p></div></details>
+    <details class="step"><summary>Step 2 — exponent first (order of operations)</summary>
+      <div class="step-body"><p>\((-2)^2 = 4\) — a negative squared is positive. Not \(-4\).</p></div></details>
+    <details class="step"><summary>Step 3 — multiply</summary>
+      <div class="step-body"><p>\(2(4) = 8\)</p></div></details>
+    <details class="step"><summary>Step 4 — subtract</summary>
+      <div class="step-body"><p>\(8 - 3 = 5\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ f(-2) = 5 \]</div><div class="eq-num" id="eq-1-2-1">(1.2.1)</div></div></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p><code>(−2)²</code> is <strong>4</strong>, not <strong>−4</strong>. The parentheses matter: <code>(−2)² = (−2)(−2) = 4</code>, while <code>−2² = −(2²) = −4</code> (no parentheses around the negative — the exponent only touches the 2). When you substitute a negative number into a function, wrap it in parentheses every time, exactly as shown above — it removes this ambiguity entirely.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — evaluating at an expression, not just a number</div>
+    <p>If <code>g(x) = x² − 3x + 1</code>, find <code>g(3)</code> and <code>g(a+1)</code>.</p>
+    <details class="step" open><summary>Step 1 — g(3): substitute 3 for x</summary>
+      <div class="step-body"><p>\(g(3) = 3^2 - 3(3) + 1 = 9 - 9 + 1 = 1\)</p></div></details>
+    <details class="step"><summary>Step 2 — g(a+1): substitute the whole expression (a+1) for x, everywhere</summary>
+      <div class="step-body"><p>\(g(a+1) = (a+1)^2 - 3(a+1) + 1\)</p></div></details>
+    <details class="step"><summary>Step 3 — expand and simplify</summary>
+      <div class="step-body"><p>\((a+1)^2 = a^2+2a+1\), and \(-3(a+1) = -3a-3\). So: \(a^2+2a+1-3a-3+1 = a^2-a-1\)</p></div></details>
+    <details class="step"><summary>Why this matters later</summary>
+      <div class="step-body"><p>Substituting an expression instead of a plain number — like <code>g(a+1)</code>, or later <code>f(x+h)</code> — is exactly the move that defines a derivative in Calculus I. This isn't a detour; it's early practice for the single most important calculation in the entire course.</p></div></details>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>The exact diagnostic problem, cold: if <code>f(x) = 2x² − 3</code>, what is <code>f(−2)</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="f of -2">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>If <code>f(x) = 3x + 5</code>, find <code>f(4)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3(4)+5=17\)</div></details></li>
+    <li>If <code>f(x) = x² + 1</code>, find <code>f(-3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\((-3)^2+1=10\)</div></details></li>
+    <li>If <code>h(x) = 2x² - 5x + 1</code>, find <code>h(0)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0-0+1=1\)</div></details></li>
+    <li>If <code>h(x) = 2x² - 5x + 1</code>, find <code>h(-1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2(1)-5(-1)+1=2+5+1=8\)</div></details></li>
+    <li>If <code>f(x) = √(x+5)</code>, find <code>f(4)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sqrt9=3\)</div></details></li>
+    <li>If <code>f(x) = 2x² - 3</code>, find <code>f(3)</code> and confirm it's different from <code>f(-3)</code>. What do you notice about the two results?
+      <details class="answer"><summary></summary><div class="ans-body">\(f(3)=2(9)-3=15\), \(f(-3)=2(9)-3=15\) — actually the same, because squaring erases the sign. (A preview of "even functions," Chapter 12.)</div></details></li>
+    <li class="tag">bonus — If <code>f(x) = x² - 2x</code>, find <code>f(a)</code> in terms of a.
+      <details class="answer"><summary></summary><div class="ans-body">\(a^2-2a\)</div></details></li>
+    <li class="tag">bonus — If <code>f(x) = x² - 2x</code>, find <code>f(a+2)</code>, fully expanded.
+      <details class="answer"><summary></summary><div class="ans-body">\((a+2)^2-2(a+2) = a^2+4a+4-2a-4 = a^2+2a\)</div></details></li>
+    <li class="tag">bonus — If <code>f(x) = 1/(x-1)</code>, find <code>f(2)</code> and explain why <code>f(1)</code> can't be evaluated.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(2)=1\); \(f(1)\) would require dividing by 0, which is undefined.</div></details></li>
+    <li class="tag">bonus — If <code>g(x) = x³</code>, find <code>g(-2)</code> and explain why the sign carries through here but not for <code>x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(g(-2)=-8\) — an odd power of a negative stays negative, since an odd number of negative factors multiply to a negative.</div></details></li>
+    <li class="tag">challenge — If <code>f(x) = x² + 3x - 1</code>, compute <code>f(x+h) - f(x)</code> and simplify fully in terms of x and h (don't cancel yet, just expand and collect like terms).
+      <details class="answer"><summary></summary><div class="ans-body">\(f(x+h) = (x+h)^2+3(x+h)-1 = x^2+2xh+h^2+3x+3h-1\). Subtracting \(f(x)=x^2+3x-1\): \(f(x+h)-f(x) = 2xh+h^2+3h\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch03-domain-and-range.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 2 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

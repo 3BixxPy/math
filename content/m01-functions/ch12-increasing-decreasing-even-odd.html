@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — Increasing/Decreasing & Even/Odd Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 12 of 15</div>
+  <div class="eyebrow">Day 12 · concept:increasing-decreasing-intervals, concept:even-odd-functions</div>
+  <h1>Increasing/Decreasing & Even/Odd Functions</h1>
+  <p class="subtitle">Two ways of describing a graph's behavior without needing to see the whole picture — both come back explicitly once derivatives and trig functions arrive.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>"Where is this function increasing?" is precisely the question a derivative's sign answers in Calculus I (Module 7, curve sketching) — this chapter is the plain-language version before there's a formula for it. Even/odd symmetry, meanwhile, is exactly the property that makes sine an odd function and cosine an even one in Module 2 — recognizing it here means it won't be a new idea then, just a new example.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Increasing / decreasing</div>
+    <p>A function is <strong>increasing</strong> on an interval if, as x increases through that interval, y also increases (the graph rises left to right). It's <strong>decreasing</strong> if y falls as x increases (the graph drops left to right).</p>
+  </div>
+
+  <div class="plot-wrap"><svg id="incdec-svg" viewBox="0 0 320 280" width="320" height="280"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;"><code>y=(x-2)²-1</code>: falling (decreasing) until the vertex at x=2, then rising (increasing) after.</p>
+  <script>
+  (function () {
+    const opts = { xMin: -3, xMax: 7, yMin: -2, yMax: 8, width: 320, height: 280, pad: 26, xStep: 1, yStep: 2 };
+    const svg = document.getElementById("incdec-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => (x - 2) * (x - 2) - 1, opts, "plot-curve-alt");
+    MCPlot.plotFunction(svg, (x) => (x < 2 ? (x - 2) * (x - 2) - 1 : NaN), opts, "plot-curve");
+    MCPlot.plotPoints(svg, [[2, -1]], opts, "plot-point");
+  })();
+  </script>
+
+  <div class="block definition">
+    <div class="label">Definition — Even and odd functions</div>
+    <div class="eqn"><div class="eq-body">\[ \text{Even: } f(-x) = f(x) \qquad\qquad \text{Odd: } f(-x) = -f(x) \]</div><div class="eq-num" id="eq-1-12-1">(1.12.1)</div></div>
+    <p>An <strong>even</strong> function looks identical when reflected over the y-axis (plug in −x, get the same output back). An <strong>odd</strong> function looks the same after a 180° rotation about the origin (plug in −x, get the exact negative of the original output). Most functions are neither.</p>
+  </div>
+
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--accent)"></span>y = x² (even)</span><span><span class="swatch" style="background:var(--ex-border)"></span>y = x³ (odd)</span></div>
+  <div class="plot-wrap"><svg id="evenodd-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">x² is a mirror image of itself across the y-axis. x³ looks the same after spinning it 180° around the origin.</p>
+  <script>
+  (function () {
+    const opts = { xMin: -3, xMax: 3, yMin: -8, yMax: 8, width: 320, height: 320, pad: 26, xStep: 1, yStep: 2 };
+    const svg = document.getElementById("evenodd-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => x * x, opts, "plot-curve");
+    MCPlot.plotFunction(svg, (x) => x * x * x, opts, "plot-curve-alt");
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — testing algebraically</div>
+    <p>Is <code>f(x) = x² + x</code> even, odd, or neither?</p>
+    <details class="step" open><summary>Step 1 — compute f(-x)</summary>
+      <div class="step-body"><p>\(f(-x) = (-x)^2+(-x) = x^2-x\)</p></div></details>
+    <details class="step"><summary>Step 2 — check the even condition: does f(-x) = f(x)?</summary>
+      <div class="step-body"><p>\(x^2-x \neq x^2+x\) (unless x=0) — not even.</p></div></details>
+    <details class="step"><summary>Step 3 — check the odd condition: does f(-x) = -f(x)?</summary>
+      <div class="step-body"><p>\(-f(x) = -x^2-x\). Compare to \(f(-x)=x^2-x\): not equal — not odd either.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p><code>f(x)=x²+x</code> is <strong>neither</strong> even nor odd.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming a function is "even" just because it contains a term with an even exponent. <code>x²+x</code> has an \(x^2\) term but is <strong>not</strong> an even function — the plain \(x\) term breaks the symmetry, as the worked example just showed. "Even function" describes the whole function's symmetry, checked with the actual definition, not a shortcut based on skimming the exponents.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="odd">
+    <div class="label">Try it yourself</div>
+    <p>Is <code>f(x) = x⁵</code> even, odd, or neither? (type one word)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="even / odd / neither" aria-label="Even, odd, or neither">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is <code>f(x) = x⁴</code> even, odd, or neither?
+      <details class="answer"><summary></summary><div class="ans-body">Even — \(f(-x)=x^4=f(x)\)</div></details></li>
+    <li>Is <code>f(x) = x⁵</code> even, odd, or neither?
+      <details class="answer"><summary></summary><div class="ans-body">Odd — \(f(-x)=-x^5=-f(x)\)</div></details></li>
+    <li>Is <code>f(x) = x² - 3</code> even, odd, or neither?
+      <details class="answer"><summary></summary><div class="ans-body">Even</div></details></li>
+    <li>Is <code>f(x) = 2x + 1</code> even, odd, or neither?
+      <details class="answer"><summary></summary><div class="ans-body">Neither</div></details></li>
+    <li>For <code>f(x) = (x-2)² - 1</code>, on what interval is f decreasing?
+      <details class="answer"><summary></summary><div class="ans-body">\(x &lt; 2\)</div></details></li>
+    <li>For the same f, on what interval is it increasing?
+      <details class="answer"><summary></summary><div class="ans-body">\(x &gt; 2\)</div></details></li>
+    <li class="tag">bonus — Is <code>f(x) = |x|</code> even, odd, or neither?
+      <details class="answer"><summary></summary><div class="ans-body">Even — \(|{-x}|=|x|\)</div></details></li>
+    <li class="tag">bonus — Is <code>f(x) = x³ - x</code> even, odd, or neither?
+      <details class="answer"><summary></summary><div class="ans-body">Odd — \(f(-x)=-x^3+x=-(x^3-x)=-f(x)\)</div></details></li>
+    <li class="tag">bonus — Is the zero function, <code>f(x)=0</code>, even, odd, both, or neither? (trick question)
+      <details class="answer"><summary></summary><div class="ans-body">Both — \(f(-x)=0=f(x)\) (even) and \(f(-x)=0=-f(x)\) (odd) are simultaneously true, since \(0=-0\). It's the one function where both hold.</div></details></li>
+    <li class="tag">bonus — A graph is symmetric about the origin and passes through <code>(3, 5)</code>. What other point must also be on it?
+      <details class="answer"><summary></summary><div class="ans-body">\((-3,-5)\)</div></details></li>
+    <li class="tag">challenge — Prove algebraically that the sum of two odd functions is always odd: if f and g are both odd, show <code>h(x) = f(x)+g(x)</code> is odd too.
+      <details class="answer"><summary></summary><div class="ans-body">\(h(-x)=f(-x)+g(-x) = -f(x)+(-g(x)) = -(f(x)+g(x)) = -h(x)\), which is exactly the odd condition.</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch13-polynomial-end-behavior.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 12 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

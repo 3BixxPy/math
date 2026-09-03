@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — Linear Functions & Slope | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 5 of 15</div>
+  <div class="eyebrow">Day 5 · concept:slope, concept:slope-intercept-form</div>
+  <h1>Linear Functions & Slope</h1>
+  <p class="subtitle">Slope is "how fast y changes as x changes." Hold onto that phrase — it's the entire idea a derivative generalizes in Calculus I.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A straight line has the same steepness everywhere, which makes it the simplest possible relationship between two changing quantities — and the perfect place to build the idea of "rate of change" before curves make it more complicated. Every calculus derivative you'll ever compute is, at its core, still asking this same slope question, just on a curve instead of a line.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Slope</div>
+    <div class="eqn"><div class="eq-body">\[ m = \frac{y_2 - y_1}{x_2 - x_1} \]</div><div class="eq-num" id="eq-1-5-1">(1.5.1)</div></div>
+    <p>Often remembered as "rise over run" — how much y changes (rise), divided by how much x changes (run), between any two points on the line. For a straight line this ratio is the same no matter which two points you pick.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the slope between <code>(1, 2)</code> and <code>(4, 11)</code>.</p>
+    <details class="step" open><summary>Step 1 — apply the formula</summary>
+      <div class="step-body"><p>\(m = \dfrac{11-2}{4-1} = \dfrac{9}{3}\)</p></div></details>
+    <details class="step"><summary>Step 2 — simplify</summary>
+      <div class="step-body"><p>\(m = 3\)</p></div></details>
+  </div>
+
+  <div class="plot-wrap"><svg id="slope-svg" viewBox="0 0 320 280" width="320" height="280"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Run = 3 (horizontal), rise = 9 (vertical). 9 ÷ 3 = 3, the slope — and it's the same ratio wherever you measure it on this line.</p>
+  <script>
+  (function () {
+    const opts = { xMin: -1, xMax: 6, yMin: -2, yMax: 13, width: 320, height: 280, pad: 26, xStep: 1, yStep: 2 };
+    const svg = document.getElementById("slope-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => 3 * x - 1, opts);
+    MCPlot.plotPoints(svg, [[1, 2], [4, 11]], opts, "plot-point-alt");
+    MCPlot.dashedLine(svg, 1, 2, 4, 2, opts);
+    MCPlot.dashedLine(svg, 4, 2, 4, 11, opts);
+    const { px, py } = MCPlot.mapper(opts);
+    const runLabel = MCPlot.el("text", { x: px(2.5), y: py(2) - 6, class: "plot-label", "text-anchor": "middle" });
+    runLabel.textContent = "run = 3";
+    svg.appendChild(runLabel);
+    const riseLabel = MCPlot.el("text", { x: px(4) + 10, y: py(6.5), class: "plot-label", "text-anchor": "start" });
+    riseLabel.textContent = "rise = 9";
+    svg.appendChild(riseLabel);
+  })();
+  </script>
+
+  <div class="block theorem">
+    <div class="label">Rule — Slope-intercept form</div>
+    <div class="eqn"><div class="eq-body">\[ y = mx + b \]</div><div class="eq-num" id="eq-1-5-2">(1.5.2)</div></div>
+    <p><code>m</code> is the slope, <code>b</code> is the y-intercept (Chapter 4). Once you know a line's slope and one point on it, you can find <code>b</code> by substituting that point in and solving.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the slope-intercept equation of the line through <code>(1, 7)</code> with slope <code>4</code>.</p>
+    <details class="step" open><summary>Step 1 — start with y = mx + b, plug in the slope</summary>
+      <div class="step-body"><p>\(y = 4x + b\)</p></div></details>
+    <details class="step"><summary>Step 2 — substitute the known point to solve for b</summary>
+      <div class="step-body"><p>\(7 = 4(1) + b \Rightarrow b = 3\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(y = 4x + 3\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Mixing up which coordinate goes on top in the slope formula, or subtracting in a different order top and bottom. <code>(y2-y1)/(x2-x1)</code> and <code>(y1-y2)/(x1-x2)</code> both give the correct (same) answer — but <code>(y2-y1)/(x1-x2)</code> flips the sign and is wrong. Pick an order for point 1 and point 2, and use that same order consistently in both the top and the bottom.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="3">
+    <div class="label">Try it yourself</div>
+    <p>What is the slope between <code>(2, 3)</code> and <code>(5, 12)</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="slope">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the slope between <code>(2, 3)</code> and <code>(5, 12)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(m=9/3=3\)</div></details></li>
+    <li>Find the slope between <code>(-1, 4)</code> and <code>(3, -8)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(m=-12/4=-3\)</div></details></li>
+    <li>Write the equation of the line with slope 2 and y-intercept -5.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=2x-5\)</div></details></li>
+    <li>Find the slope-intercept equation through <code>(0, 3)</code> and <code>(2, 11)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">slope\(=4\); since (0,3) is already the y-intercept: \(y=4x+3\)</div></details></li>
+    <li>What is the slope of a horizontal line? Of a vertical line?
+      <details class="answer"><summary></summary><div class="ans-body">Horizontal: 0. Vertical: undefined (division by zero in the formula).</div></details></li>
+    <li>Find the equation of the line through <code>(2, -1)</code> with slope -3.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=-3x+5\)</div></details></li>
+    <li class="tag">bonus — Find the slope between <code>(3, 5)</code> and <code>(3, 9)</code>. What kind of line is this?
+      <details class="answer"><summary></summary><div class="ans-body">Undefined — same x-coordinate means a vertical line.</div></details></li>
+    <li class="tag">bonus — Find the slope between <code>(-2, 6)</code> and <code>(4, 6)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">0 — same y-coordinate, a horizontal line.</div></details></li>
+    <li class="tag">bonus — Two lines both have slope 2 but different y-intercepts. What do you know about them geometrically?
+      <details class="answer"><summary></summary><div class="ans-body">They're parallel — same steepness, never meet.</div></details></li>
+    <li class="tag">bonus — A line has slope -1/2. Is it steeper or less steep than a line with slope 3? Explain using the sign and size of each number.
+      <details class="answer"><summary></summary><div class="ans-body">Less steep — steepness depends on the size (absolute value) of the slope, not its sign; \(|{-1/2}| = 0.5 < 3\).</div></details></li>
+    <li class="tag">challenge — A line passes through <code>(1, 5)</code> and <code>(3, 13)</code>. Find its slope-intercept equation, then use it to predict y when x = 10.
+      <details class="answer"><summary></summary><div class="ans-body">slope\(=8/2=4\); \(y-5=4(x-1) \Rightarrow y=4x+1\). At \(x=10\): \(y=41\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch06-transformations-shifts.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 5 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — Piecewise Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 9 of 15</div>
+  <div class="eyebrow">Day 9 · concept:piecewise-functions</div>
+  <h1>Piecewise Functions</h1>
+  <p class="subtitle">One function, different rules on different parts of the domain. This chapter's open/closed dot convention is a direct preview of one-sided limits in Calculus I.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Plenty of real quantities genuinely behave by different rules in different ranges — a tax bracket, shipping cost by weight, a speed limit that changes at a certain road. A piecewise function is just honest notation for "it depends which zone you're in." The bookkeeping skill here (which rule applies, and what happens exactly at the boundary) is precisely what one-sided limits will formalize later.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Piecewise function</div>
+    <div class="eqn"><div class="eq-body">\[ f(x) = \begin{cases} x+2 & x < 0 \\ x^2 - 1 & x \geq 0 \end{cases} \]</div><div class="eq-num" id="eq-1-9-1">(1.9.1)</div></div>
+    <p>Each line is one "piece": an output rule, paired with the condition on x that decides when it applies. To evaluate at a specific input, first find which condition that input satisfies, then use only that piece's rule.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Using (1.9.1), find <code>f(-3)</code> and <code>f(0)</code>.</p>
+    <details class="step" open><summary>Step 1 — f(-3): which condition does -3 satisfy?</summary>
+      <div class="step-body"><p>\(-3 &lt; 0\), so use the first piece: \(x+2\)</p></div></details>
+    <details class="step"><summary>Step 2 — evaluate</summary>
+      <div class="step-body"><p>\(f(-3) = -3+2 = -1\)</p></div></details>
+    <details class="step"><summary>Step 3 — f(0): which condition does 0 satisfy?</summary>
+      <div class="step-body"><p>\(0 \geq 0\) — the <em>second</em> piece, not the first, even though 0 feels like a boundary case. The "≥" belongs to the second rule.</p></div></details>
+    <details class="step"><summary>Step 4 — evaluate</summary>
+      <div class="step-body"><p>\(f(0) = 0^2-1 = -1\)</p></div></details>
+  </div>
+
+  <div class="plot-wrap"><svg id="pw-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">The open circle marks a value the first piece approaches but never actually reaches at x=0 (it stops being used there); the filled circle marks where the second piece actually starts.</p>
+  <script>
+  (function () {
+    const opts = { xMin: -4, xMax: 4, yMin: -3, yMax: 8, width: 320, height: 320, pad: 26, xStep: 1, yStep: 2 };
+    const svg = document.getElementById("pw-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => (x < 0 ? x + 2 : NaN), opts, "plot-curve");
+    MCPlot.plotFunction(svg, (x) => (x >= 0 ? x * x - 1 : NaN), opts, "plot-curve-alt");
+    MCPlot.plotPoints(svg, [[0, -1]], opts, "plot-point-alt");
+    const { px, py } = MCPlot.mapper(opts);
+    const openDot = MCPlot.el("circle", { cx: px(0), cy: py(2), r: 4, style: "fill:var(--surface); stroke:var(--accent); stroke-width:2" });
+    svg.appendChild(openDot);
+  })();
+  </script>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Rushing past the boundary condition and grabbing whichever piece looks "closer." <code>≤</code> and <code>&lt;</code> are not interchangeable — they decide, precisely, which single piece owns the boundary point. Read the condition on the exact input you're evaluating before picking a rule, every time, especially near a boundary.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="4">
+    <div class="label">Try it yourself</div>
+    <p>For <code>g(x) = {2x if x≤2; x+3 if x&gt;2}</code>, what is <code>g(2)</code>? (careful which piece owns the boundary)</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="g of 2">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <p class="subtitle">Using (1.9.1) for problems 1–2:</p>
+  <ol class="problems">
+    <li>Find <code>f(-1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-1+2=1\)</div></details></li>
+    <li>Find <code>f(5)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(5^2-1=24\)</div></details></li>
+    <li>For <code>g(x) = {2x if x≤2; x+3 if x&gt;2}</code>, find <code>g(3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3+3=6\)</div></details></li>
+    <li>For the same g, find <code>g(-4)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2(-4)=-8\)</div></details></li>
+    <li>For the same g, what value does the first piece give as x approaches 2, versus what the second piece gives just past 2? Is there a jump?
+      <details class="answer"><summary></summary><div class="ans-body">First piece at x=2: 4. Second piece just past 2: approaches 5. Yes — a jump from 4 to 5.</div></details></li>
+    <li>Explain in one sentence why <code>g(2)</code> only has one correct value despite the graph having a jump there.
+      <details class="answer"><summary></summary><div class="ans-body">The condition x≤2 unambiguously assigns x=2 to the first piece only — a function must have exactly one output per input (Chapter 1), and the piecewise definition guarantees that by construction.</div></details></li>
+    <li class="tag">bonus — For <code>h(x) = {|x| if x&lt;3; 2x-3 if x≥3}</code>, find <code>h(-5)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(|-5|=5\)</div></details></li>
+    <li class="tag">bonus — For the same h, find <code>h(3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2(3)-3=3\)</div></details></li>
+    <li class="tag">bonus — For the same h, find <code>h(0)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(|0|=0\)</div></details></li>
+    <li class="tag">bonus — Is h continuous (no jump) at x=3? Compare what each piece gives near x=3.
+      <details class="answer"><summary></summary><div class="ans-body">First piece approaching 3: →3. Second piece at 3: 3. They match — no jump, continuous there.</div></details></li>
+    <li class="tag">challenge — Define your own piecewise function using two linear pieces (not the <code>|x|</code> notation) that reproduces the absolute value function exactly, and verify it against <code>|x|</code> at x=-4, 0, and 5.
+      <details class="answer"><summary></summary><div class="ans-body">\(p(x) = \{-x \text{ if } x&lt;0;\ x \text{ if } x\geq0\}\). Check: \(p(-4)=4=|-4|\), \(p(0)=0=|0|\), \(p(5)=5=|5|\) ✓.</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch10-function-composition.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 9 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

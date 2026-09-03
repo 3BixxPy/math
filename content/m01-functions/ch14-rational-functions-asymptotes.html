@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 14 — Rational Functions & Asymptotes | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 14 of 15</div>
+  <div class="eyebrow">Day 14 · concept:vertical-asymptote, concept:horizontal-asymptote</div>
+  <h1>Rational Functions & Asymptotes</h1>
+  <p class="subtitle">Module 0's rational-expression factoring finally meets a graph — and settles, for good, whether a hole in the domain is an asymptote or something else entirely.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>An asymptote is a line a graph gets closer and closer to without touching. "What happens as x approaches this value?" and "what happens as x gets huge?" are literally the two questions a limit answers in Calculus I — so reading asymptotes off a rational function now is direct rehearsal for that.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Rational function</div>
+    <p>A function of the form <code>P(x)/Q(x)</code> where P and Q are polynomials — same object as Module 0's rational expressions, now graphed.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Vertical asymptotes</div>
+    <p>A vertical asymptote occurs at any x where the <strong>fully factored and simplified</strong> denominator is zero. The word "simplified" is doing real work here — check the next section before trusting a raw denominator zero.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Horizontal asymptotes (compare degrees)</div>
+    <ul>
+      <li>degree of numerator <strong>&lt;</strong> degree of denominator → horizontal asymptote <code>y = 0</code></li>
+      <li>degree of numerator <strong>=</strong> degree of denominator → <code>y =</code> (ratio of leading coefficients)</li>
+      <li>degree of numerator <strong>&gt;</strong> degree of denominator → no horizontal asymptote (the graph grows without bound; Calculus II's polynomial division reveals what it does instead)</li>
+    </ul>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>h: <input type="range" id="ra-h" min="-4" max="4" step="1" value="4"></label>
+  </div>
+  <div class="plot-wrap"><svg id="ra-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="ra-readout">y = 1/(x−4) — vertical asymptote x=4, horizontal asymptote y=0</span></div>
+  <script>
+  (function () {
+    const hInput = document.getElementById("ra-h");
+    const opts = { xMin: -8, xMax: 8, yMin: -8, yMax: 8, width: 320, height: 320, pad: 26, xStep: 2, yStep: 2 };
+    const svg = document.getElementById("ra-svg");
+    function update() {
+      const h = parseInt(hInput.value, 10);
+      MCPlot.drawAxes(svg, opts);
+      MCPlot.plotFunction(svg, (x) => 1 / (x - h), opts);
+      MCPlot.dashedLine(svg, h, -8, h, 8, opts);
+      document.getElementById("ra-readout").textContent =
+        "y = 1/(x" + (h >= 0 ? "−" + h : "+" + Math.abs(h)) + ") — vertical asymptote x=" + h + ", horizontal asymptote y=0";
+    }
+    hInput.addEventListener("input", update);
+    update();
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">The vertical asymptote always sits exactly where the shift takes it — domain restrictions move with the graph, same as in Chapter 6.</p>
+
+  <div class="block example">
+    <div class="label">Worked example — hole or asymptote? The exact diagnostic expression, revisited</div>
+    <p>Does <code>f(x) = (x²−9)/(x−3)</code> have a vertical asymptote at x=3?</p>
+    <details class="step" open><summary>Step 1 — factor the numerator (Module 0, Chapter 7)</summary>
+      <div class="step-body"><p>\(x^2-9 = (x-3)(x+3)\)</p></div></details>
+    <details class="step"><summary>Step 2 — cancel the common factor</summary>
+      <div class="step-body"><p>\(\dfrac{(x-3)(x+3)}{x-3} = x+3\), for \(x \neq 3\)</p></div></details>
+    <details class="step"><summary>Result — it's a hole, not an asymptote</summary>
+      <div class="step-body"><p>The factor canceled out entirely — the function simplifies to the plain line \(y=x+3\) with a single missing point at \(x=3\). That's called a <strong>removable discontinuity</strong> (a "hole"): the graph is a perfectly ordinary line everywhere except one missing point, not a curve shooting off toward infinity. A true vertical asymptote only happens when the factor <em>doesn't</em> cancel.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Setting the denominator to zero and calling every solution a vertical asymptote <em>before</em> checking whether it cancels with the numerator. Always fully factor and simplify first (Module 0, Chapters 7–10) — a zero that survives simplification is a true vertical asymptote; a zero that cancels away is only a hole.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="hole">
+    <div class="label">Try it yourself</div>
+    <p>For <code>f(x) = (x+1)/(x²−1)</code>, is <code>x = -1</code> a hole or a vertical asymptote? (hint: factor \(x^2-1\) first)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="hole or asymptote" aria-label="hole or asymptote at x=-1">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the vertical asymptote: <code>f(x) = 1/(x+5)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=-5\)</div></details></li>
+    <li>Find the horizontal asymptote: <code>f(x) = 3/(x-2)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(y=0\) (numerator degree 0 &lt; denominator degree 1)</div></details></li>
+    <li>Find both asymptotes: <code>f(x) = (x+1)/(x-6)</code>
+      <details class="answer"><summary></summary><div class="ans-body">VA \(x=6\); HA \(y=1\) (equal degrees, leading coefficients both 1)</div></details></li>
+    <li>Find both asymptotes: <code>f(x) = (4x-1)/(2x+3)</code>
+      <details class="answer"><summary></summary><div class="ans-body">VA \(x=-3/2\); HA \(y=4/2=2\)</div></details></li>
+    <li>Is <code>x=3</code> a hole or a vertical asymptote for <code>f(x) = (x²-9)/(x-3)</code>? (from the worked example — restate the reasoning yourself)
+      <details class="answer"><summary></summary><div class="ans-body">A hole — the (x-3) factor cancels.</div></details></li>
+    <li>Find the vertical asymptote(s): <code>f(x) = 1/(x²-4)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=2\) and \(x=-2\) (both survive — no numerator factor to cancel them)</div></details></li>
+    <li class="tag">bonus — Find the horizontal asymptote: <code>f(x) = (x²+1)/(3x²-5)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(y=1/3\)</div></details></li>
+    <li class="tag">bonus — Find the horizontal asymptote: <code>f(x) = (x+2)/(x²-1)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(y=0\)</div></details></li>
+    <li class="tag">bonus — For <code>f(x)=(x+1)/(x²-1)</code>, identify both the hole and the true vertical asymptote (there's one of each).
+      <details class="answer"><summary></summary><div class="ans-body">Factor: \((x+1)/[(x-1)(x+1)]\). Hole at \(x=-1\) (cancels); true vertical asymptote at \(x=1\) (doesn't cancel).</div></details></li>
+    <li class="tag">bonus — For <code>f(x) = (x-2)(x+5)/[(x-2)(x-7)]</code>, identify the hole and the vertical asymptote.
+      <details class="answer"><summary></summary><div class="ans-body">Hole at \(x=2\); vertical asymptote at \(x=7\).</div></details></li>
+    <li class="tag">challenge — Construct a rational function that has a vertical asymptote at x=2, a hole at x=-3, and horizontal asymptote y=0.
+      <details class="answer"><summary></summary><div class="ans-body">One example: \(f(x)=\dfrac{x+3}{(x-2)(x+3)}\) — the \((x+3)\) cancels (hole at \(x=-3\)), \((x-2)\) survives (VA at \(x=2\)), and the original numerator degree (1) is less than the original denominator degree (2), giving HA \(y=0\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch15-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 14 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Quadratic Functions & Vertex Form | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 8 of 15</div>
+  <div class="eyebrow">Day 8 · concept:vertex-form, concept:axis-of-symmetry</div>
+  <h1>Quadratic Functions & Vertex Form</h1>
+  <p class="subtitle">Three chapters' worth of tools converge here: transformations (Ch. 6–7) plus completing the square (Module 0, Ch. 13) turn any quadratic into a shape you can read on sight.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Quadratics almost never arrive in the convenient <code>(x-h)²+k</code> form — they show up as <code>ax²+bx+c</code>. Converting between the two is just completing the square wearing different clothes, and the payoff is immediate: vertex form <em>hands you</em> the highest or lowest point of the graph, which is exactly what "optimization" problems in Calculus I ask for.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Vertex form</div>
+    <div class="eqn"><div class="eq-body">\[ y = a(x-h)^2 + k \]</div><div class="eq-num" id="eq-1-8-1">(1.8.1)</div></div>
+    <p>The vertex — the graph's lowest point if \(a>0\), highest if \(a&lt;0\) — is exactly \((h,k)\), read directly off the equation using Chapters 6–7. The vertical line \(x=h\) through it is called the <strong>axis of symmetry</strong>: the parabola is a mirror image of itself across that line.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Shortcut — Finding the vertex from standard form</div>
+    <div class="eqn"><div class="eq-body">\[ h = -\frac{b}{2a}, \qquad k = f(h) \]</div><div class="eq-num" id="eq-1-8-2">(1.8.2)</div></div>
+    <p>This falls straight out of completing the square on \(ax^2+bx+c\) (same derivation as the quadratic formula, Module 0 Ch. 13) — it's the location of the axis of symmetry. Once you have \(h\), just evaluate the original function at it to get \(k\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — both methods, cross-checked</div>
+    <p>Find the vertex of <code>y = x² − 6x + 5</code>.</p>
+    <details class="step" open><summary>Method 1, Step 1 — complete the square</summary>
+      <div class="step-body"><p>\(x^2-6x+5 = (x-3)^2 - 9 + 5\)</p></div></details>
+    <details class="step"><summary>Method 1, Step 2 — simplify to vertex form</summary>
+      <div class="step-body"><p>\(y=(x-3)^2-4\) → vertex \((3,-4)\)</p></div></details>
+    <details class="step"><summary>Method 2, Step 1 — use the shortcut, a=1, b=-6</summary>
+      <div class="step-body"><p>\(h = -\dfrac{-6}{2(1)} = 3\)</p></div></details>
+    <details class="step"><summary>Method 2, Step 2 — evaluate at h to find k</summary>
+      <div class="step-body"><p>\(k = f(3) = 9-18+5 = -4\)</p></div></details>
+    <details class="step"><summary>Both methods agree</summary>
+      <div class="step-body"><p>Vertex \((3,-4)\) either way — a good habit is to have a second method ready to cross-check, especially on something as error-prone as a sign.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting the negative sign in <code>h = -b/(2a)</code>. For <code>y=x²-6x+5</code>, \(b=-6\), so \(h=-(-6)/2 = 3\) — the two negatives cancel. It's easy to rush and write \(h=-6/2=-3\), dropping one of the negatives. Write out \(-b\) as its own mini-step before dividing, the same habit from the discriminant in Module 0.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Tool</div>
+    <h3 style="margin-top:.2rem;">Vertex finder</h3>
+    <p class="subtitle">Enter a, b, c for <code>y = ax² + bx + c</code>. Check it against your own completed-the-square work.</p>
+    <div class="tool-inputs">
+      <label>a <input type="number" id="vf-a" value="1" step="any"></label>
+      <label>b <input type="number" id="vf-b" value="-6" step="any"></label>
+      <label>c <input type="number" id="vf-c" value="5" step="any"></label>
+    </div>
+    <button class="btn" id="vf-find" type="button">Find vertex</button>
+    <div class="tool-output" id="vf-output"></div>
+  </div>
+  <script>
+  (function () {
+    const aI = document.getElementById("vf-a"), bI = document.getElementById("vf-b"), cI = document.getElementById("vf-c");
+    const out = document.getElementById("vf-output");
+    function fmt(n) { return Math.round(n * 1000) / 1000; }
+    function find() {
+      const a = parseFloat(aI.value), b = parseFloat(bI.value), c = parseFloat(cI.value);
+      if (!isFinite(a) || !isFinite(b) || !isFinite(c) || a === 0) {
+        out.innerHTML = '<p class="step-line" style="color:var(--mis-border)">Enter numbers, with a ≠ 0.</p>';
+        return;
+      }
+      const h = -b / (2 * a);
+      const k = a * h * h + b * h + c;
+      out.innerHTML =
+        '<p class="step-line">h = −b/(2a) = ' + fmt(h) + "</p>" +
+        '<p class="step-line">k = f(h) = ' + fmt(k) + "</p>" +
+        '<p class="step-line"><strong>Vertex: (' + fmt(h) + ", " + fmt(k) + ")</strong></p>" +
+        '<p class="step-line">Opens ' + (a > 0 ? "upward (minimum)" : "downward (maximum)") + "</p>";
+    }
+    document.getElementById("vf-find").addEventListener("click", find);
+    find();
+  })();
+  </script>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Convert to vertex form and state the vertex: <code>y = x² − 4x + 1</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-2)^2-3\), vertex \((2,-3)\)</div></details></li>
+    <li>Convert to vertex form and state the vertex: <code>y = x² + 2x − 8</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+1)^2-9\), vertex \((-1,-9)\)</div></details></li>
+    <li>Find the vertex using the shortcut: <code>y = 2x² − 8x + 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(h=2\), \(k=-5\), vertex \((2,-5)\)</div></details></li>
+    <li>Find the vertex: <code>y = -x² + 4x</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(h=2\), \(k=4\), vertex \((2,4)\)</div></details></li>
+    <li>Does <code>y = 3(x+2)² − 5</code> open up or down, and what's its vertex?
+      <details class="answer"><summary></summary><div class="ans-body">Up (a=3&gt;0); vertex \((-2,-5)\)</div></details></li>
+    <li>Write the vertex-form equation with vertex <code>(4, -2)</code> and <code>a = 1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=(x-4)^2-2\)</div></details></li>
+    <li class="tag">bonus — Find the vertex: <code>y = x² + 5</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((0,5)\)</div></details></li>
+    <li class="tag">bonus — Convert to vertex form and state whether it's a max or min: <code>y = -2x² + 8x - 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-2(x-2)^2+5\), vertex \((2,5)\), a maximum since it opens down</div></details></li>
+    <li class="tag">bonus — Expand back to standard form: <code>y = 2(x-1)² + 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2x^2-4x+5\)</div></details></li>
+    <li class="tag">bonus — A ball's height is <code>h(t) = -16t² + 32t + 5</code> (feet, t in seconds). Find its maximum height and when it occurs.
+      <details class="answer"><summary></summary><div class="ans-body">\(h=-32/(2\cdot-16)=1\) second; max height \(=-16+32+5=21\) feet.</div></details></li>
+    <li class="tag">challenge — Find the vertex form of <code>y = 3x² − 12x + 7</code> two ways: complete the square by hand, then confirm with the shortcut formula.
+      <details class="answer"><summary></summary><div class="ans-body">\(3(x^2-4x)+7 = 3[(x-2)^2-4]+7 = 3(x-2)^2-5\), vertex \((2,-5)\). Shortcut: \(h=-(-12)/6=2\), \(k=3(4)-24+7=-5\) ✓.</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch09-piecewise-functions.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 8 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

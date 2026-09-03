@@ -29,7 +29,23 @@
         { "day": 15, "file": "ch15-capstone-review.html", "title": "Module 0 Capstone — Mixed Review & Diagnostic Retake", "core": "Complete the interleaved review set (all of Module 0).", "bonus": "Retake the original diagnostic problems and compare." }
       ]
     },
-    { "id": "m01", "number": 1, "title": "Functions & Graphs", "folder": "content/m01-functions", "status": "planned", "dayCount": 15, "description": "Function notation, domain/range, transformations, piecewise, composition, inverse functions. Currently zero prior knowledge — built from scratch; this is the backbone skill for everything after.", "days": [] },
+    { "id": "m01", "number": 1, "title": "Functions & Graphs", "folder": "content/m01-functions", "status": "authored", "dayCount": 15, "description": "Function notation, domain/range, transformations, piecewise, composition, inverse functions. Currently zero prior knowledge — built from scratch; this is the backbone skill for everything after.", "days": [
+      { "day": 1, "file": "ch01-what-is-a-function.html", "title": "What Is a Function?", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 2, "file": "ch02-evaluating-functions.html", "title": "Evaluating Functions", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 3, "file": "ch03-domain-and-range.html", "title": "Domain and Range", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 4, "file": "ch04-coordinate-plane-basics.html", "title": "The Coordinate Plane & Graphing Basics", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 5, "file": "ch05-linear-functions-slope.html", "title": "Linear Functions & Slope", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 6, "file": "ch06-transformations-shifts.html", "title": "Transformations I — Shifts", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 7, "file": "ch07-transformations-stretch-reflect.html", "title": "Transformations II — Stretches & Reflections", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 8, "file": "ch08-quadratic-vertex-form.html", "title": "Quadratic Functions & Vertex Form", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 9, "file": "ch09-piecewise-functions.html", "title": "Piecewise Functions", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 10, "file": "ch10-function-composition.html", "title": "Function Composition", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 11, "file": "ch11-inverse-functions.html", "title": "Inverse Functions", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 12, "file": "ch12-increasing-decreasing-even-odd.html", "title": "Increasing/Decreasing & Even/Odd Functions", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 13, "file": "ch13-polynomial-end-behavior.html", "title": "Polynomial Functions & End Behavior", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 14, "file": "ch14-rational-functions-asymptotes.html", "title": "Rational Functions & Asymptotes", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+      { "day": 15, "file": "ch15-capstone-review.html", "title": "Module 1 Capstone — Mixed Review & Diagnostic Retake", "core": "Complete the interleaved review set (all of Module 1).", "bonus": "Retake the functions/graphs diagnostic problems and compare." }
+    ] },
     { "id": "m02", "number": 2, "title": "Trigonometry", "folder": "content/m02-trigonometry", "status": "planned", "dayCount": 15, "description": "Unit circle, radians, exact values, graphs of sin/cos/tan, identities, solving trig equations. Builds on existing wave/physics intuition.", "days": [] },
     { "id": "m03", "number": 3, "title": "Exponentials & Logarithms", "folder": "content/m03-exp-log", "status": "planned", "dayCount": 10, "description": "Exponential growth/decay, log laws, change of base, solving exp/log equations.", "days": [] },
     { "id": "m04", "number": 4, "title": "Logic & Proof Foundations", "folder": "content/m04-logic", "status": "planned", "dayCount": 10, "description": "Propositional logic (∧ ∨ ¬ ⇒ ⇔), quantifiers (∀ ∃), set notation (∈ ⊆ ∩ ∪), direct/contrapositive/contradiction proofs, induction. Maps directly onto existing boolean logic-gate fluency.", "days": [] },

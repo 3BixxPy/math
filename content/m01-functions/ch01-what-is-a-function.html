@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — What Is a Function? | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 1 of 15</div>
+  <div class="eyebrow">Day 1 · concept:function-definition, concept:vertical-line-test</div>
+  <h1>What Is a Function?</h1>
+  <p class="subtitle">On the diagnostic this whole area came back "I don't know anything." That's fine — nothing here builds on shaky ground. This is the actual starting point.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Almost everything from here through the end of Calculus II is "take a function, do something to it." Derivatives are a rule applied to a function; integrals are too. If the idea of a function itself isn't rock solid, everything built on top of it wobbles. So we go slow here, and we go visual — functions are one of the few topics in this curriculum where the picture and the equation genuinely teach different halves of the idea.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Function</div>
+    <p>A <strong>function</strong> is a rule that pairs every input with exactly <strong>one</strong> output. Give it the same input twice, you always get the same output back. Give it two different inputs, they're allowed to share an output — that's fine — but one input can never split into two different outputs.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Notation — f(x)</div>
+    <p><code>f(x)</code> is read "<strong>f of x</strong>" — it means "the output of the rule <code>f</code>, when you feed it the input <code>x</code>." It is a label for a value, not a multiplication. <code>f</code> is the name of the function (could be any letter — <code>g</code>, <code>h</code>, whatever), and <code>x</code> is whatever you're plugging in.</p>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake — the single most common one in this whole topic</div>
+    <p><code>f(x)</code> does <strong>not</strong> mean "f times x." There's no multiplication happening. It's function notation: "the value you get from function f when the input is x." If <code>f(x) = 2x - 3</code> and you're asked for <code>f(5)</code>, you are not computing <code>f</code> times <code>5</code> — you're computing <code>2(5) - 3 = 7</code>. The parentheses here mean "applied to," not "multiplied by."</p>
+  </div>
+
+  <h2>The vertical line test</h2>
+  <div class="block theorem">
+    <div class="label">Rule — Vertical line test</div>
+    <p>A graph represents a function exactly when <strong>no vertical line crosses it more than once</strong>. A vertical line at a fixed <code>x</code> represents "all the outputs for that one input" — if it hits the graph twice, that input has two different outputs, which breaks the definition above.</p>
+  </div>
+
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--accent)"></span>a function — passes</span></div>
+  <div class="plot-wrap"><svg id="fn-yes" viewBox="0 0 300 300" width="300" height="300"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Every vertical line (like the dashed one at x=2) crosses this graph exactly once.</p>
+
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--mis-border)"></span>not a function — fails</span></div>
+  <div class="plot-wrap"><svg id="fn-no" viewBox="0 0 300 300" width="300" height="300"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">The dashed vertical line at x=1 crosses the circle twice — one input, two outputs. A circle is a relation, but not a function of x.</p>
+  <script>
+  (function () {
+    const opts = { xMin: -5, xMax: 5, yMin: -5, yMax: 5, width: 300, height: 300, pad: 26, xStep: 1, yStep: 1 };
+    const svgYes = document.getElementById("fn-yes");
+    MCPlot.drawAxes(svgYes, opts);
+    MCPlot.plotFunction(svgYes, (x) => 0.6 * x + 1, opts);
+    MCPlot.dashedLine(svgYes, 2, -5, 2, 5, opts);
+    MCPlot.plotPoints(svgYes, [[2, 0.6 * 2 + 1]], opts, "plot-point-alt");
+
+    const svgNo = document.getElementById("fn-no");
+    MCPlot.drawAxes(svgNo, opts);
+    MCPlot.plotFunction(svgNo, (x) => Math.sqrt(Math.max(0, 9 - x * x)), opts);
+    MCPlot.plotFunction(svgNo, (x) => -Math.sqrt(Math.max(0, 9 - x * x)), opts);
+    MCPlot.dashedLine(svgNo, 1, -5, 1, 5, opts);
+    MCPlot.plotPoints(svgNo, [[1, Math.sqrt(8)], [1, -Math.sqrt(8)]], opts, "plot-point-alt");
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — checking a set of ordered pairs</div>
+    <p>Is <code>{(1,3), (2,5), (3,3), (4,9)}</code> a function? Is <code>{(1,3), (1,5), (2,3)}</code>?</p>
+    <details class="step" open><summary>Step 1 — check the first set for repeated x-values</summary>
+      <div class="step-body"><p>x-values used: 1, 2, 3, 4 — all different. It doesn't matter that the outputs 3 appears twice (for x=1 and x=3); repeated <em>outputs</em> are fine. Repeated <em>inputs</em> are the problem.</p></div></details>
+    <details class="step"><summary>Step 2 — first set is a function</summary>
+      <div class="step-body"><p>Every input appears once, each with one output. ✓ Function.</p></div></details>
+    <details class="step"><summary>Step 3 — check the second set</summary>
+      <div class="step-body"><p>x=1 appears twice: once paired with 3, once with 5. Same input, two different outputs.</p></div></details>
+    <details class="step"><summary>Step 4 — second set is not a function</summary>
+      <div class="step-body"><p>It's a relation (a set of pairs), but it fails the function definition.</p></div></details>
+  </div>
+
+  <div class="block practice checker" data-answers="yes">
+    <div class="label">Try it yourself</div>
+    <p>Is <code>{(2,4), (3,4), (5,7)}</code> a function? (type "yes" or "no")</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Is this set a function">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is <code>{(1,2), (2,4), (3,6)}</code> a function?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — every input is different.</div></details></li>
+    <li>Is <code>{(0,1), (0,-1), (2,3)}</code> a function?
+      <details class="answer"><summary></summary><div class="ans-body">No — input 0 has two different outputs.</div></details></li>
+    <li>Does the graph of a straight (non-vertical) line always pass the vertical line test?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — any vertical line crosses a non-vertical line exactly once.</div></details></li>
+    <li>Does a vertical line itself (like <code>x = 3</code>) pass the vertical line test?
+      <details class="answer"><summary></summary><div class="ans-body">No — the vertical line test fails against itself; it's infinitely many outputs for one input, so <code>x=3</code> is not a function of x.</div></details></li>
+    <li>Explain in one sentence why <code>y² = x</code> does not describe y as a function of x.
+      <details class="answer"><summary></summary><div class="ans-body">For most positive x, both y=√x and y=−√x work, so one input x gives two outputs.</div></details></li>
+    <li>True or false: <code>f(x)</code> means "f multiplied by x."
+      <details class="answer"><summary></summary><div class="ans-body">False — it means "the output of function f when the input is x."</div></details></li>
+    <li class="tag">bonus — Is <code>{(-1,5), (0,5), (1,5)}</code> a function? What's unusual about it?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — repeated outputs (all 5) are fine, only repeated inputs would break it. This is a valid (constant) function.</div></details></li>
+    <li class="tag">bonus — A graph is a wide "U" shape (a parabola) opening upward. Does it pass the vertical line test?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — every vertical line crosses an upward parabola at most once.</div></details></li>
+    <li class="tag">bonus — A graph is a sideways "U" (opening to the right, like <code>x = y²</code>). Does it pass the vertical line test?
+      <details class="answer"><summary></summary><div class="ans-body">No — a vertical line through the open part crosses it twice (once on the top branch, once on the bottom).</div></details></li>
+    <li class="tag">bonus — Why is "give it the same input twice, always get the same output" a reasonable thing to require of a function?
+      <details class="answer"><summary></summary><div class="ans-body">Answers will vary — commonly: it makes the rule predictable/well-defined, e.g. a vending machine code should always dispense the same item.</div></details></li>
+    <li class="tag">challenge — A relation contains the points (2,7) and (2,9). Without seeing any other points, can you already conclude it's not a function? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — input 2 already has two different outputs (7 and 9), which alone violates the definition regardless of what other points exist.</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch02-evaluating-functions.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 1 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

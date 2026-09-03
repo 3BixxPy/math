@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — The Coordinate Plane & Graphing Basics | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 4 of 15</div>
+  <div class="eyebrow">Day 4 · concept:coordinate-plane, concept:intercepts</div>
+  <h1>The Coordinate Plane & Graphing Basics</h1>
+  <p class="subtitle">The last three chapters worked entirely with equations and notation. This one is pure picture-reading — the skill that makes everything after it visual instead of abstract.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A graph is just a picture of every input-output pair a function produces, plotted as points. Reading that picture fluently — where it crosses the axes, which direction it's heading, what a point on it means — is what lets you check your algebra by eye, and it's the entire visual language the rest of this module (and Calculus) is written in.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — The coordinate plane</div>
+    <p>Two number lines crossing at a right angle: the horizontal <strong>x-axis</strong> and vertical <strong>y-axis</strong>, meeting at the <strong>origin</strong> <code>(0,0)</code>. Every point is located by an <strong>ordered pair</strong> <code>(x, y)</code>: move <code>x</code> units horizontally from the origin, then <code>y</code> units vertically. The four regions this divides the plane into are the <strong>quadrants</strong>, numbered I–IV counter-clockwise starting from the top right.</p>
+  </div>
+
+  <div class="plot-wrap"><svg id="quad-svg" viewBox="0 0 300 300" width="300" height="300"></svg></div>
+  <script>
+  (function () {
+    const opts = { xMin: -6, xMax: 6, yMin: -6, yMax: 6, width: 300, height: 300, pad: 26, xStep: 2, yStep: 2 };
+    const svg = document.getElementById("quad-svg");
+    MCPlot.drawAxes(svg, opts);
+    const { px, py } = MCPlot.mapper(opts);
+    function label(text, x, y, cls) {
+      const t = MCPlot.el("text", { x: px(x), y: py(y), class: cls || "plot-label", "text-anchor": "middle" });
+      t.textContent = text;
+      svg.appendChild(t);
+    }
+    label("I", 4, 4, "plot-label");
+    label("II", -4, 4, "plot-label");
+    label("III", -4, -4, "plot-label");
+    label("IV", 4, -4, "plot-label");
+    MCPlot.plotPoints(svg, [[3, 2], [-2, 4], [-3, -3], [4, -1]], opts, "plot-point-alt");
+    label("(3,2)", 3, 2.7, "plot-label");
+    label("(-2,4)", -2, 4.7, "plot-label");
+    label("(-3,-3)", -3, -3.7, "plot-label");
+    label("(4,-1)", 4, -1.7, "plot-label");
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Quadrant I: both positive. II: x negative, y positive. III: both negative. IV: x positive, y negative.</p>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Plotting <code>(2, -3)</code> by going <em>down</em> 2 then <em>right</em> 3 (or any other swap) — the order in an ordered pair is always <strong>x first, then y</strong>. "Along the hall, then up the stairs": move horizontally first (x), then vertically (y). Read the pair left to right, move in that same order.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Intercepts</div>
+    <p>The <strong>x-intercept</strong> is where a graph crosses the x-axis — the point(s) where <code>y = 0</code>. The <strong>y-intercept</strong> is where it crosses the y-axis — where <code>x = 0</code>. To find either algebraically: set the other variable to 0 and solve.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the x- and y-intercepts of <code>y = 2x − 4</code>.</p>
+    <details class="step" open><summary>Step 1 — y-intercept: set x = 0</summary>
+      <div class="step-body"><p>\(y = 2(0) - 4 = -4\). y-intercept: \((0, -4)\)</p></div></details>
+    <details class="step"><summary>Step 2 — x-intercept: set y = 0</summary>
+      <div class="step-body"><p>\(0 = 2x - 4 \Rightarrow x = 2\). x-intercept: \((2, 0)\)</p></div></details>
+  </div>
+
+  <div class="plot-wrap"><svg id="int-svg" viewBox="0 0 300 300" width="300" height="300"></svg></div>
+  <script>
+  (function () {
+    const opts = { xMin: -4, xMax: 4, yMin: -6, yMax: 4, width: 300, height: 300, pad: 26, xStep: 1, yStep: 1 };
+    const svg = document.getElementById("int-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => 2 * x - 4, opts);
+    MCPlot.plotPoints(svg, [[0, -4], [2, 0]], opts, "plot-point-alt");
+  })();
+  </script>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Which quadrant is <code>(-5, 2)</code> in?
+      <details class="answer"><summary></summary><div class="ans-body">Quadrant II (x negative, y positive)</div></details></li>
+    <li>Which quadrant is <code>(3, -7)</code> in?
+      <details class="answer"><summary></summary><div class="ans-body">Quadrant IV</div></details></li>
+    <li>Which quadrant is <code>(-1, -1)</code> in?
+      <details class="answer"><summary></summary><div class="ans-body">Quadrant III</div></details></li>
+    <li>Find the intercepts of <code>y = 3x + 6</code>.
+      <details class="answer"><summary></summary><div class="ans-body">y-intercept \((0,6)\); x-intercept: \(0=3x+6 \Rightarrow x=-2\), so \((-2,0)\)</div></details></li>
+    <li>Find the intercepts of <code>y = -x + 5</code>.
+      <details class="answer"><summary></summary><div class="ans-body">y-intercept \((0,5)\); x-intercept \((5,0)\)</div></details></li>
+    <li>A point lies exactly on the y-axis. What must be true about its x-coordinate?
+      <details class="answer"><summary></summary><div class="ans-body">It must be 0.</div></details></li>
+    <li class="tag">bonus — Find the y-intercept only: <code>y = x² - 4</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((0,-4)\)</div></details></li>
+    <li class="tag">bonus — Find the x-intercept(s): <code>y = x² - 4</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(0=x^2-4 \Rightarrow x=\pm2\), so \((2,0)\) and \((-2,0)\) — a curve can have more than one x-intercept.</div></details></li>
+    <li class="tag">bonus — Can a function's graph have more than one y-intercept? Why or why not?
+      <details class="answer"><summary></summary><div class="ans-body">No — that would mean x=0 has two different outputs, which violates the definition of a function (Chapter 1).</div></details></li>
+    <li class="tag">bonus — A graph passes through the origin. What does that tell you about both intercepts at once?
+      <details class="answer"><summary></summary><div class="ans-body">The x-intercept and y-intercept are both \((0,0)\) — the same point.</div></details></li>
+    <li class="tag">challenge — A line has x-intercept \((4,0)\) and y-intercept \((0,-2)\). Find its equation in the form \(y=mx+b\) (hint: you now have two points — Module 0's slope idea from Chapter 5 of this module will make this exact later, but see if you can reason it out with what you know now).
+      <details class="answer"><summary></summary><div class="ans-body">Slope \(=\dfrac{0-(-2)}{4-0}=\dfrac12\); with b=-2 (the y-intercept): \(y=\tfrac12x-2\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch05-linear-functions-slope.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 4 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

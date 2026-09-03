@@ -247,6 +247,24 @@ ol.problems .tag {
 .tool-output { margin-top: .8rem; }
 .tool-output .step-line { margin: .3rem 0; }
 
+/* ---- coordinate-plane plots (assets/plot.js) ---- */
+.plot-wrap { display: flex; justify-content: center; margin: 1rem 0; }
+.plot-wrap svg {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  max-width: 100%; height: auto;
+}
+.plot-grid { stroke: var(--border); stroke-width: 1; }
+.plot-axis { stroke: var(--text-dim); stroke-width: 1.6; }
+.plot-label { font-size: 10px; fill: var(--text-dim); font-family: sans-serif; }
+.plot-curve { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.plot-curve-alt { fill: none; stroke: var(--ex-border); stroke-width: 2.2; }
+.plot-curve-mistake { fill: none; stroke: var(--mis-border); stroke-width: 2; stroke-dasharray: 5 3; }
+.plot-point { fill: var(--accent); stroke: var(--surface); stroke-width: 1.5; }
+.plot-point-alt { fill: var(--ex-border); stroke: var(--surface); stroke-width: 1.5; }
+.plot-dashed { stroke: var(--mis-border); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.plot-legend { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; font-size: .82rem; color: var(--text-dim); margin: -.4rem 0 .8rem; }
+.plot-legend .swatch { display: inline-block; width: 14px; height: 3px; margin-right: .4rem; vertical-align: middle; border-radius: 2px; }
+
 /* ---- misc ---- */
 code, .code { background: var(--code-bg); border-radius: 5px; padding: .05rem .35rem; font-size: .9em; }
 hr.div { border: none; border-top: 1px solid var(--border); margin: 2.2rem 0; }

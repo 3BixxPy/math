@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Domain and Range | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 3 of 15</div>
+  <div class="eyebrow">Day 3 · concept:domain-of-a-function, concept:range-of-a-function</div>
+  <h1>Domain and Range</h1>
+  <p class="subtitle">The exact two problems from the diagnostic — domain of <code>1/(x−4)</code> and <code>√(x−4)</code> — are the two worked examples below. This is where Module 0's "domain restrictions" chapter pays off directly.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p><strong>Domain</strong> is "which inputs are actually allowed." <strong>Range</strong> is "which outputs are actually possible." You already did the hard part of domain-thinking back in Module 0 (rational expressions can't divide by zero) — this chapter adds exactly one new restriction (square roots of negatives) and then asks you to apply both together.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Domain and Range</div>
+    <p>The <strong>domain</strong> of a function is the complete set of allowed input values (x). The <strong>range</strong> is the complete set of output values (y) the function actually produces.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Two restrictions to check, every time</div>
+    <ol>
+      <li><strong>Denominators can't be zero.</strong> If x appears in a denominator, exclude any x that makes it zero. (Module 0, Chapter 10.)</li>
+      <li><strong>You can't take an even root (square root, fourth root, ...) of a negative number</strong> and get a real output. If x appears under a square root, whatever's under the root must be ≥ 0.</li>
+    </ol>
+    <p>A function can have neither restriction (most polynomials), one, or both at once — check systematically rather than guessing.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the exact diagnostic problems</div>
+    <p>Find the domain of <code>f(x) = 1/(x−4)</code>, and of <code>g(x) = √(x−4)</code>.</p>
+    <details class="step" open><summary>Step 1 — f(x): denominator can't be zero</summary>
+      <div class="step-body"><p>\(x - 4 \neq 0 \Rightarrow x \neq 4\)</p></div></details>
+    <details class="step"><summary>Step 2 — f(x) domain</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ \text{domain of } f: x \neq 4 \]</div><div class="eq-num" id="eq-1-3-1">(1.3.1)</div></div></div></details>
+    <details class="step"><summary>Step 3 — g(x): what's under the root must be ≥ 0</summary>
+      <div class="step-body"><p>\(x - 4 \geq 0\)</p></div></details>
+    <details class="step"><summary>Step 4 — solve the inequality</summary>
+      <div class="step-body"><p>\(x \geq 4\)</p></div></details>
+    <details class="step"><summary>g(x) domain</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ \text{domain of } g: x \geq 4 \]</div><div class="eq-num" id="eq-1-3-2">(1.3.2)</div></div>
+      <p>Notice the two answers look similar but mean very different things: <code>f</code> excludes a single point; <code>g</code> excludes an entire half-line.</p></div></details>
+  </div>
+
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--accent)"></span>y = 1/(x−4)</span><span><span class="swatch" style="background:var(--ex-border)"></span>y = √(x−4)</span></div>
+  <div class="plot-wrap"><svg id="dom-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Both graphs make the domain visible: the left one has a gap exactly at x=4 (vertical asymptote), the right one simply doesn't exist at all left of x=4 — the plotter can't draw what isn't real.</p>
+  <script>
+  (function () {
+    const opts = { xMin: -1, xMax: 10, yMin: -6, yMax: 6, width: 320, height: 320, pad: 28, xStep: 2, yStep: 2 };
+    const svg = document.getElementById("dom-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => 1 / (x - 4), opts, "plot-curve");
+    MCPlot.dashedLine(svg, 4, -6, 4, 6, opts);
+    MCPlot.plotFunction(svg, (x) => Math.sqrt(x - 4), opts, "plot-curve-alt");
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — both restrictions at once</div>
+    <p>Find the domain of <code>h(x) = 1/√(x−1)</code>.</p>
+    <details class="step" open><summary>Step 1 — the square root needs its inside ≥ 0</summary>
+      <div class="step-body"><p>\(x - 1 \geq 0 \Rightarrow x \geq 1\)</p></div></details>
+    <details class="step"><summary>Step 2 — but it's also in the denominator, so it can't equal 0</summary>
+      <div class="step-body"><p>\(\sqrt{x-1} \neq 0 \Rightarrow x \neq 1\)</p></div></details>
+    <details class="step"><summary>Step 3 — combine: ≥ 1, but not equal to 1</summary>
+      <div class="step-body"><p>\(x > 1\) — strictly greater, not "greater or equal."</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>When a square root sits in a denominator, it's easy to write <code>x ≥ 1</code> (from the root rule) and forget the denominator rule tightens it to <code>x &gt; 1</code> (strict). Always check <em>both</em> restrictions when both apply, and combine them — don't stop after the first one you spot.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="x!=4,x≠4,x is not 4">
+    <div class="label">Try it yourself</div>
+    <p>State the domain of <code>1/(x−4)</code> using "x ≠" notation (type e.g. <code>x!=4</code>):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="x!=4" aria-label="Domain of 1 over x minus 4">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the domain: <code>1/(x−7)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x \neq 7\)</div></details></li>
+    <li>Find the domain: <code>√(x+3)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x \geq -3\)</div></details></li>
+    <li>Find the domain: <code>1/(x²−9)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x \neq 3, -3\)</div></details></li>
+    <li>Find the domain: <code>√(10−x)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x \leq 10\)</div></details></li>
+    <li>Find the domain: <code>1/√(x−1)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x > 1\)</div></details></li>
+    <li>Find the domain: <code>x² + 3x − 1</code>. What's different about this one?
+      <details class="answer"><summary></summary><div class="ans-body">All real numbers — no denominator, no root. Polynomials never have domain restrictions.</div></details></li>
+    <li class="tag">bonus — Find the domain: <code>√(x²−4)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x \leq -2\) or \(x \geq 2\) (need \(x^2 \ge 4\))</div></details></li>
+    <li class="tag">bonus — Find the domain: <code>1/(x²−4)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x \neq 2, -2\)</div></details></li>
+    <li class="tag">bonus — Find the range: <code>f(x) = √x</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(y \geq 0\) — a square root is never negative.</div></details></li>
+    <li class="tag">bonus — Find the range: <code>f(x) = -x² + 1</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(y \leq 1\) — the vertex (highest point) is at y=1, and it only goes down from there.</div></details></li>
+    <li class="tag">challenge — Find the domain: <code>√(x−4)/(x−9)</code> (combine a root restriction and a denominator restriction that involve <em>different</em> numbers).
+      <details class="answer"><summary></summary><div class="ans-body">Need \(x-4\ge0 \Rightarrow x\ge4\), and \(x-9\neq0 \Rightarrow x\neq9\). Combined: \(x\ge4\) and \(x\neq9\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch04-coordinate-plane-basics.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 3 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>

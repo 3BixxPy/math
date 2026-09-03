@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 13 — Polynomial Functions & End Behavior | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script src="../../assets/plot.js"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 1 · Functions &amp; Graphs</a> → Chapter 13 of 15</div>
+  <div class="eyebrow">Day 13 · concept:polynomial-end-behavior, concept:polynomial-degree</div>
+  <h1>Polynomial Functions & End Behavior</h1>
+  <p class="subtitle">What happens to a graph way off to the left and way off to the right — decided by exactly two numbers, without needing to plot anything.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>"What does y do as x→∞?" is a question you'll ask constantly starting in Calculus I, formalized there as a limit at infinity. This chapter answers it for polynomials with a simple rule, before "limit" is even a defined word — so when it is, this will already feel familiar.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Degree and leading coefficient</div>
+    <div class="eqn"><div class="eq-body">\[ a_n x^n + \cdots + a_1 x + a_0 \]</div><div class="eq-num" id="eq-1-13-1">(1.13.1)</div></div>
+    <p>The <strong>degree</strong> is the highest power of x present (\(n\)). The <strong>leading coefficient</strong> is the number multiplying that highest power (\(a_n\)). Together, these two numbers alone decide what the graph does at its far left and far right ends.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Four end-behavior cases</div>
+    <ul>
+      <li><strong>Even degree, positive leading coefficient</strong>: both ends go up (like <code>x²</code>)</li>
+      <li><strong>Even degree, negative leading coefficient</strong>: both ends go down (like <code>-x²</code>)</li>
+      <li><strong>Odd degree, positive leading coefficient</strong>: left end down, right end up (like <code>x³</code>)</li>
+      <li><strong>Odd degree, negative leading coefficient</strong>: left end up, right end down (like <code>-x³</code>)</li>
+    </ul>
+    <p>Only the leading term matters for this — every other term becomes insignificant compared to it once <code>|x|</code> is large enough.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>degree: <select id="eb-degree"><option value="even">even</option><option value="odd">odd</option></select></label>
+    <label>leading coeff.: <select id="eb-sign"><option value="pos">positive</option><option value="neg">negative</option></select></label>
+  </div>
+  <div class="plot-wrap"><svg id="eb-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="eb-readout"></span></div>
+  <script>
+  (function () {
+    const degSel = document.getElementById("eb-degree");
+    const signSel = document.getElementById("eb-sign");
+    const opts = { xMin: -3, xMax: 3, yMin: -10, yMax: 10, width: 320, height: 320, pad: 26, xStep: 1, yStep: 2 };
+    const svg = document.getElementById("eb-svg");
+    function update() {
+      const even = degSel.value === "even";
+      const pos = signSel.value === "pos";
+      const s = pos ? 1 : -1;
+      const fn = even ? (x) => s * x * x * x * x : (x) => s * x * x * x;
+      MCPlot.drawAxes(svg, opts);
+      MCPlot.plotFunction(svg, fn, opts);
+      const left = even ? (pos ? "up" : "down") : (pos ? "down" : "up");
+      const right = pos ? "up" : "down";
+      document.getElementById("eb-readout").textContent =
+        "As x→−∞, y→" + left + ";  as x→+∞, y→" + right;
+    }
+    degSel.addEventListener("change", update);
+    signSel.addEventListener("change", update);
+    update();
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Describe the end behavior of <code>f(x) = -2x³ + 5x - 1</code>.</p>
+    <details class="step" open><summary>Step 1 — identify degree and leading coefficient</summary>
+      <div class="step-body"><p>Degree 3 (odd), leading coefficient \(-2\) (negative).</p></div></details>
+    <details class="step"><summary>Step 2 — apply the rule (odd, negative)</summary>
+      <div class="step-body"><p>Left end up, right end down.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>As \(x\to-\infty\), \(y\to+\infty\); as \(x\to+\infty\), \(y\to-\infty\). The \(5x-1\) part never gets a say — for huge \(|x|\), \(-2x^3\) completely dominates.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Judging end behavior from the sign of the leading coefficient <em>alone</em>, ignoring whether the degree is even or odd. A negative leading coefficient means "both ends down" <strong>only</strong> if the degree is even; with an odd degree, a negative leading coefficient actually flips the two ends in <em>opposite</em> directions, not the same one. Always check both numbers.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="bothup,both up">
+    <div class="label">Try it yourself</div>
+    <p>What's the end behavior of <code>f(x) = 3x⁴ - 2x² + 1</code>? (type e.g. <code>bothup</code>, <code>bothdown</code>, <code>leftdownrightup</code>, or <code>leftuprightdown</code>)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. bothup" aria-label="End behavior">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>State the degree and leading coefficient: <code>f(x) = 3x⁴ - 2x² + 1</code>
+      <details class="answer"><summary></summary><div class="ans-body">Degree 4, leading coefficient 3</div></details></li>
+    <li>Describe the end behavior of that same f(x).
+      <details class="answer"><summary></summary><div class="ans-body">Both ends up (even, positive)</div></details></li>
+    <li>State the degree and leading coefficient: <code>f(x) = -5x³ + x - 2</code>
+      <details class="answer"><summary></summary><div class="ans-body">Degree 3, leading coefficient -5</div></details></li>
+    <li>Describe the end behavior of that same f(x).
+      <details class="answer"><summary></summary><div class="ans-body">Left end up, right end down (odd, negative)</div></details></li>
+    <li>Describe the end behavior of <code>f(x) = -x⁶ + 4x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Both ends down (even, negative)</div></details></li>
+    <li>Describe the end behavior of <code>f(x) = 2x⁵ - 3x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Left end down, right end up (odd, positive)</div></details></li>
+    <li class="tag">bonus — What is the maximum number of direction changes a degree-5 polynomial's graph can have?
+      <details class="answer"><summary></summary><div class="ans-body">4 (degree − 1)</div></details></li>
+    <li class="tag">bonus — A polynomial has odd degree and positive leading coefficient. What happens to y as x→−∞?
+      <details class="answer"><summary></summary><div class="ans-body">y→−∞ (left end down)</div></details></li>
+    <li class="tag">bonus — Two different polynomials both have "both ends up" behavior. What must be true about each one's degree and leading coefficient sign?
+      <details class="answer"><summary></summary><div class="ans-body">Both must have even degree and a positive leading coefficient.</div></details></li>
+    <li class="tag">bonus — Explain in one sentence why only the leading term affects end behavior.
+      <details class="answer"><summary></summary><div class="ans-body">For very large |x|, the highest power grows so much faster than the lower-degree terms that they become negligible in comparison.</div></details></li>
+    <li class="tag">challenge — Without expanding fully, determine the end behavior of <code>f(x) = -(x-1)²(x+3)³</code> by figuring out its overall degree and the sign of its leading term.
+      <details class="answer"><summary></summary><div class="ans-body">Degree = 2+3 = 5 (odd). Leading term comes from \(x^2\cdot x^3=x^5\), times the outer \(-1\): \(-x^5\), so leading coefficient is negative. Odd + negative → left end up, right end down.</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch14-rational-functions-asymptotes.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 1 · Functions &amp; Graphs</span>
+  <span>Chapter 13 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body);</script>
+</body>
+</html>
