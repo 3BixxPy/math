@@ -92,6 +92,18 @@ const MC = (() => {
     return state;
   }
 
+  // Undo a mark-done. Deliberately simple: only removes the completedDays
+  // entry (so progress counts and roadmap/dashboard immediately reflect
+  // it). Doesn't try to retroactively unwind the streak counter or pull
+  // the chapter's concepts back out of spaced review — both would need
+  // full history to do correctly, and this is meant for the rare "marked
+  // that by mistake" case, not routine use.
+  function unmarkDayComplete(state, key) {
+    delete state.completedDays[key];
+    save(state);
+    return state;
+  }
+
   // Wires up the "mark this chapter done" card at the bottom of a chapter
   // page. `key` is this chapter's own day key (e.g. "m00:5") — independent
   // of whatever the dashboard currently shows, so chapters can be marked
@@ -113,7 +125,13 @@ const MC = (() => {
       const entry = state.completedDays[key];
       if (entry) {
         container.innerHTML =
-          '<div class="card"><p><strong>✓ Chapter marked done</strong> <span class="subtitle">— ' + entry.date + "</span></p></div>";
+          '<div class="card"><p><strong>✓ Chapter marked done</strong> <span class="subtitle">— ' + entry.date + '</span></p>' +
+          '<p style="margin-top:.5rem;"><a href="#" id="chapter-unmark-link" style="font-size:.8rem; color:var(--text-dim);">marked this by mistake? unmark it</a></p></div>';
+        document.getElementById("chapter-unmark-link").addEventListener("click", (e) => {
+          e.preventDefault();
+          unmarkDayComplete(state, key);
+          render();
+        });
         return;
       }
       container.innerHTML =
@@ -273,6 +291,7 @@ const MC = (() => {
     completedCount,
     totalAuthoredDays,
     markDayComplete,
+    unmarkDayComplete,
     initChapterDone,
     introduceConcept,
     introduceConceptsForFile,

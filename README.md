@@ -62,13 +62,14 @@ deliberately.
 ## Cache-busting shared assets
 
 Every page loads `assets/app.js`, `assets/plot.js`, and `assets/styles.css`
-with a `?v=N` query string (currently `v=2`). GitHub Pages/browsers cache
-these aggressively with no versioning, so an edit to any of the three that
-isn't accompanied by a version bump can leave users stuck on stale JS/CSS
-after a deploy, with no visible error — it just silently behaves like the
-old code. **Whenever you edit `app.js`, `plot.js`, or `styles.css`, bump the
-version number in every reference** (e.g. `sed -i 's/?v=2/?v=3/g'` across
-`*.html` and `content/*/*.html`). Nothing else needs versioning — the
+with a `?v=N` query string. GitHub Pages/browsers cache these aggressively
+with no versioning, so an edit to any of the three that isn't accompanied by
+a version bump can leave users stuck on stale JS/CSS after a deploy, with no
+visible error — it just silently behaves like the old code. **Whenever you
+edit `app.js`, `plot.js`, or `styles.css`, bump the trailing number in every
+`?v=N` reference, everywhere it appears** (`*.html` and `content/*/*.html` —
+check with `grep -rn '?v=' --include=*.html .` to find every occurrence and
+confirm they all match after bumping). Nothing else needs versioning — the
 per-chapter HTML files aren't shared, and `katex/*` is vendored and never
 edited in place.
 
@@ -113,18 +114,35 @@ Numbered equations: `<div class="eqn"><div class="eq-body">\[ ... \]</div><div c
 Module 0 (`content/m00-foundations/`) is the reference implementation — when in
 doubt, match its patterns rather than inventing new ones.
 
-## The daily/streak/review engine (`assets/app.js`)
+## The completion/streak/review engine (`assets/app.js`)
+
+Internally the data model still calls the unit a "day" (`curriculum.json`'s
+`days` array, keys like `"m00:5"`, `entry.day`) because each one maps 1:1 to
+a chapter and that's how the original day-per-chapter plan was scoped — but
+**every user-facing string calls it a "chapter,"** not a day, since chapters
+and calendar days aren't 1:1 in practice (any number can be marked done in
+one sitting, in any order, from that chapter's own page). Don't reintroduce
+"day" into displayed text; keep it to the internal keys/variable names.
 
 All state lives in `localStorage` under key `mathcurr_state_v1` — no backend,
 nothing leaves the device except via manual export/import (buttons on the
-dashboard; this is the phone↔PC sync mechanism). Day pointer is a flat
-concatenation of every module's `days` array in module order, so appending new
-modules to `curriculum.json` never disturbs existing progress. Streak counts
-consecutive *calendar days* with at least one day marked done — pace within
-that is entirely up to the learner (multiple days in one sitting is fine).
-Spaced repetition is a simple Leitner box (intervals 1/1/3/7/16/35 days);
-concepts get introduced into the box automatically when the day that defines
-them is marked complete.
+dashboard; this is the phone↔PC sync mechanism). Marking a chapter done
+(`MC.initChapterDone`, wired at the bottom of every chapter page) just adds
+its key to `completedDays` — no cap, no ordering requirement. The dashboard
+shows whichever chapter was most recently completed (by position in the
+flattened module/day sequence, not by date) with a link back to it, rather
+than predicting a "next" chapter — a prediction would silently go stale the
+moment chapters get completed out of order. Streak counts consecutive
+*calendar days* with at least one chapter marked done, independent of how
+many — `markDayComplete` only advances it once per day no matter how many
+times it's called that day, and `MC.unmarkDayComplete(state, key)` (exposed
+as a low-key "unmark it" link once a chapter's done) removes a completion
+without touching the streak or spaced-review state, on purpose — it's a
+mistake-correction escape hatch, not a full undo. Spaced repetition is a
+simple Leitner box (intervals 1/1/3/7/16/35 days — this one's a real elapsed-
+time interval, unrelated to the terminology note above); concepts get
+introduced into the box automatically when the chapter that defines them is
+marked done.
 
 ## Running locally / hosting
 

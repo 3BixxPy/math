@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Math Curriculum — Dashboard</title>
 <link rel="stylesheet" href="assets/katex/katex.min.css">
-<link rel="stylesheet" href="assets/styles.css?v=2">
+<link rel="stylesheet" href="assets/styles.css?v=3">
 </head>
 <body>
 <header class="topnav">
@@ -74,7 +74,7 @@
 
 <script src="assets/katex/katex.min.js"></script>
 <script src="assets/katex/auto-render.min.js"></script>
-<script src="assets/app.js?v=2"></script>
+<script src="assets/app.js?v=3"></script>
 <script>
 (async function () {
   const state = MC.load();
@@ -97,9 +97,9 @@
       (state.streak.longest > state.streak.count ? " · best: " + state.streak.longest : "");
     const done = MC.completedCount(state);
     const total = MC.totalAuthoredDays(curriculum);
-    document.getElementById("progress-fraction").textContent = done + " / " + total + " days";
+    document.getElementById("progress-fraction").textContent = done + " / " + total + " chapters";
     document.getElementById("progress-fill").style.width = (total ? (100 * done / total) : 0) + "%";
-    document.getElementById("foot-total").textContent = total + " learning-days authored so far (of ~213 planned)";
+    document.getElementById("foot-total").textContent = total + " chapters authored so far (of ~213 planned)";
   }
 
   // No "next up" prediction — that quietly skips gaps once you complete
@@ -125,7 +125,7 @@
       const first = flat[0];
       box.innerHTML =
         '<div class="card">' +
-          '<div class="eyebrow">Start here — Module ' + first.moduleNumber + ' · Day ' + first.day + '</div>' +
+          '<div class="eyebrow">Start here — Module ' + first.moduleNumber + ' · Chapter ' + first.day + '</div>' +
           '<h2 style="margin-top:.1rem;">' + first.title + '</h2>' +
           '<p><strong>Core (~30 min):</strong> ' + first.core + '</p>' +
           '<p><strong>Bonus, if you have time:</strong> ' + first.bonus + '</p>' +
@@ -142,7 +142,7 @@
     const doneToday = Object.values(state.completedDays).filter((e) => e.date === today).length;
     box.innerHTML =
       '<div class="card">' +
-        '<div class="eyebrow">Last completed — Module ' + last.moduleNumber + ' · Day ' + last.day + '</div>' +
+        '<div class="eyebrow">Last completed — Module ' + last.moduleNumber + ' · Chapter ' + last.day + '</div>' +
         '<h2 style="margin-top:.1rem;">' + last.title + '</h2>' +
         '<div class="row" style="margin-top:.8rem;">' +
           '<a class="btn" href="' + last.moduleFolder + '/' + last.file + '">Open chapter</a>' +
