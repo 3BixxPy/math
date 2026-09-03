@@ -59,6 +59,19 @@ opened on a phone. A build pipeline is one more thing to go stale. Trade-off:
 some markup duplication between chapters (nav, footer, script tags) — accepted
 deliberately.
 
+## Cache-busting shared assets
+
+Every page loads `assets/app.js`, `assets/plot.js`, and `assets/styles.css`
+with a `?v=N` query string (currently `v=2`). GitHub Pages/browsers cache
+these aggressively with no versioning, so an edit to any of the three that
+isn't accompanied by a version bump can leave users stuck on stale JS/CSS
+after a deploy, with no visible error — it just silently behaves like the
+old code. **Whenever you edit `app.js`, `plot.js`, or `styles.css`, bump the
+version number in every reference** (e.g. `sed -i 's/?v=2/?v=3/g'` across
+`*.html` and `content/*/*.html`). Nothing else needs versioning — the
+per-chapter HTML files aren't shared, and `katex/*` is vendored and never
+edited in place.
+
 ## Visual conventions (`assets/styles.css`)
 
 Fixed color-coding by block type, same meaning on every page:
