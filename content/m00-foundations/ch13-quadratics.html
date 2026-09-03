@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 13 — Solving Quadratics | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 13 of 15</div>
+  <div class="eyebrow">Day 13 · concept:solving-quadratics-factoring, concept:completing-the-square, concept:quadratic-formula</div>
+  <h1>Solving Quadratics — Factoring, Completing the Square, and Deriving the Formula</h1>
+  <p class="subtitle">On the diagnostic you used the quadratic formula correctly in structure but had to look it up, and slipped on the discriminant (writing <code>25−26</code> instead of <code>25−24</code>). By the end of this chapter you can rebuild the formula from scratch, any time, and the discriminant step becomes routine.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>There are three ways to solve <code>ax²+bx+c=0</code>, and they're not really three separate things to memorize — factoring is a shortcut when it's available, completing the square is the general method underneath everything, and the quadratic formula is just completing the square done once, in general, and packaged for reuse. Learn the middle one properly and the other two stop needing separate memorization.</p>
+  </div>
+
+  <h2>Method 1 — Factoring (fastest, when it works)</h2>
+  <div class="block example">
+    <div class="label">Reminder</div>
+    <p>Chapters 8–9 already cover this: factor, set each factor to zero. E.g. \(x^2-5x+6=0 \Rightarrow (x-2)(x-3)=0 \Rightarrow x=2 \text{ or } 3\). Fast, but only works when the quadratic factors nicely with integers — not every quadratic does.</p>
+  </div>
+
+  <h2>Method 2 — Completing the square (always works)</h2>
+  <div class="block theorem">
+    <div class="label">Identity — Completing the square</div>
+    <div class="eqn"><div class="eq-body">\[ x^2+bx = \left(x+\frac b2\right)^2 - \left(\frac b2\right)^2 \]</div><div class="eq-num" id="eq-0-13-1">(0.13.1)</div></div>
+    <p>Take half of \(b\), square it, add and subtract it. This turns \(x^2+bx\) into a perfect square (Chapter 6) minus a constant.</p>
+  </div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 210 190" width="320" role="img" aria-label="Geometric picture of completing the square: an x by x square, plus two (b/2) by x strips, plus a small (b/2) by (b/2) corner square added to complete a larger square of side x plus b over 2">
+      <rect x="10" y="10" width="120" height="120" style="fill:var(--def-bg); stroke:var(--def-border); stroke-width:2"/>
+      <rect x="130" y="10" width="30" height="120" style="fill:var(--int-bg); stroke:var(--int-border); stroke-width:2"/>
+      <rect x="10" y="130" width="120" height="30" style="fill:var(--int-bg); stroke:var(--int-border); stroke-width:2"/>
+      <rect x="130" y="130" width="30" height="30" style="fill:var(--mis-bg); stroke:var(--mis-border); stroke-width:2; stroke-dasharray:4 2"/>
+      <text x="70" y="76" text-anchor="middle" style="font-size:16px; fill:var(--def-text); font-family:sans-serif">x²</text>
+      <text x="145" y="76" text-anchor="middle" style="font-size:9px; fill:var(--int-text); font-family:sans-serif" transform="rotate(90 145 76)">(b/2)x</text>
+      <text x="70" y="149" text-anchor="middle" style="font-size:9px; fill:var(--int-text); font-family:sans-serif">(b/2)x</text>
+      <text x="145" y="150" text-anchor="middle" style="font-size:7px; fill:var(--mis-text); font-family:sans-serif">+(b/2)²</text>
+      <text x="70" y="-2" y2="0" text-anchor="middle" style="font-size:10px; fill:var(--text-dim); font-family:sans-serif" transform="translate(0,8)">x</text>
+      <text x="0" y="76" text-anchor="middle" style="font-size:10px; fill:var(--text-dim); font-family:sans-serif" transform="rotate(-90 8 76)">x + b/2</text>
+      <text x="90" y="188" text-anchor="middle" style="font-size:11px; fill:var(--text); font-family:sans-serif">(x + b/2)² = x² + bx + (b/2)²</text>
+    </svg>
+  </div>
+  <p class="subtitle" style="text-align:center; margin-top:-.5rem;">The dashed corner is the piece you add to turn an "almost square" shape into an actual square — that's why it's called completing the square.</p>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Solve by completing the square: <code>x² + 6x + 1 = 0</code></p>
+    <details class="step" open><summary>Step 1 — move the constant to the other side</summary>
+      <div class="step-body"><p>\(x^2+6x = -1\)</p></div></details>
+    <details class="step"><summary>Step 2 — complete the square (half of 6 is 3, squared is 9)</summary>
+      <div class="step-body"><p>\((x+3)^2 - 9 = -1\)</p></div></details>
+    <details class="step"><summary>Step 3 — isolate the square</summary>
+      <div class="step-body"><p>\((x+3)^2 = 8\)</p></div></details>
+    <details class="step"><summary>Step 4 — take the square root of both sides (don't forget ±)</summary>
+      <div class="step-body"><p>\(x+3 = \pm\sqrt8 = \pm2\sqrt2\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(x = -3\pm2\sqrt2\)</p></div></details>
+  </div>
+
+  <h2>Method 3 — The quadratic formula (completing the square, done once for every case)</h2>
+  <div class="block theorem">
+    <div class="label">Derivation — from ax² + bx + c = 0</div>
+    <details class="step" open><summary>Step 1 — divide everything by a (a ≠ 0)</summary>
+      <div class="step-body"><p>\(x^2 + \dfrac ba x + \dfrac ca = 0\)</p></div></details>
+    <details class="step"><summary>Step 2 — move the constant over, complete the square</summary>
+      <div class="step-body"><p>\(x^2+\dfrac ba x = -\dfrac ca\), then \(\left(x+\dfrac{b}{2a}\right)^2 - \left(\dfrac{b}{2a}\right)^2 = -\dfrac ca\)</p></div></details>
+    <details class="step"><summary>Step 3 — isolate the square</summary>
+      <div class="step-body"><p>\(\left(x+\dfrac{b}{2a}\right)^2 = \dfrac{b^2}{4a^2} - \dfrac ca = \dfrac{b^2-4ac}{4a^2}\)</p></div></details>
+    <details class="step"><summary>Step 4 — square root both sides</summary>
+      <div class="step-body"><p>\(x+\dfrac{b}{2a} = \pm\dfrac{\sqrt{b^2-4ac}}{2a}\)</p></div></details>
+    <details class="step"><summary>Result — the quadratic formula</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ x = \frac{-b \pm \sqrt{b^2-4ac}}{2a} \]</div><div class="eq-num" id="eq-0-13-2">(0.13.2)</div></div>
+      <p>This works for <em>every</em> quadratic — factoring and completing-the-square are special cases of what this formula does automatically.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the exact diagnostic problem, discriminant done carefully</div>
+    <p>Solve using the formula: <code>x² − 5x + 6 = 0</code></p>
+    <details class="step" open><summary>Step 1 — identify a, b, c</summary>
+      <div class="step-body"><p>\(a=1,\ b=-5,\ c=6\)</p></div></details>
+    <details class="step"><summary>Step 2 — compute the discriminant b² − 4ac carefully, as its own mini-step</summary>
+      <div class="step-body"><p>\(b^2 = (-5)^2 = 25\). \(4ac = 4(1)(6) = 24\). Discriminant \(= 25 - 24 = 1\). (Compute \(4ac\) fully before subtracting — combining it all in your head in one go is exactly where a slip like <code>25−26</code> creeps in.)</p></div></details>
+    <details class="step"><summary>Step 3 — plug into the formula</summary>
+      <div class="step-body"><p>\(x = \dfrac{-(-5)\pm\sqrt1}{2(1)} = \dfrac{5\pm1}{2}\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(x = \dfrac{6}{2}=3\) or \(x=\dfrac{4}{2}=2\) — matching both the factoring method (Chapter 8) and your original diagnostic answer.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake — the exact one from the diagnostic</div>
+    <p>Computing \(b^2-4ac\) in one mental step invites sign errors. Split it into two separate mini-computations every time: first \(b^2\) alone, then \(4ac\) alone, <em>then</em> subtract. This single habit change is what would have turned <code>25−26</code> into the correct <code>25−24</code>.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Solve by factoring: <code>x² + 3x − 10 = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+5)(x-2)=0 \Rightarrow x=-5,2\)</div></details></li>
+    <li>Solve by completing the square: <code>x² + 4x − 1 = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+2)^2=5 \Rightarrow x=-2\pm\sqrt5\)</div></details></li>
+    <li>Solve using the formula: <code>2x² − 3x − 5 = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(a=2,b=-3,c=-5\): disc\(=9+40=49\), \(x=\dfrac{3\pm7}{4} \Rightarrow x=2.5, -1\)</div></details></li>
+    <li>Compute only the discriminant for <code>3x² + 2x + 5 = 0</code> and state how many real solutions it has.
+      <details class="answer"><summary></summary><div class="ans-body">disc\(=4-60=-56\), negative → no real solutions</div></details></li>
+    <li>Solve by completing the square: <code>x² − 2x − 8 = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-1)^2=9 \Rightarrow x=1\pm3 \Rightarrow x=4,-2\)</div></details></li>
+    <li>Solve using the formula, from scratch: <code>x² − 5x + 6 = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">disc\(=25-24=1\), \(x=\dfrac{5\pm1}{2} \Rightarrow x=3,2\)</div></details></li>
+    <li class="tag">bonus — Solve by factoring: <code>x² − x − 12 = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-4)(x+3)=0 \Rightarrow x=4,-3\)</div></details></li>
+    <li class="tag">bonus — Solve using the formula: <code>x² + 2x − 1 = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">disc\(=4+4=8\), \(x=\dfrac{-2\pm2\sqrt2}{2}=-1\pm\sqrt2\)</div></details></li>
+    <li class="tag">bonus — Solve by completing the square: <code>x² + 10x + 21 = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+5)^2=4 \Rightarrow x=-5\pm2 \Rightarrow x=-3,-7\)</div></details></li>
+    <li class="tag">bonus — Without fully solving, use the discriminant to say how many real solutions <code>4x² − 4x + 1 = 0</code> has.
+      <details class="answer"><summary></summary><div class="ans-body">disc\(=16-16=0\) → exactly one repeated real root</div></details></li>
+    <li class="tag">challenge — Without looking above, re-derive the quadratic formula from <code>ax²+bx+c=0</code> using completing the square, writing every step. Then use it to solve <code>3x² − 2x − 1 = 0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Formula: \(x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}\). For \(3x^2-2x-1=0\): \(a=3,b=-2,c=-1\), disc\(=4+12=16\), \(x=\dfrac{2\pm4}{6} \Rightarrow x=1,-\tfrac13\)</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch14-systems-of-equations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 13 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

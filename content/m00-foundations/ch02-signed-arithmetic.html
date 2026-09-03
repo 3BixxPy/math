@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Signed Numbers & Distribution | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 2 of 15</div>
+  <div class="eyebrow">Day 2 · concept:signed-arithmetic</div>
+  <h1>Signed Numbers & Distribution</h1>
+  <p class="subtitle">Yesterday you fixed one sign slip. This chapter makes every sign rule automatic, so it stops being a source of errors anywhere downstream.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every algebra mistake that isn't conceptual is almost always a sign error. Derivatives, factoring, solving equations — all of it sits on top of "can I reliably combine positive and negative numbers without thinking hard." We make it automatic now, with a physical picture (the number line) backing up the abstract rule.</p>
+  </div>
+
+  <h2>Adding and subtracting</h2>
+  <div class="block definition">
+    <div class="label">Definition — Subtracting a negative</div>
+    <div class="eqn"><div class="eq-body">\[ a - (-b) = a + b \]</div><div class="eq-num" id="eq-0-2-1">(0.2.1)</div></div>
+    <p>Subtracting a negative number is the same as adding its positive. On a number line: subtraction normally moves you left; subtracting a <em>negative</em> flips that, so you move right.</p>
+  </div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 400 100" width="400" role="img" aria-label="Number line showing negative four minus negative two equals negative two, an arrow moving two steps right from -4 to -2">
+      <line x1="20" y1="50" x2="380" y2="50" stroke="currentColor" stroke-width="2" style="stroke:var(--text-dim)"/>
+      <g style="stroke:var(--text-dim); stroke-width:1.5">
+        <line x1="20" y1="44" x2="20" y2="56"/><line x1="50" y1="44" x2="50" y2="56"/><line x1="80" y1="44" x2="80" y2="56"/>
+        <line x1="110" y1="44" x2="110" y2="56"/><line x1="140" y1="44" x2="140" y2="56"/><line x1="170" y1="44" x2="170" y2="56"/>
+        <line x1="200" y1="40" x2="200" y2="60"/>
+        <line x1="230" y1="44" x2="230" y2="56"/><line x1="260" y1="44" x2="260" y2="56"/><line x1="290" y1="44" x2="290" y2="56"/>
+        <line x1="320" y1="44" x2="320" y2="56"/><line x1="350" y1="44" x2="350" y2="56"/><line x1="380" y1="44" x2="380" y2="56"/>
+      </g>
+      <g style="fill:var(--text-dim); font-size:11px; text-anchor:middle; font-family:sans-serif">
+        <text x="20" y="72">-6</text><text x="50" y="72">-5</text><text x="80" y="72">-4</text>
+        <text x="110" y="72">-3</text><text x="140" y="72">-2</text><text x="170" y="72">-1</text>
+        <text x="200" y="72">0</text><text x="230" y="72">1</text><text x="260" y="72">2</text>
+        <text x="290" y="72">3</text><text x="320" y="72">4</text><text x="350" y="72">5</text><text x="380" y="72">6</text>
+      </g>
+      <path d="M 80 30 Q 110 8 140 30" fill="none" style="stroke:var(--accent); stroke-width:2" marker-end="url(#arrow0)"/>
+      <defs><marker id="arrow0" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" style="fill:var(--accent)"/></marker></defs>
+      <text x="110" y="8" text-anchor="middle" style="fill:var(--accent); font-size:11px; font-family:sans-serif">−(−2) → move +2 right</text>
+      <circle cx="80" cy="50" r="4" style="fill:var(--accent)"/>
+      <circle cx="140" cy="50" r="4" style="fill:var(--accent)"/>
+    </svg>
+  </div>
+
+  <h2>Multiplying and dividing</h2>
+  <div class="block theorem">
+    <div class="label">Rule — Sign of a product or quotient</div>
+    <p>Same signs → positive. Different signs → negative. This holds for both multiplication and division:</p>
+    <div class="eqn"><div class="eq-body">\[ (+)(+) = +, \quad (-)(-) = +, \quad (+)(-) = -, \quad (-)(+) = - \]</div><div class="eq-num" id="eq-0-2-2">(0.2.2)</div></div>
+    <p>Shortcut for longer products: count the negative signs. An even number of negatives → positive result. An odd number → negative result.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Compute: <code>−7 − (−3)</code></p>
+    <details class="step" open><summary>Step 1 — rewrite subtracting a negative as adding</summary>
+      <div class="step-body"><p>\( -7 - (-3) = -7 + 3 \)</p></div></details>
+    <details class="step"><summary>Step 2 — combine</summary>
+      <div class="step-body"><p>Start at \(-7\), move 3 right: \(-7+3=-4\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Compute: <code>(−4)(−2) − 6</code></p>
+    <details class="step" open><summary>Step 1 — multiply first (order of operations)</summary>
+      <div class="step-body"><p>Two negatives multiplied → positive: \( (-4)(-2) = 8 \)</p></div></details>
+    <details class="step"><summary>Step 2 — subtract</summary>
+      <div class="step-body"><p>\( 8 - 6 = 2 \)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Mixing up "two negatives make a positive" for <em>multiplication</em> with addition. <code>−4 + (−2) = −6</code> (still negative!) — negatives only cancel out to positive under multiplication/division, or when you're subtracting a negative. Don't apply the multiplication rule to addition.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Compute: <code>−5 + (−3)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-8\)</div></details></li>
+    <li>Compute: <code>8 − (−6)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(8+6=14\)</div></details></li>
+    <li>Compute: <code>(−5)(3)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-15\)</div></details></li>
+    <li>Compute: <code>(−12) ÷ (−4)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(3\)</div></details></li>
+    <li>Compute: <code>−3 − 5 + (−2)(4)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-2\times4=-8\), then \(-3-5-8=-16\)</div></details></li>
+    <li>Compute: <code>(−1)(−1)(−1)(−2)</code>
+      <details class="answer"><summary></summary><div class="ans-body">Four negatives (even count) → positive: \(2\)</div></details></li>
+    <li class="tag">bonus — Compute: <code>−9 − (−9)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(0\)</div></details></li>
+    <li class="tag">bonus — Compute: <code>(−6)(2) − (−3)(5)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-12-(-15) = -12+15=3\)</div></details></li>
+    <li class="tag">bonus — Compute: <code>15 ÷ (−3) + (−2)(−2)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-5+4=-1\)</div></details></li>
+    <li class="tag">bonus — Simplify: <code>−2(x − 3) − (x − 5)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-2x+6-x+5 = -3x+11\)</div></details></li>
+    <li class="tag">challenge — Without a calculator, determine the sign only (not the value) of <code>(−3)⁷</code>, and explain your reasoning in one sentence.
+      <details class="answer"><summary></summary><div class="ans-body">Negative — 7 factors of \(-3\) multiplied together is an odd count of negatives, so the result is negative.</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch03-exponent-laws-1.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 2 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

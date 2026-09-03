@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Math Curriculum — Roadmap</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="index.html">∑ Math Curriculum</a>
+    <nav>
+      <a href="index.html">Today</a>
+      <a href="review.html">Review</a>
+      <a href="roadmap.html" class="active">Roadmap</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Full roadmap</h1>
+  <p class="subtitle">STEM first-year university track. Sized in learning-days (~30 min core each), not calendar weeks — pace is yours. Roughly 213 learning-days total; at 5–6 active days/week that's about 9–10 months, with room to finish sooner.</p>
+
+  <div id="modules"></div>
+</main>
+
+<footer class="pagefoot">
+  <span>Private curriculum · built for one learner</span>
+</footer>
+
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  const state = MC.load();
+  let curriculum;
+  try {
+    curriculum = await MC.fetchJSON("data/curriculum.json");
+  } catch (e) {
+    document.getElementById("modules").innerHTML =
+      '<div class="block mistake"><div class="label">Couldn\'t load data</div><p>Open via the GitHub Pages URL or a local server. (' + e.message + ')</p></div>';
+    return;
+  }
+
+  const el = document.getElementById("modules");
+  el.innerHTML = curriculum.modules.map((m) => {
+    const authored = m.status === "authored";
+    const doneInModule = (m.days || []).filter((d) => state.completedDays[m.id + ":" + d.day]).length;
+    const statusPill = authored
+      ? '<span class="module-status done">' + doneInModule + ' / ' + m.dayCount + ' done</span>'
+      : '<span class="module-status pending">planned · not yet written</span>';
+    const dayList = authored
+      ? '<ol class="problems">' + m.days.map((d) => {
+          const done = !!state.completedDays[m.id + ":" + d.day];
+          return '<li>' + (done ? '✅ ' : '') + '<a href="' + m.folder + '/' + d.file + '">' + d.title + '</a></li>';
+        }).join("") + '</ol>'
+      : '';
+    return (
+      '<div class="card">' +
+        '<div class="row" style="justify-content:space-between;">' +
+          '<div class="eyebrow">Module ' + m.number + '</div>' +
+          statusPill +
+        '</div>' +
+        '<h2 style="margin-top:.1rem;">' + m.title + '</h2>' +
+        '<p class="subtitle">' + m.description + '</p>' +
+        '<p class="pill">' + m.dayCount + ' learning-days</p>' +
+        dayList +
+      '</div>'
+    );
+  }).join("");
+})();
+</script>
+</body>
+</html>

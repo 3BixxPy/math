@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Exponent Laws II | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 4 of 15</div>
+  <div class="eyebrow">Day 4 · concept:exponent-power-rule, concept:zero-negative-exponents</div>
+  <h1>Exponent Laws II — Power Rules, Zero & Negative Exponents</h1>
+  <p class="subtitle">On the diagnostic, <code>(a²b³)²</code> came out as <code>a⁵b⁶</code> from careful-but-miscounted manual expansion. The correct answer is <code>a⁴b⁶</code>. This chapter gives you a rule that makes the miscount impossible.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>You had the right instinct — "squaring means writing it out twice and multiplying" — and that instinct is exactly correct. The error was a bookkeeping slip while doing it by hand (one extra <code>a</code> crept into the second copy). The rules below are that same correct instinct, turned into a shortcut that removes the manual counting entirely.</p>
+  </div>
+
+  <h2>Power of a power</h2>
+  <div class="block theorem">
+    <div class="label">Rule — Power of a power</div>
+    <div class="eqn"><div class="eq-body">\[ (a^m)^n = a^{mn} \]</div><div class="eq-num" id="eq-0-4-1">(0.4.1)</div></div>
+    <p><strong>Why:</strong> \((a^3)^2\) means \(a^3\) multiplied by itself 2 times: \((a\cdot a\cdot a)(a\cdot a\cdot a)\) — that's 6 total factors of \(a\), i.e. \(a^6 = a^{3\times2}\).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Power of a product / quotient</div>
+    <div class="eqn"><div class="eq-body">\[ (ab)^n = a^n b^n \qquad \left(\frac{a}{b}\right)^n = \frac{a^n}{b^n} \]</div><div class="eq-num" id="eq-0-4-2">(0.4.2)</div></div>
+    <p>The exponent on the outside applies to <em>every</em> factor inside — same idea as the distributive property, but for multiplication instead of addition.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the exact diagnostic problem, done two ways</div>
+    <p>Simplify: <code>(a²b³)²</code></p>
+    <details class="step" open><summary>Step 1 — the shortcut: apply the exponent to each factor</summary>
+      <div class="step-body"><p>Using (0.4.2), the outer 2 applies to both \(a^2\) and \(b^3\) separately: \((a^2)^2 (b^3)^2\).</p></div></details>
+    <details class="step"><summary>Step 2 — apply power-of-a-power to each</summary>
+      <div class="step-body"><p>\((a^2)^2 = a^{2\times2}=a^4\), and \((b^3)^2 = b^{3\times2}=b^6\).</p></div></details>
+    <details class="step"><summary>Step 3 — cross-check by full manual expansion</summary>
+      <div class="step-body">
+        <p>Write \(a^2b^3\) twice and multiply: \((a\cdot a\cdot b\cdot b\cdot b)(a\cdot a\cdot b\cdot b\cdot b)\). Count carefully: 4 factors of \(a\), 6 factors of \(b\). That's \(a^4b^6\) — matching the shortcut, and correcting the earlier miscount (which had 5 a's because one copy accidentally got an extra factor).</p>
+      </div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ (a^2b^3)^2 = a^4b^6 \]</div><div class="eq-num" id="eq-0-4-3">(0.4.3)</div></div></div></details>
+  </div>
+
+  <h2>Zero and negative exponents</h2>
+  <div class="block definition">
+    <div class="label">Definition — Zero exponent (\(a \neq 0\))</div>
+    <div class="eqn"><div class="eq-body">\[ a^0 = 1 \]</div><div class="eq-num" id="eq-0-4-4">(0.4.4)</div></div>
+    <p><strong>Why:</strong> from the quotient rule, \(\dfrac{a^n}{a^n} = a^{n-n} = a^0\). But anything divided by itself is 1. So \(a^0\) must equal 1.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Negative exponent</div>
+    <div class="eqn"><div class="eq-body">\[ a^{-n} = \frac{1}{a^n} \qquad (a \neq 0) \]</div><div class="eq-num" id="eq-0-4-5">(0.4.5)</div></div>
+    <p><strong>Why:</strong> \(\dfrac{a^0}{a^n} = a^{0-n} = a^{-n}\) by the quotient rule, but also \(\dfrac{a^0}{a^n} = \dfrac{1}{a^n}\). So a negative exponent just means "put it on the bottom of a fraction instead." It does <em>not</em> mean the number is negative.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Write <code>2⁻³</code> as a fraction, and simplify <code>(x⁻²y³)⁻¹</code>.</p>
+    <details class="step" open><summary>Step 1</summary><div class="step-body"><p>\(2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}\)</p></div></details>
+    <details class="step"><summary>Step 2 — apply the outer exponent to each factor</summary>
+      <div class="step-body"><p>\((x^{-2}y^3)^{-1} = x^{(-2)(-1)}y^{(3)(-1)} = x^{2}y^{-3}\)</p></div></details>
+    <details class="step"><summary>Step 3 — rewrite the negative exponent as a fraction</summary>
+      <div class="step-body"><p>\(x^2 y^{-3} = \dfrac{x^2}{y^3}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>\(a^{-n}\) is <strong>not</strong> a negative number — it's a positive fraction (as long as \(a\) is positive). \(2^{-3} = \frac18\), not \(-8\). Also, when applying an exponent to a product like \((2x^3)^2\), the exponent hits <em>every</em> factor including any plain numbers: \((2x^3)^2 = 2^2 x^6 = 4x^6\), not \(2x^6\).</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Simplify: <code>(x³)⁴</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x^{12}\)</div></details></li>
+    <li>Simplify: <code>(2y)³</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2^3y^3 = 8y^3\)</div></details></li>
+    <li>Simplify: <code>(x/y)²</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x^2/y^2\)</div></details></li>
+    <li>Evaluate: <code>7⁰</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(1\)</div></details></li>
+    <li>Write as a fraction: <code>3⁻²</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(1/9\)</div></details></li>
+    <li>Simplify: <code>(x²y)³</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x^6y^3\)</div></details></li>
+    <li class="tag">bonus — Simplify: <code>(a⁻²)³</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(a^{-6} = 1/a^6\)</div></details></li>
+    <li class="tag">bonus — Simplify: <code>(2x³)⁻²</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2^{-2}x^{-6} = \dfrac{1}{4x^6}\)</div></details></li>
+    <li class="tag">bonus — Simplify: <code>(a²b⁻¹)⁻²</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(a^{-4}b^{2} = \dfrac{b^2}{a^4}\)</div></details></li>
+    <li class="tag">bonus — Evaluate as a single fraction: <code>5⁰ + 2⁻¹</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(1 + \tfrac12 = \tfrac32\)</div></details></li>
+    <li class="tag">challenge — Fully hand-expand <code>(2x²)³</code> factor by factor (don't use the shortcut), then confirm it matches what the power-of-a-product rule gives.
+      <details class="answer"><summary></summary><div class="ans-body">\((2x^2)(2x^2)(2x^2) = 2\cdot2\cdot2 \cdot x^2\cdot x^2\cdot x^2 = 8x^6\), matching \(2^3x^6=8x^6\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch05-radicals.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 4 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

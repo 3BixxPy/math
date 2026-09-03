@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — Factoring III: Leading Coefficient & Grouping | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 9 of 15</div>
+  <div class="eyebrow">Day 9 · concept:factoring-trinomials-nonmonic, concept:factoring-by-grouping</div>
+  <h1>Factoring III — Leading Coefficient & Grouping</h1>
+  <p class="subtitle">Chapter 8 handled <code>x² + bx + c</code>. Real quadratics often have a number in front of the <code>x²</code> too — this chapter extends the same idea to handle that, plus a technique (grouping) that generalizes further than quadratics.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>The "find two numbers" trick from Chapter 8 doesn't directly work once there's a leading coefficient, because the simple sum/product relationship breaks. The fix (the "ac method" below) is a small, mechanical extension — same core idea, one extra step. Grouping is the more general skill underneath it, and it'll show up again factoring higher-degree polynomials later.</p>
+  </div>
+
+  <h2>The "ac method" for ax² + bx + c</h2>
+  <div class="block theorem">
+    <div class="label">Method — Factoring when a ≠ 1</div>
+    <ol>
+      <li>Compute \(a \times c\).</li>
+      <li>Find two numbers that multiply to \(ac\) and add to \(b\) (same search as Chapter 8, just using \(ac\) instead of \(c\)).</li>
+      <li>Split the middle term \(bx\) into two terms using those numbers.</li>
+      <li>Factor the resulting four-term expression by grouping (below).</li>
+    </ol>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Factoring by grouping</div>
+    <div class="eqn"><div class="eq-body">\[ ax+ay+bx+by = a(x+y)+b(x+y) = (x+y)(a+b) \]</div><div class="eq-num" id="eq-0-9-1">(0.9.1)</div></div>
+    <p>Group the four terms in pairs, pull the GCF out of each pair separately, and if you did the pairing right, the same binomial appears in both — factor that binomial out.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — ac method</div>
+    <p>Factor: <code>2x² + 7x + 3</code></p>
+    <details class="step" open><summary>Step 1 — compute ac</summary><div class="step-body"><p>\(a=2, c=3\), so \(ac=6\).</p></div></details>
+    <details class="step"><summary>Step 2 — find two numbers multiplying to 6, summing to 7</summary>
+      <div class="step-body"><p>\(6\) and \(1\): \(6\times1=6\) ✓, \(6+1=7\) ✓</p></div></details>
+    <details class="step"><summary>Step 3 — split the middle term</summary>
+      <div class="step-body"><p>\(2x^2 + 6x + x + 3\)</p></div></details>
+    <details class="step"><summary>Step 4 — factor by grouping</summary>
+      <div class="step-body"><p>\((2x^2+6x) + (x+3) = 2x(x+3) + 1(x+3) = (x+3)(2x+1)\)</p></div></details>
+    <details class="step"><summary>Check</summary>
+      <div class="step-body"><p>\((x+3)(2x+1) = 2x^2+x+6x+3 = 2x^2+7x+3\) ✓</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — grouping with a sign trap</div>
+    <p>Factor: <code>x³ − 3x² − 2x + 6</code></p>
+    <details class="step" open><summary>Step 1 — group in pairs</summary>
+      <div class="step-body"><p>\((x^3-3x^2) - (2x-6)\) — note the minus sign pulled out front of the second group, which flips the inner sign from \(+6\) to \(-6\) inside the parentheses.</p></div></details>
+    <details class="step"><summary>Step 2 — factor GCF from each group</summary>
+      <div class="step-body"><p>\(x^2(x-3) - 2(x-3)\)</p></div></details>
+    <details class="step"><summary>Step 3 — factor the common binomial</summary>
+      <div class="step-body"><p>\((x-3)(x^2-2)\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>When the second group has a leading minus sign, factoring out a <em>negative</em> GCF flips the sign of every term inside — it's easy to flip only one and not the other. Always re-expand after grouping to check both pairs still match the original expression before continuing.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Factor: <code>3x² + 11x + 6</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+3)(3x+2)\)</div></details></li>
+    <li>Factor: <code>2x² − 5x − 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-3)(2x+1)\)</div></details></li>
+    <li>Factor: <code>5x² + 13x − 6</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+3)(5x-2)\)</div></details></li>
+    <li>Factor by grouping: <code>x³ + 2x² + 3x + 6</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+2)(x^2+3)\)</div></details></li>
+    <li>Factor by grouping: <code>2x³ − 4x² + 3x − 6</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-2)(2x^2+3)\)</div></details></li>
+    <li>Factor: <code>4x² + 4x − 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((2x+3)(2x-1)\)</div></details></li>
+    <li class="tag">bonus — Factor: <code>6x² − 7x − 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((2x-3)(3x+1)\)</div></details></li>
+    <li class="tag">bonus — Factor by grouping, then keep going: <code>x³ − 5x² − 4x + 20</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-5)(x^2-4) = (x-5)(x-2)(x+2)\) — difference of squares appears after grouping</div></details></li>
+    <li class="tag">bonus — Factor: <code>3x² − 2x − 8</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-2)(3x+4)\)</div></details></li>
+    <li class="tag">bonus — Factor by grouping: <code>6x³ + 9x² + 4x + 6</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((2x+3)(3x^2+2)\)</div></details></li>
+    <li class="tag">challenge — Without looking above, factor <code>2x² + 7x + 3</code> again from scratch using the ac method, and verify by expanding.
+      <details class="answer"><summary></summary><div class="ans-body">\((x+3)(2x+1)\); check: \(2x^2+x+6x+3=2x^2+7x+3\) ✓</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch10-rational-expressions-1.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 9 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

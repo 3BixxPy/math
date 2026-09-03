@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 14 — Systems of Linear Equations | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 14 of 15</div>
+  <div class="eyebrow">Day 14 · concept:systems-of-equations-2var</div>
+  <h1>Systems of Linear Equations (Two Variables)</h1>
+  <p class="subtitle">Two unknowns, two equations, one shared solution. This is a direct preview of Module 10 (Linear Algebra), where the exact same problem gets solved again with matrices — same idea, more variables.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A "system" just means: find the \(x\) and \(y\) that satisfy <em>both</em> equations at once. Two methods handle every 2-variable linear system; later, when there are 10 unknowns instead of 2, the elimination idea generalizes directly into Gaussian elimination on matrices — you're not learning a disposable trick here, you're learning the seed of a whole module.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Linear system in two variables</div>
+    <div class="eqn"><div class="eq-body">\[ \begin{cases} ax+by = e \\ cx+dy = f \end{cases} \]</div><div class="eq-num" id="eq-0-14-1">(0.14.1)</div></div>
+    <p>The solution is the pair \((x,y)\) that makes <em>both</em> equations true simultaneously — geometrically, the point where the two lines cross.</p>
+  </div>
+
+  <h2>Method 1 — Elimination</h2>
+  <div class="block theorem">
+    <div class="label">Method — Elimination</div>
+    <p>Add or subtract the two equations (after optionally scaling one or both) so that one variable cancels out entirely, leaving a single equation in one variable.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Solve: <code>x + y = 5</code> and <code>x − y = 1</code></p>
+    <details class="step" open><summary>Step 1 — add the two equations</summary>
+      <div class="step-body"><p>\((x+y) + (x-y) = 5+1 \Rightarrow 2x = 6\) — the \(y\)'s cancel because one is \(+y\) and the other is \(-y\).</p></div></details>
+    <details class="step"><summary>Step 2 — solve for x</summary>
+      <div class="step-body"><p>\(x=3\)</p></div></details>
+    <details class="step"><summary>Step 3 — substitute back to find y</summary>
+      <div class="step-body"><p>\(3+y=5 \Rightarrow y=2\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ x=3,\ y=2 \]</div><div class="eq-num" id="eq-0-14-2">(0.14.2)</div></div>
+      <p>Always check: \(3+2=5\) ✓, \(3-2=1\) ✓.</p></div></details>
+  </div>
+
+  <h2>Method 2 — Substitution</h2>
+  <div class="block theorem">
+    <div class="label">Method — Substitution</div>
+    <p>Solve one equation for one variable, then substitute that expression into the other equation, collapsing it to one variable.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Solve: <code>y = x + 2</code> and <code>3x + y = 14</code></p>
+    <details class="step" open><summary>Step 1 — substitute y = x+2 into the second equation</summary>
+      <div class="step-body"><p>\(3x + (x+2) = 14\)</p></div></details>
+    <details class="step"><summary>Step 2 — solve for x</summary>
+      <div class="step-body"><p>\(4x+2=14 \Rightarrow 4x=12 \Rightarrow x=3\)</p></div></details>
+    <details class="step"><summary>Step 3 — back-substitute to find y</summary>
+      <div class="step-body"><p>\(y = 3+2 = 5\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>When <em>subtracting</em> one full equation from another, the minus sign must distribute across every term on the right-hand side too — not just the first one. E.g. eliminating \(x\) from <code>2x+3y=12</code> and <code>2x−y=4</code> by subtracting: \((2x+3y)-(2x-y) = 3y-(-y) = 3y+y=4y\), not \(3y-y\). Forgetting to distribute the subtraction sign to the second term is the single most common elimination error.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Solve by elimination: <code>x + y = 9</code>, <code>x − y = 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=6, y=3\)</div></details></li>
+    <li>Solve by substitution: <code>y = 2x − 1</code>, <code>x + y = 11</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=4, y=7\)</div></details></li>
+    <li>Solve by elimination: <code>3x + y = 10</code>, <code>x + y = 4</code>
+      <details class="answer"><summary></summary><div class="ans-body">Subtract: \(2x=6 \Rightarrow x=3\), \(y=1\)</div></details></li>
+    <li>Solve by substitution: <code>x = y + 3</code>, <code>2x + y = 12</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(y=2, x=5\)</div></details></li>
+    <li>Solve by elimination: <code>2x + 3y = 13</code>, <code>2x − y = 1</code>
+      <details class="answer"><summary></summary><div class="ans-body">Subtract: \(4y=12 \Rightarrow y=3\), \(x=2\)</div></details></li>
+    <li>Solve (pick your method): <code>4x − y = 7</code>, <code>x + y = 8</code>
+      <details class="answer"><summary></summary><div class="ans-body">Add: \(5x=15 \Rightarrow x=3\), \(y=5\)</div></details></li>
+    <li class="tag">bonus — Solve by elimination: <code>5x + 2y = 16</code>, <code>3x − 2y = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">Add: \(8x=16 \Rightarrow x=2\), \(y=3\)</div></details></li>
+    <li class="tag">bonus — Solve by substitution: <code>y = 3x + 1</code>, <code>4x − y = −5</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=-4, y=-11\)</div></details></li>
+    <li class="tag">bonus — Solve by elimination (scale one equation first): <code>2x + y = 11</code>, <code>x + 3y = 18</code>
+      <details class="answer"><summary></summary><div class="ans-body">Scale first by 3: \(6x+3y=33\); subtract second: \(5x=15 \Rightarrow x=3\), \(y=5\)</div></details></li>
+    <li class="tag">bonus — Solve by elimination: <code>3x + 4y = 25</code>, <code>3x − 2y = 1</code>
+      <details class="answer"><summary></summary><div class="ans-body">Subtract: \(6y=24 \Rightarrow y=4\), \(x=3\)</div></details></li>
+    <li class="tag">challenge — Solve by elimination, scaling <em>both</em> equations: <code>2x + 5y = 13</code>, <code>3x − 2y = 10</code>
+      <details class="answer"><summary></summary><div class="ans-body">Scale first ×2: \(4x+10y=26\); scale second ×5: \(15x-10y=50\); add: \(19x=76 \Rightarrow x=4\); back-substitute: \(y=1\)</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch15-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 14 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — Rational Expressions II | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 11 of 15</div>
+  <div class="eyebrow">Day 11 · concept:rational-expr-operations</div>
+  <h1>Rational Expressions II — Multiply, Divide, Add, Subtract</h1>
+  <p class="subtitle">Same rules as ordinary numeric fractions — <code>2/3</code>, <code>5/7</code> — just with polynomials in place of numbers. If a rule feels unfamiliar, try it first with plain numbers; it'll match.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>This closes out the algebra toolkit before we start solving actual equations with it. Multiplying/dividing rational expressions shows up any time you simplify a complex fraction; adding/subtracting them is exactly the skill behind combining terms in later derivative and limit calculations.</p>
+  </div>
+
+  <h2>Multiply and divide</h2>
+  <div class="block theorem">
+    <div class="label">Rule — Multiplying and dividing</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{A}{B}\cdot\frac{C}{D} = \frac{AC}{BD} \qquad\qquad \frac{A}{B}\div\frac{C}{D} = \frac{A}{B}\cdot\frac{D}{C} = \frac{AD}{BC} \]</div><div class="eq-num" id="eq-0-11-1">(0.11.1)</div></div>
+    <p>Multiply straight across. To divide, flip the second fraction and multiply — exactly like numeric fractions. Factor everything <em>before</em> multiplying so you can cancel across the two fractions, not just within each one.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — multiply</div>
+    <p>Simplify: <code>(x² − 4)/(x + 3) · (x + 3)/(x − 2)</code></p>
+    <details class="step" open><summary>Step 1 — factor everything first</summary>
+      <div class="step-body"><p>\(\dfrac{(x-2)(x+2)}{x+3}\cdot\dfrac{x+3}{x-2}\)</p></div></details>
+    <details class="step"><summary>Step 2 — cancel across both fractions</summary>
+      <div class="step-body"><p>\((x+3)\) cancels, \((x-2)\) cancels, leaving \(x+2\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(x+2\), with \(x\neq-3\) and \(x\neq2\) (both original denominators).</p></div></details>
+  </div>
+
+  <h2>Add and subtract</h2>
+  <div class="block theorem">
+    <div class="label">Rule — Common denominator required</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{A}{D} + \frac{B}{D} = \frac{A+B}{D} \]</div><div class="eq-num" id="eq-0-11-2">(0.11.2)</div></div>
+    <p>Only valid with a <em>shared</em> denominator. If the denominators differ, find the least common denominator (LCD) first — multiply each fraction by whatever "missing factor" turns its denominator into the LCD (this is multiplying by 1 in disguise, same trick as rationalizing in Chapter 5).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — unlike denominators</div>
+    <p>Simplify: <code>1/x + 1/(x+1)</code></p>
+    <details class="step" open><summary>Step 1 — LCD is the product of both denominators (they share no common factor)</summary>
+      <div class="step-body"><p>LCD \(= x(x+1)\)</p></div></details>
+    <details class="step"><summary>Step 2 — rewrite each fraction over the LCD</summary>
+      <div class="step-body"><p>\(\dfrac{1}{x}=\dfrac{x+1}{x(x+1)}\), and \(\dfrac{1}{x+1}=\dfrac{x}{x(x+1)}\)</p></div></details>
+    <details class="step"><summary>Step 3 — add numerators</summary>
+      <div class="step-body"><p>\(\dfrac{x+1}{x(x+1)}+\dfrac{x}{x(x+1)} = \dfrac{2x+1}{x(x+1)}\), with \(x\neq0,-1\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p><code>1/a + 1/b ≠ 1/(a+b)</code>. Check with plain numbers: \(\frac12+\frac13=\frac56\), but \(\frac{1}{2+3}=\frac15\). Not equal, not even close. You can never add fractions by adding their denominators — always find a common denominator first.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Multiply, with restriction: <code>(x/3) · (6/x²)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{2}{x}\), \(x\neq0\)</div></details></li>
+    <li>Multiply, with restrictions: <code>[(x+2)/(x−1)] · [(x−1)/(x+5)]</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x+2}{x+5}\), \(x\neq1,-5\)</div></details></li>
+    <li>Divide, with restrictions: <code>(x² − 9)/(x+2) ÷ (x−3)/(x+2)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x+3\), \(x\neq-2,3\)</div></details></li>
+    <li>Add, with restriction: <code>2/x + 3/x</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{5}{x}\), \(x\neq0\)</div></details></li>
+    <li>Add, with restrictions: <code>1/x + 2/(x+3)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{3x+3}{x(x+3)}\), \(x\neq0,-3\)</div></details></li>
+    <li>Subtract, with restriction: <code>3/(x−1) − 1/(x−1)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{2}{x-1}\), \(x\neq1\)</div></details></li>
+    <li class="tag">bonus — Multiply, with restrictions: <code>[(x² − 1)/(x+4)] · [(x+4)/(x−1)]</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x+1\), \(x\neq-4,1\)</div></details></li>
+    <li class="tag">bonus — Divide, with restrictions: <code>(x+5)/(2x) ÷ (x+5)/(4x)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2\), \(x\neq0,-5\)</div></details></li>
+    <li class="tag">bonus — Subtract, with restrictions: <code>1/(x+1) − 1/(x+2)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1}{(x+1)(x+2)}\), \(x\neq-1,-2\)</div></details></li>
+    <li class="tag">bonus — Using a different numeric example than the one above, show <code>1/a + 1/b ≠ 1/(a+b)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">e.g. \(a=1,b=4\): \(\frac11+\frac14=\frac54\), but \(\frac{1}{1+4}=\frac15\).</div></details></li>
+    <li class="tag">challenge — Combine into a single fraction, with restrictions: <code>2/(x−1) + 3/(x+1)</code>
+      <details class="answer"><summary></summary><div class="ans-body">LCD \((x-1)(x+1)\): \(\dfrac{2(x+1)+3(x-1)}{(x-1)(x+1)} = \dfrac{5x-1}{(x-1)(x+1)}\), \(x\neq1,-1\)</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch12-linear-equations-inequalities.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 11 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

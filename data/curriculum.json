@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "track": "STEM first-year university mathematics (Slovak/Czech: prvý ročník vysokoškolská matematika)",
+  "notes": "Day units are learning-days (~30 min core, optional bonus), not calendar days. A future AI session should read this file first to find the right chapter file before reading any chapter content directly.",
+  "modules": [
+    {
+      "id": "m00",
+      "number": 0,
+      "title": "Foundations Bridge",
+      "folder": "content/m00-foundations",
+      "status": "authored",
+      "dayCount": 15,
+      "description": "Targets diagnosed gaps directly: arithmetic care, exponent laws, factoring, rational expressions, and solving equations rigorously. Sized for 'rusty, not beginner.'",
+      "days": [
+        { "day": 1, "file": "ch01-order-of-operations.html", "title": "Order of Operations & Arithmetic Care", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 2, "file": "ch02-signed-arithmetic.html", "title": "Signed Numbers & Distribution", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 3, "file": "ch03-exponent-laws-1.html", "title": "Exponent Laws I — Product & Quotient Rules", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 4, "file": "ch04-exponent-laws-2.html", "title": "Exponent Laws II — Power Rules, Zero & Negative Exponents", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 5, "file": "ch05-radicals.html", "title": "Radicals & Rational Exponents", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 6, "file": "ch06-expanding-distributing.html", "title": "Expanding & Distributing (FOIL and beyond)", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 7, "file": "ch07-factoring-gcf-squares.html", "title": "Factoring I — GCF & Difference of Squares", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 8, "file": "ch08-factoring-trinomials.html", "title": "Factoring II — Trinomials (x²+bx+c)", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 9, "file": "ch09-factoring-advanced.html", "title": "Factoring III — Leading Coefficient & Grouping", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 10, "file": "ch10-rational-expressions-1.html", "title": "Rational Expressions I — Simplifying & Domain", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 11, "file": "ch11-rational-expressions-2.html", "title": "Rational Expressions II — Multiply, Divide, Add, Subtract", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 12, "file": "ch12-linear-equations-inequalities.html", "title": "Solving Linear Equations & Inequalities", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 13, "file": "ch13-quadratics.html", "title": "Solving Quadratics — Factoring, Completing the Square, the Formula", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 14, "file": "ch14-systems-of-equations.html", "title": "Systems of Linear Equations (2 variables)", "core": "Read chapter, do problems 1-6.", "bonus": "Problems 7-10 + challenge problem." },
+        { "day": 15, "file": "ch15-capstone-review.html", "title": "Module 0 Capstone — Mixed Review & Diagnostic Retake", "core": "Complete the interleaved review set (all of Module 0).", "bonus": "Retake the original diagnostic problems and compare." }
+      ]
+    },
+    { "id": "m01", "number": 1, "title": "Functions & Graphs", "folder": "content/m01-functions", "status": "planned", "dayCount": 15, "description": "Function notation, domain/range, transformations, piecewise, composition, inverse functions. Currently zero prior knowledge — built from scratch; this is the backbone skill for everything after.", "days": [] },
+    { "id": "m02", "number": 2, "title": "Trigonometry", "folder": "content/m02-trigonometry", "status": "planned", "dayCount": 15, "description": "Unit circle, radians, exact values, graphs of sin/cos/tan, identities, solving trig equations. Builds on existing wave/physics intuition.", "days": [] },
+    { "id": "m03", "number": 3, "title": "Exponentials & Logarithms", "folder": "content/m03-exp-log", "status": "planned", "dayCount": 10, "description": "Exponential growth/decay, log laws, change of base, solving exp/log equations.", "days": [] },
+    { "id": "m04", "number": 4, "title": "Logic & Proof Foundations", "folder": "content/m04-logic", "status": "planned", "dayCount": 10, "description": "Propositional logic (∧ ∨ ¬ ⇒ ⇔), quantifiers (∀ ∃), set notation (∈ ⊆ ∩ ∪), direct/contrapositive/contradiction proofs, induction. Maps directly onto existing boolean logic-gate fluency.", "days": [] },
+    { "id": "m05", "number": 5, "title": "Calculus I — Limits & Continuity", "folder": "content/m05-limits", "status": "planned", "dayCount": 12, "description": "Intuitive and formal limits, limit laws, continuity, asymptotes.", "days": [] },
+    { "id": "m06", "number": 6, "title": "Calculus I — Derivatives & Rules", "folder": "content/m06-derivatives", "status": "planned", "dayCount": 16, "description": "Definition of the derivative, power/product/quotient/chain rules, implicit differentiation.", "days": [] },
+    { "id": "m07", "number": 7, "title": "Calculus I — Applications of Derivatives", "folder": "content/m07-derivative-applications", "status": "planned", "dayCount": 12, "description": "Optimization, related rates, curve sketching, mean value theorem.", "days": [] },
+    { "id": "m08", "number": 8, "title": "Calculus I — Integrals & FTC", "folder": "content/m08-integrals", "status": "planned", "dayCount": 16, "description": "Antiderivatives, definite integrals, Fundamental Theorem of Calculus, basic techniques.", "days": [] },
+    { "id": "m09", "number": 9, "title": "Linear Algebra — Vectors", "folder": "content/m09-vectors", "status": "planned", "dayCount": 12, "description": "Vector algebra, dot & cross product, projections. Builds directly on existing 3D game-dev vector intuition.", "days": [] },
+    { "id": "m10", "number": 10, "title": "Linear Algebra — Systems & Matrices", "folder": "content/m10-matrices", "status": "planned", "dayCount": 12, "description": "Systems of linear equations, matrices, Gaussian elimination, matrix algebra.", "days": [] },
+    { "id": "m11", "number": 11, "title": "Linear Algebra — Vector Spaces", "folder": "content/m11-vector-spaces", "status": "planned", "dayCount": 12, "description": "Vector spaces, linear independence, span, basis, dimension.", "days": [] },
+    { "id": "m12", "number": 12, "title": "Linear Algebra — Eigenvalues & Transformations", "folder": "content/m12-eigen", "status": "planned", "dayCount": 12, "description": "Linear transformations, eigenvalues/eigenvectors, diagonalization.", "days": [] },
+    { "id": "m13", "number": 13, "title": "Calculus II — Integration Techniques", "folder": "content/m13-integration-techniques", "status": "planned", "dayCount": 12, "description": "Substitution, integration by parts, partial fractions, trig substitution.", "days": [] },
+    { "id": "m14", "number": 14, "title": "Calculus II — Applications & Improper Integrals", "folder": "content/m14-integral-applications", "status": "planned", "dayCount": 8, "description": "Volumes of revolution, arc length, improper integrals.", "days": [] },
+    { "id": "m15", "number": 15, "title": "Calculus II — Sequences, Series & Taylor Series", "folder": "content/m15-series", "status": "planned", "dayCount": 16, "description": "Convergence tests, power series, Taylor/Maclaurin series.", "days": [] },
+    { "id": "m16", "number": 16, "title": "Calculus II — Intro Multivariable", "folder": "content/m16-multivariable", "status": "planned", "dayCount": 8, "description": "Partial derivatives, gradient — bridge into 2nd-year material.", "days": [] }
+  ]
+}

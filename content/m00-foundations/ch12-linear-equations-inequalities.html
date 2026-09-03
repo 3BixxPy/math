@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — Linear Equations & Inequalities | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 12 of 15</div>
+  <div class="eyebrow">Day 12 · concept:solving-linear-equations, concept:solving-linear-inequalities</div>
+  <h1>Solving Linear Equations & Inequalities</h1>
+  <p class="subtitle">Time to close the loop on the diagnostic's very first problem — this time expanded correctly from the start.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Your equation-solving mechanics were never the problem — isolating a variable, combining like terms, that was all correct on the diagnostic. What needed fixing was the arithmetic feeding into it (Chapter 1) and the toolkit around it (exponents, factoring). This chapter is where all of it comes together on real equations — and introduces one genuinely new rule for inequalities.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Solving equations: keep both sides balanced</div>
+    <p>Whatever operation you apply to one side of an equation, apply the same operation to the other side. Your goal: isolate the variable using inverse operations (undo addition with subtraction, undo multiplication with division, etc.), working from the outside in.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the diagnostic equation, solved correctly end-to-end</div>
+    <p>Solve: <code>3(x − 4) + 2 = 5x − 6</code></p>
+    <details class="step" open><summary>Step 1 — expand the left side (Chapter 1's fix)</summary>
+      <div class="step-body"><p>\(3x - 12 + 2 = 3x - 10\)</p></div></details>
+    <details class="step"><summary>Step 2 — rewrite the equation</summary>
+      <div class="step-body"><p>\(3x - 10 = 5x - 6\)</p></div></details>
+    <details class="step"><summary>Step 3 — gather the x-terms on one side</summary>
+      <div class="step-body"><p>Subtract \(3x\) from both sides: \(-10 = 2x - 6\)</p></div></details>
+    <details class="step"><summary>Step 4 — isolate x</summary>
+      <div class="step-body"><p>Add 6 to both sides: \(-4 = 2x\). Divide by 2: \(x=-2\).</p></div></details>
+    <details class="step"><summary>Check</summary>
+      <div class="step-body"><p>Left: \(3(-2-4)+2 = 3(-6)+2=-18+2=-16\). Right: \(5(-2)-6=-10-6=-16\). Equal ✓</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ 3(x-4)+2 = 5x-6 \;\Longrightarrow\; x = -2 \]</div><div class="eq-num" id="eq-0-12-1">(0.12.1)</div></div></div></details>
+  </div>
+
+  <h2>Inequalities — one new rule</h2>
+  <div class="block theorem">
+    <div class="label">Rule — Flip the sign when multiplying/dividing by a negative</div>
+    <p>Everything about solving an inequality works exactly like an equation, <strong>except</strong>: multiplying or dividing both sides by a negative number reverses the inequality's direction.</p>
+    <p><strong>Why:</strong> \(2 < 5\) is true. Multiply both sides by \(-1\): naively you'd write \(-2 < -5\), but that's false — \(-2\) is actually bigger than \(-5\) on the number line. The correct statement after multiplying by \(-1\) is \(-2 > -5\). The inequality had to flip to stay true.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Solve: <code>−2x + 3 > 7</code></p>
+    <details class="step" open><summary>Step 1 — isolate the x-term</summary>
+      <div class="step-body"><p>Subtract 3: \(-2x > 4\)</p></div></details>
+    <details class="step"><summary>Step 2 — divide by −2, and flip the inequality</summary>
+      <div class="step-body"><p>\(x < -2\)</p></div></details>
+    <details class="step"><summary>Sanity check</summary>
+      <div class="step-body"><p>Try \(x=-3\) (satisfies \(x<-2\)): \(-2(-3)+3 = 9 > 7\) ✓. Try \(x=0\) (violates it): \(3 > 7\) is false, correctly excluded.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting to flip the inequality — this is the single new rule in this chapter and the only thing that differs from equation-solving. It only triggers on multiply/divide by a negative, never on addition/subtraction. When in doubt, plug in a test value afterward (as above) to confirm the direction is right.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Solve: <code>4x − 7 = 2x + 9</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=8\)</div></details></li>
+    <li>Solve: <code>5(x + 2) = 3x + 16</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=3\)</div></details></li>
+    <li>Solve: <code>2(3x − 1) − x = 4x + 5</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=7\)</div></details></li>
+    <li>Solve: <code>3x − 5 < 10</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x<5\)</div></details></li>
+    <li>Solve: <code>−4x + 1 ≥ 9</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-4x\ge8 \Rightarrow x\le-2\) (flip on divide by \(-4\))</div></details></li>
+    <li>Solve from scratch (don't peek above): <code>3(x − 4) + 2 = 5x − 6</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=-2\)</div></details></li>
+    <li class="tag">bonus — Solve: <code>−2(x − 3) = 4(x + 1)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=\tfrac13\)</div></details></li>
+    <li class="tag">bonus — Solve: <code>5 − 2x > −1</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-2x>-6 \Rightarrow x<3\)</div></details></li>
+    <li class="tag">bonus — Solve: <code>(x + 3)/2 = (2x − 1)/3</code>
+      <details class="answer"><summary></summary><div class="ans-body">Cross-multiply: \(3(x+3)=2(2x-1) \Rightarrow 3x+9=4x-2 \Rightarrow x=11\)</div></details></li>
+    <li class="tag">bonus — Solve: <code>−3(x + 2) ≤ 9</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(-3x-6\le9 \Rightarrow -3x\le15 \Rightarrow x\ge-5\) (flip)</div></details></li>
+    <li class="tag">challenge — Solve <code>4(x − 2) − 3(2x + 1) = −5</code>, showing every step, then verify by substituting your answer back into the original equation.
+      <details class="answer"><summary></summary><div class="ans-body">\(4x-8-6x-3=-5 \Rightarrow -2x-11=-5 \Rightarrow -2x=6 \Rightarrow x=-3\). Check: \(4(-5)-3(-5)=-20+15=-5\) ✓</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch13-quadratics.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 12 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

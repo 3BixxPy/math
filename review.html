@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Math Curriculum — Review</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="index.html">∑ Math Curriculum</a>
+    <nav>
+      <a href="index.html">Today</a>
+      <a href="review.html" class="active">Review</a>
+      <a href="roadmap.html">Roadmap</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Spaced review</h1>
+  <p class="subtitle">Concepts you've learned come back here on a schedule (Leitner boxes: 1 → 3 → 7 → 16 → 35 days). Answer from memory first, then reveal.</p>
+
+  <div id="queue"></div>
+</main>
+
+<footer class="pagefoot">
+  <span>Private curriculum · built for one learner</span>
+</footer>
+
+<script src="assets/katex/katex.min.js"></script>
+<script src="assets/katex/auto-render.min.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  const state = MC.load();
+  let concepts;
+  try {
+    concepts = (await MC.fetchJSON("data/concepts.json")).concepts;
+  } catch (e) {
+    document.getElementById("queue").innerHTML =
+      '<div class="block mistake"><div class="label">Couldn\'t load data</div><p>Open this via the GitHub Pages URL or a local server, not by double-clicking the file. (' + e.message + ')</p></div>';
+    return;
+  }
+
+  const due = MC.dueConcepts(state, concepts);
+  const queueEl = document.getElementById("queue");
+
+  if (!due.length) {
+    const learned = Object.keys(state.leitner).length;
+    queueEl.innerHTML = learned
+      ? '<div class="block example"><div class="label">Nothing due right now</div><p>' + learned + ' concept(s) in rotation, none due today. Come back tomorrow, or go learn something new on <a href="index.html">Today</a>.</p></div>'
+      : '<div class="block intuition"><div class="label">Nothing to review yet</div><p>Concepts get added here automatically as you complete days on the <a href="index.html">Today</a> page.</p></div>';
+    return;
+  }
+
+  function renderQueue() {
+    const remaining = MC.dueConcepts(state, concepts);
+    if (!remaining.length) {
+      queueEl.innerHTML = '<div class="block example"><div class="label">Review complete</div><p>All due concepts cleared for today. Nice.</p></div>';
+      return;
+    }
+    const c = remaining[0];
+    queueEl.innerHTML =
+      '<div class="card">' +
+        '<div class="eyebrow">' + remaining.length + ' remaining · box ' + (state.leitner[c.id].box) + '</div>' +
+        '<h2 style="margin-top:.2rem;">' + c.name + '</h2>' +
+        '<p>' + c.prompt + '</p>' +
+        '<details class="answer"><summary></summary><div class="ans-body">' + c.hint + '</div></details>' +
+        '<p class="subtitle">Be honest — this only works if you answer before revealing.</p>' +
+        '<div class="row" style="margin-top:.8rem;">' +
+          '<button class="btn" id="got-it">I remembered it ✓</button>' +
+          '<button class="btn secondary" id="missed-it">I missed it — reset</button>' +
+        '</div>' +
+        '<p class="subtitle" style="margin-top:.6rem;"><a href="' + c.definedIn + '">Reread the source chapter</a></p>' +
+      '</div>';
+
+    document.getElementById("got-it").addEventListener("click", () => {
+      MC.reviewResult(state, c.id, true);
+      renderQueue();
+    });
+    document.getElementById("missed-it").addEventListener("click", () => {
+      MC.reviewResult(state, c.id, false);
+      renderQueue();
+    });
+  }
+
+  renderQueue();
+  MC.renderMath(document.body);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Math Curriculum — Dashboard</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="index.html">∑ Math Curriculum</a>
+    <nav>
+      <a href="index.html" class="active">Today</a>
+      <a href="review.html">Review</a>
+      <a href="roadmap.html">Roadmap</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Today</h1>
+  <p class="subtitle">One page, updated daily. Go your own pace — the streak just tracks that you showed up.</p>
+
+  <div class="card" id="streak-card">
+    <div class="row" style="justify-content:space-between; align-items:flex-start;">
+      <div>
+        <div class="eyebrow">Current streak</div>
+        <div class="streak-num" id="streak-count">–</div>
+        <div class="subtitle" id="streak-sub" style="margin-top:.1rem;">loading…</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="eyebrow">Progress</div>
+        <div id="progress-fraction" style="font-weight:700;">–</div>
+      </div>
+    </div>
+    <div class="progress-bar"><div id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="today-block"></div>
+
+  <hr class="div">
+
+  <h2>Jump to an equation</h2>
+  <p class="subtitle">Type a reference like <code>0.13.2</code> (module.chapter.equation) to open it directly.</p>
+  <div class="row">
+    <input id="eq-input" type="text" placeholder="e.g. 0.13.2" style="flex:1; min-width:160px; padding:.55rem .7rem; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--text);">
+    <button class="btn" id="eq-go">Go</button>
+  </div>
+  <p id="eq-error" class="subtitle" style="color:var(--mis-border);"></p>
+
+  <h2>Search concepts</h2>
+  <input id="concept-search" type="text" placeholder="e.g. factoring, exponent, quadratic formula…" style="width:100%; padding:.55rem .7rem; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--text); margin-bottom:.6rem;">
+  <div id="concept-results"></div>
+
+  <hr class="div">
+  <h2>Backup progress</h2>
+  <p class="subtitle">Progress lives only in this browser (localStorage). Export on one device, import on the other, to keep phone and PC in sync.</p>
+  <div class="row">
+    <button class="btn secondary" id="export-btn">Export progress (.json)</button>
+    <label class="btn secondary" style="cursor:pointer;">
+      Import progress
+      <input id="import-input" type="file" accept="application/json" style="display:none;">
+    </label>
+  </div>
+  <p id="import-msg" class="subtitle"></p>
+</main>
+
+<footer class="pagefoot">
+  <span>Private curriculum · built for one learner</span>
+  <span id="foot-total"></span>
+</footer>
+
+<script src="assets/katex/katex.min.js"></script>
+<script src="assets/katex/auto-render.min.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  const state = MC.load();
+  let curriculum, concepts;
+  try {
+    [curriculum, concepts] = await Promise.all([
+      MC.fetchJSON("data/curriculum.json"),
+      MC.fetchJSON("data/concepts.json")
+    ]);
+  } catch (e) {
+    document.getElementById("today-block").innerHTML =
+      '<div class="block mistake"><div class="label">Couldn\'t load data</div><p>This page needs to be served over http(s) — open it via the GitHub Pages URL, or run a local server (e.g. <code>python3 -m http.server</code>) rather than double-clicking the file. (' + e.message + ')</p></div>';
+    return;
+  }
+
+  function renderStreak() {
+    document.getElementById("streak-count").textContent = state.streak.count;
+    document.getElementById("streak-sub").textContent =
+      state.streak.count === 1 ? "day in a row" : "days in a row" +
+      (state.streak.longest > state.streak.count ? " · best: " + state.streak.longest : "");
+    const done = MC.completedCount(state);
+    const total = MC.totalAuthoredDays(curriculum);
+    document.getElementById("progress-fraction").textContent = done + " / " + total + " days";
+    document.getElementById("progress-fill").style.width = (total ? (100 * done / total) : 0) + "%";
+    document.getElementById("foot-total").textContent = total + " learning-days authored so far (of ~213 planned)";
+  }
+
+  function renderToday() {
+    const entry = MC.nextUpEntry(curriculum, state);
+    const box = document.getElementById("today-block");
+    if (!entry) {
+      box.innerHTML =
+        '<div class="block example"><div class="label">All authored days complete</div>' +
+        '<p>You\'ve finished every day that\'s been written so far. Nice work — more modules are being authored; check the <a href="roadmap.html">roadmap</a> for what\'s next, and use <a href="review.html">Review</a> to keep everything sharp in the meantime.</p></div>';
+      return;
+    }
+    box.innerHTML =
+      '<div class="card">' +
+        '<div class="eyebrow">Module ' + entry.moduleNumber + ' · Day ' + entry.day + '</div>' +
+        '<h2 style="margin-top:.1rem;">' + entry.title + '</h2>' +
+        '<p><strong>Core (~30 min):</strong> ' + entry.core + '</p>' +
+        '<p><strong>Bonus, if you have time:</strong> ' + entry.bonus + '</p>' +
+        '<div class="row" style="margin-top:.8rem;">' +
+          '<a class="btn" href="' + entry.moduleFolder + '/' + entry.file + '">Open chapter</a>' +
+        '</div>' +
+        '<div class="row" style="margin-top:1rem;">' +
+          '<label class="row" style="gap:.4rem;"><input type="checkbox" id="bonus-check"> I also did the bonus</label>' +
+        '</div>' +
+        '<div class="row" style="margin-top:.6rem;">' +
+          '<button class="btn" id="mark-done-btn">Mark today done ✓</button>' +
+        '</div>' +
+      '</div>';
+
+    document.getElementById("mark-done-btn").addEventListener("click", () => {
+      const gotBonus = document.getElementById("bonus-check").checked;
+      MC.markDayComplete(state, entry.key, gotBonus);
+      MC.introduceConceptsForFile(state, concepts.concepts, entry.moduleFolder + "/" + entry.file);
+      MC.save(state);
+      renderStreak();
+      renderToday();
+    });
+  }
+
+  renderStreak();
+  renderToday();
+
+  // equation jump
+  document.getElementById("eq-go").addEventListener("click", () => {
+    const ref = document.getElementById("eq-input").value;
+    const errEl = document.getElementById("eq-error");
+    const resolved = MC.resolveEquation(curriculum, ref);
+    if (!resolved) {
+      errEl.textContent = "Couldn't resolve \"" + ref + "\" — use module.chapter.equation, e.g. 0.13.2.";
+      return;
+    }
+    errEl.textContent = "";
+    window.location.href = resolved.path + "#" + resolved.anchor;
+  });
+  document.getElementById("eq-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") document.getElementById("eq-go").click();
+  });
+
+  // concept search
+  document.getElementById("concept-search").addEventListener("input", (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const resultsEl = document.getElementById("concept-results");
+    if (!q) { resultsEl.innerHTML = ""; return; }
+    const matches = concepts.concepts.filter((c) =>
+      c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q)
+    ).slice(0, 8);
+    if (!matches.length) { resultsEl.innerHTML = '<p class="subtitle">No matches yet.</p>'; return; }
+    resultsEl.innerHTML = matches.map((c) =>
+      '<div class="card" style="margin:.5rem 0; padding:.7rem .9rem;">' +
+        '<strong>' + c.name + '</strong><br>' +
+        '<a href="' + c.definedIn + '" style="font-size:.85rem;">' + c.definedIn.split("/").pop() + '</a>' +
+      '</div>'
+    ).join("");
+  });
+
+  // export / import
+  document.getElementById("export-btn").addEventListener("click", () => MC.exportState(state));
+  document.getElementById("import-input").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    MC.importState(file, (err) => {
+      const msg = document.getElementById("import-msg");
+      if (err) { msg.textContent = "Import failed: " + err.message; return; }
+      msg.textContent = "Imported. Reloading…";
+      setTimeout(() => window.location.reload(), 600);
+    });
+  });
+
+  MC.renderMath(document.body);
+})();
+</script>
+</body>
+</html>

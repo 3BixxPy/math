@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Factoring II: Trinomials | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 8 of 15</div>
+  <div class="eyebrow">Day 8 · concept:factoring-trinomials-monic</div>
+  <h1>Factoring II — Trinomials (x² + bx + c)</h1>
+  <p class="subtitle">On the diagnostic, you solved <code>x² − 5x + 6 = 0</code> with the quadratic formula — correctly, but you had to look the formula up. This chapter gives you a faster route for quadratics like this one: spot the factors directly.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Not every quadratic needs the full formula. Many of the ones you'll meet — especially ones built for teaching — factor cleanly, and factoring is faster once you can do it fluently. It also builds the same "what are the roots" intuition you'll need for calculus later, just via a different route.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Factoring \(x^2+bx+c\)</div>
+    <div class="eqn"><div class="eq-body">\[ (x+p)(x+q) = x^2 + (p+q)x + pq \]</div><div class="eq-num" id="eq-0-8-1">(0.8.1)</div></div>
+    <p>Reading this backward: to factor \(x^2+bx+c\), find two numbers \(p\) and \(q\) that <strong>multiply to \(c\)</strong> and <strong>add to \(b\)</strong>. Then the factors are \((x+p)(x+q)\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the exact diagnostic quadratic</div>
+    <p>Factor: <code>x² − 5x + 6</code></p>
+    <details class="step" open><summary>Step 1 — list factor pairs of c = 6</summary>
+      <div class="step-body"><p>\(1\times6\), \(2\times3\), \((-1)\times(-6)\), \((-2)\times(-3)\)</p></div></details>
+    <details class="step"><summary>Step 2 — find the pair that also sums to b = −5</summary>
+      <div class="step-body"><p>\(-2 + (-3) = -5\). ✓ Both conditions match with \(p=-2, q=-3\).</p></div></details>
+    <details class="step"><summary>Step 3 — write the factors</summary>
+      <div class="step-body"><p>\((x-2)(x-3)\)</p></div></details>
+    <details class="step"><summary>Step 4 — check by expanding back (always do this)</summary>
+      <div class="step-body"><p>\((x-2)(x-3) = x^2-3x-2x+6 = x^2-5x+6\) ✓ matches the original.</p></div></details>
+    <details class="step"><summary>Result — matches your diagnostic answer</summary>
+      <div class="step-body"><p>Setting each factor to zero: \(x-2=0 \Rightarrow x=2\), \(x-3=0 \Rightarrow x=3\). Same roots \(x=2,3\) you got with the quadratic formula — factoring is just a shortcut to the same place, when it's available.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — negative constant term</div>
+    <p>Factor: <code>x² + 2x − 15</code></p>
+    <details class="step" open><summary>Step 1 — factor pairs of c = −15 (one positive, one negative, since c is negative)</summary>
+      <div class="step-body"><p>Need product \(-15\), sum \(2\): try \(5\) and \(-3\): \(5\times(-3)=-15\) ✓, \(5+(-3)=2\) ✓.</p></div></details>
+    <details class="step"><summary>Step 2 — write the factors</summary>
+      <div class="step-body"><p>\((x+5)(x-3)\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Getting the multiplication condition right but the sum wrong (or vice versa) — both must hold simultaneously. Also: when \(c\) is negative, \(p\) and \(q\) must have <em>opposite</em> signs (a negative times a positive is negative); when \(c\) is positive, they must have the <em>same</em> sign as each other, matching the sign of \(b\). Always verify with the expand-back check — it takes ten seconds and catches every mistake.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Factor: <code>x² + 7x + 12</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+3)(x+4)\)</div></details></li>
+    <li>Factor: <code>x² − 3x − 10</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-5)(x+2)\)</div></details></li>
+    <li>Factor: <code>x² − 8x + 16</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-4)^2\) — a perfect square trinomial, same pattern as Chapter 6</div></details></li>
+    <li>Factor: <code>x² + x − 6</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+3)(x-2)\)</div></details></li>
+    <li>Factor: <code>x² − 9x + 20</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-4)(x-5)\)</div></details></li>
+    <li>Factor: <code>x² + 4x − 21</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+7)(x-3)\)</div></details></li>
+    <li class="tag">bonus — Factor: <code>x² − 2x − 24</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-6)(x+4)\)</div></details></li>
+    <li class="tag">bonus — Factor: <code>x² + 10x + 25</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+5)^2\)</div></details></li>
+    <li class="tag">bonus — Factor: <code>x² − x − 42</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x-7)(x+6)\)</div></details></li>
+    <li class="tag">bonus — Factor: <code>x² + 6x − 16</code>
+      <details class="answer"><summary></summary><div class="ans-body">\((x+8)(x-2)\)</div></details></li>
+    <li class="tag">challenge — Without looking above, factor <code>x² − 5x + 6</code> again from scratch, then verify by expanding your answer back to the original.
+      <details class="answer"><summary></summary><div class="ans-body">\((x-2)(x-3)\); expanding: \(x^2-3x-2x+6=x^2-5x+6\) ✓</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch09-factoring-advanced.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 8 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

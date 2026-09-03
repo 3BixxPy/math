@@ -1,0 +1,251 @@
+/* =========================================================================
+   Math Curriculum — shared design system
+   One file, reused by every page. Keep block-type colors fixed and
+   consistent across all chapters so pattern recognition becomes automatic.
+   ========================================================================= */
+
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --text: #1c1c1e;
+  --text-dim: #56565c;
+  --border: #e2e2e0;
+  --accent: #2d6cdf;
+
+  /* fixed block-type palette (same meaning everywhere) */
+  --def-bg: #eaf1fd;    --def-border: #2d6cdf;   --def-text: #10305e;
+  --thm-bg: #f2eafd;    --thm-border: #7c3aed;   --thm-text: #3d1a75;
+  --ex-bg:  #e9f9ee;    --ex-border:  #1f9d55;   --ex-text:  #0f5a30;
+  --mis-bg: #fdeeea;    --mis-border: #e34a29;   --mis-text: #7a2711;
+  --int-bg: #e6f8f7;    --int-border: #0f9d94;   --int-text: #0a4f4a;
+  --prac-bg:#f1f1ef;    --prac-border:#8a8a86;   --prac-text:#3a3a38;
+
+  --code-bg: #f0f0ee;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 1px 12px rgba(0,0,0,.03);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131315;
+    --surface: #1c1c1f;
+    --text: #eceef0;
+    --text-dim: #a5a5ad;
+    --border: #313136;
+    --accent: #6ea1ff;
+
+    --def-bg: #16233d;   --def-border: #5b8fef;  --def-text: #cfe0ff;
+    --thm-bg: #241a3d;   --thm-border: #a97cf5;  --thm-text: #e6d9ff;
+    --ex-bg:  #123321;   --ex-border:  #35c56f;  --ex-text:  #c3f2d4;
+    --mis-bg: #3a1c14;   --mis-border: #ef6a44;  --mis-text: #ffd8c9;
+    --int-bg: #0f2e2c;   --int-border: #2bc2b7;  --int-text: #bdf2ee;
+    --prac-bg:#232325;   --prac-border:#8a8a92;  --prac-text:#d6d6da;
+
+    --code-bg: #232325;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 1px 12px rgba(0,0,0,.25);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding-bottom: 4rem;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.1rem;
+}
+
+/* ---- top nav ---- */
+header.topnav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+header.topnav .wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: .7rem;
+  padding-bottom: .7rem;
+  flex-wrap: wrap;
+}
+header.topnav a.brand {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.02rem;
+}
+header.topnav nav { display: flex; gap: .9rem; margin-left: auto; flex-wrap: wrap; }
+header.topnav nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: .92rem;
+  padding: .3rem .1rem;
+}
+header.topnav nav a:hover, header.topnav nav a.active { color: var(--accent); }
+
+/* ---- headings ---- */
+h1 { font-size: 1.5rem; margin: 1.4rem 0 .4rem; letter-spacing: -.01em; }
+h2 { font-size: 1.18rem; margin: 2.2rem 0 .6rem; letter-spacing: -.01em; }
+h3 { font-size: 1rem; margin: 1.4rem 0 .4rem; }
+p { margin: .7rem 0; }
+.subtitle { color: var(--text-dim); font-size: .96rem; margin-top: -.2rem; }
+.eyebrow {
+  font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: .25rem;
+}
+
+/* ---- breadcrumb / meta ---- */
+.crumb { font-size: .84rem; color: var(--text-dim); margin-top: 1rem; }
+.crumb a { color: var(--text-dim); }
+.meta-row { display: flex; gap: .6rem; flex-wrap: wrap; margin: .6rem 0 1rem; }
+.pill {
+  display: inline-block; font-size: .74rem; padding: .2rem .55rem; border-radius: 999px;
+  background: var(--prac-bg); color: var(--text-dim); border: 1px solid var(--border);
+}
+
+/* ---- block types (the core of the visual system) ---- */
+.block {
+  border-left: 4px solid var(--border);
+  background: var(--surface);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: .85rem 1rem .95rem;
+  margin: 1.1rem 0;
+  box-shadow: var(--shadow);
+}
+.block > .label {
+  font-size: .72rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+  margin-bottom: .4rem; display: flex; align-items: center; gap: .4rem;
+}
+
+.block.definition { border-color: var(--def-border); background: var(--def-bg); }
+.block.definition > .label { color: var(--def-text); }
+
+.block.theorem { border-color: var(--thm-border); background: var(--thm-bg); }
+.block.theorem > .label { color: var(--thm-text); }
+
+.block.example { border-color: var(--ex-border); background: var(--ex-bg); }
+.block.example > .label { color: var(--ex-text); }
+
+.block.mistake { border-color: var(--mis-border); background: var(--mis-bg); }
+.block.mistake > .label { color: var(--mis-text); }
+
+.block.intuition { border-color: var(--int-border); background: var(--int-bg); }
+.block.intuition > .label { color: var(--int-text); }
+
+.block.practice { border-color: var(--prac-border); background: var(--prac-bg); }
+.block.practice > .label { color: var(--prac-text); }
+
+/* ---- step reveal (worked examples / answers) ---- */
+details.step {
+  margin: .5rem 0;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: .5rem .7rem;
+  background: var(--surface);
+}
+details.step > summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .92rem;
+  color: var(--accent);
+  list-style: none;
+}
+details.step > summary::-webkit-details-marker { display: none; }
+details.step > summary::before { content: "▸ "; }
+details.step[open] > summary::before { content: "▾ "; }
+details.step .step-body { margin-top: .5rem; }
+
+details.answer {
+  margin-top: .6rem;
+}
+details.answer > summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: .85rem;
+  color: var(--accent);
+  list-style: none;
+}
+details.answer > summary::-webkit-details-marker { display: none; }
+details.answer > summary::before { content: "Show answer ▸ "; }
+details.answer[open] > summary::before { content: "Answer ▾ "; }
+details.answer .ans-body {
+  margin-top: .4rem;
+  padding: .5rem .7rem;
+  background: var(--code-bg);
+  border-radius: 8px;
+  font-size: .93rem;
+}
+
+/* ---- numbered equations ---- */
+.eqn {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .8rem 0;
+  padding: .55rem .3rem;
+  overflow-x: auto;
+}
+.eqn .eq-body { flex: 1; }
+.eqn .eq-num {
+  flex-shrink: 0;
+  font-size: .78rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .1rem .4rem;
+}
+
+/* ---- problem list ---- */
+ol.problems { padding-left: 1.3rem; }
+ol.problems > li { margin: 1rem 0; }
+ol.problems .tag {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-dim); margin-left: .4rem;
+}
+
+/* ---- misc ---- */
+code, .code { background: var(--code-bg); border-radius: 5px; padding: .05rem .35rem; font-size: .9em; }
+hr.div { border: none; border-top: 1px solid var(--border); margin: 2.2rem 0; }
+.svg-wrap { display: flex; justify-content: center; margin: 1rem 0; }
+.svg-wrap svg { max-width: 100%; height: auto; }
+a { color: var(--accent); }
+.btn {
+  display: inline-block; background: var(--accent); color: #fff !important; text-decoration: none;
+  padding: .55rem 1rem; border-radius: 8px; font-weight: 600; font-size: .92rem;
+  border: none; cursor: pointer; font-family: inherit;
+}
+.btn.secondary { background: transparent; color: var(--accent) !important; border: 1px solid var(--accent); }
+.btn:disabled { opacity: .5; cursor: default; }
+.row { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem 1.1rem; margin: 1rem 0; box-shadow: var(--shadow);
+}
+.streak-num { font-size: 2.4rem; font-weight: 800; line-height: 1; }
+.progress-bar { height: 8px; border-radius: 999px; background: var(--border); overflow: hidden; margin: .5rem 0; }
+.progress-bar > div { height: 100%; background: var(--accent); }
+footer.pagefoot {
+  max-width: 720px; margin: 3rem auto 0; padding: 0 1.1rem 2rem; color: var(--text-dim); font-size: .82rem;
+  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.module-status { font-size: .78rem; padding: .15rem .5rem; border-radius: 6px; }
+.module-status.done { background: var(--ex-bg); color: var(--ex-text); }
+.module-status.pending { background: var(--prac-bg); color: var(--text-dim); }
+
+@media (min-width: 760px) {
+  .wrap { max-width: 780px; }
+  body { font-size: 16.5px; }
+}

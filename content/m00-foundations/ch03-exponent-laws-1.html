@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Exponent Laws I | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 3 of 15</div>
+  <div class="eyebrow">Day 3 · concept:exponent-product-rule, concept:exponent-quotient-rule</div>
+  <h1>Exponent Laws I — Product & Quotient Rules</h1>
+  <p class="subtitle">On the diagnostic, <code>2⁻³ · 2⁵</code> got "no idea." By the end of this chapter it's a one-line answer, derived from something you already fully understand: repeated multiplication.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Exponent rules aren't a separate thing to memorize — they're direct, mechanical consequences of what an exponent <em>is</em>. If you rebuild them from the definition once, you stop needing to memorize them at all; you can always re-derive them in five seconds. That's the reductionist approach: one small idea (repeated multiplication), reused everywhere.</p>
+  </div>
+
+  <h2>What an exponent actually is</h2>
+  <div class="block definition">
+    <div class="label">Definition — Exponent (positive integer case)</div>
+    <div class="eqn"><div class="eq-body">\[ a^n = \underbrace{a \times a \times \cdots \times a}_{n \text{ factors}} \]</div><div class="eq-num" id="eq-0-3-0">(0.3.0)</div></div>
+    <p>e.g. \(a^3 = a\cdot a\cdot a\). Everything below falls out of this one fact just by counting factors.</p>
+  </div>
+
+  <h2>Product rule</h2>
+  <div class="block theorem">
+    <div class="label">Rule — Product of powers (same base)</div>
+    <div class="eqn"><div class="eq-body">\[ a^m \cdot a^n = a^{m+n} \]</div><div class="eq-num" id="eq-0-3-1">(0.3.1)</div></div>
+    <p><strong>Why:</strong> \(a^3 \cdot a^2 = (a\cdot a\cdot a)(a \cdot a)\) — that's 5 copies of \(a\) multiplied together, i.e. \(a^5 = a^{3+2}\). You're just counting total factors. This still works even when an exponent is negative or zero — you don't need to know what \(a^{-3}\) "looks like" to add exponents correctly.</p>
+  </div>
+
+  <h2>Quotient rule</h2>
+  <div class="block theorem">
+    <div class="label">Rule — Quotient of powers (same base, \(a \neq 0\))</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{a^m}{a^n} = a^{m-n} \]</div><div class="eq-num" id="eq-0-3-2">(0.3.2)</div></div>
+    <p><strong>Why:</strong> \(\dfrac{a^5}{a^2} = \dfrac{a\cdot a\cdot a\cdot a\cdot a}{a\cdot a}\). Two of the top factors cancel with the two on the bottom, leaving \(a^3 = a^{5-2}\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the exact diagnostic problem</div>
+    <p>Simplify: <code>2⁻³ · 2⁵</code></p>
+    <details class="step" open><summary>Step 1 — same base, so apply the product rule</summary>
+      <div class="step-body"><p>Same base (2) being multiplied → add the exponents. You don't need to know what \(2^{-3}\) equals yet.</p></div></details>
+    <details class="step"><summary>Step 2 — add exponents</summary>
+      <div class="step-body"><p>\(-3 + 5 = 2\), so \(2^{-3}\cdot 2^5 = 2^2\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ 2^{-3}\cdot 2^5 = 2^2 = 4 \]</div><div class="eq-num" id="eq-0-3-3">(0.3.3)</div></div></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Simplify: <code>x⁷ / x³</code></p>
+    <details class="step" open><summary>Step 1 — apply the quotient rule</summary>
+      <div class="step-body"><p>\(x^{7-3} = x^4\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>These rules only apply when the <strong>base is the same</strong>. \(x^3 \cdot y^2\) does <em>not</em> simplify to anything with combined exponents — different bases just stay as they are. Also: \(a^m \cdot a^n \ne a^{mn}\) — that's a different rule (power of a power), coming next chapter. Multiplying same-base powers <em>adds</em> exponents; it never multiplies them.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Simplify: <code>x⁴ · x³</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x^7\)</div></details></li>
+    <li>Simplify: <code>y² · y⁵ · y</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(y^8\) (remember \(y=y^1\))</div></details></li>
+    <li>Simplify: <code>a⁹ / a⁴</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(a^5\)</div></details></li>
+    <li>Simplify: <code>5⁷ / 5⁷</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(5^0 = 1\) — a preview of next chapter's zero-exponent rule</div></details></li>
+    <li>Simplify: <code>2³ · 2⁻¹</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2^{3-1}=2^2=4\)</div></details></li>
+    <li>Simplify: <code>m⁶ / m⁹</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(m^{6-9}=m^{-3}\) — a preview of next chapter's negative-exponent rule</div></details></li>
+    <li class="tag">bonus — Simplify: <code>(x² · x⁵) / x³</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x^{2+5-3}=x^4\)</div></details></li>
+    <li class="tag">bonus — Simplify: <code>3⁻² · 3⁵</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(3^{3}=27\)</div></details></li>
+    <li class="tag">bonus — Simplify: <code>b¹⁰ / (b³ · b²)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(b^{10-3-2}=b^5\)</div></details></li>
+    <li class="tag">bonus — Simplify (general letters as exponents): <code>xᵃ · xᵇ · xᶜ</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x^{a+b+c}\)</div></details></li>
+    <li class="tag">challenge — Using only the "count the factors" definition, explain in your own words why \(a^m \cdot a^n = a^{m+n}\) for positive whole numbers \(m,n\).
+      <details class="answer"><summary></summary><div class="ans-body">\(a^m\) is \(m\) copies of \(a\) multiplied, \(a^n\) is \(n\) more copies; multiplying them together lines up all the copies into one product with \(m+n\) total factors of \(a\), which is exactly the definition of \(a^{m+n}\).</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch04-exponent-laws-2.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 3 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>

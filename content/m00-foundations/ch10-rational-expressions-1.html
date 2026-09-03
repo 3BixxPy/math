@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — Rational Expressions I | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 0 · Foundations Bridge</a> → Chapter 10 of 15</div>
+  <div class="eyebrow">Day 10 · concept:rational-expr-simplify, concept:domain-restrictions</div>
+  <h1>Rational Expressions I — Simplifying & Domain</h1>
+  <p class="subtitle">All three factoring chapters were building toward this: a fraction of polynomials only simplifies by canceling <em>factors</em>, and every value that would divide by zero has to be tracked and excluded — a skill that comes back constantly once you reach functions.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>"Domain" — which inputs are actually allowed — becomes a central idea starting next module (Functions & Graphs). Rational expressions are the cleanest place to build the habit: division by zero is undefined, full stop, so any value making a denominator zero must be excluded, even if it later cancels out algebraically.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Rational expression</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{P(x)}{Q(x)}, \quad Q(x) \neq 0 \]</div><div class="eq-num" id="eq-0-10-1">(0.10.1)</div></div>
+    <p>A ratio of two polynomials. Just like a plain fraction, the bottom can never be zero.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Simplifying: cancel factors, never terms</div>
+    <p>You may only cancel something that is a <em>factor</em> of the entire numerator <strong>and</strong> the entire denominator — meaning it's multiplied by everything else, not added to it. That's exactly why Chapters 7–9 came first: you need the expression factored before you can safely cancel anything.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Simplify <code>(x² − 1)/(x² + 3x + 2)</code>, stating all domain restrictions.</p>
+    <details class="step" open><summary>Step 1 — factor top and bottom</summary>
+      <div class="step-body"><p>Top: \(x^2-1=(x-1)(x+1)\). Bottom: \(x^2+3x+2=(x+1)(x+2)\).</p></div></details>
+    <details class="step"><summary>Step 2 — note the restrictions from the <em>original</em> denominator, before canceling</summary>
+      <div class="step-body"><p>\((x+1)(x+2)=0\) when \(x=-1\) or \(x=-2\). Both are excluded, permanently — this doesn't change no matter what happens next.</p></div></details>
+    <details class="step"><summary>Step 3 — cancel the common factor</summary>
+      <div class="step-body"><p>\(\dfrac{(x-1)(x+1)}{(x+1)(x+2)} = \dfrac{x-1}{x+2}\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ \frac{x^2-1}{x^2+3x+2} = \frac{x-1}{x+2} \quad (x \neq -1,\, x\neq-2) \]</div><div class="eq-num" id="eq-0-10-2">(0.10.2)</div></div>
+      <p>Notice \(x=-1\) doesn't even look excluded in the simplified form anymore — but it still is, because the restriction comes from the <em>original</em> expression, not the simplified one.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Canceling pieces of a sum instead of factors of a product. <code>(x + 3)/(x + 5)</code> does <strong>not</strong> simplify by "canceling the x's" — the \(x\) is not a factor of the whole numerator or the whole denominator (it's only part of a sum), so nothing can be canceled here at all. Only cancel after full factoring, and only whole factors.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>State the domain restriction: <code>1/(x − 7)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x\neq7\)</div></details></li>
+    <li>State the domain restrictions: <code>(x+2)/(x² − 9)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x\neq3,\, x\neq-3\)</div></details></li>
+    <li>Simplify, with restriction: <code>(x² − 4)/(x² + 4x + 4)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{(x-2)(x+2)}{(x+2)^2}=\dfrac{x-2}{x+2}\), \(x\neq-2\)</div></details></li>
+    <li>Simplify, with restrictions: <code>(x² + x − 6)/(x² − 9)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{(x+3)(x-2)}{(x-3)(x+3)}=\dfrac{x-2}{x-3}\), \(x\neq-3,3\)</div></details></li>
+    <li>Simplify, with restriction: <code>(x² − 25)/(x + 5)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x-5\), \(x\neq-5\)</div></details></li>
+    <li>Simplify, with restrictions: <code>(2x² − 8)/(x² − 4)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{2(x-2)(x+2)}{(x-2)(x+2)}=2\), \(x\neq2,-2\) — note it simplifies to a plain constant, but the restrictions still apply!</div></details></li>
+    <li class="tag">bonus — Simplify, with restrictions: <code>(x² − 6x + 9)/(x² − 9)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{(x-3)^2}{(x-3)(x+3)}=\dfrac{x-3}{x+3}\), \(x\neq3,-3\)</div></details></li>
+    <li class="tag">bonus — Simplify, with restrictions: <code>(x² + 2x − 15)/(x² − 25)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{(x+5)(x-3)}{(x-5)(x+5)}=\dfrac{x-3}{x-5}\), \(x\neq-5,5\)</div></details></li>
+    <li class="tag">bonus — Explain why <code>(x+4)/(x+9)</code> cannot be simplified any further.
+      <details class="answer"><summary></summary><div class="ans-body">Neither numerator nor denominator factors further, and they share no common factor — there's nothing to cancel.</div></details></li>
+    <li class="tag">bonus — Simplify, with restriction: <code>(3x² − 3)/(x − 1)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{3(x-1)(x+1)}{x-1}=3(x+1)=3x+3\), \(x\neq1\)</div></details></li>
+    <li class="tag">challenge — Simplify <code>(x³ − x)/(x² − 1)</code> fully, and explain why a restriction is still needed even though the simplified answer is just <code>x</code>, with no fraction in sight.
+      <details class="answer"><summary></summary><div class="ans-body">Top: \(x(x-1)(x+1)\). Bottom: \((x-1)(x+1)\). Cancels to \(x\), with \(x\neq1,-1\). The restriction survives because it describes the original expression's domain — the simplified form is only equal to the original everywhere <em>except</em> those excluded points.</div></details></li>
+  </ol>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn" href="../../index.html">← Back to dashboard to mark today done</a>
+    <a class="btn secondary" href="ch11-rational-expressions-2.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 0 · Foundations Bridge</span>
+  <span>Chapter 10 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js"></script>
+<script>MC.renderMath(document.body);</script>
+</body>
+</html>
