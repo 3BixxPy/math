@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Angles, Degrees & Radians | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 1 of 15</div>
+  <div class="eyebrow">Chapter 1 · concept:radians, concept:degree-radian-conversion</div>
+  <h1>Angles, Degrees & Radians</h1>
+  <p class="subtitle">The diagnostic found "one circle and something about sine waves — no concrete equations." This module builds the concrete part, starting with the unit calculus actually uses: radians, not degrees.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Degrees are arbitrary — 360 is a historical accident (roughly the number of days in a year, to the Babylonians). Radians are not arbitrary: they're defined directly from the circle itself, which is exactly why every clean calculus formula for sine and cosine (starting in Module 5) only works out neatly in radians. Building radian fluency now, before it's forced on you by a formula, means it's never a translation step later — just the native unit.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Angle</div>
+    <p>An angle measures rotation from a starting ray (the <strong>initial side</strong>) to an ending ray (the <strong>terminal side</strong>), both starting at a shared point (the <strong>vertex</strong>). By convention, angles are measured starting from the positive x-axis, and counterclockwise is positive.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Radian</div>
+    <p>One <strong>radian</strong> is the angle you sweep out when the arc length traveled along the circle equals the circle's radius. Since the full circumference is \(2\pi r\) (that is, \(2\pi\) radius-lengths), a full rotation is exactly \(2\pi\) radians.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>angle: <input type="range" id="ang-slider" min="0" max="360" step="5" value="60"></label>
+  </div>
+  <div class="plot-wrap"><svg id="ang-svg" viewBox="0 0 240 240" width="240" height="240"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="ang-readout">60° = π/3 rad ≈ 1.047</span></div>
+  <script>
+  (function () {
+    const svg = document.getElementById("ang-svg");
+    const slider = document.getElementById("ang-slider");
+    const cx = 120, cy = 120, r = 90;
+    function gcd(a, b) { return b < 1e-9 ? a : gcd(b, a % b); }
+    function fracPi(deg) {
+      // express deg/180 as a simplified fraction for a clean "kπ/n" label
+      let num = deg, den = 180;
+      const g = gcd(num, den) || 1;
+      num = Math.round(num / g); den = Math.round(den / g);
+      if (den === 1) return num === 1 ? "π" : num + "π";
+      return (num === 1 ? "π" : num + "π") + "/" + den;
+    }
+    function update() {
+      const deg = parseInt(slider.value, 10);
+      const rad = (deg * Math.PI) / 180;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      svg.appendChild(MCPlot.el("circle", { cx, cy, r, style: "fill:none; stroke:var(--border); stroke-width:2" }));
+      svg.appendChild(MCPlot.el("line", { x1: cx, y1: cy, x2: cx + r, y2: cy, style: "stroke:var(--text-dim); stroke-width:1.5" }));
+      const x = cx + r * Math.cos((deg * Math.PI) / 180);
+      const y = cy - r * Math.sin((deg * Math.PI) / 180);
+      svg.appendChild(MCPlot.el("line", { x1: cx, y1: cy, x2: x, y2: y, style: "stroke:var(--accent); stroke-width:2.5" }));
+      const large = deg > 180 ? 1 : 0;
+      const arcR = 28;
+      const ax = cx + arcR, ay = cy;
+      const bx = cx + arcR * Math.cos((deg * Math.PI) / 180), by = cy - arcR * Math.sin((deg * Math.PI) / 180);
+      svg.appendChild(MCPlot.el("path", { d: "M " + ax + " " + ay + " A " + arcR + " " + arcR + " 0 " + large + " 0 " + bx + " " + by, style: "fill:none; stroke:var(--ex-border); stroke-width:2" }));
+      svg.appendChild(MCPlot.el("circle", { cx: x, cy: y, r: 4, style: "fill:var(--accent)" }));
+      document.getElementById("ang-readout").textContent = deg + "° = " + fracPi(deg) + " rad ≈ " + rad.toFixed(3);
+    }
+    slider.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block theorem">
+    <div class="label">Rule — Converting between degrees and radians</div>
+    <div class="eqn"><div class="eq-body">\[ 180^\circ = \pi \text{ radians} \]</div><div class="eq-num" id="eq-2-1-1">(2.1.1)</div></div>
+    <p>To convert degrees → radians, multiply by \(\dfrac{\pi}{180}\). To convert radians → degrees, multiply by \(\dfrac{180}{\pi}\). Everything else follows from this one equivalence.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Convert <code>90°</code>, <code>180°</code>, and <code>270°</code> to radians — the quarter-circle marks you'll use constantly.</p>
+    <details class="step" open><summary>Step 1 — apply the conversion factor π/180 to each</summary>
+      <div class="step-body"><p>\(90 \times \dfrac{\pi}{180} = \dfrac{\pi}{2}\)</p></div></details>
+    <details class="step"><summary>Step 2</summary>
+      <div class="step-body"><p>\(180 \times \dfrac{\pi}{180} = \pi\)</p></div></details>
+    <details class="step"><summary>Step 3</summary>
+      <div class="step-body"><p>\(270 \times \dfrac{\pi}{180} = \dfrac{3\pi}{2}\)</p></div></details>
+    <details class="step"><summary>Worth memorizing</summary>
+      <div class="step-body"><p>Quarter turns: \(90^\circ=\pi/2\), \(180^\circ=\pi\), \(270^\circ=3\pi/2\), \(360^\circ=2\pi\). These four show up constantly.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — going the other way</div>
+    <p>Convert <code>5π/6</code> radians to degrees.</p>
+    <details class="step" open><summary>Step 1 — multiply by 180/π</summary>
+      <div class="step-body"><p>\(\dfrac{5\pi}{6} \times \dfrac{180}{\pi} = \dfrac{5 \times 180}{6} = \dfrac{900}{6} = 150^\circ\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating a radian value like <code>2</code> as "\(2\pi\)" or assuming radian answers must always contain \(\pi\). They don't have to — \(2\) radians is a perfectly valid angle (about \(114.6°\)), it's just less common to work with than the "nice" multiples of \(\pi\) this module focuses on. Also: keep your calculator's degree/radian mode straight — computing \(\sin(30)\) in radian mode is not the same question as \(\sin(30°)\), and both are valid computations of <em>different</em> angles.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="3pi/2,3π/2">
+    <div class="label">Try it yourself</div>
+    <p>Convert <code>270°</code> to radians, as a fraction of π (type e.g. <code>3pi/2</code>):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 3pi/2" aria-label="270 degrees in radians">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Convert to radians: <code>45°</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi/4\)</div></details></li>
+    <li>Convert to radians: <code>60°</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi/3\)</div></details></li>
+    <li>Convert to radians: <code>30°</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi/6\)</div></details></li>
+    <li>Convert to degrees: <code>π/4</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(45°\)</div></details></li>
+    <li>Convert to degrees: <code>2π/3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(120°\)</div></details></li>
+    <li>Convert to degrees: <code>7π/6</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(210°\)</div></details></li>
+    <li class="tag">bonus — Convert to radians: <code>120°</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2\pi/3\)</div></details></li>
+    <li class="tag">bonus — Convert to radians: <code>−90°</code>. What does the negative sign mean?
+      <details class="answer"><summary></summary><div class="ans-body">\(-\pi/2\); negative means measured clockwise instead of counterclockwise.</div></details></li>
+    <li class="tag">bonus — Convert to degrees: <code>5π/4</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(225°\)</div></details></li>
+    <li class="tag">bonus — How many radians are in <em>one and a half</em> full rotations?
+      <details class="answer"><summary></summary><div class="ans-body">\(3\pi\) (one full rotation is \(2\pi\))</div></details></li>
+    <li class="tag">challenge — Without a calculator, convert <code>1°</code> to radians as a decimal approximation (use \(\pi\approx3.1416\)), and explain why "1 radian ≈ 57.3°" is a more natural-feeling benchmark than "1° in radians."
+      <details class="answer"><summary></summary><div class="ans-body">\(1° \approx 0.01745\) rad — an awkward number, because the degree isn't naturally related to the radian. \(1\) radian \(\approx57.3°\) is more natural because radians are the circle's own unit — one radian is "one radius of arc," a real geometric quantity, not an arbitrary fraction of 360.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m01-functions/ch15-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-unit-circle.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 1 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:1", "content/m02-trigonometry/ch01-angles-radians.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
