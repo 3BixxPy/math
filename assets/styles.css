@@ -288,6 +288,11 @@ a { color: var(--accent); }
 }
 .btn.secondary { background: transparent; color: var(--accent) !important; border: 1px solid var(--accent); }
 .btn:disabled { opacity: .5; cursor: default; }
+.ai-btn { color: #fff !important; }
+.ai-btn-chatgpt { background: #10a37f; }
+.ai-btn-chatgpt:hover { background: #0d8c6c; }
+.ai-btn-gemini { background: #4285f4; }
+.ai-btn-gemini:hover { background: #3367d6; }
 .row { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
 .card {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);

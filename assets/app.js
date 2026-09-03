@@ -151,6 +151,64 @@ const MC = (() => {
     render();
   }
 
+  // Wires up the "ask an AI about this page" card. Reads the page's own
+  // <main> at click time (so it's always in sync with the rendered
+  // content, no separate context to author or keep updated), builds a
+  // short prompt, and both copies it to the clipboard AND opens it via
+  // URL query param — the clipboard copy is a deliberate fallback in
+  // case a given AI's prefill-via-URL behavior changes or isn't
+  // supported, so the button stays useful either way.
+  function initAskAi(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    function buildPrompt() {
+      const root = document.querySelector("main") || document.querySelector("article") || document.body;
+      const pageText = root.innerText.trim().slice(0, 1800);
+      return (
+        'I\'m studying "' + document.title + '" from my personal math curriculum. ' +
+        "Here's the page content:\n\n" + pageText +
+        "\n\nHelp me understand it, or answer my question about it."
+      );
+    }
+
+    async function ask(urlPrefix, statusEl) {
+      const prompt = buildPrompt();
+      let copied = false;
+      try {
+        await navigator.clipboard.writeText(prompt);
+        copied = true;
+      } catch (e) {
+        // clipboard API can be unavailable (permissions, insecure context) —
+        // the URL prefill below is still attempted regardless
+      }
+      window.open(urlPrefix + encodeURIComponent(prompt), "_blank", "noopener");
+      if (statusEl) {
+        statusEl.textContent = copied
+          ? "Prompt copied to your clipboard too — paste it if it doesn't show up pre-filled."
+          : "Opened in a new tab.";
+      }
+    }
+
+    container.innerHTML =
+      '<div class="card">' +
+        '<p class="subtitle">Stuck on something here? Send this page as context to an AI chat.</p>' +
+        '<div class="row" style="margin-top:.5rem;">' +
+          '<button class="btn ai-btn ai-btn-chatgpt" id="ask-chatgpt-btn" type="button">🤖 Ask ChatGPT about this page</button>' +
+          '<button class="btn ai-btn ai-btn-gemini" id="ask-gemini-btn" type="button">✨ Ask Gemini about this page</button>' +
+        "</div>" +
+        '<p class="subtitle" id="ask-ai-status" style="margin-top:.5rem;"></p>' +
+      "</div>";
+
+    const statusEl = document.getElementById("ask-ai-status");
+    document.getElementById("ask-chatgpt-btn").addEventListener("click", () => {
+      ask("https://chatgpt.com/?q=", statusEl);
+    });
+    document.getElementById("ask-gemini-btn").addEventListener("click", () => {
+      ask("https://gemini.google.com/app?q=", statusEl);
+    });
+  }
+
   // ---- Leitner spaced repetition ----
   function introduceConcept(state, conceptId) {
     if (state.leitner[conceptId]) return;
@@ -293,6 +351,7 @@ const MC = (() => {
     markDayComplete,
     unmarkDayComplete,
     initChapterDone,
+    initAskAi,
     introduceConcept,
     introduceConceptsForFile,
     reviewResult,
