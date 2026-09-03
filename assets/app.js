@@ -202,8 +202,8 @@ const MC = (() => {
       '<div class="card">' +
         '<p class="subtitle">Stuck on something here? Send this page as context to an AI chat.</p>' +
         '<div class="row" style="margin-top:.5rem;">' +
-          '<button class="btn ai-btn ai-btn-chatgpt" id="ask-chatgpt-btn" type="button">' + openaiIcon + " Ask ChatGPT about this page</button>" +
-          '<button class="btn ai-btn ai-btn-gemini" id="ask-gemini-btn" type="button">' + geminiIcon + " Ask Gemini about this page</button>" +
+          '<button class="btn ai-btn ai-btn-chatgpt" id="ask-chatgpt-btn" type="button">' + openaiIcon + " Ask ChatGPT</button>" +
+          '<button class="btn ai-btn ai-btn-gemini" id="ask-gemini-btn" type="button">' + geminiIcon + " Ask Gemini</button>" +
         "</div>" +
         '<p class="subtitle" id="ask-ai-status" style="margin-top:.5rem;"></p>' +
       "</div>";
