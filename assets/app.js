@@ -68,11 +68,20 @@ const MC = (() => {
     return out;
   }
 
+  // "Next up" = whatever comes right after the furthest chapter you've
+  // actually completed (by position in the sequence, not by date) — so
+  // the dashboard continues from your reading frontier even if you've
+  // jumped ahead and left earlier gaps unmarked. Those gaps don't get
+  // lost: roadmap.html lists every chapter with a direct link, and each
+  // chapter has its own prev/next nav, so going back is always one click
+  // away — this function only decides what "Open chapter" defaults to.
   function nextUpEntry(curriculum, state) {
-    for (const entry of flattenDays(curriculum)) {
-      if (!state.completedDays[entry.key]) return entry;
-    }
-    return null;
+    const flat = flattenDays(curriculum);
+    let furthest = -1;
+    flat.forEach((entry, i) => {
+      if (state.completedDays[entry.key]) furthest = i;
+    });
+    return furthest + 1 < flat.length ? flat[furthest + 1] : null;
   }
 
   function completedCount(state) {
