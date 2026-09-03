@@ -288,7 +288,8 @@ a { color: var(--accent); }
 }
 .btn.secondary { background: transparent; color: var(--accent) !important; border: 1px solid var(--accent); }
 .btn:disabled { opacity: .5; cursor: default; }
-.ai-btn { color: #fff !important; }
+.ai-btn { color: #fff !important; display: inline-flex; align-items: center; gap: .5rem; }
+.ai-btn .ai-icon { width: 16px; height: 16px; flex-shrink: 0; }
 .ai-btn-chatgpt { background: #10a37f; }
 .ai-btn-chatgpt:hover { background: #0d8c6c; }
 .ai-btn-gemini { background: #4285f4; }
