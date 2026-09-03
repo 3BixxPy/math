@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 11 — Rational Expressions II | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=3">
+<link rel="stylesheet" href="../../assets/styles.css?v=4">
 </head>
 <body>
 <header class="topnav">
@@ -67,6 +67,23 @@
     <p><code>1/a + 1/b ≠ 1/(a+b)</code>. Check with plain numbers: \(\frac12+\frac13=\frac56\), but \(\frac{1}{2+3}=\frac15\). Not equal, not even close. You can never add fractions by adding their denominators — always find a common denominator first.</p>
   </div>
 
+  <div class="block synthesis">
+    <div class="label">Synthesis — the toolkit so far, in one problem</div>
+    <div class="concept-tags"><span>Ch. 6 — expanding</span><span>Ch. 7 — diff. of squares</span><span>Ch. 8 — trinomials</span><span>Ch. 10–11 — rational expressions</span></div>
+    <p>Everything since Chapter 6 has been building toward this: expand/factor patterns, then use them to operate on fractions of polynomials. Simplify:</p>
+    <p style="text-align:center;">\(\dfrac{x^2-9}{x^2-4} \div \dfrac{x+3}{x^2+4x+4}\)</p>
+    <details class="step" open><summary>Step 1 — dividing by a fraction means multiplying by its reciprocal</summary>
+      <div class="step-body"><p>\(\dfrac{x^2-9}{x^2-4} \times \dfrac{x^2+4x+4}{x+3}\)</p></div></details>
+    <details class="step"><summary>Step 2 — factor every piece (Chapters 7 and the trinomial pattern from Chapter 8)</summary>
+      <div class="step-body"><p>\(x^2-9=(x-3)(x+3)\), \(x^2-4=(x-2)(x+2)\), \(x^2+4x+4=(x+2)^2\) — a perfect square trinomial, same pattern as Chapter 6.</p></div></details>
+    <details class="step"><summary>Step 3 — rewrite fully factored</summary>
+      <div class="step-body"><p>\(\dfrac{(x-3)(x+3)}{(x-2)(x+2)} \times \dfrac{(x+2)^2}{x+3}\)</p></div></details>
+    <details class="step"><summary>Step 4 — cancel across both fractions (Chapter 11's rule)</summary>
+      <div class="step-body"><p>\((x+3)\) cancels; one \((x+2)\) cancels: \(\dfrac{(x-3)(x+2)}{x-2}\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\dfrac{(x-3)(x+2)}{x-2}\), with \(x\neq2, -2, -3\) (every original denominator, tracked all the way through — Chapter 10's rule still applies even after everything cancels).</p></div></details>
+  </div>
+
   <h2>Practice</h2>
   <ol class="problems">
     <li>Multiply, with restriction: <code>(x/3) · (6/x²)</code>
@@ -109,7 +126,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=3"></script>
+<script src="../../assets/app.js?v=4"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m00:11", "content/m00-foundations/ch11-rational-expressions-2.html");</script>
 </body>
 </html>

@@ -19,6 +19,7 @@
   --mis-bg: #fdeeea;    --mis-border: #e34a29;   --mis-text: #7a2711;
   --int-bg: #e6f8f7;    --int-border: #0f9d94;   --int-text: #0a4f4a;
   --prac-bg:#f1f1ef;    --prac-border:#8a8a86;   --prac-text:#3a3a38;
+  --syn-bg: #fdf3d9;    --syn-border: #b8860b;   --syn-text: #6b4c00;
 
   --code-bg: #f0f0ee;
   --radius: 10px;
@@ -40,6 +41,7 @@
     --mis-bg: #3a1c14;   --mis-border: #ef6a44;  --mis-text: #ffd8c9;
     --int-bg: #0f2e2c;   --int-border: #2bc2b7;  --int-text: #bdf2ee;
     --prac-bg:#232325;   --prac-border:#8a8a92;  --prac-text:#d6d6da;
+    --syn-bg: #3a2e0a;   --syn-border: #e0b12f;  --syn-text: #f5dd8f;
 
     --code-bg: #232325;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 1px 12px rgba(0,0,0,.25);
@@ -146,6 +148,14 @@ p { margin: .7rem 0; }
 
 .block.practice { border-color: var(--prac-border); background: var(--prac-bg); }
 .block.practice > .label { color: var(--prac-text); }
+
+.block.synthesis { border-color: var(--syn-border); background: var(--syn-bg); }
+.block.synthesis > .label { color: var(--syn-text); }
+.block.synthesis .concept-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin: .4rem 0 .8rem; }
+.block.synthesis .concept-tags span {
+  font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 999px;
+  background: var(--surface); color: var(--syn-text); border: 1px solid var(--syn-border);
+}
 
 /* ---- step reveal (worked examples / answers) ---- */
 details.step {

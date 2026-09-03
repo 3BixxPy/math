@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 15 — Module 1 Capstone | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=3">
-<script src="../../assets/plot.js?v=3"></script>
+<link rel="stylesheet" href="../../assets/styles.css?v=4">
+<script src="../../assets/plot.js?v=4"></script>
 </head>
 <body>
 <header class="topnav">
@@ -61,6 +61,33 @@
 
   <hr class="div">
 
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">Two problems that each need multiple chapters' tools working together, not just one technique per problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 6 — shift</span><span>Ch. 7 — reflection</span><span>Ch. 8 — vertex form</span></div>
+    <p>The parabola <code>y = (x-3)² - 4</code> is reflected over the x-axis, then shifted up 4. Find the resulting equation, its vertex, and whether it's now a maximum or minimum.</p>
+    <details class="step" open><summary>Step 1 — reflect over the x-axis: negate the whole function</summary>
+      <div class="step-body"><p>\(y = -\left[(x-3)^2-4\right] = -(x-3)^2+4\)</p></div></details>
+    <details class="step"><summary>Step 2 — shift up 4</summary>
+      <div class="step-body"><p>\(y = -(x-3)^2+4+4 = -(x-3)^2+8\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Vertex \((3,8)\); since \(a=-1<0\), it opens downward — a <strong>maximum</strong>.</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 10 — composition</span><span>Ch. 14 — asymptotes</span></div>
+    <p>If <code>f(x) = 1/x</code> and <code>g(x) = x - 3</code>, find <code>(f∘g)(x)</code> and its vertical asymptote.</p>
+    <details class="step" open><summary>Step 1 — compose: g happens first, then f</summary>
+      <div class="step-body"><p>\(f(g(x)) = f(x-3) = \dfrac{1}{x-3}\)</p></div></details>
+    <details class="step"><summary>Step 2 — read off the vertical asymptote (Chapter 14's rule)</summary>
+      <div class="step-body"><p>Denominator zero at \(x=3\); the numerator is a nonzero constant, so nothing cancels — it's a genuine asymptote, not a hole.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\((f\circ g)(x) = \dfrac{1}{x-3}\), vertical asymptote at \(x=3\) — composing with \(g(x)=x-3\) just shifted \(f\)'s asymptote 3 units right, same shift rule as Chapter 6.</p></div></details>
+  </div>
+
   <h2>Diagnostic retake</h2>
   <p class="subtitle">The functions/graphs section of the original diagnostic came back with no attempts — completely blank. Here it is again.</p>
 
@@ -105,7 +132,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=3"></script>
+<script src="../../assets/app.js?v=4"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m01:15", "content/m01-functions/ch15-capstone-review.html");</script>
 </body>
 </html>

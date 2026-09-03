@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 11 — Inverse Functions | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=3">
-<script src="../../assets/plot.js?v=3"></script>
+<link rel="stylesheet" href="../../assets/styles.css?v=4">
+<script src="../../assets/plot.js?v=4"></script>
 </head>
 <body>
 <header class="topnav">
@@ -81,6 +81,20 @@
     <p>Just like the vertical line test decided whether a graph was a function of x, a "horizontal line test" decides whether that function has an inverse that's also a function: if any horizontal line crosses the graph more than once, the outputs repeat, and swapping x/y would break the function definition (one input, one output) for the inverse. <code>f(x)=x²</code> fails this — \(f(2)=f(-2)=4\) — which is exactly why Module 3's inverse (the logarithm) is built from exponential functions, which don't have this problem.</p>
   </div>
 
+  <div class="block synthesis">
+    <div class="label">Synthesis — domain, range, and inverses connect</div>
+    <div class="concept-tags"><span>Ch. 3 — domain &amp; range</span><span>Ch. 11 — inverses</span></div>
+    <p>Find the inverse of <code>f(x) = √(x − 1)</code>, including its domain — and notice where that domain comes from.</p>
+    <details class="step" open><summary>Step 1 — first, f's own domain and range (Chapter 3)</summary>
+      <div class="step-body"><p>Domain of \(f\): \(x-1\geq0 \Rightarrow x\geq1\). Range of \(f\): a square root is never negative, so \(y\geq0\).</p></div></details>
+    <details class="step"><summary>Step 2 — find f⁻¹ using the swap-and-solve method</summary>
+      <div class="step-body"><p>\(y=\sqrt{x-1}\) → swap: \(x=\sqrt{y-1}\) → square both sides: \(x^2=y-1\) → \(y=x^2+1\)</p></div></details>
+    <details class="step"><summary>Step 3 — but x²+1 alone isn't the full picture</summary>
+      <div class="step-body"><p>\(f^{-1}(x)=x^2+1\) only works as a true inverse if we restrict its domain to \(x\geq0\) — otherwise \(x^2+1\) isn't one-to-one and wouldn't correctly undo \(f\).</p></div></details>
+    <details class="step"><summary>Result — the connection</summary>
+      <div class="step-body"><p>\(f^{-1}(x)=x^2+1\), domain \(x\geq0\). Notice: that restriction, \(x\geq0\), is exactly \(f\)'s <em>range</em> from Step 1. And \(f^{-1}\)'s own range works out to \(y\geq1\) — exactly \(f\)'s <em>domain</em>. This isn't a coincidence: <strong>domain of f⁻¹ = range of f</strong>, always, since inversion swaps every \((x,y)\) pair to \((y,x)\) (Chapter 11's coordinate-swap idea) — domain and range swap right along with them.</p></div></details>
+  </div>
+
   <div class="block practice checker" data-answers="2">
     <div class="label">Try it yourself</div>
     <p>If <code>f(2) = 9</code>, what must <code>f⁻¹(9)</code> equal? (no algebra needed — use the definition directly)</p>
@@ -133,7 +147,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=3"></script>
+<script src="../../assets/app.js?v=4"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m01:11", "content/m01-functions/ch11-inverse-functions.html");</script>
 </body>
 </html>

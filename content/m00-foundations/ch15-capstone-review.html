@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 15 — Module 0 Capstone | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=3">
+<link rel="stylesheet" href="../../assets/styles.css?v=4">
 </head>
 <body>
 <header class="topnav">
@@ -55,6 +55,35 @@
   </ol>
 
   <hr class="div">
+
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">The mixed review above is still one technique per problem, just unlabeled. These two aren't — each one genuinely needs two or three separate chapters' tools working together in the same problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 7 — diff. of squares</span><span>Ch. 10 — domain</span><span>Ch. 12 — linear equations</span></div>
+    <p>Solve: <code>(x² − 16)/(x + 4) = 3x − 9</code></p>
+    <details class="step" open><summary>Step 1 — factor and simplify the left side first</summary>
+      <div class="step-body"><p>\(x^2-16=(x-4)(x+4)\), so \(\dfrac{(x-4)(x+4)}{x+4}=x-4\), valid for \(x\neq-4\).</p></div></details>
+    <details class="step"><summary>Step 2 — now it's just a linear equation</summary>
+      <div class="step-body"><p>\(x-4=3x-9 \Rightarrow 5=2x \Rightarrow x=2.5\)</p></div></details>
+    <details class="step"><summary>Step 3 — check against the restriction</summary>
+      <div class="step-body"><p>\(2.5 \neq -4\), so it's valid. \(x=2.5\).</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 4 — negative exponents</span><span>Ch. 10 — clearing denominators</span><span>Ch. 8 — factoring trinomials</span></div>
+    <p>Solve: <code>x + 6x⁻¹ = 5</code></p>
+    <details class="step" open><summary>Step 1 — rewrite the negative exponent as a fraction</summary>
+      <div class="step-body"><p>\(6x^{-1} = \dfrac6x\), so the equation is \(x + \dfrac6x = 5\)</p></div></details>
+    <details class="step"><summary>Step 2 — clear the fraction by multiplying every term by x (x≠0)</summary>
+      <div class="step-body"><p>\(x^2 + 6 = 5x\)</p></div></details>
+    <details class="step"><summary>Step 3 — rearrange and factor</summary>
+      <div class="step-body"><p>\(x^2-5x+6=0 \Rightarrow (x-2)(x-3)=0 \Rightarrow x=2 \text{ or } 3\)</p></div></details>
+    <details class="step"><summary>Notice anything?</summary>
+      <div class="step-body"><p>That's the exact quadratic from the very first diagnostic — <code>x²−5x+6=0</code> — arrived at through a completely different route (an exponent + a rational equation, not a quadratic you started with). Same building block, reused in a new context. That's the whole point of this curriculum.</p></div></details>
+  </div>
 
   <h2>Diagnostic retake</h2>
   <p class="subtitle">The exact algebra problems from your original diagnostic (the ones that shaped this whole curriculum), side by side with what you got then.</p>
@@ -106,7 +135,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=3"></script>
+<script src="../../assets/app.js?v=4"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m00:15", "content/m00-foundations/ch15-capstone-review.html");</script>
 </body>
 </html>
