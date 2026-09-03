@@ -99,6 +99,59 @@ const MC = (() => {
     return state;
   }
 
+  // A brand-new chapter can only be marked done once per calendar day —
+  // deliberate: reading ahead is unrestricted, but "done" (what advances
+  // the streak/progress) is capped so a click-happy session can't
+  // accidentally skip several days' worth of chapters at once.
+  function canMarkToday(state) {
+    return state.streak.lastDate !== todayISO();
+  }
+
+  // Wires up the "mark this chapter done" card at the bottom of a chapter
+  // page. `key` is this chapter's own day key (e.g. "m00:5") — independent
+  // of whatever the dashboard currently considers "today's" entry, so
+  // chapters can be completed out of order (read ahead, catch up, redo).
+  async function initChapterDone(key, chapterFile) {
+    const container = document.getElementById("chapter-done-card");
+    if (!container) return;
+    const state = load();
+    let concepts = [];
+    try {
+      concepts = (await fetchJSON("../../data/concepts.json")).concepts;
+    } catch (e) {
+      // offline/local file:// — degrade gracefully, spaced review just won't seed from here
+    }
+
+    function render() {
+      const entry = state.completedDays[key];
+      if (entry) {
+        container.innerHTML =
+          '<div class="card"><p><strong>✓ Chapter marked done</strong> <span class="subtitle">— ' + entry.date + "</span></p></div>";
+        return;
+      }
+      if (!canMarkToday(state)) {
+        container.innerHTML =
+          '<div class="card"><p><strong>Already marked a chapter done today.</strong></p>' +
+          '<p class="subtitle">One new chapter counts per day, by design — keep reading if you like, it\'ll still be here to mark tomorrow.</p></div>';
+        return;
+      }
+      container.innerHTML =
+        '<div class="card">' +
+          '<p class="subtitle">Done with this chapter?</p>' +
+          '<div class="row" style="margin:.4rem 0 .8rem;"><label class="row" style="gap:.4rem;"><input type="checkbox" id="chapter-bonus-check"> I also did the bonus/challenge</label></div>' +
+          '<button class="btn" id="chapter-done-btn" type="button">Mark this chapter done ✓</button>' +
+        "</div>";
+      document.getElementById("chapter-done-btn").addEventListener("click", () => {
+        const gotBonus = document.getElementById("chapter-bonus-check").checked;
+        markDayComplete(state, key, gotBonus);
+        introduceConceptsForFile(state, concepts, chapterFile);
+        save(state);
+        render();
+      });
+    }
+    render();
+  }
+
   // ---- Leitner spaced repetition ----
   function introduceConcept(state, conceptId) {
     if (state.leitner[conceptId]) return;
@@ -240,6 +293,8 @@ const MC = (() => {
     completedCount,
     totalAuthoredDays,
     markDayComplete,
+    canMarkToday,
+    initChapterDone,
     introduceConcept,
     introduceConceptsForFile,
     reviewResult,
