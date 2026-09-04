@@ -80,7 +80,9 @@
       const opts = { xMin, xMax, yMin, yMax, width, height, pad };
       const { px, py } = MCPlot.mapper(opts);
       while (svg.firstChild) svg.removeChild(svg.firstChild);
-      svg.appendChild(MCPlot.el("line", { x1: px(xMin), y1: py(0), x2: px(xMax), y2: py(0), class: "plot-axis" }));
+      if (yMin <= 0 && 0 <= yMax) {
+        svg.appendChild(MCPlot.el("line", { x1: px(xMin), y1: py(0), x2: px(xMax), y2: py(0), class: "plot-axis" }));
+      }
       svg.appendChild(MCPlot.el("line", { x1: px(0), y1: py(yMin), x2: px(0), y2: py(yMax), class: "plot-axis" }));
       const marks = [-2, -1.5, -1, -0.5, 0.5, 1, 1.5, 2];
       const mlabels = ["-2π", "-3π/2", "-π", "-π/2", "π/2", "π", "3π/2", "2π"];
