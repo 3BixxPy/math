@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Linear Transformations | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 1 of 12</div>
+  <div class="eyebrow">Chapter 1 · concept:linear-transformation-definition</div>
+  <h1>Linear Transformations</h1>
+  <p class="subtitle">Module 11's capstone closed out vector spaces in the abstract. This module puts them back to work: every rotate, scale, and reflect you've ever called on a game object is about to get a name, a precise test, and — by Chapter 6 — a way to find the one direction it doesn't secretly rotate.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>You've called <code>transform.Rotate(90, Vector3.up)</code>, or multiplied a mesh's vertices by a scale matrix, or flipped a sprite with <code>transform.localScale.x *= -1</code>, more times than you can count. Every one of those is a function that eats a vector (a vertex position, a direction) and hands back another vector. Not every such function deserves to be called "linear," though — and the ones that do are exactly the ones an engine can represent as a single matrix, compose by multiplying, and — this module's whole point — analyze for the directions they only stretch and never rotate. This chapter draws the line between "linear" and "everything else," precisely enough to test it in two lines of algebra.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Linear transformation</div>
+    <p>A function \(T\) (taking vectors to vectors) is a <strong>linear transformation</strong> if, for <em>every</em> pair of vectors \(u,v\) and every scalar \(c\), both of the following hold:</p>
+    <div class="eqn"><div class="eq-body">\[ T(u+v) = T(u) + T(v) \qquad\text{and}\qquad T(cu) = cT(u) \]</div><div class="eq-num" id="eq-12-1-1">(12.1.1)</div></div>
+    <p>The first condition is called <strong>additivity</strong> — transforming a sum gives the same result as transforming each piece and adding afterward. The second is <strong>homogeneity</strong> — transforming a scaled vector gives the same result as scaling the transformed vector. Together, these two properties — "preserves addition" and "preserves scalar multiplication" — are the <em>entire</em> content of the word "linear." Nothing about lines, slopes, or graphs is implied; it's purely about which structural properties the function respects.</p>
+    <p>One useful corollary falls out immediately: set \(c=0\) in the homogeneity condition. Then \(T(0\cdot u) = 0\cdot T(u)\), which simplifies to \(T(\vec 0) = \vec 0\). <strong>Every linear transformation sends the zero vector to the zero vector.</strong> That's a necessary condition, not a sufficient one — but because it's so cheap to check, it's the fastest possible first test for ruling a candidate <em>out</em>.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — confirming a transformation IS linear</div>
+    <p>Let \(T(\langle x,y\rangle) = \langle 2x, 2y\rangle\) — uniform scaling by a factor of 2, exactly what <code>transform.localScale = Vector3.one * 2</code> does to every vertex of a mesh. Verify both conditions of Definition 12.1.1.</p>
+    <details class="step" open><summary>Step 1 — check additivity</summary>
+      <div class="step-body"><p>Let \(u=\langle x_1,y_1\rangle\), \(v=\langle x_2,y_2\rangle\), so \(u+v=\langle x_1+x_2,\ y_1+y_2\rangle\).</p>
+      <p>\(T(u+v) = \langle 2(x_1+x_2),\ 2(y_1+y_2)\rangle = \langle 2x_1+2x_2,\ 2y_1+2y_2\rangle\)</p>
+      <p>\(T(u)+T(v) = \langle 2x_1,2y_1\rangle + \langle 2x_2,2y_2\rangle = \langle 2x_1+2x_2,\ 2y_1+2y_2\rangle\)</p>
+      <p>The two sides match exactly, for <em>any</em> \(u,v\) — additivity holds.</p></div></details>
+    <details class="step"><summary>Step 2 — check homogeneity</summary>
+      <div class="step-body"><p>\(T(cu) = T(\langle cx_1,cy_1\rangle) = \langle 2cx_1,\ 2cy_1\rangle\)</p>
+      <p>\(cT(u) = c\langle 2x_1,2y_1\rangle = \langle 2cx_1,\ 2cy_1\rangle\)</p>
+      <p>These match too, for any scalar \(c\) — homogeneity holds.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Both conditions hold for <em>every</em> choice of \(u,v,c\), so \(T\) is a linear transformation. Uniform scaling is linear — no surprise, but now it's proven, not just assumed.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — confirming a transformation is NOT linear</div>
+    <p>Let \(T(\langle x,y\rangle) = \langle x+1,\ y\rangle\) — a translation, shifting everything 1 unit right. Is it linear?</p>
+    <details class="step" open><summary>Step 1 — run the fast disqualifying test first: does T(0) = 0?</summary>
+      <div class="step-body"><p>\(T(\langle 0,0\rangle) = \langle 0+1,\ 0\rangle = \langle 1,0\rangle \neq \langle 0,0\rangle\).</p>
+      <p>The corollary from Definition 12.1.1 said every linear transformation must send the zero vector to itself. This one sends it to \(\langle1,0\rangle\) instead — <em>T already fails</em>, and there's no need to check the full additivity/homogeneity conditions at all.</p></div></details>
+    <details class="step"><summary>Step 2 — confirm directly, for completeness</summary>
+      <div class="step-body"><p>Let \(u=\langle1,0\rangle\), \(v=\langle1,0\rangle\), so \(u+v=\langle2,0\rangle\).</p>
+      <p>\(T(u+v) = T(\langle2,0\rangle) = \langle3,0\rangle\), but \(T(u)+T(v) = \langle2,0\rangle+\langle2,0\rangle = \langle4,0\rangle\).</p>
+      <p>\(\langle3,0\rangle \neq \langle4,0\rangle\) — additivity genuinely fails, confirming what the fast test already showed.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(T\) is <strong>not</strong> a linear transformation. Geometrically this makes sense: a translation slides the entire plane without fixing the origin in place, while every linear transformation — rotation, scaling, reflection, shearing — leaves the origin exactly where it is (in engine terms: it transforms a mesh's <em>local-space</em> vertices, all measured from a shared local origin, which is precisely why <code>transform.Rotate</code> or a scale matrix never needs to also carry a separate "move by this much" offset the way a translation does).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming any "reasonable-looking" function of a vector is automatically linear. Translations are the single most common near-miss — anything of the form "add a fixed nonzero vector" fails, because \(T(\vec0)\) comes out to that fixed vector instead of \(\vec0\). The same failure catches anything with a constant baked in, like \(T(\langle x,y\rangle)=\langle x, y+1\rangle\): \(T(\vec0)=\langle0,1\rangle\neq\vec0\), disqualified by the same one-line check.</p>
+    <p>Be careful with the converse, though: passing the \(T(\vec 0)=\vec 0\) test is <strong>necessary, not sufficient</strong>. For example \(T(\langle x,y\rangle) = \langle x^2, y\rangle\) does send \(\langle0,0\rangle\) to \(\langle0,0\rangle\) — and is still not linear. Check additivity with \(u=v=\langle1,0\rangle\): \(T(u+v)=T(\langle2,0\rangle)=\langle4,0\rangle\), but \(T(u)+T(v)=\langle1,0\rangle+\langle1,0\rangle=\langle2,0\rangle\). \(4\neq2\) — it fails anyway, just not on the fast test. The zero-vector check is a good first move for ruling things out quickly; it can never fully confirm linearity on its own.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="no|not linear|no it isn't|not a linear transformation">
+    <div class="label">Try it yourself</div>
+    <p>Is a translation — adding a fixed nonzero vector to the input, like \(T(\langle x,y\rangle)=\langle x+3,\ y-1\rangle\) — a linear transformation?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Is a translation a linear transformation?">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is \(T(\langle x,y\rangle) = \langle 3x,\ -y\rangle\) linear? (Check both conditions, or reason from its structure.)
+      <details class="answer"><summary></summary><div class="ans-body">Yes — both additivity and homogeneity hold (each output coordinate is just a constant times an input coordinate, which always distributes correctly over sums and scalars).</div></details></li>
+    <li>Is \(T(\langle x,y\rangle) = \langle x,\ y,\ 1\rangle\) (mapping into 3D) linear?
+      <details class="answer"><summary></summary><div class="ans-body">No — fast test: \(T(\langle0,0\rangle)=\langle0,0,1\rangle\neq\langle0,0,0\rangle\).</div></details></li>
+    <li>Is \(T(x) = 5x\) (a function of a single real number) linear?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(T(x_1+x_2)=5(x_1+x_2)=5x_1+5x_2=T(x_1)+T(x_2)\), and \(T(cx)=5cx=c(5x)=cT(x)\). Scaling by a constant is always linear, in any dimension.</div></details></li>
+    <li>Is \(T(\langle x,y\rangle) = \langle xy,\ x\rangle\) linear?
+      <details class="answer"><summary></summary><div class="ans-body">No. With \(u=v=\langle1,1\rangle\): \(T(u+v)=T(\langle2,2\rangle)=\langle4,2\rangle\), but \(T(u)+T(v)=\langle1,1\rangle+\langle1,1\rangle=\langle2,2\rangle\). Multiplying two coordinates together always breaks linearity.</div></details></li>
+    <li>Is \(T(\langle x,y\rangle) = \langle y,\ x\rangle\) (swapping coordinates) linear?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — this is reflection over the line \(y=x\), a genuine linear transformation (common as an axis-swap in engine code).</div></details></li>
+    <li>Is \(T(\langle x,y\rangle) = \langle x-2,\ y+2\rangle\) linear?
+      <details class="answer"><summary></summary><div class="ans-body">No — it's a translation. \(T(\langle0,0\rangle)=\langle-2,2\rangle\neq\langle0,0\rangle\).</div></details></li>
+    <li class="tag">bonus — Is \(T(\langle x,y\rangle) = \langle 2x+3y,\ x-y\rangle\) linear?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — every output coordinate is a sum of constants times input coordinates (exactly the shape Chapter 2 will show always comes from a matrix).</div></details></li>
+    <li class="tag">bonus — Is \(T(\langle x,y\rangle) = \langle |x|,\ y\rangle\) linear?
+      <details class="answer"><summary></summary><div class="ans-body">No — homogeneity fails for negative scalars: \(T(-1\cdot\langle x,y\rangle)=T(\langle-x,y\rangle)=\langle|x|,y\rangle\), but \((-1)T(\langle x,y\rangle)=\langle-|x|,-y\rangle\). These aren't equal whenever \(x\neq0\) or \(y\neq0\) — an "absolute value" step in engine code is a classic hidden source of non-linearity.</div></details></li>
+    <li class="tag">bonus — Is \(T(\langle x,y,z\rangle) = x+y+z\) (summing all three coordinates into one number) linear?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — sums always distribute over vector addition and pull scalars out cleanly, so any "add up the coordinates" function is linear.</div></details></li>
+    <li class="tag">bonus — If a transformation fixes the origin (\(T(\vec 0)=\vec 0\)), is that enough on its own to guarantee it's linear?
+      <details class="answer"><summary></summary><div class="ans-body">No — necessary, not sufficient. \(T(\langle x,y\rangle)=\langle x^2,y\rangle\) fixes the origin but still fails additivity (see the mistake block above).</div></details></li>
+    <li class="tag">challenge — Let \(A\) be <em>any</em> fixed matrix and define \(T(x) = Ax\) (matrix-vector multiplication). Using the distributive and scalar properties of matrix multiplication, prove \(T\) is automatically linear for every choice of \(A\) — no specific numbers needed.
+      <details class="answer"><summary></summary><div class="ans-body">Additivity: \(T(u+v) = A(u+v) = Au+Av = T(u)+T(v)\), using the distributive law for matrix multiplication over vector addition. Homogeneity: \(T(cu) = A(cu) = c(Au) = cT(u)\), pulling the scalar through matrix multiplication. Both hold for <em>any</em> matrix \(A\) — so every matrix automatically defines a linear transformation. Chapter 2 proves the converse: every linear transformation comes from some matrix, meaning "linear transformation" and "matrix" turn out to be exactly the same idea seen from two directions.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m11-vector-spaces/ch12-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-matrix-representation-of-transformations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 1 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:1", "content/m12-eigen/ch01-linear-transformations.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

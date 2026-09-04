@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Finding Eigenvalues — The Characteristic Equation | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 6 of 12</div>
+  <div class="eyebrow">Chapter 6 · concept:characteristic-equation</div>
+  <h1>Finding Eigenvalues — The Characteristic Equation</h1>
+  <p class="subtitle">Chapter 5 could only check whether a GIVEN vector happens to be an eigenvector. This chapter finds every eigenvalue of a matrix from scratch, turning Module 10, Chapter 11's determinant test for singularity into an equation to solve.</p>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The characteristic equation</div>
+    <p>Start from the eigenvalue equation and rearrange:</p>
+    <p style="text-align:center;">\[ Av=\lambda v \;\;\Longleftrightarrow\;\; Av-\lambda v = \vec0 \;\;\Longleftrightarrow\;\; (A-\lambda I)v = \vec0 \]</p>
+    <p>(the \(I\) is essential here — see the mistake block below.) An eigenvector \(v\) must be <em>nonzero</em>, so this equation needs a nontrivial solution. By Module 10, Chapter 11, a homogeneous system \(Mx=\vec0\) has a nonzero solution exactly when \(M\) is <strong>singular</strong> — that is, when \(\det(M)=0\). Applying that here:</p>
+    <div class="eqn"><div class="eq-body">\[ \det(A - \lambda I) = 0 \]</div><div class="eq-num" id="eq-12-6-1">(12.6.1)</div></div>
+    <p>This is the <strong>characteristic equation</strong>. Its solutions in \(\lambda\) are exactly \(A\)'s eigenvalues — no guessing or checking individual vectors required.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the eigenvalues of \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\) — the running example from Chapter 5.</p>
+    <details class="step" open><summary>Step 1 — form A − λI</summary>
+      <div class="step-body"><p>\(A-\lambda I = \begin{bmatrix}3-\lambda&-2\\2&-2-\lambda\end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Step 2 — compute the determinant</summary>
+      <div class="step-body"><p>\(\det(A-\lambda I) = (3-\lambda)(-2-\lambda) - (-2)(2)\)</p>
+      <p>\((3-\lambda)(-2-\lambda) = -6-3\lambda+2\lambda+\lambda^2 = \lambda^2-\lambda-6\), so the determinant is \(\lambda^2-\lambda-6+4 = \lambda^2-\lambda-2\).</p></div></details>
+    <details class="step"><summary>Step 3 — solve the characteristic equation (Module 0 factoring)</summary>
+      <div class="step-body"><p>\(\lambda^2-\lambda-2=0 \;\Rightarrow\; (\lambda-2)(\lambda+1)=0 \;\Rightarrow\; \lambda=2 \text{ or } \lambda=-1\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The eigenvalues of \(A\) are \(\lambda=2\) and \(\lambda=-1\). Notice \(\lambda=2\) matches the eigenvalue found by hand for \(v=\langle2,1\rangle\) in Chapter 5 — consistent, as it must be. This matrix and these two eigenvalues carry forward through Chapters 7–10.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting the \(I\) and computing \(\det(A-\lambda)\) instead of \(\det(A-\lambda I)\). This isn't just sloppy — it's not even a defined operation: \(A\) is a matrix and \(\lambda\) is a plain number, and you can't subtract a number from a matrix directly. The identity matrix \(I\) is what lets \(\lambda\) be "matrix-shaped" first (\(\lambda I\) scales every diagonal entry by \(\lambda\) and leaves everything else zero), so that the subtraction only touches \(A\)'s diagonal entries. Always scale by \(I\) before subtracting.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="4and7|7and4">
+    <div class="label">Try it yourself</div>
+    <p>Find the eigenvalues of \(\begin{bmatrix}4&0\\0&7\end{bmatrix}\) — a diagonal matrix. Enter both, separated by "and" (either order is fine):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 4 and 7" aria-label="eigenvalues of the diagonal matrix">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the eigenvalues of \(A=\begin{bmatrix}5&0\\0&3\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\lambda=5,3\) — for a diagonal matrix, the eigenvalues are just the diagonal entries themselves, no work required.</div></details></li>
+    <li>Find the eigenvalues of \(A=\begin{bmatrix}2&1\\1&2\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=(2-\lambda)^2-1=\lambda^2-4\lambda+3=(\lambda-1)(\lambda-3)\) → \(\lambda=1,3\)</div></details></li>
+    <li>Find the eigenvalues of \(A=\begin{bmatrix}0&1\\1&0\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=\lambda^2-1=(\lambda-1)(\lambda+1)\) → \(\lambda=1,-1\) (matches Chapter 5's problems on this exact matrix).</div></details></li>
+    <li>Find the eigenvalues of \(A=\begin{bmatrix}1&2\\0&3\end{bmatrix}\) (upper triangular).
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=(1-\lambda)(3-\lambda)-0\) → \(\lambda=1,3\). Shortcut: for any triangular matrix, the eigenvalues are simply its diagonal entries.</div></details></li>
+    <li>Find the eigenvalues of \(A=\begin{bmatrix}4&2\\1&3\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=(4-\lambda)(3-\lambda)-2=\lambda^2-7\lambda+10=(\lambda-5)(\lambda-2)\) → \(\lambda=5,2\)</div></details></li>
+    <li>Find the eigenvalues of \(A=\begin{bmatrix}1&4\\2&3\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=(1-\lambda)(3-\lambda)-8=\lambda^2-4\lambda-5=(\lambda-5)(\lambda+1)\) → \(\lambda=5,-1\)</div></details></li>
+    <li class="tag">bonus — Find the eigenvalues of \(A=\begin{bmatrix}6&0\\0&6\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\lambda=6\) (a repeated root — both solutions of the characteristic equation equal 6, previewed further in Chapter 11).</div></details></li>
+    <li class="tag">bonus — Without fully solving, state the sum and product of \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\)'s two eigenvalues using its trace and determinant, and check against the worked example's answer (\(\lambda=2,-1\)).
+      <details class="answer"><summary></summary><div class="ans-body">Sum \(=\operatorname{trace}(A)=3+(-2)=1=2+(-1)\) ✓. Product \(=\det(A)=3(-2)-(-2)(2)=-6+4=-2=2\times(-1)\) ✓. A handy shortcut for checking (or even finding) 2×2 eigenvalues.</div></details></li>
+    <li class="tag">bonus — Find the eigenvalues of \(A=\begin{bmatrix}7&-4\\4&-1\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=(7-\lambda)(-1-\lambda)+16=\lambda^2-6\lambda+9=(\lambda-3)^2\) → \(\lambda=3\) (a repeated root — previewed in Chapter 11 as a case that can fail to diagonalize).</div></details></li>
+    <li class="tag">bonus — Find the eigenvalues of \(A=\begin{bmatrix}0&-1\\1&0\end{bmatrix}\) — the 90° rotation matrix from Chapter 2.
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=\lambda^2+1=0 \Rightarrow \lambda^2=-1\) — no real solutions. A 90° rotation has no real eigenvalues (previewed fully in Chapter 11) — which makes total sense: it doesn't leave any real direction unrotated.</div></details></li>
+    <li class="tag">challenge — For a general 2×2 matrix \(A=\begin{bmatrix}a&b\\c&d\end{bmatrix}\), derive its characteristic equation in terms of \(a,b,c,d\), and show it always has the form \(\lambda^2-(\operatorname{trace} A)\lambda+\det(A)=0\). Explain why this proves the "sum = trace, product = det" shortcut from the bonus problem above always works for 2×2 matrices.
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=(a-\lambda)(d-\lambda)-bc = ad-a\lambda-d\lambda+\lambda^2-bc = \lambda^2-(a+d)\lambda+(ad-bc) = \lambda^2-(\operatorname{trace}A)\lambda+\det(A)\). By Vieta's formulas (Module 0), for any quadratic \(\lambda^2-p\lambda+q=0\), the sum of its roots is \(p\) and the product is \(q\) — here \(p=\operatorname{trace}(A)\) and \(q=\det(A)\), which is exactly the shortcut.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-eigenvalues-and-eigenvectors-intro.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-finding-eigenvectors.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 6 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:6", "content/m12-eigen/ch06-finding-eigenvalues.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

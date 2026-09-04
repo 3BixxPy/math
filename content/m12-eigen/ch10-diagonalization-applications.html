@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — Applications — Powers of a Matrix | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 10 of 12</div>
+  <div class="eyebrow">Chapter 10 · concept:matrix-powers-via-diagonalization</div>
+  <h1>Applications — Powers of a Matrix</h1>
+  <p class="subtitle">Diagonalization isn't just elegant bookkeeping. It turns computing a huge power of a matrix from thousands of multiplications into three easy steps — and that shortcut is exactly how repeated transformations, applied over and over, get computed in practice.</p>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Matrix powers via diagonalization</div>
+    <p>If \(A=PDP^{-1}\), then for any positive integer \(k\):</p>
+    <div class="eqn"><div class="eq-body">\[ A^k = PD^kP^{-1} \]</div><div class="eq-num" id="eq-12-10-1">(12.10.1)</div></div>
+    <p>where \(D^k\) just means raising each diagonal entry to the \(k\)-th power individually — no repeated matrix multiplication needed for that part at all. Quick proof by induction (Module 4): \(A^2=(PDP^{-1})(PDP^{-1})=PD(P^{-1}P)DP^{-1}=PD\cdot I\cdot DP^{-1}=PD^2P^{-1}\) — the middle \(P^{-1}P\) collapses to \(I\) and vanishes. Repeating the same collapse \(k-1\) more times gives \(A^k=PD^kP^{-1}\) for any \(k\).</p>
+    <p><strong>Why this matters beyond the algebra:</strong> a discrete dynamical system — a population model applied year after year, or a game-world transformation applied frame after frame — computes exactly \(x_k = A^kx_0\). This theorem is the reason that's computed efficiently for large \(k\), instead of by looping the multiplication \(k\) times.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Compute \(A^{10}\) for the running example, using Chapter 9's diagonalization: \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\), \(P=\begin{bmatrix}2&1\\1&2\end{bmatrix}\), \(D=\begin{bmatrix}2&0\\0&-1\end{bmatrix}\), \(P^{-1}=\frac13\begin{bmatrix}2&-1\\-1&2\end{bmatrix}\).</p>
+    <details class="step" open><summary>Step 1 — raise D's diagonal entries to the 10th power</summary>
+      <div class="step-body"><p>\(D^{10} = \begin{bmatrix}2^{10}&0\\0&(-1)^{10}\end{bmatrix} = \begin{bmatrix}1024&0\\0&1\end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Step 2 — compute PD¹⁰ (scales each column of P)</summary>
+      <div class="step-body"><p>\(PD^{10} = \begin{bmatrix}2&1\\1&2\end{bmatrix}\begin{bmatrix}1024&0\\0&1\end{bmatrix} = \begin{bmatrix}2048&1\\1024&2\end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Step 3 — multiply by P⁻¹</summary>
+      <div class="step-body"><p>\((PD^{10})P^{-1} = \dfrac13\begin{bmatrix}2048&1\\1024&2\end{bmatrix}\begin{bmatrix}2&-1\\-1&2\end{bmatrix} = \dfrac13\begin{bmatrix}4095&-2046\\2046&-1020\end{bmatrix} = \begin{bmatrix}1365&-682\\682&-340\end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Result — verify with the trace/det trick</summary>
+      <div class="step-body"><p>\(A^{10}=\begin{bmatrix}1365&-682\\682&-340\end{bmatrix}\). Check: \(\operatorname{trace}(A^{10})\) should equal \(2^{10}+(-1)^{10}=1025\); here \(1365+(-340)=1025\) ✓. \(\det(A^{10})\) should equal \(\det(A)^{10}=(-2)^{10}=1024\); here \(1365(-340)-(-682)(682)=-464100+465124=1024\) ✓. Contrast: computing \(A^{10}\) by hand via 9 successive matrix multiplications would be brutal. This shortcut took exactly 3 easy steps, and would take the same 3 steps even for \(A^{1000}\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Applying the shortcut \(A^k=PD^kP^{-1}\) to a matrix that isn't actually diagonalizable in the first place. The formula requires Chapter 9's factorization to genuinely exist — skipping the diagonalizability check (\(n\) independent eigenvectors, or Chapter 11's repeated-eigenvalue failure case) and just guessing some \(P,D\) pair produces a meaningless, wrong result. Always confirm \(A=PDP^{-1}\) actually holds before using its powers.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="4and9|9and4">
+    <div class="label">Try it yourself</div>
+    <p>For a diagonal matrix \(D\) with entries 2 and 3, what are \(D^2\)'s two diagonal entries? Separate with "and":</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 4 and 9" aria-label="diagonal entries of D squared">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>For \(D=\begin{bmatrix}4&0\\0&5\end{bmatrix}\), find \(D^3\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}64&0\\0&125\end{bmatrix}\)</div></details></li>
+    <li>Using Chapter 9's diagonalization of \(A=\begin{bmatrix}2&1\\1&2\end{bmatrix}\) (\(D=\begin{bmatrix}1&0\\0&3\end{bmatrix}\)), find \(D^2\) without recomputing any eigen-data.
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}1&0\\0&9\end{bmatrix}\)</div></details></li>
+    <li>Using the same data, set up (don't necessarily multiply out) \(A^2\) via the shortcut.
+      <details class="answer"><summary></summary><div class="ans-body">\(A^2 = PD^2P^{-1} = \begin{bmatrix}1&1\\-1&1\end{bmatrix}\begin{bmatrix}1&0\\0&9\end{bmatrix}P^{-1}\)</div></details></li>
+    <li>True or false: \(A^0=I\) always, using the diagonalization shortcut with \(k=0\).
+      <details class="answer"><summary></summary><div class="ans-body">True — \(D^0=I\) (every diagonal entry raised to the 0th power is 1), so \(PD^0P^{-1}=PIP^{-1}=PP^{-1}=I\).</div></details></li>
+    <li>If \(A\) is diagonalizable with eigenvalues 2 and \(\frac12\), describe qualitatively what happens to \(A^k\) as \(k\) gets very large.
+      <details class="answer"><summary></summary><div class="ans-body">The \(\lambda=2\) direction grows without bound while the \(\lambda=\frac12\) direction shrinks toward 0 — for large \(k\), \(A^k\) behaves almost entirely like scaling along the \(\lambda=2\) eigenvector; the other direction becomes negligible.</div></details></li>
+    <li>Using the already-computed \(A^{10}=\begin{bmatrix}1365&-682\\682&-340\end{bmatrix}\), predict \(A^{10}\langle2,1\rangle\) directly from the fact that \(\langle2,1\rangle\) is an eigenvector with \(\lambda=2\), then check against the matrix.
+      <details class="answer"><summary></summary><div class="ans-body">Prediction: \(2^{10}\langle2,1\rangle=1024\langle2,1\rangle=\langle2048,1024\rangle\) (Chapter 5's challenge, generalized: eigenvectors keep scaling by \(\lambda\) each application, never changing direction). Check: \(\begin{bmatrix}1365&-682\\682&-340\end{bmatrix}\langle2,1\rangle=\langle1365(2)-682,\ 682(2)-340\rangle=\langle2048,1024\rangle\) ✓.</div></details></li>
+    <li class="tag">bonus — For a scalar matrix \(A=cI\), what is \(A^k\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(c^kI\) — a trivial diagonalization case (P can be any invertible matrix, e.g. \(P=I\)).</div></details></li>
+    <li class="tag">bonus — Can this shortcut also compute \(A^{-1}\) (a "negative first power")?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(A^{-1}=PD^{-1}P^{-1}\), as long as no eigenvalue is zero (so every diagonal entry of \(D^{-1}\) is defined). The theorem generalizes to negative integer powers too.</div></details></li>
+    <li class="tag">bonus — The swap matrix \(A=\begin{bmatrix}0&1\\1&0\end{bmatrix}\) has eigenvalues 1 and −1 (Chapter 5). What is \(A^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(D^2=\begin{bmatrix}1&0\\0&1\end{bmatrix}=I\), so \(A^2=PIP^{-1}=PP^{-1}=I\) — squaring the swap matrix undoes itself, which makes total sense (swap twice = back to normal).</div></details></li>
+    <li class="tag">bonus — In one sentence, explain why computing \(A^{100}\) directly (99 successive matrix multiplications) is impractical by hand, while \(PD^{100}P^{-1}\) is not.
+      <details class="answer"><summary></summary><div class="ans-body">Direct multiplication needs 99 full matrix multiplications, each combining every entry; the diagonalized version needs only two numbers raised to the 100th power plus two fixed matrix multiplications, regardless of how large the exponent gets.</div></details></li>
+    <li class="tag">challenge — A population model doubles an "urban" population each year (eigenvalue 2) and halves a "rural" population each year (eigenvalue ½), along two eigenvector directions describing a mixed starting population. Even if the rural (λ=½) direction starts as the large majority of the population, explain qualitatively what the makeup looks like after 20 years.
+      <details class="answer"><summary></summary><div class="ans-body">After 20 years, \(2^{20}\) is astronomically larger than \((\frac12)^{20}\) (which is nearly 0), so the urban (\(\lambda=2\)) direction totally dominates the total, no matter how large the rural share started out — the long-run composition converges to being almost entirely along the urban eigenvector direction. This is the real payoff of diagonalization: it separates growing directions from shrinking ones and tells you which one wins in the long run, without simulating year by year.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-diagonalization.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-special-cases-repeated-and-complex-eigenvalues.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 10 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:10", "content/m12-eigen/ch10-diagonalization-applications.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

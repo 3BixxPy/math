@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — Diagonalization | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 9 of 12</div>
+  <div class="eyebrow">Chapter 9 · concept:diagonalization</div>
+  <h1>Diagonalization</h1>
+  <p class="subtitle">Every piece is on the table: eigenvalues (Chapter 6), eigenvectors (Chapter 7), and linear independence (Module 11, Chapter 5). This chapter assembles them into a single factorization that turns a matrix into a diagonal one in disguise.</p>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Diagonalization</div>
+    <p>An \(n\times n\) matrix \(A\) is <strong>diagonalizable</strong> if it has \(n\) linearly independent eigenvectors (Module 11, Chapter 5). In that case:</p>
+    <div class="eqn"><div class="eq-body">\[ A = PDP^{-1} \]</div><div class="eq-num" id="eq-12-9-1">(12.9.1)</div></div>
+    <p>where \(D\) is the diagonal matrix of \(A\)'s eigenvalues, and \(P\)'s columns are the corresponding eigenvectors — column \(i\) of \(P\) must be the eigenvector belonging to the eigenvalue sitting in position \(i\) of \(D\)'s diagonal.</p>
+    <p><strong>Why it works:</strong> if \(v_1,\dots,v_n\) are independent eigenvectors with eigenvalues \(\lambda_1,\dots,\lambda_n\), then \(AP = A[v_1|\cdots|v_n] = [Av_1|\cdots|Av_n] = [\lambda_1v_1|\cdots|\lambda_nv_n]\). That last expression is exactly \(PD\) — right-multiplying by a diagonal matrix scales each <em>column</em> by the matching diagonal entry (Module 10). So \(AP=PD\), and since \(P\)'s columns are independent, \(P\) is invertible (Module 10/11), giving \(A=PDP^{-1}\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Diagonalize the running example \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\), using \(\lambda=2\) with eigenvector \(\langle2,1\rangle\), and \(\lambda=-1\) with eigenvector \(\langle1,2\rangle\) (Chapters 6–8).</p>
+    <details class="step" open><summary>Step 1 — build P and D, matching columns to diagonal entries</summary>
+      <div class="step-body"><p>\(P=\begin{bmatrix}2&1\\1&2\end{bmatrix}\), \(D=\begin{bmatrix}2&0\\0&-1\end{bmatrix}\) — column 1 of \(P\) (the \(\lambda=2\) eigenvector) matches position 1 of \(D\) (the value 2); column 2 matches position 2.</p></div></details>
+    <details class="step"><summary>Step 2 — compute P⁻¹ (Module 10, Chapter 11's 2×2 formula)</summary>
+      <div class="step-body"><p>\(\det(P)=2(2)-1(1)=3\). \(P^{-1} = \dfrac{1}{3}\begin{bmatrix}2&-1\\-1&2\end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Result — spot-check</summary>
+      <div class="step-body"><p>\(A=PDP^{-1}=\begin{bmatrix}2&1\\1&2\end{bmatrix}\begin{bmatrix}2&0\\0&-1\end{bmatrix}\dfrac{1}{3}\begin{bmatrix}2&-1\\-1&2\end{bmatrix}\). A fast way to sanity-check without fully multiplying: \(\operatorname{trace}(PDP^{-1})=\operatorname{trace}(D)=2+(-1)=1=\operatorname{trace}(A)\) ✓, and \(\det(PDP^{-1})=\det(D)=2\times(-1)=-2=\det(A)\) ✓ (the same trace/determinant trick from Chapter 6's challenge). Both check out.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Mismatching the order of eigenvalues in \(D\) with the order of eigenvectors in \(P\)'s columns. Column \(i\) of \(P\) <strong>must</strong> correspond to the diagonal entry in position \(i\) of \(D\) — this isn't optional bookkeeping, it's part of the mathematical statement. If \(D\) had been built as \(\begin{bmatrix}-1&0\\0&2\end{bmatrix}\) while \(P\)'s columns stayed in the \((2,1)\)-then-\((1,2)\) order, \(PDP^{-1}\) would compute something entirely different from \(A\) — even though every individual number involved (the eigenvalues, the eigenvectors) would still be perfectly correct on its own.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes|y|true">
+    <div class="label">Try it yourself</div>
+    <p>In \(A=PDP^{-1}\), is \(D\) always a diagonal matrix?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Is D always diagonal in A=PDP^-1?">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Diagonalize \(A=\begin{bmatrix}5&0\\0&3\end{bmatrix}\) (already diagonal).
+      <details class="answer"><summary></summary><div class="ans-body">\(P=I\), \(D=A\) — a matrix that's already diagonal is trivially its own diagonalization.</div></details></li>
+    <li>Using \(A=\begin{bmatrix}2&1\\1&2\end{bmatrix}\) with \(\lambda=1\) (eigenvector \(\langle1,-1\rangle\)) and \(\lambda=3\) (eigenvector \(\langle1,1\rangle\)) from Chapter 7, give \(P\) and \(D\).
+      <details class="answer"><summary></summary><div class="ans-body">\(P=\begin{bmatrix}1&1\\-1&1\end{bmatrix}\), \(D=\begin{bmatrix}1&0\\0&3\end{bmatrix}\)</div></details></li>
+    <li>Compute \(P^{-1}\) for the previous problem.
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(P)=1(1)-1(-1)=2\); \(P^{-1}=\dfrac12\begin{bmatrix}1&-1\\1&1\end{bmatrix}\)</div></details></li>
+    <li>Diagonalize \(A=\begin{bmatrix}1&2\\0&3\end{bmatrix}\), using \(\lambda=1\) (eigenvector \(\langle1,0\rangle\)) and \(\lambda=3\) (eigenvector \(\langle1,1\rangle\)) from Chapter 7.
+      <details class="answer"><summary></summary><div class="ans-body">\(P=\begin{bmatrix}1&1\\0&1\end{bmatrix}\), \(D=\begin{bmatrix}1&0\\0&3\end{bmatrix}\)</div></details></li>
+    <li>True or false: if a 2×2 matrix has two DIFFERENT eigenvalues, it's automatically diagonalizable.
+      <details class="answer"><summary></summary><div class="ans-body">True — eigenvectors belonging to distinct eigenvalues are automatically linearly independent, which is exactly the "n independent eigenvectors" condition needed here.</div></details></li>
+    <li>Is \(A=\begin{bmatrix}6&0\\0&6\end{bmatrix}\) (Chapter 8's repeated eigenvalue with a full 2D eigenspace) diagonalizable? Give a valid P and D.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — since \(E_6\) is the whole plane, ANY two independent vectors work, e.g. \(P=I\), \(D=\begin{bmatrix}6&0\\0&6\end{bmatrix}=A\) itself.</div></details></li>
+    <li class="tag">bonus — What goes wrong with diagonalization if a matrix has a repeated eigenvalue whose eigenspace is only 1-dimensional (not enough independent eigenvectors)?
+      <details class="answer"><summary></summary><div class="ans-body">There aren't \(n\) independent eigenvectors available to fill \(P\)'s columns, so \(A\) is NOT diagonalizable — fully explored in Chapter 11.</div></details></li>
+    <li class="tag">bonus — For \(A=PDP^{-1}\), what does \(P^{-1}AP\) simplify to?
+      <details class="answer"><summary></summary><div class="ans-body">\(D\): \(P^{-1}AP = P^{-1}(PDP^{-1})P = (P^{-1}P)D(P^{-1}P) = D\).</div></details></li>
+    <li class="tag">bonus — Could more than one valid (P, D) pair exist for the same diagonalizable matrix A?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — reordering which eigenvalue/eigenvector pair sits in which column (as long as D and P are reordered together), or scaling any eigenvector column by a nonzero constant, all give equally valid (P, D) pairs for the same A.</div></details></li>
+    <li class="tag">bonus — For the running example's \(P=\begin{bmatrix}2&1\\1&2\end{bmatrix}\), \(D=\begin{bmatrix}2&0\\0&-1\end{bmatrix}\), verify \(AP=PD\) by comparing just the FIRST column of each side.
+      <details class="answer"><summary></summary><div class="ans-body">\(AP\)'s first column \(=A\langle2,1\rangle=\langle4,2\rangle\) (Chapter 5). \(PD\)'s first column \(=2\langle2,1\rangle=\langle4,2\rangle\). They match ✓.</div></details></li>
+    <li class="tag">challenge — Explain why the diagonalization theorem specifically requires \(n\) <em>independent</em> eigenvectors, not merely \(n\) eigenvectors (possibly repeated or dependent) — tie this to why \(P^{-1}\) must exist for \(A=PDP^{-1}\) to make sense at all.
+      <details class="answer"><summary></summary><div class="ans-body">\(P^{-1}\) has to actually exist for the formula to be meaningful, and a square matrix is invertible exactly when its columns are linearly independent (Module 10, Chapter 11 / Module 11, Chapter 5). Dependent "eigenvector" columns would make \(P\) singular, so \(P^{-1}\) simply wouldn't exist and the whole factorization would be undefined — independence isn't a nicety, it's the condition that makes the theorem's conclusion possible in the first place.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch08-eigenspaces.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch10-diagonalization-applications.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 9 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:9", "content/m12-eigen/ch09-diagonalization.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

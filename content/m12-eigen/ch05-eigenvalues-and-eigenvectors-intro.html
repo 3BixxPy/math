@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — Eigenvalues &amp; Eigenvectors — The Idea | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 5 of 12</div>
+  <div class="eyebrow">Chapter 5 · concept:eigenvalue-eigenvector-definition</div>
+  <h1>Eigenvalues &amp; Eigenvectors — The Idea</h1>
+  <p class="subtitle">Every transformation in this module so far can rotate, stretch, reflect, or some tangled mix of all three. This chapter asks a sharper question: for a given transformation, are there any special directions it ONLY stretches — and never rotates at all?</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Picture a transformation as deforming all of space — a physics simulation's stress tensor, a skinning matrix bending a mesh, any general linear map. Most directions get bent into some genuinely new direction. But for a huge number of transformations that actually show up in practice, there exist a couple of special axes that <em>don't</em> get bent — they just get longer, shorter, or flipped, while staying on the exact same line. Those special directions are <strong>eigenvectors</strong>, and the amount they get stretched by is the corresponding <strong>eigenvalue</strong>. Find them, and you've found the "spine" of a transformation — the handful of directions that describe its whole behavior, instead of needing to track what happens to every possible vector individually.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Eigenvalue &amp; eigenvector</div>
+    <p>For a square matrix \(A\) (\(n\times n\)), a <strong>nonzero</strong> vector \(v\) is an <strong>eigenvector</strong> of \(A\) if there exists a scalar \(\lambda\) — the corresponding <strong>eigenvalue</strong> — such that:</p>
+    <div class="eqn"><div class="eq-body">\[ Av = \lambda v \]</div><div class="eq-num" id="eq-12-5-1">(12.5.1)</div></div>
+    <p>Applying the transformation to \(v\) produces a vector pointing along the exact same line as \(v\) — only scaled by \(\lambda\). A negative \(\lambda\) flips \(v\) to point the opposite way but keeps it on the same line; \(\lambda=0\) is allowed too, meaning \(v\) gets sent straight to the zero vector. The vector \(v\) itself, though, is always required to be <strong>nonzero</strong> — the zero vector trivially satisfies \(A\vec0=\lambda\vec0\) for literally every \(\lambda\), which says nothing useful, so it's excluded from the definition by convention.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Verify that \(v=\langle2,1\rangle\) is an eigenvector of \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\), and find its eigenvalue. (This matrix and this eigenvector will be the running example for the next several chapters.)</p>
+    <details class="step" open><summary>Step 1 — compute Av</summary>
+      <div class="step-body"><p>\(Av = \begin{bmatrix}3&-2\\2&-2\end{bmatrix}\begin{bmatrix}2\\1\end{bmatrix} = \begin{bmatrix}3(2)+(-2)(1)\\2(2)+(-2)(1)\end{bmatrix} = \begin{bmatrix}4\\2\end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Step 2 — check whether the result is a scalar multiple of v</summary>
+      <div class="step-body"><p>\(\langle4,2\rangle = 2\cdot\langle2,1\rangle\) — yes, exactly a scalar multiple.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(v=\langle2,1\rangle\) is an eigenvector of \(A\), with eigenvalue \(\lambda=2\). Applying \(A\) to this particular direction just doubles it — no rotation at all.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming every vector is an eigenvector of a given matrix. Being an eigenvector is a <em>special</em> property that most vectors don't have — a typical transformation rotates most directions at least a little, and only a few special ones survive unrotated. Try \(v=\langle1,0\rangle\) on the same \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\) from the worked example: \(Av = \langle3,2\rangle\), which is <strong>not</strong> a scalar multiple of \(\langle1,0\rangle\) (a multiple would need a zero second coordinate, and \(2\neq0\)) — so \(\langle1,0\rangle\) is not an eigenvector of this \(A\) at all, despite looking like an equally reasonable guess.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>If \(Av=5v\) for some nonzero vector \(v\), what is the eigenvalue?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 5" aria-label="eigenvalue when Av=5v">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is \(v=\langle1,1\rangle\) an eigenvector of \(A=\begin{bmatrix}2&0\\0&2\end{bmatrix}\)? Find \(\lambda\) if so.
+      <details class="answer"><summary></summary><div class="ans-body">\(Av=\langle2,2\rangle=2\langle1,1\rangle\) — yes, \(\lambda=2\). (In fact, a scalar matrix like this has <em>every</em> nonzero vector as an eigenvector, all with the same \(\lambda\) — a special case worth remembering.)</div></details></li>
+    <li>Is \(v=\langle1,-1\rangle\) an eigenvector of \(A=\begin{bmatrix}0&1\\1&0\end{bmatrix}\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(Av=\langle-1,1\rangle=-1\cdot\langle1,-1\rangle\) — yes, \(\lambda=-1\).</div></details></li>
+    <li>Is \(v=\langle1,1\rangle\) an eigenvector of the same \(A=\begin{bmatrix}0&1\\1&0\end{bmatrix}\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(Av=\langle1,1\rangle=1\cdot\langle1,1\rangle\) — yes, \(\lambda=1\). (This "swap" matrix has a clean geometric picture: it leaves the line \(y=x\) untouched (\(\lambda=1\)) and flips the line \(y=-x\) (\(\lambda=-1\)).)</div></details></li>
+    <li>Is \(v=\langle1,2\rangle\) an eigenvector of \(A=\begin{bmatrix}4&0\\0&7\end{bmatrix}\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(Av=\langle4,14\rangle\). For this to be a multiple of \(\langle1,2\rangle\) the scalar would need to be both 4 (from the first coordinate) and 7 (from the second) — contradiction. No.</div></details></li>
+    <li>Is \(v=\langle1,0\rangle\) an eigenvector of \(A=\begin{bmatrix}4&0\\0&7\end{bmatrix}\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(Av=\langle4,0\rangle=4\langle1,0\rangle\) — yes, \(\lambda=4\).</div></details></li>
+    <li>Is \(v=\langle3,0\rangle\) an eigenvector of the same \(A=\begin{bmatrix}4&0\\0&7\end{bmatrix}\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(Av=\langle12,0\rangle=4\langle3,0\rangle\) — yes, \(\lambda=4\), same eigenvalue as the previous problem (same line, so same eigenvalue).</div></details></li>
+    <li class="tag">bonus — For the identity matrix \(I\), what is the eigenvalue for EVERY nonzero vector?
+      <details class="answer"><summary></summary><div class="ans-body">\(\lambda=1\) always, since \(Iv=v=1\cdot v\) for any \(v\).</div></details></li>
+    <li class="tag">bonus — If \(Av=\vec0\) for some nonzero \(v\), is \(v\) an eigenvector, and what is \(\lambda\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(\lambda=0\) is a perfectly valid eigenvalue, as long as \(v\) itself is nonzero.</div></details></li>
+    <li class="tag">bonus — Is the zero vector \(\vec0\) ever itself called an eigenvector?
+      <details class="answer"><summary></summary><div class="ans-body">No — by definition, eigenvectors must be nonzero, even though \(\vec0\) trivially satisfies \(A\vec0=\lambda\vec0\) for any \(\lambda\).</div></details></li>
+    <li class="tag">bonus — Using the worked example's \(v=\langle2,1\rangle\), is it also an eigenvector of \(B=\begin{bmatrix}4&-2\\2&-1\end{bmatrix}\) (note: \(B=A+I\), adding the identity to the running example's matrix)? If so, find λ.
+      <details class="answer"><summary></summary><div class="ans-body">\(Bv=\langle4(2)-2(1),\ 2(2)-1(1)\rangle=\langle6,3\rangle=3\langle2,1\rangle\) — yes, \(\lambda=3\). Interesting: adding \(I\) to \(A\) shifted the eigenvalue from 2 to 3 but kept the exact same eigenvector — a pattern worth noticing even before it's explained.</div></details></li>
+    <li class="tag">challenge — If \(v\) is an eigenvector of \(A\) with eigenvalue \(\lambda\), prove algebraically that \(v\) is also an eigenvector of \(A^2\) (i.e. \(A\) applied twice), with eigenvalue \(\lambda^2\). (Hint: apply \(A\) to both sides of \(Av=\lambda v\).)
+      <details class="answer"><summary></summary><div class="ans-body">Starting from \(Av=\lambda v\), apply \(A\) to both sides: \(A(Av) = A(\lambda v)\). The left side is \(A^2v\). The right side, using homogeneity (Chapter 1), is \(\lambda(Av) = \lambda(\lambda v) = \lambda^2 v\). So \(A^2v=\lambda^2v\) — \(v\) is an eigenvector of \(A^2\) with eigenvalue \(\lambda^2\). (This generalizes to any power, previewed fully in Chapter 10.)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-kernel-and-image.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-finding-eigenvalues.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 5 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:5", "content/m12-eigen/ch05-eigenvalues-and-eigenvectors-intro.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Eigenspaces | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 8 of 12</div>
+  <div class="eyebrow">Chapter 8 · concept:eigenspaces</div>
+  <h1>Eigenspaces</h1>
+  <p class="subtitle">Chapter 7 found individual eigenvectors. This chapter names the whole set they belong to — a genuine subspace (Module 11, Chapter 2), because it's exactly the null space of A − λI (Module 11, Chapter 10) for that particular λ.</p>
+
+  <div class="block definition">
+    <div class="label">Definition — Eigenspace</div>
+    <p>For an eigenvalue \(\lambda\) of \(A\), the <strong>eigenspace</strong> \(E_\lambda\) is:</p>
+    <p style="text-align:center;">\[ E_\lambda = \operatorname{Nul}(A-\lambda I) = \{v : (A-\lambda I)v = \vec0\} \]</p>
+    <p>the set of <em>all</em> eigenvectors for \(\lambda\), plus the zero vector. The zero vector has to be thrown in to make \(E_\lambda\) a genuine subspace — Module 11, Chapter 2 required every subspace to contain \(\vec 0\), and \(\vec0\) always trivially solves \((A-\lambda I)v=\vec0\), even though it's never itself called "an eigenvector." The dimension of \(E_\lambda\) is called the <strong>geometric multiplicity</strong> of \(\lambda\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>State the eigenspaces for the running example \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\), using the eigenvectors found in Chapter 7.</p>
+    <details class="step" open><summary>Step 1 — λ = 2</summary>
+      <div class="step-body"><p>\(E_2 = \operatorname{span}\{\langle2,1\rangle\}\) — a line through the origin, dimension 1.</p></div></details>
+    <details class="step"><summary>Step 2 — λ = −1</summary>
+      <div class="step-body"><p>\(E_{-1} = \operatorname{span}\{\langle1,2\rangle\}\) — also a line through the origin, dimension 1.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Both eigenvalues here have geometric multiplicity 1 — each eigenspace is a single line, not a plane. That won't always be the case (see the practice problems below and Chapter 11).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Confusing "the eigenspace" with "an eigenvector." An eigenspace is a <em>subspace</em> — potentially more than one-dimensional for a repeated eigenvalue — while an eigenvector is one specific nonzero vector living inside it. Saying "the eigenspace is \(\langle2,1\rangle\)" is technically wrong phrasing: the eigenspace is the entire span, \(\operatorname{span}\{\langle2,1\rangle\}\) — an infinite set of vectors — and \(\langle2,1\rangle\) is just one representative member of it, no more special than \(\langle4,2\rangle\) or \(\langle-6,-3\rangle\).</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes|y|true">
+    <div class="label">Try it yourself</div>
+    <p>Is the zero vector considered part of an eigenspace, even though it's never itself called an eigenvector?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Is the zero vector part of an eigenspace?">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>State the eigenspace for \(\lambda=5\) of \(A=\begin{bmatrix}5&0\\0&3\end{bmatrix}\) (Chapter 7, problem 1).
+      <details class="answer"><summary></summary><div class="ans-body">\(E_5=\operatorname{span}\{\langle1,0\rangle\}\)</div></details></li>
+    <li>What is the dimension of \(E_5\) from the previous problem?
+      <details class="answer"><summary></summary><div class="ans-body">1 (its geometric multiplicity).</div></details></li>
+    <li>State the eigenspace for \(\lambda=1\) of \(A=\begin{bmatrix}2&1\\1&2\end{bmatrix}\) (Chapter 7, problem 3).
+      <details class="answer"><summary></summary><div class="ans-body">\(E_1=\operatorname{span}\{\langle1,-1\rangle\}\)</div></details></li>
+    <li>The scalar matrix \(A=\begin{bmatrix}6&0\\0&6\end{bmatrix}\) has a single repeated eigenvalue \(\lambda=6\) (Chapter 6, bonus 7). Find its FULL eigenspace \(E_6\) — is it just a line, or bigger?
+      <details class="answer"><summary></summary><div class="ans-body">Solve \((A-6I)v=\vec0\): \(\begin{bmatrix}0&0\\0&0\end{bmatrix}v=\vec0\) — every vector solves this. \(E_6\) is all of \(\mathbb{R}^2\), dimension 2 — a whole plane's worth of eigenvectors for one eigenvalue.</div></details></li>
+    <li>True or false: every eigenspace (for an actual eigenvalue) contains infinitely many vectors.
+      <details class="answer"><summary></summary><div class="ans-body">True — any nonzero scalar multiple of a member is also a member. A subspace is either just \(\{\vec0\}\) or infinite, and an eigenspace always contains at least one nonzero eigenvector.</div></details></li>
+    <li>Can two DIFFERENT eigenvalues of the same matrix ever share the exact same eigenspace?
+      <details class="answer"><summary></summary><div class="ans-body">No — if they did, every vector in that space would satisfy \(Av=\lambda_1v\) and \(Av=\lambda_2v\) simultaneously, forcing \(\lambda_1=\lambda_2\), a contradiction.</div></details></li>
+    <li class="tag">bonus — What is the geometric multiplicity of \(\lambda=2\) in the running example \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\)?
+      <details class="answer"><summary></summary><div class="ans-body">1 — \(E_2\) is a single line, \(\operatorname{span}\{\langle2,1\rangle\}\).</div></details></li>
+    <li class="tag">bonus — If an eigenspace of a 2×2 matrix turns out to be 2-dimensional (the whole plane), what does that say about the matrix?
+      <details class="answer"><summary></summary><div class="ans-body">It must be a scalar multiple of the identity matrix — that's the only way a 2×2 matrix's eigenspace can be all of \(\mathbb{R}^2\).</div></details></li>
+    <li class="tag">bonus — Is \(\{\vec0\}\) alone ever a valid "eigenspace"?
+      <details class="answer"><summary></summary><div class="ans-body">No — an eigenspace only exists for an actual eigenvalue, and being an eigenvalue requires at least one nonzero eigenvector in the first place. \(\{\vec0\}\) alone would mean \(\lambda\) wasn't really an eigenvalue at all.</div></details></li>
+    <li class="tag">bonus — Explain why an eigenspace is always a genuine subspace (closed under addition and scalar multiplication), not just some arbitrary set of vectors.
+      <details class="answer"><summary></summary><div class="ans-body">Because it's defined as \(\operatorname{Nul}(A-\lambda I)\), and null spaces of any matrix are always subspaces (Module 11, Chapter 10's proof applies directly — just to the matrix \(A-\lambda I\) instead of \(A\) itself).</div></details></li>
+    <li class="tag">challenge — A 3×3 matrix \(A\) has eigenvalue \(\lambda=4\) with eigenspace \(E_4=\operatorname{span}\{\langle1,0,1\rangle,\langle0,1,1\rangle\}\) (two independent vectors, Module 11 Chapter 5). What is the geometric multiplicity of \(\lambda=4\), and give one more eigenvector for \(\lambda=4\) that isn't a scalar multiple of either spanning vector.
+      <details class="answer"><summary></summary><div class="ans-body">Geometric multiplicity = 2 (the dimension of the span). Another eigenvector: any nontrivial combination, e.g. \(\langle1,0,1\rangle+\langle0,1,1\rangle=\langle1,1,2\rangle\) — inside \(E_4\), but not a scalar multiple of either single spanning vector.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-finding-eigenvectors.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-diagonalization.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 8 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:8", "content/m12-eigen/ch08-eigenspaces.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

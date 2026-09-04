@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — The Standard Matrix of a Transformation | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 2 of 12</div>
+  <div class="eyebrow">Chapter 2 · concept:standard-matrix-of-transformation</div>
+  <h1>The Standard Matrix of a Transformation</h1>
+  <p class="subtitle">Chapter 1's challenge problem showed that every matrix gives a linear transformation. This chapter proves the converse: every linear transformation \(\mathbb{R}^n\to\mathbb{R}^m\) comes from exactly one matrix — and finding it only takes watching where two (or three, or \(n\)) vectors go.</p>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The standard matrix</div>
+    <p>Every linear transformation \(T:\mathbb{R}^n\to\mathbb{R}^m\) can be written as \(T(x) = Ax\) for a unique \(m\times n\) matrix \(A\), called its <strong>standard matrix</strong>. That matrix is built one column at a time: column \(i\) of \(A\) is \(T(e_i)\), the image of the \(i\)-th standard basis vector (Module 11, Chapter 7).</p>
+    <div class="eqn"><div class="eq-body">\[ A = \begin{bmatrix} \big| & & \big| \\ T(e_1) & \cdots & T(e_n) \\ \big| & & \big| \end{bmatrix} \]</div><div class="eq-num" id="eq-12-2-1">(12.2.1)</div></div>
+    <p>Here's why it works: any vector \(x=\langle x_1,\dots,x_n\rangle\) can be written as \(x = x_1e_1+x_2e_2+\cdots+x_ne_n\) (Module 11, Chapter 7's basis representation — every vector is a unique combination of the standard basis vectors). Linearity (Chapter 1) then lets the transformation distribute right through that sum:</p>
+    <p style="text-align:center;">\[ T(x) = T(x_1e_1+\cdots+x_ne_n) = x_1T(e_1)+\cdots+x_nT(e_n) \]</p>
+    <p>and that last expression is <em>exactly</em> what matrix-vector multiplication computes when \(T(e_1),\dots,T(e_n)\) sit in the columns of \(A\). Linearity is what makes this shortcut legal — a transformation only needs to be tested on \(n\) vectors (the basis) to be known completely on all of \(\mathbb{R}^n\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the 90° rotation matrix</div>
+    <p>Find the standard matrix of \(T\): rotate every vector in \(\mathbb{R}^2\) by 90° counterclockwise.</p>
+    <details class="step" open><summary>Step 1 — find T(e₁), where e₁ = ⟨1,0⟩</summary>
+      <div class="step-body"><p>Rotating \(\langle1,0\rangle\) (pointing right) by 90° counterclockwise lands it pointing straight up: \(T(e_1) = \langle0,1\rangle\).</p></div></details>
+    <details class="step"><summary>Step 2 — find T(e₂), where e₂ = ⟨0,1⟩</summary>
+      <div class="step-body"><p>Rotating \(\langle0,1\rangle\) (pointing up) by 90° counterclockwise lands it pointing left: \(T(e_2) = \langle-1,0\rangle\).</p></div></details>
+    <details class="step"><summary>Result — assemble the columns</summary>
+      <div class="step-body"><p>\(A = \begin{bmatrix}0&-1\\1&0\end{bmatrix}\) — first column \(T(e_1)=\langle0,1\rangle\), second column \(T(e_2)=\langle-1,0\rangle\). Check: \(A\langle1,0\rangle^T=\langle0,1\rangle\) ✓ and \(A\langle0,1\rangle^T=\langle-1,0\rangle\) ✓. This is the exact matrix behind a "rotate 90°" call in any engine's 2D transform code.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Building the matrix from the wrong orientation — stacking the images of the basis vectors as <strong>rows</strong> instead of <strong>columns</strong>. For the rotation above, that mistake would produce \(\begin{bmatrix}0&1\\-1&0\end{bmatrix}\) instead of the correct \(\begin{bmatrix}0&-1\\1&0\end{bmatrix}\) — and this isn't a harmless typo. Check what the wrong matrix actually does: it sends \(\langle1,0\rangle\) to \(\langle0,-1\rangle\), which is a 90° rotation <em>clockwise</em> — the exact opposite direction. Row-vs-column isn't bookkeeping; it silently flips which way the whole transformation turns. The rule to hold onto: images of the basis vectors are always <strong>columns</strong> of \(A\), never rows.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2and3|3and2">
+    <div class="label">Try it yourself</div>
+    <p>The standard matrix of \(T(\langle x,y\rangle) = \langle 2x,\ 3y\rangle\) is diagonal. Enter its two diagonal entries, in order (top-left first, then bottom-right), separated by the word "and":</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 2 and 3" aria-label="diagonal entries of the standard matrix">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the standard matrix of \(T(\langle x,y\rangle) = \langle 5x,\ -y\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}5&0\\0&-1\end{bmatrix}\)</div></details></li>
+    <li>Find the standard matrix of \(T(\langle x,y\rangle) = \langle x+y,\ x-y\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}1&1\\1&-1\end{bmatrix}\)</div></details></li>
+    <li>Find the standard matrix of reflection over the x-axis: \(T(\langle x,y\rangle)=\langle x,-y\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}1&0\\0&-1\end{bmatrix}\)</div></details></li>
+    <li>Find the standard matrix of \(T:\mathbb{R}^2\to\mathbb{R}^3\), \(T(\langle x,y\rangle)=\langle x,\ y,\ x+y\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}1&0\\0&1\\1&1\end{bmatrix}\) — a 3×2 matrix, since the output has 3 components and the input has 2.</div></details></li>
+    <li>Find the standard matrix of projection onto the x-axis: \(T(\langle x,y\rangle) = \langle x, 0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}1&0\\0&0\end{bmatrix}\)</div></details></li>
+    <li>Find T(e₁) and T(e₂) for the 180° rotation, then assemble the standard matrix.
+      <details class="answer"><summary></summary><div class="ans-body">\(T(e_1)=\langle-1,0\rangle\), \(T(e_2)=\langle0,-1\rangle\), so \(A=\begin{bmatrix}-1&0\\0&-1\end{bmatrix}\).</div></details></li>
+    <li class="tag">bonus — Find the standard matrix of the identity transformation \(T(x)=x\).
+      <details class="answer"><summary></summary><div class="ans-body">The identity matrix \(I=\begin{bmatrix}1&0\\0&1\end{bmatrix}\) (Module 10) — "do nothing" is itself a linear transformation.</div></details></li>
+    <li class="tag">bonus — Find the standard matrix of a non-uniform 3D scale, exactly what setting <code>transform.localScale = (2,3,4)</code> does: \(T(\langle x,y,z\rangle)=\langle2x,3y,4z\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}2&0&0\\0&3&0\\0&0&4\end{bmatrix}\)</div></details></li>
+    <li class="tag">bonus — A transformation has standard matrix \(A=\begin{bmatrix}0&1\\1&0\end{bmatrix}\). Describe geometrically what it does.
+      <details class="answer"><summary></summary><div class="ans-body">It swaps the two coordinates — reflection over the line \(y=x\).</div></details></li>
+    <li class="tag">bonus — Without computing anything, explain why the standard matrix of any transformation \(\mathbb{R}^n\to\mathbb{R}^m\) must have exactly \(n\) columns and \(m\) rows.
+      <details class="answer"><summary></summary><div class="ans-body">There's one column per input basis vector (\(n\) of them, one for each input dimension), and each column is an output vector, which lives in \(\mathbb{R}^m\) and so has \(m\) entries (rows).</div></details></li>
+    <li class="tag">challenge — A linear transformation \(T:\mathbb{R}^2\to\mathbb{R}^2\) sends \(\langle1,0\rangle\) to \(\langle3,1\rangle\) and \(\langle0,1\rangle\) to \(\langle-2,5\rangle\). Compute \(T(\langle4,-2\rangle)\) two independent ways — (a) directly from linearity, decomposing \(\langle4,-2\rangle\) into basis vectors, and (b) by building the standard matrix and multiplying — and confirm they agree.
+      <details class="answer"><summary></summary><div class="ans-body">(a) \(\langle4,-2\rangle = 4e_1-2e_2\), so \(T(\langle4,-2\rangle)=4T(e_1)-2T(e_2)=4\langle3,1\rangle-2\langle-2,5\rangle=\langle12,4\rangle+\langle4,-10\rangle=\langle16,-6\rangle\).<br>(b) \(A=\begin{bmatrix}3&-2\\1&5\end{bmatrix}\), and \(A\langle4,-2\rangle^T=\langle3(4)+(-2)(-2),\ 1(4)+5(-2)\rangle=\langle12+4,\ 4-10\rangle=\langle16,-6\rangle\). Both methods agree — exactly Theorem 12.2.1's point: the matrix isn't a separate technique, it's a repackaging of the same linearity computation.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-linear-transformations.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-composition-of-transformations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 2 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:2", "content/m12-eigen/ch02-matrix-representation-of-transformations.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

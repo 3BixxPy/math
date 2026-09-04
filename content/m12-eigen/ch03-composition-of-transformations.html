@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Composing Transformations | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 3 of 12</div>
+  <div class="eyebrow">Chapter 3 · concept:composition-of-transformations</div>
+  <h1>Composing Transformations</h1>
+  <p class="subtitle">Module 10, Chapter 4 defined matrix multiplication by a row-times-column rule that probably felt arbitrary at the time. It wasn't. This chapter is the payoff: matrix multiplication is defined <em>exactly</em> so that "do one transformation, then another" becomes "multiply their matrices."</p>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Composition is multiplication</div>
+    <p>Suppose transformation \(T\) has standard matrix \(B\), and transformation \(S\) has standard matrix \(A\). The <strong>composite</strong> transformation "\(T\), then \(S\)" — written \(S\circ T\), meaning \((S\circ T)(x) = S(T(x))\) — has standard matrix \(AB\):</p>
+    <div class="eqn"><div class="eq-body">\[ S(T(x)) = A(Bx) = (AB)x \]</div><div class="eq-num" id="eq-12-3-1">(12.3.1)</div></div>
+    <p>The middle step uses associativity of matrix multiplication (Module 10) — \(A(Bx)\) and \((AB)x\) are guaranteed to be the same vector for every \(x\). That means applying \(T\) and then \(S\) to any vector gives the exact same result as multiplying that vector by the single matrix \(AB\) — two transformations collapse into one matrix product. This is the real reason Module 10 defined matrix multiplication the way it did: not as an arbitrary rule, but as whatever rule makes Equation 12.3.1 true.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — rotate, then scale</div>
+    <p>Let \(T\) = "rotate 90°" with matrix \(B=\begin{bmatrix}0&-1\\1&0\end{bmatrix}\) (Chapter 2), and \(S\) = "scale by 2" with matrix \(A=\begin{bmatrix}2&0\\0&2\end{bmatrix}\). Find the matrix for "rotate 90°, then scale by 2."</p>
+    <details class="step" open><summary>Step 1 — identify which matrix goes on which side</summary>
+      <div class="step-body"><p>"Rotate, then scale" means \(T\) happens first, \(S\) second — that's \(S\circ T\), so by Theorem 12.3.1 the combined matrix is \(AB\), with \(S\)'s matrix \(A\) on the <strong>left</strong> and \(T\)'s matrix \(B\) on the <strong>right</strong> (the order you'd read \(S(T(x))\), innermost function first).</p></div></details>
+    <details class="step"><summary>Step 2 — compute AB</summary>
+      <div class="step-body"><p>\(AB = \begin{bmatrix}2&0\\0&2\end{bmatrix}\begin{bmatrix}0&-1\\1&0\end{bmatrix} = \begin{bmatrix}2(0)+0(1) & 2(-1)+0(0)\\0(0)+2(1) & 0(-1)+2(0)\end{bmatrix} = \begin{bmatrix}0&-2\\2&0\end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Result — and a subtlety worth noticing</summary>
+      <div class="step-body"><p>Combined matrix: \(\begin{bmatrix}0&-2\\2&0\end{bmatrix}\). Check on \(e_1=\langle1,0\rangle\): rotating first gives \(\langle0,1\rangle\), then scaling by 2 gives \(\langle0,2\rangle\) — matches \(AB\langle1,0\rangle^T=\langle0,2\rangle\) ✓. Here, computing \(BA\) instead (scale first, then rotate) happens to give the <em>same</em> matrix — because uniform scaling by a scalar matrix (\(2I\)) commutes with absolutely everything. That's a special feature of <em>uniform</em> scaling, not a general fact — the mistake block below shows a case where order genuinely changes the answer.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Multiplying the two matrices in the wrong order, trusting that it won't matter. It usually does — matrix multiplication isn't commutative in general (Module 10, Chapter 4), so "\(T\) then \(S\)" and "\(S\) then \(T\)" are typically genuinely different transformations, and the product must be written with the <em>second-applied</em> transformation's matrix on the left.</p>
+    <p>Concrete proof it matters: let \(R=\begin{bmatrix}1&0\\0&-1\end{bmatrix}\) (reflect over the x-axis) and \(\text{Rot}=\begin{bmatrix}0&-1\\1&0\end{bmatrix}\) (rotate 90°).</p>
+    <p>"Rotate, then reflect" \(= R\cdot\text{Rot} = \begin{bmatrix}1&0\\0&-1\end{bmatrix}\begin{bmatrix}0&-1\\1&0\end{bmatrix} = \begin{bmatrix}0&-1\\-1&0\end{bmatrix}\)</p>
+    <p>"Reflect, then rotate" \(= \text{Rot}\cdot R = \begin{bmatrix}0&-1\\1&0\end{bmatrix}\begin{bmatrix}1&0\\0&-1\end{bmatrix} = \begin{bmatrix}0&1\\1&0\end{bmatrix}\)</p>
+    <p>Two genuinely different matrices from the same two transformations, just swapped in order — exactly the kind of bug that shows up as "my object rotated around the wrong point" when a rotation and a non-uniform transform get composed in the wrong sequence in engine code.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="ab|a*b|a·b">
+    <div class="label">Try it yourself</div>
+    <p>\(T\) is applied first, then \(S\). \(S\)'s matrix is \(A\), \(T\)'s matrix is \(B\). Is the combined transformation's matrix \(AB\) or \(BA\)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. AB" aria-label="which product gives the combined matrix">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>\(S\) has matrix \(\begin{bmatrix}1&0\\0&2\end{bmatrix}\), \(T\) has matrix \(\begin{bmatrix}0&1\\1&0\end{bmatrix}\). Find the matrix for "\(T\), then \(S\)."
+      <details class="answer"><summary></summary><div class="ans-body">\(AB=\begin{bmatrix}1&0\\0&2\end{bmatrix}\begin{bmatrix}0&1\\1&0\end{bmatrix}=\begin{bmatrix}0&1\\2&0\end{bmatrix}\)</div></details></li>
+    <li>Using the same \(A,B\) as above, find the matrix for "\(S\), then \(T\)," and compare with the previous answer.
+      <details class="answer"><summary></summary><div class="ans-body">\(BA=\begin{bmatrix}0&1\\1&0\end{bmatrix}\begin{bmatrix}1&0\\0&2\end{bmatrix}=\begin{bmatrix}0&2\\1&0\end{bmatrix}\) — different from \(AB\), confirming order matters here.</div></details></li>
+    <li>Find the matrix for "reflect over the y-axis, then reflect over the x-axis," using \(\begin{bmatrix}-1&0\\0&1\end{bmatrix}\) and \(\begin{bmatrix}1&0\\0&-1\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}1&0\\0&-1\end{bmatrix}\begin{bmatrix}-1&0\\0&1\end{bmatrix}=\begin{bmatrix}-1&0\\0&-1\end{bmatrix}\) — a 180° rotation. Two perpendicular reflections compose into a rotation, a fact worth remembering.</div></details></li>
+    <li>If \(S\)'s matrix is \(A\) and \(T\)'s matrix is the identity \(I\), what is the combined matrix for "\(T\), then \(S\)"?
+      <details class="answer"><summary></summary><div class="ans-body">\(AI=A\) — composing with "do nothing" changes nothing.</div></details></li>
+    <li>Find the matrix for "scale x by 3, then rotate 90°," using \(\begin{bmatrix}3&0\\0&1\end{bmatrix}\) and \(\begin{bmatrix}0&-1\\1&0\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}0&-1\\1&0\end{bmatrix}\begin{bmatrix}3&0\\0&1\end{bmatrix}=\begin{bmatrix}0&-1\\3&0\end{bmatrix}\)</div></details></li>
+    <li>True or false: the composition of two linear transformations is always itself a linear transformation.
+      <details class="answer"><summary></summary><div class="ans-body">True — the matrix product \(AB\) is still just a matrix, and Chapter 1's challenge showed every matrix defines a linear transformation.</div></details></li>
+    <li class="tag">bonus — \(S\circ T\) has matrix \(\begin{bmatrix}2&0\\0&2\end{bmatrix}\), and \(T\)'s matrix is the identity \(I\). What must \(S\)'s matrix be?
+      <details class="answer"><summary></summary><div class="ans-body">Also \(\begin{bmatrix}2&0\\0&2\end{bmatrix}\) — since \(T=I\) contributes nothing, \(S\circ T = S\).</div></details></li>
+    <li class="tag">bonus — In one sentence, explain why matrix multiplication is defined row-times-column rather than some other, simpler-looking rule.
+      <details class="answer"><summary></summary><div class="ans-body">Because row-times-column is precisely the rule that makes matrix multiplication compute function composition correctly (Theorem 12.3.1) — any "simpler" entrywise rule wouldn't have that property.</div></details></li>
+    <li class="tag">bonus — Are two rotations about the same origin, by angles θ and φ, ever an exception to the "order matters" rule?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — rotations about the same point always commute with each other (rotating by θ then φ is the same as φ then θ, both give a single rotation by θ+φ). It's a genuine special case, alongside uniform scaling.</div></details></li>
+    <li class="tag">bonus — If \(A\) and \(B\) are both diagonal matrices, does \(AB=BA\) always hold?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — diagonal matrices always commute with each other (multiplying diagonals just multiplies matching entries either way).</div></details></li>
+    <li class="tag">challenge — Using \(A=\begin{bmatrix}1&0\\0&2\end{bmatrix}\) and \(B=\begin{bmatrix}0&1\\1&0\end{bmatrix}\) from problems 1–2, compute \(AB\) and \(BA\) and verify \((AB)^T=BA\). Is that a coincidence, or a consequence of a Module 10 transpose rule applied to this specific \(A,B\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(AB=\begin{bmatrix}0&1\\2&0\end{bmatrix}\), \(BA=\begin{bmatrix}0&2\\1&0\end{bmatrix}\), and indeed \((AB)^T=\begin{bmatrix}0&2\\1&0\end{bmatrix}=BA\). Not a coincidence: Module 10's rule \((AB)^T=B^TA^T\) applies to any \(A,B\), and here both \(A\) and \(B\) happen to be symmetric (\(A^T=A\), \(B^T=B\)), so \((AB)^T=B^TA^T=BA\) automatically. Whenever both matrices are symmetric, \((AB)^T=BA\) is guaranteed, not accidental.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-matrix-representation-of-transformations.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-kernel-and-image.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 3 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:3", "content/m12-eigen/ch03-composition-of-transformations.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Kernel &amp; Image | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 4 of 12</div>
+  <div class="eyebrow">Chapter 4 · concept:kernel-and-image</div>
+  <h1>Kernel &amp; Image</h1>
+  <p class="subtitle">Two ideas you already have names for, wearing transformation-language costumes: the kernel is exactly the null space (Module 11, Chapter 10), the image is exactly the column space, and rank-nullity (Module 11, Chapter 11) already told you how their sizes trade off.</p>
+
+  <div class="block definition">
+    <div class="label">Definition — Kernel</div>
+    <p>The <strong>kernel</strong> of a linear transformation \(T\) (with standard matrix \(A\)) is the set of every vector that gets sent to the zero vector:</p>
+    <p style="text-align:center;">\[ \ker(T) = \{x : T(x) = \vec 0\} = \{x : Ax = \vec 0\} \]</p>
+    <p>This is nothing new — it's exactly the <strong>null space</strong> of \(A\) from Module 11, Chapter 10, wearing a transformation-flavored name. "Solve \(Ax=0\)" and "find \(T\)'s kernel" are literally the same computation.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Image</div>
+    <p>The <strong>image</strong> of \(T\) is the set of every vector that can actually come <em>out</em> of the transformation:</p>
+    <p style="text-align:center;">\[ \operatorname{im}(T) = \{T(x) : x \in \mathbb{R}^n\} = \{Ax : x \in \mathbb{R}^n\} \]</p>
+    <p>This is exactly the <strong>column space</strong> of \(A\): every output is some linear combination of \(A\)'s columns (since \(Ax\) is precisely \(x_1(\text{col }1)+\cdots+x_n(\text{col }n)\)), so the set of all possible outputs is exactly the span of \(A\)'s columns.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rank-nullity, restated</div>
+    <p>Module 11, Chapter 11's rank-nullity theorem said \(\operatorname{rank}(A) + \operatorname{nullity}(A) = n\). In transformation language, that's:</p>
+    <p style="text-align:center;">\[ \dim(\operatorname{im}(T)) + \dim(\ker(T)) = n \]</p>
+    <p>where \(n\) is the dimension of \(T\)'s input space. Same theorem, same proof — just a reminder that "kernel/image" and "null space/column space" are the same objects under different names, so every tool from Module 11 Chapter 11 carries over unchanged.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Let \(A=\begin{bmatrix}1&2\\2&4\end{bmatrix}\). Find \(\ker(T)\) and \(\operatorname{im}(T)\), and verify rank-nullity.</p>
+    <details class="step" open><summary>Step 1 — find the kernel: solve Ax = 0</summary>
+      <div class="step-body"><p>Row 2 is exactly twice row 1, so Gaussian elimination (Module 10) collapses this to one equation: \(x+2y=0\), i.e. \(x=-2y\). Free variable \(y\): \(\ker(T) = \operatorname{span}\{\langle-2,1\rangle\}\), dimension 1.</p></div></details>
+    <details class="step"><summary>Step 2 — find the image: span the columns</summary>
+      <div class="step-body"><p>\(A\)'s columns are \(\langle1,2\rangle\) and \(\langle2,4\rangle=2\langle1,2\rangle\) — the second is a scalar multiple of the first, so together they only span a line: \(\operatorname{im}(T)=\operatorname{span}\{\langle1,2\rangle\}\), dimension 1.</p></div></details>
+    <details class="step"><summary>Result — verify rank-nullity</summary>
+      <div class="step-body"><p>\(\dim(\operatorname{im}(T))+\dim(\ker(T)) = 1+1 = 2 = n\) ✓. This matrix collapses the whole plane down onto a single line (the image) while an entire other line (the kernel) gets crushed to the origin — a very "lossy" transformation.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming a transformation with a <strong>nontrivial kernel</strong> (containing more than just the zero vector) could still be invertible. It can't. An inverse function requires every output to trace back to exactly <em>one</em> input — but a nontrivial kernel means at least one nonzero vector gets sent to \(\vec 0\), the exact same place the zero vector itself goes. Two different inputs, one output: information has been permanently lost, and there's no way to invert that. This lines up exactly with Module 10, Chapter 11's determinant test: a nontrivial kernel forces \(\det(A)=0\), which is precisely the singular (non-invertible) case.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="no|not invertible|no it isn't">
+    <div class="label">Try it yourself</div>
+    <p>If a transformation's kernel contains more than just the zero vector, is it invertible?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Is a transformation with a nontrivial kernel invertible?">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the kernel of \(A=\begin{bmatrix}1&0\\0&0\end{bmatrix}\) (projection onto the x-axis).
+      <details class="answer"><summary></summary><div class="ans-body">\(\operatorname{span}\{\langle0,1\rangle\}\) — every point on the y-axis gets crushed to the origin.</div></details></li>
+    <li>Find the image of the same \(A=\begin{bmatrix}1&0\\0&0\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\operatorname{span}\{\langle1,0\rangle\}\) — the x-axis; verify rank-nullity: \(1+1=2\) ✓.</div></details></li>
+    <li>Find the kernel of \(A=\begin{bmatrix}2&4\\1&2\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">Row 2 is half of row 1: \(x+2y=0\Rightarrow x=-2y\). Kernel \(=\operatorname{span}\{\langle-2,1\rangle\}\).</div></details></li>
+    <li>Is \(A=\begin{bmatrix}1&1\\1&1\end{bmatrix}\) invertible? Justify using its kernel.
+      <details class="answer"><summary></summary><div class="ans-body">No. Solving \(Ax=0\) gives \(x+y=0\), so \(\ker(T)=\operatorname{span}\{\langle1,-1\rangle\}\) is nontrivial — a nontrivial kernel means \(\det(A)=0\), singular.</div></details></li>
+    <li>If \(T:\mathbb{R}^3\to\mathbb{R}^2\) has a 2-dimensional kernel, what is \(\dim(\operatorname{im}(T))\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(n=3\), so \(\dim(\operatorname{im}(T)) = 3-2=1\).</div></details></li>
+    <li>Find the kernel of the identity transformation \(I\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\{\vec 0\}\) only — the trivial kernel, consistent with \(I\) being invertible.</div></details></li>
+    <li class="tag">bonus — If \(\dim(\ker(T))=0\) for a square matrix, is \(T\) guaranteed invertible?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — a trivial kernel means full rank, which means \(\det(A)\neq0\), which means invertible (for a square matrix).</div></details></li>
+    <li class="tag">bonus — Find the image of \(A=\begin{bmatrix}1&2\\3&6\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">Columns \(\langle1,3\rangle\) and \(\langle2,6\rangle=2\langle1,3\rangle\) — image \(=\operatorname{span}\{\langle1,3\rangle\}\).</div></details></li>
+    <li class="tag">bonus — For \(T:\mathbb{R}^4\to\mathbb{R}^3\) with a 1-dimensional kernel, find \(\dim(\operatorname{im}(T))\), and say whether \(T\) is onto (surjective).
+      <details class="answer"><summary></summary><div class="ans-body">\(4-1=3\) — the image is all 3 dimensions of the codomain, so yes, \(T\) is onto.</div></details></li>
+    <li class="tag">bonus — Can the image of a transformation \(\mathbb{R}^2\to\mathbb{R}^2\) ever be just \(\{\vec 0\}\)? What would that say about the kernel?
+      <details class="answer"><summary></summary><div class="ans-body">Yes, if \(A\) is the zero matrix — then everything maps to \(\vec 0\), so \(\dim(\operatorname{im}(T))=0\) and by rank-nullity \(\dim(\ker(T))=2\): the kernel is the entire input space.</div></details></li>
+    <li class="tag">challenge — A linear transformation \(T:\mathbb{R}^3\to\mathbb{R}^3\) has standard matrix \(A\) with \(\det(A)\neq0\). Without any further computation, what can you conclude about \(\ker(T)\) and \(\operatorname{im}(T)\), and why?
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A)\neq0\) means \(A\) is invertible (Module 10, Chapter 11), which forces \(\ker(T)=\{\vec 0\}\) (trivial kernel — a nontrivial one would force \(\det(A)=0\), the contrapositive of this chapter's mistake block). By rank-nullity, \(\dim(\operatorname{im}(T))=3-0=3\), so the image is all of \(\mathbb{R}^3\). Together: \(T\) is a bijection — every output traces back to exactly one input.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-composition-of-transformations.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-eigenvalues-and-eigenvectors-intro.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 4 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:4", "content/m12-eigen/ch04-kernel-and-image.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — Finding Eigenvectors | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 7 of 12</div>
+  <div class="eyebrow">Chapter 7 · concept:finding-eigenvectors</div>
+  <h1>Finding Eigenvectors</h1>
+  <p class="subtitle">Chapter 6 found the eigenvalues. Now find the actual directions they belong to — solve the homogeneous system (A − λI)v = 0 for each one, using Module 10's Gaussian elimination.</p>
+
+  <div class="block theorem">
+    <div class="label">Method — Finding eigenvectors</div>
+    <p>For each eigenvalue \(\lambda\) found from the characteristic equation (Chapter 6), substitute it back into:</p>
+    <p style="text-align:center;">\[ (A-\lambda I)v = \vec 0 \]</p>
+    <p>and solve this homogeneous system exactly like any other \(Ax=\vec0\) system (Module 10's Gaussian elimination). Its solution set is a subspace — Module 11, Chapter 10's null space, this time of \(A-\lambda I\) instead of \(A\) itself — and every <em>nonzero</em> vector in it is a valid eigenvector for that \(\lambda\).</p>
+    <ol>
+      <li>Substitute \(\lambda\) into \(A-\lambda I\).</li>
+      <li>Row-reduce. Since \(\lambda\) was chosen precisely to make \(A-\lambda I\) singular, expect at least one free variable.</li>
+      <li>Express the solution set as a span of one (or more) vectors — these span the eigenvectors for that \(\lambda\).</li>
+      <li>Repeat for every eigenvalue found in Chapter 6.</li>
+    </ol>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Continue the running example, \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\), with eigenvalues \(\lambda=2\) and \(\lambda=-1\) from Chapter 6.</p>
+    <details class="step" open><summary>Step 1 — λ = 2</summary>
+      <div class="step-body"><p>\(A-2I = \begin{bmatrix}1&-2\\2&-4\end{bmatrix}\). Row 2 minus 2×row 1 gives \(\begin{bmatrix}0&0\end{bmatrix}\), collapsing to one equation: \(x-2y=0 \Rightarrow x=2y\). Eigenvectors: \(v = t\langle2,1\rangle\) for any \(t\neq0\) — matches the exact vector verified by hand in Chapter 5.</p></div></details>
+    <details class="step"><summary>Step 2 — λ = −1</summary>
+      <div class="step-body"><p>\(A+I = \begin{bmatrix}4&-2\\2&-1\end{bmatrix}\). Row 2 is half of row 1, collapsing to \(2x-y=0 \Rightarrow y=2x\). Eigenvectors: \(v = t\langle1,2\rangle\) for any \(t\neq0\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>For \(\lambda=2\): any nonzero multiple of \(\langle2,1\rangle\). For \(\lambda=-1\): any nonzero multiple of \(\langle1,2\rangle\). These two directions are the running example's "spine," reused in Chapters 8–10.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Reporting "the" eigenvector for a given \(\lambda\) as if it were unique. It isn't — there are infinitely many, since <em>any</em> nonzero scalar multiple of an eigenvector is also an eigenvector with the exact same eigenvalue. For \(\lambda=2\) above, \(\langle2,1\rangle\), \(\langle4,2\rangle\), and \(\langle-2,-1\rangle\) are all equally valid — none is "more correct" than another. It's the <em>direction</em> (formalized as the eigenspace, Chapter 8) that's the real invariant here, not any one specific vector.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes|y|true">
+    <div class="label">Try it yourself</div>
+    <p>If \(v\) is an eigenvector of \(A\) with eigenvalue \(\lambda\), is \(3v\) also an eigenvector of \(A\) with the same eigenvalue?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Is 3v also an eigenvector?">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the eigenvector(s) of \(A=\begin{bmatrix}5&0\\0&3\end{bmatrix}\) for \(\lambda=5\).
+      <details class="answer"><summary></summary><div class="ans-body">\((A-5I)v=0\): \(\begin{bmatrix}0&0\\0&-2\end{bmatrix}v=0 \Rightarrow y=0\), \(x\) free. Eigenvectors: \(t\langle1,0\rangle\).</div></details></li>
+    <li>Find the eigenvector(s) of the same \(A=\begin{bmatrix}5&0\\0&3\end{bmatrix}\) for \(\lambda=3\).
+      <details class="answer"><summary></summary><div class="ans-body">Eigenvectors: \(t\langle0,1\rangle\).</div></details></li>
+    <li>Find the eigenvector(s) of \(A=\begin{bmatrix}2&1\\1&2\end{bmatrix}\) for \(\lambda=1\).
+      <details class="answer"><summary></summary><div class="ans-body">\(A-I=\begin{bmatrix}1&1\\1&1\end{bmatrix} \Rightarrow x+y=0\). Eigenvectors: \(t\langle1,-1\rangle\).</div></details></li>
+    <li>Find the eigenvector(s) of the same \(A=\begin{bmatrix}2&1\\1&2\end{bmatrix}\) for \(\lambda=3\).
+      <details class="answer"><summary></summary><div class="ans-body">\(A-3I=\begin{bmatrix}-1&1\\1&-1\end{bmatrix} \Rightarrow x=y\). Eigenvectors: \(t\langle1,1\rangle\).</div></details></li>
+    <li>Find the eigenvector(s) of \(A=\begin{bmatrix}1&2\\0&3\end{bmatrix}\) for \(\lambda=1\).
+      <details class="answer"><summary></summary><div class="ans-body">\(A-I=\begin{bmatrix}0&2\\0&2\end{bmatrix} \Rightarrow y=0\), \(x\) free. Eigenvectors: \(t\langle1,0\rangle\).</div></details></li>
+    <li>Find the eigenvector(s) of the same \(A=\begin{bmatrix}1&2\\0&3\end{bmatrix}\) for \(\lambda=3\).
+      <details class="answer"><summary></summary><div class="ans-body">\(A-3I=\begin{bmatrix}-2&2\\0&0\end{bmatrix} \Rightarrow x=y\). Eigenvectors: \(t\langle1,1\rangle\).</div></details></li>
+    <li class="tag">bonus — Find the eigenvector(s) of \(A=\begin{bmatrix}4&2\\1&3\end{bmatrix}\) for \(\lambda=5\) (from Chapter 6's practice).
+      <details class="answer"><summary></summary><div class="ans-body">\(A-5I=\begin{bmatrix}-1&2\\1&-2\end{bmatrix} \Rightarrow x=2y\). Eigenvectors: \(t\langle2,1\rangle\).</div></details></li>
+    <li class="tag">bonus — Find the eigenvector(s) of the same \(A=\begin{bmatrix}4&2\\1&3\end{bmatrix}\) for \(\lambda=2\).
+      <details class="answer"><summary></summary><div class="ans-body">\(A-2I=\begin{bmatrix}2&2\\1&1\end{bmatrix} \Rightarrow x+y=0\). Eigenvectors: \(t\langle1,-1\rangle\).</div></details></li>
+    <li class="tag">bonus — Is \(\langle4,2\rangle\) an eigenvector of the running example's \(A=\begin{bmatrix}3&-2\\2&-2\end{bmatrix}\)? If so, for which \(\lambda\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — it's a scalar multiple of \(\langle2,1\rangle\) (the worked example's eigenvector for \(\lambda=2\)), and scalar multiples always share the same eigenvalue: \(\lambda=2\).</div></details></li>
+    <li class="tag">bonus — After solving \((A-\lambda I)v=0\), can \(v=\langle0,0\rangle\) ever legitimately be "the eigenvector found" for that λ?
+      <details class="answer"><summary></summary><div class="ans-body">No — \(\vec0\) always technically solves the homogeneous system, but it's explicitly excluded from counting as an eigenvector (Chapter 5's definition requires \(v\neq\vec0\)). It's a trivial solution, never the interesting one.</div></details></li>
+    <li class="tag">challenge — Suppose solving \((A-\lambda I)v=0\) for some eigenvalue \(\lambda\) produces TWO free variables instead of one. What does that say about the solution set's dimension, and what does it preview about Chapters 8 and 11?
+      <details class="answer"><summary></summary><div class="ans-body">Two free variables means the null space of \(A-\lambda I\) is 2-dimensional — a whole plane's worth of eigenvectors for that single \(\lambda\), not just a line. This previews Chapter 8's eigenspace (which can have dimension greater than 1) and Chapter 11's repeated eigenvalues, where this is exactly the "good" outcome that still allows diagonalization.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-finding-eigenvalues.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-eigenspaces.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 7 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:7", "content/m12-eigen/ch07-finding-eigenvectors.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

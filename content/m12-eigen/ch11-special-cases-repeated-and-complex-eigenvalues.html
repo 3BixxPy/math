@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — Special Cases — Repeated &amp; Complex Eigenvalues | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</a> → Chapter 11 of 12</div>
+  <div class="eyebrow">Chapter 11 · concept:repeated-and-complex-eigenvalues</div>
+  <h1>Special Cases — Repeated &amp; Complex Eigenvalues</h1>
+  <p class="subtitle">Every example so far conveniently diagonalized. Real matrices aren't always so polite. This is a shorter, lighter chapter — a quick tour of the two genuine ways diagonalization can fail, not a deep derivation.</p>
+
+  <div class="block definition">
+    <div class="label">Definition — Algebraic vs. geometric multiplicity</div>
+    <p>A <strong>repeated eigenvalue</strong> is a root of the characteristic equation with multiplicity greater than 1 — its <strong>algebraic multiplicity</strong>. Whether it still yields enough independent eigenvectors to diagonalize depends on its <strong>geometric multiplicity</strong> (Chapter 8's eigenspace dimension). Diagonalization only works if geometric multiplicity equals algebraic multiplicity for <em>every</em> eigenvalue — a repeated root doesn't automatically break anything, but it does remove the free pass that distinct eigenvalues get (Chapter 9's "distinct ⟹ automatically diagonalizable" shortcut no longer applies).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example A — repeated, but still diagonalizable</div>
+    <p>\(A=\begin{bmatrix}6&0\\0&6\end{bmatrix}\) has \(\lambda=6\) as a double root (algebraic multiplicity 2). Its eigenspace, found in Chapter 8, is all of \(\mathbb{R}^2\) — geometric multiplicity 2. The two multiplicities match, so \(A\) IS diagonalizable (trivially — it's already diagonal, with \(P\) any invertible matrix).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example B — repeated, and NOT diagonalizable</div>
+    <p>\(A=\begin{bmatrix}7&-4\\4&-1\end{bmatrix}\) has characteristic equation \((\lambda-3)^2=0\) (Chapter 6, bonus 9) — \(\lambda=3\), algebraic multiplicity 2. Find its eigenspace:</p>
+    <details class="step" open><summary>Step 1 — solve (A − 3I)v = 0</summary>
+      <div class="step-body"><p>\(A-3I=\begin{bmatrix}4&-4\\4&-4\end{bmatrix}\) — one independent equation, \(x-y=0\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(E_3=\operatorname{span}\{\langle1,1\rangle\}\), dimension 1 — geometric multiplicity 1. This does <strong>not</strong> match the algebraic multiplicity of 2: there's only a 1-dimensional worth of eigenvectors, not enough to fill a 2×2 \(P\). \(A\) is <strong>not</strong> diagonalizable, despite being a perfectly well-defined, useful matrix.</p></div></details>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Complex eigenvalues</div>
+    <p>The characteristic equation of a real matrix is just a polynomial — and, exactly like Module 0's quadratic formula, a negative discriminant means no real solutions. The matrix still has eigenvalues; they're just complex. Geometrically, this corresponds to a transformation that <strong>rotates</strong> — no real direction is left unrotated (nothing just stretches in place).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the 90° rotation, revisited</div>
+    <p>\(A=\begin{bmatrix}0&-1\\1&0\end{bmatrix}\) — the rotation matrix from Chapter 2, previewed again in Chapter 6, bonus 10.</p>
+    <details class="step" open><summary>Step 1 — characteristic equation</summary>
+      <div class="step-body"><p>\(\det(A-\lambda I)=\lambda^2+1=0\). As a quadratic \(\lambda^2+0\lambda+1=0\), the discriminant is \(0^2-4(1)(1)=-4<0\) — no real solutions.</p></div></details>
+    <details class="step"><summary>Result — algebra meets geometry</summary>
+      <div class="step-body"><p>\(\lambda=\pm i\) (complex). This lines up perfectly with the geometry: a 90° rotation genuinely doesn't leave any real vector pointing the same direction it started — every nonzero vector gets turned, none just stretched — so it makes complete sense that no <em>real</em> eigenvalue exists for it.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming every matrix is diagonalizable. There are two genuinely distinct ways it can fail: (1) a repeated eigenvalue whose geometric multiplicity falls short of its algebraic multiplicity (Worked example B), and (2) complex eigenvalues over the reals (the rotation example). A transformation can be perfectly well-defined, useful, and important — a 90° rotation is about as ordinary as transformations get — without ever being diagonalizable over the real numbers.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="complex eigenvalues|complex|no real eigenvalues|no real|imaginary eigenvalues">
+    <div class="label">Try it yourself</div>
+    <p>A 2×2 matrix's characteristic equation has a negative discriminant. What does that tell you about its eigenvalues?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. complex" aria-label="what a negative discriminant means for eigenvalues">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the algebraic multiplicity of the eigenvalue of \(A=\begin{bmatrix}5&0\\0&5\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">2 — a double root at \(\lambda=5\).</div></details></li>
+    <li>Find the eigenspace and geometric multiplicity for the previous problem. Is A diagonalizable?
+      <details class="answer"><summary></summary><div class="ans-body">\(E_5=\mathbb{R}^2\) (whole plane), geometric multiplicity 2 — matches the algebraic multiplicity, so yes, diagonalizable.</div></details></li>
+    <li>\(A=\begin{bmatrix}3&1\\0&3\end{bmatrix}\) has characteristic equation \((3-\lambda)^2=0\), so \(\lambda=3\) (algebraic multiplicity 2). Find its eigenspace by solving \((A-3I)v=0\). Is A diagonalizable?
+      <details class="answer"><summary></summary><div class="ans-body">\(A-3I=\begin{bmatrix}0&1\\0&0\end{bmatrix}\Rightarrow y=0\), \(x\) free. \(E_3=\operatorname{span}\{\langle1,0\rangle\}\), geometric multiplicity 1 — doesn't match algebraic multiplicity 2, so NOT diagonalizable.</div></details></li>
+    <li>Does \(A=\begin{bmatrix}0&-4\\1&0\end{bmatrix}\) have real or complex eigenvalues?
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=\lambda^2+4=0\Rightarrow\lambda^2=-4\), discriminant \(0-16=-16<0\) — complex, \(\lambda=\pm2i\).</div></details></li>
+    <li>Does \(A=\begin{bmatrix}2&-1\\1&2\end{bmatrix}\) have real or complex eigenvalues?
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=(2-\lambda)^2+1=\lambda^2-4\lambda+5=0\), discriminant \(16-20=-4<0\) — complex.</div></details></li>
+    <li>Does \(A=\begin{bmatrix}5&4\\1&2\end{bmatrix}\) have real or complex eigenvalues? Find them if real.
+      <details class="answer"><summary></summary><div class="ans-body">\(\det(A-\lambda I)=(5-\lambda)(2-\lambda)-4=\lambda^2-7\lambda+6=(\lambda-6)(\lambda-1)\), discriminant \(49-24=25>0\) — real, \(\lambda=6,1\) (distinct, so automatically diagonalizable — Chapter 9's shortcut).</div></details></li>
+    <li class="tag">bonus — Can a matrix with complex eigenvalues still represent a perfectly legitimate linear transformation on real vectors (like rotating a game object)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — complex eigenvalues just mean it's not diagonalizable over the reals. The transformation itself (a rotation, say) remains completely well-defined and useful.</div></details></li>
+    <li class="tag">bonus — A repeated eigenvalue has geometric multiplicity EQUAL to its algebraic multiplicity. Is the matrix diagonalizable?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — that equality is precisely the diagonalizability condition (Worked example A).</div></details></li>
+    <li class="tag">bonus — Could a 2×2 real matrix have one real eigenvalue and one complex eigenvalue?
+      <details class="answer"><summary></summary><div class="ans-body">No — for a real matrix, complex eigenvalues always come in conjugate pairs (if \(a+bi\) is an eigenvalue, so is \(a-bi\)). You can't have just one alone.</div></details></li>
+    <li class="tag">bonus — Geometrically, what does it mean for a real 2×2 matrix to have complex eigenvalues, in terms of what it does to the plane?
+      <details class="answer"><summary></summary><div class="ans-body">It rotates (possibly combined with scaling) — there is no real direction that stays on its own line; every nonzero real vector gets turned to point somewhere genuinely different.</div></details></li>
+    <li class="tag">challenge — Show that \(A=\begin{bmatrix}7&-4\\4&-1\end{bmatrix}\) (Worked example B, the non-diagonalizable repeated-eigenvalue case) satisfies \(\operatorname{trace}(A)=2\times3=6\) and \(\det(A)=3^2=9\), consistent with a repeated eigenvalue of 3 (using Chapter 6's sum/product-of-eigenvalues shortcut) — even though it fails to actually diagonalize.
+      <details class="answer"><summary></summary><div class="ans-body">\(\operatorname{trace}(A)=7+(-1)=6=3+3\) ✓. \(\det(A)=7(-1)-(-4)(4)=-7+16=9=3\times3\) ✓. Both check out — the trace/determinant shortcut correctly identifies that BOTH eigenvalues equal 3, even though this particular matrix ultimately fails to diagonalize. The shortcut only reveals the eigenVALUES; it says nothing about whether enough independent eigenVECTORS exist to actually build \(P\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch10-diagonalization-applications.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch12-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 12 · Linear Algebra — Eigenvalues &amp; Transformations</span>
+  <span>Chapter 11 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m12:11", "content/m12-eigen/ch11-special-cases-repeated-and-complex-eigenvalues.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
