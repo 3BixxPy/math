@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — The Quotient Rule | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 7 of 16</div>
+  <div class="eyebrow">Chapter 7 · concept:quotient-rule</div>
+  <h1>The Quotient Rule</h1>
+  <p class="subtitle">The product rule's sibling, for division instead of multiplication. It's built from the same idea, but the formula has a specific term order that's notoriously easy to scramble — this chapter is as much about a reliable memory aid as it is about the rule itself.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Rational functions — one polynomial divided by another, like Module 1 Chapter 14's asymptote-bearing functions — show up everywhere, and so do quotients involving trig or exponential pieces once Chapters 8 and 11 arrive. Differentiating a quotient by rewriting it and hoping the product rule alone handles it doesn't generally work; this rule is the direct tool.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The quotient rule</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x)g(x) - f(x)g'(x)}{\left[g(x)\right]^2} \]</div><div class="eq-num" id="eq-6-7-1">(6.7.1)</div></div>
+    <p>Requires <code>g(x)≠0</code>. A classic memory aid, if <code>f</code> is called "high" (the numerator, on top) and <code>g</code> is called "low" (the denominator, on the bottom): <strong>"low-d-high minus high-d-low, all over low-squared"</strong> — <code>(low)(d-high) − (high)(d-low)</code>, over <code>(low)²</code>. Say it as a chant if it helps; the order genuinely matters, unlike the product rule's two symmetric terms.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Differentiate <code>(x²+1)/(x-3)</code>.</p>
+    <details class="step" open><summary>Step 1 — identify high and low, and their derivatives</summary>
+      <div class="step-body"><p>High: \(f=x^2+1\), \(f'=2x\). Low: \(g=x-3\), \(g'=1\).</p></div></details>
+    <details class="step"><summary>Step 2 — apply (6.7.1): low-d-high minus high-d-low, over low-squared</summary>
+      <div class="step-body"><p>\(\dfrac{(x-3)(2x) - (x^2+1)(1)}{(x-3)^2}\)</p></div></details>
+    <details class="step"><summary>Step 3 — expand the numerator only, and leave the denominator factored</summary>
+      <div class="step-body"><p>\((x-3)(2x) = 2x^2-6x\); numerator becomes \(2x^2-6x-x^2-1 = x^2-6x-1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\dfrac{x^2-6x-1}{(x-3)^2}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Getting the numerator's term order or sign backwards — writing <code>f·g' − g·f'</code> (high-d-low minus low-d-high) instead of the correct <code>f'·g − f·g'</code> (low-d-high minus high-d-low). Unlike the product rule, where the two terms add and their order doesn't matter, the quotient rule's terms are <em>subtracted</em>, so swapping them flips the entire answer's sign. This is a famously easy rule to misremember under pressure — lean on the "low-d-high minus high-d-low, over low-squared" chant every time rather than trusting memory alone.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="-1/x^2,-1/x2">
+    <div class="label">Try it yourself</div>
+    <p>Differentiate <code>x/x²</code> using the quotient rule (it should simplify to match <code>d/dx[1/x] = -1/x²</code>).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. -1/x^2" aria-label="derivative of x over x squared via quotient rule">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Differentiate <code>x/(x+1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1(x+1)-x(1)}{(x+1)^2} = \dfrac{1}{(x+1)^2}\)</div></details></li>
+    <li>Differentiate <code>(x-1)/(x+2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1(x+2)-(x-1)(1)}{(x+2)^2}=\dfrac{3}{(x+2)^2}\)</div></details></li>
+    <li>Differentiate <code>(3x²)/(x-1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{6x(x-1)-3x^2(1)}{(x-1)^2}=\dfrac{3x^2-6x}{(x-1)^2}\)</div></details></li>
+    <li>Differentiate <code>5/x³</code> using the quotient rule (with f=5, constant), then check against the power rule's shortcut (rewrite as 5x⁻³ first).
+      <details class="answer"><summary></summary><div class="ans-body">Quotient rule: \(\dfrac{0\cdot x^3 - 5(3x^2)}{x^6}=\dfrac{-15x^2}{x^6}=\dfrac{-15}{x^4}\). Power rule: \(5x^{-3}\to-15x^{-4}=-15/x^4\). Match.</div></details></li>
+    <li>Differentiate <code>(x²-4)/(x+2)</code>, first using the quotient rule directly.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{2x(x+2)-(x^2-4)(1)}{(x+2)^2}=\dfrac{2x^2+4x-x^2+4}{(x+2)^2}=\dfrac{x^2+4x+4}{(x+2)^2}=\dfrac{(x+2)^2}{(x+2)^2}=1\)</div></details></li>
+    <li>Differentiate <code>(2x+1)/(3x-2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{2(3x-2)-(2x+1)(3)}{(3x-2)^2}=\dfrac{6x-4-6x-3}{(3x-2)^2}=\dfrac{-7}{(3x-2)^2}\)</div></details></li>
+    <li class="tag">bonus — Redo problem 5, (x²-4)/(x+2), by first factoring and canceling algebraically (Module 0), then differentiating the simplified form. Why does the answer stay 1 either way?
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x^2-4}{x+2}=\dfrac{(x-2)(x+2)}{x+2}=x-2\) for \(x\neq-2\), whose derivative is simply 1. Both methods agree because the function itself simplifies to a line (with a hole at x=-2) — same reasoning as Module 5's factor-and-cancel limits.</div></details></li>
+    <li class="tag">bonus — Differentiate <code>1/(x²+1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{0(x^2+1)-1(2x)}{(x^2+1)^2}=\dfrac{-2x}{(x^2+1)^2}\)</div></details></li>
+    <li class="tag">bonus — If f(1)=4, f'(1)=-2, g(1)=2, g'(1)=1, find (f/g)'(1).
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{f'(1)g(1)-f(1)g'(1)}{[g(1)]^2}=\dfrac{-2(2)-4(1)}{2^2}=\dfrac{-8}{4}=-2\)</div></details></li>
+    <li class="tag">bonus — Differentiate <code>x²/(2x-1)</code>, and simplify the numerator as far as it will go.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{2x(2x-1)-x^2(2)}{(2x-1)^2}=\dfrac{4x^2-2x-2x^2}{(2x-1)^2}=\dfrac{2x^2-2x}{(2x-1)^2}=\dfrac{2x(x-1)}{(2x-1)^2}\)</div></details></li>
+    <li class="tag">challenge — Derive the quotient rule from the product rule: write f/g as f·g⁻¹, apply the product rule together with the power-rule-style fact d/dx[g⁻¹]=−g⁻²·g' (a preview of Chapter 9's chain rule), and show the result simplifies to (6.7.1).
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{d}{dx}\left[f\cdot g^{-1}\right] = f'g^{-1} + f(-g^{-2}g') = \dfrac{f'}{g} - \dfrac{fg'}{g^2} = \dfrac{f'g}{g^2}-\dfrac{fg'}{g^2} = \dfrac{f'g-fg'}{g^2}\) — exactly (6.7.1). The quotient rule isn't independent of the product rule; it's the product rule applied to \(f\cdot g^{-1}\), with the "derivative of a reciprocal" fact folded in.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-product-rule.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-derivatives-of-trig-functions.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 7 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:7", "content/m06-derivatives/ch07-quotient-rule.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

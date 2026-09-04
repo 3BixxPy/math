@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — The Chain Rule | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 9 of 16</div>
+  <div class="eyebrow">Chapter 9 · concept:chain-rule</div>
+  <h1>The Chain Rule</h1>
+  <p class="subtitle">Module 1 Chapter 10 defined composition, <code>(f∘g)(x) = f(g(x))</code> — one function wrapped around another. This chapter is that exact idea's derivative rule.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every rule so far handles a specific shape: a bare power (Chapter 4), a sum (Chapter 5), a product (Chapter 6), a quotient (Chapter 7). None of them, alone, differentiate something like <code>(x²+1)⁵</code> or <code>sin(3x)</code> — these aren't sums, products, or quotients of simple pieces; they're one function <em>composed</em> with another, exactly Module 1 Chapter 10's <code>f(g(x))</code> shape. Composition is arguably the most common way real functions actually get built, so this rule ends up used more than any other in this module.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The chain rule</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[f(g(x))\right] = f'(g(x))\cdot g'(x) \]</div><div class="eq-num" id="eq-6-9-1">(6.9.1)</div></div>
+    <p>This is literally composition's derivative rule — differentiate <code>f</code> (the outside function), evaluated at <code>g(x)</code> (leave the inside alone while doing this part), then multiply by <code>g'(x)</code> (the derivative of the inside). The mental model: <strong>outside-inside</strong>. Identify what the "last operation applied" is — that's the outside function — differentiate it first while treating everything inside it as a single frozen chunk, then multiply by that chunk's own derivative.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a power of a polynomial</div>
+    <p>Differentiate <code>(x²+1)⁵</code>.</p>
+    <details class="step" open><summary>Step 1 — identify outside and inside</summary>
+      <div class="step-body"><p>Outside: "something to the 5th power" — \(f(u)=u^5\). Inside: \(g(x)=x^2+1\).</p></div></details>
+    <details class="step"><summary>Step 2 — differentiate the outside (power rule, Ch. 4), leaving the inside untouched</summary>
+      <div class="step-body"><p>\(f'(u)=5u^4\), so \(f'(g(x)) = 5(x^2+1)^4\).</p></div></details>
+    <details class="step"><summary>Step 3 — multiply by the inside's own derivative</summary>
+      <div class="step-body"><p>\(g'(x)=2x\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(5(x^2+1)^4 \cdot 2x = 10x(x^2+1)^4\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a trig function of a linear inside</div>
+    <p>Differentiate <code>sin(3x)</code>.</p>
+    <details class="step" open><summary>Step 1 — outside and inside</summary>
+      <div class="step-body"><p>Outside: \(f(u)=\sin u\), inside: \(g(x)=3x\).</p></div></details>
+    <details class="step"><summary>Step 2 — differentiate the outside (Ch. 8), inside frozen</summary>
+      <div class="step-body"><p>\(f'(u)=\cos u\), so \(f'(g(x)) = \cos(3x)\).</p></div></details>
+    <details class="step"><summary>Step 3 — multiply by the inside's derivative</summary>
+      <div class="step-body"><p>\(g'(x)=3\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\cos(3x)\cdot3 = 3\cos(3x)\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Differentiating the outside function correctly, then simply stopping — forgetting to multiply by the inner function's own derivative at all. For <code>(x²+1)⁵</code>, this looks like writing <code>5(x²+1)⁴</code> and calling it done, silently dropping the required <code>·2x</code> factor. This is the single most common chain-rule error, and it's easy to miss precisely because <code>5(x²+1)⁴</code> looks like a complete, reasonable-looking answer on its own — nothing about it screams "incomplete." The fix is procedural, not conceptual: after differentiating the outside, always ask "what's the derivative of what's inside the parentheses?" and multiply by it, every single time, even when the inside looks simple.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="24x^2,24x2">
+    <div class="label">Try it yourself</div>
+    <p>Differentiate <code>(2x)³</code> using the chain rule.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 24x^2" aria-label="derivative of 2x cubed via chain rule">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Differentiate <code>(x+5)⁴</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(4(x+5)^3\cdot1=4(x+5)^3\)</div></details></li>
+    <li>Differentiate <code>(3x-2)⁶</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(6(3x-2)^5\cdot3=18(3x-2)^5\)</div></details></li>
+    <li>Differentiate <code>cos(5x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-\sin(5x)\cdot5=-5\sin(5x)\)</div></details></li>
+    <li>Differentiate <code>√(x²+9)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Rewrite as \((x^2+9)^{1/2}\): \(\frac12(x^2+9)^{-1/2}\cdot2x = \dfrac{x}{\sqrt{x^2+9}}\)</div></details></li>
+    <li>Differentiate <code>tan(2x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sec^2(2x)\cdot2=2\sec^2(2x)\)</div></details></li>
+    <li>Differentiate <code>(x³-1)²</code> two ways: with the chain rule, and by expanding first — confirm the two match.
+      <details class="answer"><summary></summary><div class="ans-body">Chain rule: \(2(x^3-1)\cdot3x^2=6x^2(x^3-1)=6x^5-6x^2\). Expanded: \((x^3-1)^2=x^6-2x^3+1\), derivative \(6x^5-6x^2\). Match.</div></details></li>
+    <li class="tag">bonus — Differentiate <code>(1-x)³</code>, and note the sign carefully.
+      <details class="answer"><summary></summary><div class="ans-body">\(3(1-x)^2\cdot(-1)=-3(1-x)^2\) — inner derivative is \(-1\), easy to forget the sign on.</div></details></li>
+    <li class="tag">bonus — Differentiate <code>sin(x²)</code>, and explain why this is genuinely different from <code>sin²(x)</code> (which is (sin x)²) — different inside/outside structure entirely.
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos(x^2)\cdot2x = 2x\cos(x^2)\). Different from \(\sin^2x\): here the outside is "square something" and the inside is \(\sin x\) — opposite composition order from \(\sin(x^2)\), where the outside is sine and the inside is \(x^2\). Same two ingredients, reversed roles, different derivatives entirely.</div></details></li>
+    <li class="tag">bonus — Differentiate <code>1/(x²+1)³</code>. (Rewrite as a negative power first.)
+      <details class="answer"><summary></summary><div class="ans-body">\((x^2+1)^{-3}\): \(-3(x^2+1)^{-4}\cdot2x = \dfrac{-6x}{(x^2+1)^4}\)</div></details></li>
+    <li class="tag">bonus — If h(x) = f(g(x)), g(2)=5, g'(2)=3, and f'(5)=7, find h'(2).
+      <details class="answer"><summary></summary><div class="ans-body">\(h'(2)=f'(g(2))\cdot g'(2) = f'(5)\cdot3 = 7\cdot3=21\)</div></details></li>
+    <li class="tag">challenge — Differentiate <code>sin(cos(x))</code> — a composition of two trig functions, so the chain rule has to be applied with sin as the outside and the entire cos(x) as the inside. Then identify why this problem could not be solved by the product rule, even though two trig functions are both present.
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos(\cos x)\cdot(-\sin x) = -\sin(x)\cos(\cos x)\). The product rule doesn't apply because \(\sin(\cos x)\) isn't two functions <em>multiplied</em> together — it's one function nested inside another (composition, not multiplication), which is exactly the structural signal that the chain rule, not the product rule, is the right tool.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch08-derivatives-of-trig-functions.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch10-chain-rule-practice.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 9 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:9", "content/m06-derivatives/ch09-chain-rule.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — Derivatives of Exponentials &amp; Logarithms | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 11 of 16</div>
+  <div class="eyebrow">Chapter 11 · concept:exponential-log-derivatives</div>
+  <h1>Derivatives of Exponentials &amp; Logarithms</h1>
+  <p class="subtitle">Module 3 Chapter 2 introduced e as "the base that appears whenever something grows continuously" and promised it would matter once calculus arrived. Here's why it was worth its own letter.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Module 3 defined <code>e</code> via a limit — <code>lim (1+1/n)ⁿ</code> — and called it "the base calculus prefers," without fully justifying why. This chapter is that justification: <code>e</code> is, by a wide margin, the only base whose exponential function is <em>its own derivative</em>. No other base has that property. That single fact is the actual reason <code>e</code> gets singled out with its own symbol instead of being just another number like 7 or 10.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The two key derivatives</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[e^x\right] = e^x \]</div><div class="eq-num" id="eq-6-11-1">(6.11.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[\ln x\right] = \frac{1}{x} \]</div><div class="eq-num" id="eq-6-11-2">(6.11.2)</div></div>
+    <p>(6.11.1) is exactly the promised payoff: differentiating <code>e^x</code> gives back <code>e^x</code>, unchanged. This is <em>why</em> e is the natural base for calculus — Module 3 Chapter 2 defined e as the limit that makes continuous growth work out cleanly, and this is that cleanliness made explicit as a derivative rule. (6.11.2) is <code>ln x</code>'s derivative — worth noting how strange it is on its face: an exponential-family function (<code>ln</code>, the inverse of <code>e^x</code>) differentiates down to a plain rational-power function, <code>1/x = x⁻¹</code>. Chapter 14 will show this isn't a coincidence — it follows directly from the inverse-function derivative formula applied to <code>e^x</code> and <code>ln x</code> as a pair.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — General bases, via the chain rule</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[a^x\right] = a^x\ln a \qquad\qquad \frac{d}{dx}\left[\log_a x\right] = \frac{1}{x\ln a} \]</div><div class="eq-num" id="eq-6-11-3">(6.11.3)</div></div>
+    <p>Neither of these needs to be memorized as an unrelated new fact. For the first: any base <code>a</code> can be rewritten as <code>a^x = e^{x\ln a}</code> (Module 0's exponent laws), so by the chain rule (Ch. 9) with outside <code>e^u</code> and inside <code>u=x\ln a</code>: <code>d/dx[e^{x\ln a}] = e^{x\ln a}\cdot\ln a = a^x\ln a</code>, using (6.11.1) plus the fact that <code>\ln a</code> is just a constant. For the second: Module 3 Chapter 7's change-of-base formula (equation 3.7.2) already says <code>log_a x = \ln x/\ln a</code>; since <code>1/\ln a</code> is a constant multiplier, differentiating just needs (6.11.2) and the constant-multiple rule (6.5.2): <code>1/(x\ln a)</code>.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — chain rule on both families</div>
+    <p>Differentiate <code>e^(3x)</code> and <code>ln(x²+1)</code>.</p>
+    <details class="step" open><summary>e^(3x) — outside e^u, inside u=3x</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}\left[e^{3x}\right] = e^{3x}\cdot\dfrac{d}{dx}[3x] = e^{3x}\cdot3 = 3e^{3x}\)</p></div></details>
+    <details class="step"><summary>ln(x²+1) — outside ln(u), inside u=x²+1</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}\left[\ln(x^2+1)\right] = \dfrac{1}{x^2+1}\cdot\dfrac{d}{dx}[x^2+1] = \dfrac{1}{x^2+1}\cdot2x = \dfrac{2x}{x^2+1}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating <code>d/dx[e^x]</code> like the power rule — writing <code>x·e^(x-1)</code>, the way <code>x^n</code> would differentiate. This is a genuine category error, not just a sign slip: the power rule (Chapter 4) applies when the <em>base</em> is the variable and the exponent is fixed (like <code>x²</code>). Here it's the opposite — the base <code>e</code> is a fixed constant and the <em>exponent</em> is the variable. These are two structurally different families of function, and they have completely different derivative rules. <code>e^x</code> is not <code>x</code> raised to any power at all — its derivative is the remarkably simple (6.11.1), not anything built from bringing an exponent down.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1/x">
+    <div class="label">Try it yourself</div>
+    <p>Find <code>d/dx[ln(x)]</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 1/x" aria-label="derivative of natural log of x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find <code>d/dx[e^x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(e^x\)</div></details></li>
+    <li>Find <code>d/dx[5e^x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(5e^x\)</div></details></li>
+    <li>Find <code>d/dx[ln(5x)]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1}{5x}\cdot5=\dfrac1x\) — the constant inside ln always cancels this way (Module 3's log-of-a-product would give the same result: ln(5x)=ln5+lnx, whose derivative is just 1/x since ln5 is a constant).</div></details></li>
+    <li>Find <code>d/dx[e^(-2x)]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(e^{-2x}\cdot(-2) = -2e^{-2x}\)</div></details></li>
+    <li>Find <code>d/dx[2^x]</code> using (6.11.3).
+      <details class="answer"><summary></summary><div class="ans-body">\(2^x\ln2\)</div></details></li>
+    <li>Find <code>d/dx[ln(x³)]</code> two ways: directly with the chain rule, and by first using Module 3's power law of logs to rewrite ln(x³) as 3ln(x).
+      <details class="answer"><summary></summary><div class="ans-body">Direct: \(\frac{1}{x^3}\cdot3x^2=\frac3x\). Rewritten: \(d/dx[3\ln x]=3\cdot\frac1x=\frac3x\). Match.</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[x·e^x]</code> using the product rule.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\cdot e^x + x\cdot e^x = e^x(1+x)\)</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[e^x/x]</code> using the quotient rule.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{e^x\cdot x - e^x\cdot1}{x^2} = \dfrac{e^x(x-1)}{x^2}\)</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[ln(sin x)]</code>. (Chain rule with a trig inside.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1}{\sin x}\cdot\cos x = \dfrac{\cos x}{\sin x} = \cot x\)</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[10^x]</code>, and evaluate it at x=0 to check it equals ln(10) numerically.
+      <details class="answer"><summary></summary><div class="ans-body">\(10^x\ln10\). At x=0: \(10^0\ln10 = \ln10\approx2.303\).</div></details></li>
+    <li class="tag">challenge — Find <code>d/dx[e^(x²)]</code> and <code>d/dx[(e^x)²]</code>, and explain why they come out different even though both expressions "look similar" at a glance.
+      <details class="answer"><summary></summary><div class="ans-body">\(e^{x^2}\): chain rule, outside \(e^u\), inside \(u=x^2\): \(e^{x^2}\cdot2x=2xe^{x^2}\). \((e^x)^2=e^{2x}\) (Module 0's exponent laws): chain rule gives \(e^{2x}\cdot2=2e^{2x}\), which also equals \(2(e^x)^2\). They differ because the composition order is reversed — the first is "e raised to a squared thing," the second is "a squared thing that happens to be e raised to something" — different inside/outside structure, different derivatives, despite superficially similar notation.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch10-chain-rule-practice.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch12-implicit-differentiation.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 11 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:11", "content/m06-derivatives/ch11-derivatives-of-exponentials-logs.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

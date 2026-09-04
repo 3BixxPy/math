@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 15 — Derivatives of Inverse Trig Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 15 of 16</div>
+  <div class="eyebrow">Chapter 15 · concept:inverse-trig-derivatives</div>
+  <h1>Derivatives of Inverse Trig Functions</h1>
+  <p class="subtitle">The last new differentiation facts in this module — and a genuine three-module synthesis. Chapter 14's inverse-derivative formula, Chapter 8's sine derivative, and Module 2 Chapter 9's Pythagorean identity all combine into one clean result.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Nothing about <code>arcsin x</code> or <code>arctan x</code> looks like it should have a simple derivative — one is an angle-valued function, the other emerged from a domain-restricted piece of tangent. Yet both differentiate down to plain algebraic expressions, no trig functions in the final answer at all. That's not a coincidence to memorize around; it's a direct, traceable consequence of tools already built: Chapter 14 turns "derivative of an inverse" into "reciprocal of the original function's derivative," and the Pythagorean identity (Module 2 Chapter 9) is exactly what converts the leftover trig expression into something purely in terms of <code>x</code>.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Two inverse trig derivatives</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[\arcsin x\right] = \frac{1}{\sqrt{1-x^2}} \]</div><div class="eq-num" id="eq-6-15-1">(6.15.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[\arctan x\right] = \frac{1}{1+x^2} \]</div><div class="eq-num" id="eq-6-15-2">(6.15.2)</div></div>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked derivation — d/dx[arcsin x], step by step</div>
+    <p>Derive (6.15.1) using Chapter 14's inverse-function formula.</p>
+    <details class="step" open><summary>Step 1 — set y = arcsin x, so x = sin y (Module 2 Chapter 13's definition)</summary>
+      <div class="step-body"><p>By definition, \(y=\arcsin x \iff x=\sin y\), with \(y\) restricted to \([-\pi/2,\pi/2]\).</p></div></details>
+    <details class="step"><summary>Step 2 — apply (6.14.1) with f = sin, f' = cos (Chapter 8)</summary>
+      <div class="step-body"><p>\(\dfrac{dy}{dx} = \left(\arcsin\right)'(x) = \dfrac{1}{f'(f^{-1}(x))} = \dfrac{1}{\cos y}\)</p></div></details>
+    <details class="step"><summary>Step 3 — the answer is in terms of y, but it needs to be in terms of x — bring in the Pythagorean identity</summary>
+      <div class="step-body"><p>\(\sin^2y+\cos^2y=1\) (Module 2, equation 2.9.1) \(\Rightarrow \cos y = \pm\sqrt{1-\sin^2y}\). Since \(x=\sin y\) (Step 1): \(\cos y = \pm\sqrt{1-x^2}\).</p></div></details>
+    <details class="step"><summary>Step 4 — resolve the sign using the restricted range</summary>
+      <div class="step-body"><p>\(y\in[-\pi/2,\pi/2]\) is exactly the range where cosine is never negative (it's 0 only at the two endpoints). So the \(+\) sign is the only one that can be correct here: \(\cos y = +\sqrt{1-x^2}\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\dfrac{dy}{dx} = \dfrac{1}{\cos y} = \dfrac{1}{\sqrt{1-x^2}}\) — equation (6.15.1). Three modules' worth of tools, none of them re-derived from scratch: Module 1's inverse-function idea (Chapter 14's version of it), Module 2's Pythagorean identity, and Module 6's own inverse-derivative formula.</p></div></details>
+  </div>
+
+  <div class="block intuition">
+    <div class="label">The same idea for arctan, more briefly</div>
+    <p>Let <code>y = arctan x</code>, so <code>x = tan y</code>. By (6.14.1) with <code>f = tan</code>, <code>f' = sec²</code> (Chapter 8): <code>dy/dx = 1/sec²y</code>. Module 2 Chapter 10's identity (equation 2.10.1) gives <code>sec²y = 1 + tan²y</code>, and since <code>x = tan y</code>, that's <code>1 + x²</code>. So <code>dy/dx = 1/(1+x²)</code> — equation (6.15.2), by the identical strategy, one identity swapped for another.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — chain rule on an inverse trig function</div>
+    <p>Differentiate <code>arcsin(2x)</code>.</p>
+    <details class="step" open><summary>Step 1 — outside/inside (Ch. 9): outside is arcsin(u), inside is u=2x</summary>
+      <div class="step-body"><p>Outside's derivative, from (6.15.1): \(\dfrac{1}{\sqrt{1-u^2}}\), evaluated at \(u=2x\): \(\dfrac{1}{\sqrt{1-(2x)^2}} = \dfrac{1}{\sqrt{1-4x^2}}\).</p></div></details>
+    <details class="step"><summary>Step 2 — multiply by the inside's derivative</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[2x]=2\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\dfrac{2}{\sqrt{1-4x^2}}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting the chain rule's inner-derivative factor whenever the argument isn't just plain <code>x</code> — exactly Chapter 9's mistake, showing up again in this new family of functions. For <code>arctan(3x)</code>, it's tempting to write <code>1/(1+(3x)²)</code> and stop — but that's only the "outside" piece from (6.15.2); the inside function <code>3x</code> has its own derivative, <code>3</code>, that still needs to be multiplied in. The correct derivative is <code>3/(1+9x²)</code>, not <code>1/(1+9x²)</code>. Any time the argument of arcsin, arccos, or arctan is something other than a bare <code>x</code>, the chain rule is in play, no exceptions.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1/(1+x^2),1/(1+x2)">
+    <div class="label">Try it yourself</div>
+    <p>Find <code>d/dx[arctan x]</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 1/(1+x^2)" aria-label="derivative of arctan of x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find <code>d/dx[arcsin x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1/\sqrt{1-x^2}\)</div></details></li>
+    <li>Find <code>d/dx[arctan(5x)]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{5}{1+25x^2}\)</div></details></li>
+    <li>Find <code>d/dx[arcsin(x/2)]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1/2}{\sqrt{1-x^2/4}} = \dfrac{1}{2\sqrt{1-x^2/4}}\)</div></details></li>
+    <li>Find <code>d/dx[3arctan x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{3}{1+x^2}\)</div></details></li>
+    <li>Find <code>d/dx[arctan(x²)]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{2x}{1+x^4}\)</div></details></li>
+    <li>Find <code>d/dx[arcsin(x) + arctan(x)]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1}{\sqrt{1-x^2}} + \dfrac{1}{1+x^2}\)</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[x·arctan(x)]</code>, using the product rule.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\cdot\arctan x + x\cdot\dfrac{1}{1+x^2} = \arctan x + \dfrac{x}{1+x^2}\)</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[arcsin(3x-1)]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{3}{\sqrt{1-(3x-1)^2}}\)</div></details></li>
+    <li class="tag">bonus — Evaluate d/dx[arctan x] at x=0, and explain how that value relates to the slope of tan(y) at y=0.
+      <details class="answer"><summary></summary><div class="ans-body">\(1/(1+0)=1\). Since arctan and tan are inverses (mirrored over y=x), and tan's own derivative sec²(0)=1 as well, the two curves have matching (reciprocal-of-1-is-1) slopes exactly at the mirrored origin point — consistent with (6.14.1).</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[arctan(1/x)]</code> for x≠0.
+      <details class="answer"><summary></summary><div class="ans-body">Inner derivative of \(1/x\) is \(-1/x^2\) (Ch. 4). \(\dfrac{-1/x^2}{1+1/x^2} = \dfrac{-1/x^2}{(x^2+1)/x^2} = \dfrac{-1}{x^2+1}\)</div></details></li>
+    <li class="tag">challenge — Using the same strategy as this chapter's arcsin derivation (Chapter 14's formula + a Module 2 identity + resolving a sign using the restricted range), derive <code>d/dx[arccos x] = -1/√(1-x²)</code> from scratch. (arccos's range is [0,π], where sine is never negative.)
+      <details class="answer"><summary></summary><div class="ans-body">Let \(y=\arccos x\), so \(x=\cos y\), \(y\in[0,\pi]\). \(f=\cos\), \(f'=-\sin\) (6.8.2). By (6.14.1): \(dy/dx = 1/(-\sin y) = -1/\sin y\). Pythagorean identity: \(\sin y=\pm\sqrt{1-\cos^2y}=\pm\sqrt{1-x^2}\); on \([0,\pi]\) sine is never negative, so \(\sin y=+\sqrt{1-x^2}\). Result: \(dy/dx = -1/\sqrt{1-x^2}\) — same magnitude as arcsin's derivative, opposite sign, which makes sense since \(\arcsin x+\arccos x\) is a constant (π/2) for all valid x, so their derivatives must be exact opposites.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch14-derivative-of-inverse-functions.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch16-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 15 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:15", "content/m06-derivatives/ch15-derivatives-of-inverse-trig.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

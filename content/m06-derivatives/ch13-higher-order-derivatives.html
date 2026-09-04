@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 13 — Higher-Order Derivatives | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 13 of 16</div>
+  <div class="eyebrow">Chapter 13 · concept:higher-order-derivatives</div>
+  <h1>Higher-Order Derivatives</h1>
+  <p class="subtitle">f'(x) is itself a function of x — nothing stops it from being differentiated all over again. This chapter is genuinely that simple: apply everything from Chapters 4–12 a second time, to a new starting function.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A quick, concrete reason this isn't just an abstract exercise in repeating a process: if <code>f(t)</code> is an object's position at time <code>t</code>, then <code>f'(t)</code> is its velocity — and the derivative of <em>that</em>, the second derivative of position, is its acceleration. Differentiating twice isn't a special new operation; it's the same operation, run twice, and it already has real physical meaning the first time it comes up. Module 7 builds an entire unit around exactly this; this chapter just makes sure the notation and mechanics are second nature first.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Second derivative and beyond</div>
+    <div class="eqn"><div class="eq-body">\[ f''(x) = \frac{d}{dx}\left[f'(x)\right] \]</div><div class="eq-num" id="eq-6-13-1">(6.13.1)</div></div>
+    <p>The <strong>second derivative</strong>, <code>f''(x)</code> ("f double-prime"), is just the derivative of <code>f'(x)</code> — differentiate once to get <code>f'</code>, then differentiate that result again. The pattern continues: <code>f'''(x)</code> (third derivative) is the derivative of <code>f''(x)</code>; beyond that, the prime notation gets clumsy, so it switches to <code>f⁽⁴⁾(x)</code>, <code>f⁽⁵⁾(x)</code>, and so on, with the order written as a parenthesized superscript. In Leibniz notation (Chapter 2), the second derivative is written <code>d²y/dx²</code> — read "dee-squared-y dee-x-squared" — which looks unusual at first but is simply Leibniz notation applied twice in a row.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find <code>f'(x)</code> and <code>f''(x)</code> for <code>f(x) = x⁴ − 3x² + 2x</code>, then evaluate both at <code>x=1</code>.</p>
+    <details class="step" open><summary>Step 1 — first derivative (Chapters 4–5, term by term)</summary>
+      <div class="step-body"><p>\(f'(x) = 4x^3 - 6x + 2\)</p></div></details>
+    <details class="step"><summary>Step 2 — second derivative: differentiate f'(x) again</summary>
+      <div class="step-body"><p>\(f''(x) = \dfrac{d}{dx}\left[4x^3-6x+2\right] = 12x^2 - 6\)</p></div></details>
+    <details class="step"><summary>Step 3 — evaluate f'(1)</summary>
+      <div class="step-body"><p>\(f'(1) = 4(1)-6(1)+2 = 0\)</p></div></details>
+    <details class="step"><summary>Result — evaluate f''(1)</summary>
+      <div class="step-body"><p>\(f''(1) = 12(1)-6 = 6\). Two separate numbers from two separate functions: \(f'(1)=0\) says the original curve is momentarily flat at \(x=1\); \(f''(1)=6\) is a fact about how \(f'\) itself is changing there — unrelated arithmetic, just built from the same starting function.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Confusing <code>f''(x)</code> (the derivative of the derivative) with <code>[f'(x)]²</code> (the first derivative, squared). These are completely different operations that happen to look similar in casual notation. For <code>f(x)=x³</code>: <code>f'(x)=3x²</code>, so <code>f''(x) = d/dx[3x²] = 6x</code> — a fresh differentiation. But <code>[f'(x)]² = (3x^2)^2 = 9x^4</code> — just algebraically squaring the expression, no differentiation involved at all. <code>6x</code> and <code>9x⁴</code> are not remotely the same function. The double-prime notation means "differentiate again," never "square the result."</p>
+  </div>
+
+  <div class="block practice checker" data-answers="6x">
+    <div class="label">Try it yourself</div>
+    <p>Find <code>f''(x)</code> for <code>f(x) = x³</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 6x" aria-label="second derivative of x cubed">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find f'(x) and f''(x) for <code>f(x) = x⁵</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=5x^4\), \(f''(x)=20x^3\)</div></details></li>
+    <li>Find f''(x) for <code>f(x) = x² - 7x + 3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=2x-7\), \(f''(x)=2\)</div></details></li>
+    <li>Find f''(x) for <code>f(x) = sin(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=\cos x\), \(f''(x)=-\sin x\)</div></details></li>
+    <li>Find f''(x) for <code>f(x) = e^x</code>, and explain why the answer is unsurprising given Chapter 11.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=e^x\), \(f''(x)=e^x\) — unsurprising because e^x is its own derivative (equation 6.11.1), so differentiating it again just reproduces e^x once more, and every derivative after that too.</div></details></li>
+    <li>Find f'''(x) (the third derivative) for <code>f(x) = x⁴</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=4x^3\), \(f''(x)=12x^2\), \(f'''(x)=24x\)</div></details></li>
+    <li>For <code>f(x) = x³ - 6x</code>, evaluate f'(2) and f''(2).
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=3x^2-6\), \(f'(2)=6\); \(f''(x)=6x\), \(f''(2)=12\)</div></details></li>
+    <li class="tag">bonus — Find f''(x) for <code>f(x) = ln(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=1/x=x^{-1}\), \(f''(x)=-x^{-2}=-1/x^2\)</div></details></li>
+    <li class="tag">bonus — Find the fourth derivative of <code>f(x) = x⁴</code>, and explain in one sentence what happens to every derivative after that.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=4x^3, f''=12x^2, f'''=24x, f^{(4)}=24\) (a constant); every derivative beyond the fourth is 0, since the constant rule (6.5.1) kicks in permanently once the x's are gone.</div></details></li>
+    <li class="tag">bonus — If f'(3) = 0 and f''(3) = 5, is this enough information alone to know f(3)? Why or why not?
+      <details class="answer"><summary></summary><div class="ans-body">No — f'(3) and f''(3) describe the function's slope and how that slope is changing at x=3, but say nothing about the function's actual height there; f(3) could be any value consistent with those derivative facts.</div></details></li>
+    <li class="tag">bonus — Find f''(x) for <code>f(x) = (x+1)³</code>, using the chain rule for f' and again for f''.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=3(x+1)^2\); \(f''(x) = 3\cdot2(x+1)\cdot1 = 6(x+1)\)</div></details></li>
+    <li class="tag">challenge — If <code>f(t)</code> represents an object's position at time t and <code>f(t) = -5t² + 20t</code> (a ball thrown upward, in some convenient units), find f'(t) and f''(t), and interpret both physically. At what time is f'(t)=0, and what does that moment represent?
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(t)=-10t+20\) (velocity), \(f''(t)=-10\) (acceleration — constant, matching the idea of constant gravity). \(f'(t)=0\) when \(t=2\): the instant velocity is exactly zero, i.e. the peak of the ball's flight, the moment it stops rising and is about to start falling.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch12-implicit-differentiation.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch14-derivative-of-inverse-functions.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 13 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:13", "content/m06-derivatives/ch13-higher-order-derivatives.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — The Product Rule | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 6 of 16</div>
+  <div class="eyebrow">Chapter 6 · concept:product-rule</div>
+  <h1>The Product Rule</h1>
+  <p class="subtitle">Chapter 5's sum rule says derivatives distribute over addition cleanly: differentiate each piece, add. Multiplication is not that simple — and knowing exactly how it isn't that simple is this chapter's whole point.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>It would be convenient if <code>d/dx[f·g]</code> were just <code>f'·g'</code> — multiply the two derivatives, done, same pattern as the sum rule. It is not. Products of functions show up constantly (a rectangle's area as width times height, revenue as price times quantity sold, and — heavily, starting in Chapter 8 — any expression combining a polynomial with a trig function), so getting this rule exactly right, not just approximately intuitive, matters immediately.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The product rule</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[f(x)g(x)\right] = f'(x)g(x) + f(x)g'(x) \]</div><div class="eq-num" id="eq-6-6-1">(6.6.1)</div></div>
+    <p>In words: derivative of the first, times the second, <em>plus</em> the first, times derivative of the second. Both terms are needed — the product rule always produces a sum of two pieces, never a single term.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — checking the rule against direct expansion</div>
+    <p>Differentiate <code>(x²+1)(x³-2x)</code> two ways: with the product rule, and by expanding first.</p>
+    <details class="step" open><summary>Method 1 — the product rule directly</summary>
+      <div class="step-body"><p>Let \(f=x^2+1\) (\(f'=2x\)) and \(g=x^3-2x\) (\(g'=3x^2-2\)). By (6.6.1): \(f'g+fg' = 2x(x^3-2x) + (x^2+1)(3x^2-2)\).</p></div></details>
+    <details class="step"><summary>Method 1, continued — expand and simplify</summary>
+      <div class="step-body"><p>\(2x(x^3-2x) = 2x^4-4x^2\). \((x^2+1)(3x^2-2) = 3x^4-2x^2+3x^2-2 = 3x^4+x^2-2\). Sum: \(2x^4-4x^2+3x^4+x^2-2 = 5x^4-3x^2-2\).</p></div></details>
+    <details class="step"><summary>Method 2 — expand the original product first (Module 0's FOIL), then differentiate term by term</summary>
+      <div class="step-body"><p>\((x^2+1)(x^3-2x) = x^5-2x^3+x^3-2x = x^5-x^3-2x\). Differentiate directly (Chapters 4–5): \(5x^4-3x^2-2\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Both methods give \(5x^4-3x^2-2\) — the product rule isn't a separate fact to trust blindly, it agrees exactly with expand-then-differentiate whenever expanding is actually feasible. Its real value shows up when expanding first isn't practical — e.g. once a trig or exponential factor is involved (Chapters 8 and 11), where there's nothing to FOIL.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming <code>d/dx[fg] = f'g'</code> — multiplying the two derivatives directly, the same pattern the sum rule uses for addition. This is <strong>false</strong>, and it's the single most common error in all of differential calculus. A quick numeric counterexample: let <code>f(x)=x</code> and <code>g(x)=x</code>, so <code>f(x)g(x)=x²</code>, whose derivative is <code>2x</code> (power rule). But <code>f'(x)g'(x) = (1)(1) = 1</code> — a constant, not <code>2x</code>. They don't match, and they never will in general; the correct rule (6.6.1) always has two terms, not one.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="3x^2,3x2,3*x^2">
+    <div class="label">Try it yourself</div>
+    <p>Differentiate <code>x · x²</code> using the product rule (it should match the power rule's <code>x³ → 3x²</code> result).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 3x^2" aria-label="derivative of x times x squared via product rule">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Differentiate <code>x²(x+3)</code> using the product rule.
+      <details class="answer"><summary></summary><div class="ans-body">\(f=x^2,f'=2x;\ g=x+3,g'=1\). \(2x(x+3)+x^2(1) = 2x^2+6x+x^2=3x^2+6x\)</div></details></li>
+    <li>Differentiate <code>(2x-1)(x²+4)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2(x^2+4)+(2x-1)(2x) = 2x^2+8+4x^2-2x = 6x^2-2x+8\)</div></details></li>
+    <li>Differentiate <code>(x³)(x⁴)</code> using the product rule, and check against the power rule applied to x⁷ directly.
+      <details class="answer"><summary></summary><div class="ans-body">\(3x^2(x^4)+x^3(4x^3)=3x^6+4x^6=7x^6\); matches \(d/dx[x^7]=7x^6\) directly.</div></details></li>
+    <li>Differentiate <code>(√x)(x-1)</code>. (Rewrite √x as x^(1/2) first.)
+      <details class="answer"><summary></summary><div class="ans-body">\(f=x^{1/2},f'=\frac12x^{-1/2};\ g=x-1,g'=1\). \(\frac12x^{-1/2}(x-1)+x^{1/2}(1) = \dfrac{x-1}{2\sqrt{x}}+\sqrt{x}\)</div></details></li>
+    <li>Differentiate <code>(3x+2)(5x-4)</code>, once with the product rule and once by expanding first, to confirm they match.
+      <details class="answer"><summary></summary><div class="ans-body">Product rule: \(3(5x-4)+(3x+2)(5) = 15x-12+15x+10=30x-2\). Expanded: \(15x^2-2x-8\), derivative \(30x-2\). Match.</div></details></li>
+    <li>Differentiate <code>x³(2x²-5)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3x^2(2x^2-5)+x^3(4x) = 6x^4-15x^2+4x^4=10x^4-15x^2\)</div></details></li>
+    <li class="tag">bonus — Differentiate <code>(x²+1)(x²-1)</code> two ways: product rule, and by recognizing the difference-of-squares shortcut (Module 0) first.
+      <details class="answer"><summary></summary><div class="ans-body">Product rule: \(2x(x^2-1)+(x^2+1)(2x) = 2x^3-2x+2x^3+2x=4x^3\). Shortcut: \((x^2+1)(x^2-1)=x^4-1\), derivative \(4x^3\). Match.</div></details></li>
+    <li class="tag">bonus — If f(2)=3, f'(2)=5, g(2)=-1, and g'(2)=4, find (fg)'(2) without knowing f or g explicitly.
+      <details class="answer"><summary></summary><div class="ans-body">\((fg)'(2)=f'(2)g(2)+f(2)g'(2) = 5(-1)+3(4)=-5+12=7\)</div></details></li>
+    <li class="tag">bonus — Show, using specific simple functions, that d/dx[fg] ≠ f'·g in general (i.e., you can't drop the second term either).
+      <details class="answer"><summary></summary><div class="ans-body">f=x,g=x: fg=x², derivative 2x. f'·g alone = 1·x=x ≠ 2x. The second term, f·g'=x·1=x, is exactly the missing piece: x+x=2x.</div></details></li>
+    <li class="tag">bonus — Differentiate <code>x²·x³·x</code> by first combining into a single power, then check by grouping as (x²·x³)·x and applying the product rule twice.
+      <details class="answer"><summary></summary><div class="ans-body">Combined: \(x^6\), derivative \(6x^5\). Grouped: \(d/dx[x^2\cdot x^3]=5x^4\) (as in problem 3), then \((x^2x^3)\cdot x = x^5\cdot x\): \(5x^4(x)+x^5(1)=5x^5+x^5=6x^5\). Match — the product rule extends consistently to more than two factors.</div></details></li>
+    <li class="tag">challenge — Derive the product rule's two-term structure informally: starting from the definition \(\lim_{h\to0}\frac{f(x+h)g(x+h)-f(x)g(x)}{h}\), the standard trick is to subtract and add \(f(x+h)g(x)\) in the numerator. Show what this produces, and identify which piece becomes each term of (6.6.1) as \(h\to0\).
+      <details class="answer"><summary></summary><div class="ans-body">Numerator becomes \(f(x+h)g(x+h)-f(x+h)g(x) + f(x+h)g(x)-f(x)g(x) = f(x+h)[g(x+h)-g(x)] + g(x)[f(x+h)-f(x)]\). Dividing by h and taking \(h\to0\): the first piece \(\to f(x)\cdot g'(x)\) (since \(f(x+h)\to f(x)\) by continuity, Chapter 3, and the bracket over h is g's own difference quotient); the second \(\to g(x)\cdot f'(x)\). Together: \(f(x)g'(x)+g(x)f'(x)\) — equation (6.6.1).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-constant-sum-difference-rules.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-quotient-rule.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 6 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:6", "content/m06-derivatives/ch06-product-rule.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

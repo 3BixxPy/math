@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 14 — Derivatives of Inverse Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 14 of 16</div>
+  <div class="eyebrow">Chapter 14 · concept:inverse-function-derivative</div>
+  <h1>Derivatives of Inverse Functions</h1>
+  <p class="subtitle">Module 1 Chapter 11 showed that a function and its inverse are mirror images across the line y=x. This chapter asks what that mirroring does to slopes — and the answer sets up Chapter 15's inverse trig derivatives directly.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Reflecting a graph over <code>y=x</code> swaps every point's coordinates: <code>(a,b)</code> becomes <code>(b,a)</code>. A tangent line is a local picture of a graph's slope at one point — so reflecting the whole graph reflects its tangent lines too, and a reflected line's slope is the <em>reciprocal</em> of the original (a line of slope <code>m</code>, reflected over <code>y=x</code>, becomes a line of slope <code>1/m</code>). That geometric fact is the entire content of this chapter's formula.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Derivative of an inverse function</div>
+    <div class="eqn"><div class="eq-body">\[ \left(f^{-1}\right)'(x) = \frac{1}{f'\!\left(f^{-1}(x)\right)} \]</div><div class="eq-num" id="eq-6-14-1">(6.14.1)</div></div>
+    <p>To find the inverse's slope at a given <code>x</code>, first find the mirrored input <code>f⁻¹(x)</code> — the point on the <em>original</em> function that reflects to this one — then take the reciprocal of <code>f</code>'s own slope there. This is precisely Module 1 Chapter 11's reflection-over-<code>y=x</code> idea, made quantitative: mirrored points get reciprocal slopes.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — verifying the formula numerically</div>
+    <p>Let <code>f(x) = x³ + 1</code>, with inverse <code>f⁻¹(x) = (x-1)^(1/3)</code>. Verify (6.14.1) at <code>x=9</code>, by computing both sides independently.</p>
+    <details class="step" open><summary>Step 1 — right side: find f⁻¹(9) first</summary>
+      <div class="step-body"><p>\(f^{-1}(9) = (9-1)^{1/3} = 8^{1/3} = 2\). (Check: \(f(2)=2^3+1=9\) ✓, confirming 2 really is the right mirrored input.)</p></div></details>
+    <details class="step"><summary>Step 2 — right side: compute f'(x) and evaluate at that mirrored input</summary>
+      <div class="step-body"><p>\(f'(x)=3x^2\) (power/sum rules), so \(f'(f^{-1}(9)) = f'(2) = 3(2)^2 = 12\). By (6.14.1), \((f^{-1})'(9) = 1/12\).</p></div></details>
+    <details class="step"><summary>Step 3 — left side: differentiate f⁻¹(x) directly and evaluate at x=9</summary>
+      <div class="step-body"><p>\(f^{-1}(x)=(x-1)^{1/3}\); by the chain rule (Ch. 9), \((f^{-1})'(x) = \dfrac13(x-1)^{-2/3}\). At \(x=9\): \(\dfrac13(8)^{-2/3} = \dfrac13\cdot\dfrac{1}{4} = \dfrac1{12}\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Both routes give \(1/12\) — (6.14.1) checks out. Notice the formula's real value: it found \((f^{-1})'(9) = 1/12\) using only facts about \(f\) itself (its formula and its derivative), without ever needing an explicit formula for \(f^{-1}\) at all. That matters enormously in Chapter 15, where the inverse trig functions don't have a simple closed-form "swap and solve" inverse the way this cubic did.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Confusing "the derivative of the inverse," <code>(f⁻¹)'(x)</code>, with "the inverse of the derivative" — these sound similar but are entirely different objects. <code>(f⁻¹)'(x)</code> means: first find the inverse function, then differentiate it (or, equivalently, use (6.14.1) directly). "The inverse of the derivative" would mean something like finding the functional inverse of <code>f'</code> itself — a completely different, usually much messier operation. For <code>f(x)=x^3+1</code>: \(f'(x)=3x^2\) isn't even one-to-one (it fails the horizontal line test — \(f'(1)=f'(-1)=3\)), so it doesn't have a genuine inverse function at all in the usual sense, while \((f^{-1})'(x)\) — the actual object this chapter studies — is perfectly well-defined, as the worked example shows. Reading the words in the right order matters: "derivative of [the inverse]" is not "[the inverse] of the derivative."</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1/4,0.25">
+    <div class="label">Try it yourself</div>
+    <p>If <code>f(3) = 7</code> and <code>f'(3) = 4</code>, find <code>(f⁻¹)'(7)</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 1/4" aria-label="derivative of f inverse at 7">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>If <code>f(2) = 5</code> and <code>f'(2) = 3</code>, find <code>(f⁻¹)'(5)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1/3\)</div></details></li>
+    <li>If <code>f(0) = 1</code> and <code>f'(0) = -2</code>, find <code>(f⁻¹)'(1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-1/2\)</div></details></li>
+    <li>For <code>f(x) = 2x + 3</code> (a line), find f⁻¹(x) directly (Module 1's swap-and-solve method), then find (f⁻¹)'(x) by differentiating it directly.
+      <details class="answer"><summary></summary><div class="ans-body">\(f^{-1}(x)=(x-3)/2\), whose derivative is \(1/2\) — the constant reciprocal of f's own constant slope, 2.</div></details></li>
+    <li>For the same f(x) = 2x+3, verify problem 3's answer using (6.14.1) instead.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=2\) everywhere, so \(f'(f^{-1}(x))=2\) regardless of the input, and \((f^{-1})'(x)=1/2\) — matches.</div></details></li>
+    <li>If <code>f(x) = x⁵</code>, and knowing \(f(1)=1\), find <code>(f⁻¹)'(1)</code> using (6.14.1).
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=5x^4\), \(f'(1)=5\); \((f^{-1})'(1)=1/5\)</div></details></li>
+    <li>True or false: (f⁻¹)'(x) and 1/f'(x) are always the same expression.
+      <details class="answer"><summary></summary><div class="ans-body">False — (6.14.1) requires evaluating f' at f⁻¹(x), the mirrored input, not at x itself. They only coincide where \(f^{-1}(x)=x\).</div></details></li>
+    <li class="tag">bonus — For <code>f(x) = x³</code>, find (f⁻¹)'(8) using (6.14.1), then double-check by differentiating f⁻¹(x)=x^(1/3) directly.
+      <details class="answer"><summary></summary><div class="ans-body">\(f^{-1}(8)=2\), \(f'(2)=12\), so \((f^{-1})'(8)=1/12\). Direct: \(f^{-1}(x)=x^{1/3}\), derivative \(\frac13x^{-2/3}\), at x=8: \(\frac13(4)^{-1}=\frac1{12}\) — using \(8^{2/3}=4\). Match.</div></details></li>
+    <li class="tag">bonus — Explain why (6.14.1) would fail (produce an undefined result) at any x where f'(f⁻¹(x)) = 0. What does that correspond to on the original graph of f?
+      <details class="answer"><summary></summary><div class="ans-body">Dividing by zero is undefined — this happens exactly where f itself has a horizontal tangent at the mirrored point. Reflected over y=x, a horizontal tangent becomes a vertical one, and a vertical tangent line has no defined (finite) slope — consistent with Chapter 3's discussion of vertical tangents breaking differentiability.</div></details></li>
+    <li class="tag">bonus — If g is the inverse of f, and f(4)=10, f'(4)=6, find g'(10).
+      <details class="answer"><summary></summary><div class="ans-body">\(g'(10)=1/f'(4)=1/6\) — same formula, different variable name for the inverse.</div></details></li>
+    <li class="tag">bonus — For f(x) = e^x (Chapter 11), whose inverse is ln(x), use (6.14.1) at x=e (so f⁻¹(e)=1) to find (f⁻¹)'(e), and compare it to the known formula d/dx[ln x]=1/x evaluated at x=e.
+      <details class="answer"><summary></summary><div class="ans-body">\(f^{-1}(e)=\ln(e)=1\); \(f'(1)=e^1=e\); \((f^{-1})'(e)=1/e\). Direct formula: \(1/x\) at \(x=e\) is also \(1/e\). Match — this is exactly why d/dx[ln x]=1/x works out the way it does.</div></details></li>
+    <li class="tag">challenge — Using (6.14.1) in general symbolic form, with <code>f(x)=e^x</code> and <code>f⁻¹(x)=\ln x</code>, derive the formula <code>d/dx[\ln x] = 1/x</code> from scratch (rather than just checking it at one point like the bonus problem above).
+      <details class="answer"><summary></summary><div class="ans-body">\((f^{-1})'(x) = \dfrac{1}{f'(f^{-1}(x))}\). Here \(f'(u)=e^u\), so \(f'(f^{-1}(x)) = e^{\ln x} = x\) (the defining cancellation property of inverses, Module 1 Ch. 11, equation 1.11.1). So \((f^{-1})'(x) = 1/x\) — exactly (6.11.2), derived here as a genuine consequence of (6.14.1) rather than asserted on its own.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch13-higher-order-derivatives.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch15-derivatives-of-inverse-trig.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 14 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:14", "content/m06-derivatives/ch14-derivative-of-inverse-functions.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

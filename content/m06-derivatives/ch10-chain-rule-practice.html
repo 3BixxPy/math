@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — Combining Product, Quotient &amp; Chain Rules | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 10 of 16</div>
+  <div class="eyebrow">Chapter 10 · concept:combined-differentiation-rules</div>
+  <h1>Combining Rules — Product, Quotient &amp; Chain Together</h1>
+  <p class="subtitle">No new rule in this chapter — just Chapters 6, 7, and 9, stacked in the same problem. Real expressions rarely arrive pre-sorted into "this is a product" or "this is a composition"; reading the structure correctly, before differentiating anything, is the actual skill.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every rule chapter so far isolated one structure at a time on purpose, so each rule could be trusted on its own before being combined with anything else. Real expressions don't come pre-labeled. This chapter is entirely about a habit: before writing a single derivative symbol, ask "what is the <em>outermost</em> structure here — is this fundamentally a product of two things, a quotient of two things, or one function wrapped around another?" — answer that first, apply the matching top-level rule, and only then worry about whatever chain-rule work each piece needs internally.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — read the outermost structure first</div>
+    <ol>
+      <li>Look at the <em>whole</em> expression and ask: is the very last operation a multiplication (→ product rule), a division (→ quotient rule), or is one function's entire output feeding into another (→ chain rule)?</li>
+      <li>Apply that one top-level rule, writing down its skeleton (e.g. product rule's <code>f'g + fg'</code>) before computing any individual piece.</li>
+      <li>Differentiate each piece (<code>f</code>, <code>g</code>, or the outside/inside pair) on its own — this is where the chain rule usually shows up again, one layer in.</li>
+      <li>Combine and simplify last, not first.</li>
+    </ol>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — product + chain</div>
+    <p>Differentiate <code>x²·sin(3x)</code>.</p>
+    <details class="step" open><summary>Step 1 — outermost structure: this is a product</summary>
+      <div class="step-body"><p>\(f=x^2\), \(g=\sin(3x)\). Skeleton: \(f'g+fg'\).</p></div></details>
+    <details class="step"><summary>Step 2 — f' is plain power rule</summary>
+      <div class="step-body"><p>\(f'=2x\)</p></div></details>
+    <details class="step"><summary>Step 3 — g' needs the chain rule (sin outside, 3x inside)</summary>
+      <div class="step-body"><p>\(g'=\cos(3x)\cdot3=3\cos(3x)\)</p></div></details>
+    <details class="step"><summary>Result — assemble the product-rule skeleton</summary>
+      <div class="step-body"><p>\(2x\sin(3x) + x^2\cdot3\cos(3x) = 2x\sin(3x)+3x^2\cos(3x)\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — quotient rule, chain rule where it's actually needed</div>
+    <p>Differentiate <code>sin(x)/(x²+1)</code>.</p>
+    <details class="step" open><summary>Step 1 — outermost structure: this is a quotient</summary>
+      <div class="step-body"><p>High: \(f=\sin x\). Low: \(g=x^2+1\).</p></div></details>
+    <details class="step"><summary>Step 2 — differentiate each piece</summary>
+      <div class="step-body"><p>\(f'=\cos x\) (technically the chain rule applied to \(\sin(x)\) with inner function \(x\) — trivial here, since \(d/dx[x]=1\), but worth noticing: the chain rule is <em>always</em> in play, sometimes with an inner derivative of exactly 1, which is why it can look invisible). \(g'=2x\) (plain power/sum rules, no chain needed — the "inside" of \(x^2+1\) is just \(x\) itself).</p></div></details>
+    <details class="step"><summary>Result — low-d-high minus high-d-low, over low-squared (Ch. 7)</summary>
+      <div class="step-body"><p>\(\dfrac{\cos(x)(x^2+1) - \sin(x)(2x)}{(x^2+1)^2}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>When three rules could plausibly stack in one problem, two things tend to go wrong: applying rules in the wrong order (starting with an inner chain-rule step before deciding whether the outermost structure is even a product or a quotient), or simply forgetting one factor entirely once the algebra gets busy — most often the inner derivative from a chain-rule step buried inside a product or quotient. The discipline from the Method box above is the fix: name the outermost structure <em>first</em>, write its skeleton down before computing anything, and only then fill in each piece — including checking every single piece for whether it itself needs the chain rule, not just the ones that obviously look complicated.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="3x^2+4x+1,3x2+4x+1">
+    <div class="label">Try it yourself</div>
+    <p>Differentiate <code>(x+1)²·x</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 3x^2+4x+1" aria-label="derivative of x plus 1 squared times x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Differentiate <code>x·(x+3)⁴</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Product: \(1\cdot(x+3)^4 + x\cdot4(x+3)^3 = (x+3)^4+4x(x+3)^3\)</div></details></li>
+    <li>Differentiate <code>cos(x)/x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Quotient: \(\dfrac{-\sin(x)\cdot x^2 - \cos(x)\cdot2x}{x^4}\)</div></details></li>
+    <li>Differentiate <code>x²·(2x-1)³</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Product + chain: \(2x(2x-1)^3 + x^2\cdot3(2x-1)^2\cdot2 = 2x(2x-1)^3+6x^2(2x-1)^2\)</div></details></li>
+    <li>Differentiate <code>sin(x)·cos(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Product, no chain needed (both inner arguments are just x): \(\cos(x)\cos(x)+\sin(x)(-\sin x) = \cos^2x-\sin^2x\)</div></details></li>
+    <li>Differentiate <code>(x²+1)/(x²-1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Quotient, no chain needed internally: \(\dfrac{2x(x^2-1)-(x^2+1)(2x)}{(x^2-1)^2} = \dfrac{-4x}{(x^2-1)^2}\)</div></details></li>
+    <li>Differentiate <code>tan(x)·x³</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Product: \(\sec^2(x)\cdot x^3 + \tan(x)\cdot3x^2\)</div></details></li>
+    <li class="tag">bonus — Differentiate <code>√x·(x+1)</code>. (Rewrite √x first.)
+      <details class="answer"><summary></summary><div class="ans-body">\(f=x^{1/2},f'=\frac12x^{-1/2}\); product: \(\frac12x^{-1/2}(x+1)+x^{1/2}(1) = \dfrac{x+1}{2\sqrt{x}}+\sqrt{x}\)</div></details></li>
+    <li class="tag">bonus — Differentiate <code>(sin x)/(cos(2x))</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Quotient, chain needed on the bottom: \(g'=-\sin(2x)\cdot2=-2\sin(2x)\). Result: \(\dfrac{\cos(x)\cos(2x) - \sin(x)(-2\sin(2x))}{\cos^2(2x)} = \dfrac{\cos(x)\cos(2x)+2\sin(x)\sin(2x)}{\cos^2(2x)}\)</div></details></li>
+    <li class="tag">bonus — Differentiate <code>(3x+1)²·(x-2)³</code>. (Product of two chain-rule pieces.)
+      <details class="answer"><summary></summary><div class="ans-body">\(f=(3x+1)^2,f'=2(3x+1)\cdot3=6(3x+1)\); \(g=(x-2)^3,g'=3(x-2)^2\). Product: \(6(3x+1)(x-2)^3 + (3x+1)^2\cdot3(x-2)^2\)</div></details></li>
+    <li class="tag">bonus — Before differentiating <code>x/(x+1)³</code> at all, identify its outermost structure (product? quotient? composition?) and name which sub-piece will additionally need the chain rule.
+      <details class="answer"><summary></summary><div class="ans-body">Outermost: quotient (x on top, (x+1)³ on bottom). The bottom piece, \((x+1)^3\), needs the chain rule internally when differentiated (outside: cube; inside: x+1).</div></details></li>
+    <li class="tag">challenge — Differentiate <code>x²·sin(x)/cos(2x)</code> — a product living inside the numerator of a quotient, with a chain rule buried in the denominator. Identify the outermost structure first, then work outside-in.
+      <details class="answer"><summary></summary><div class="ans-body">Outermost: quotient, with high \(=x^2\sin x\) (itself a product) and low \(=\cos(2x)\). High': product rule gives \(2x\sin x+x^2\cos x\). Low': chain rule gives \(-2\sin(2x)\). Quotient rule: \(\dfrac{(2x\sin x+x^2\cos x)\cos(2x) - x^2\sin(x)(-2\sin(2x))}{\cos^2(2x)} = \dfrac{(2x\sin x+x^2\cos x)\cos(2x)+2x^2\sin(x)\sin(2x)}{\cos^2(2x)}\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-chain-rule.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-derivatives-of-exponentials-logs.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 10 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:10", "content/m06-derivatives/ch10-chain-rule-practice.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Average Rate of Change &amp; Secant Lines | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 1 of 16</div>
+  <div class="eyebrow">Chapter 1 · concept:average-rate-of-change</div>
+  <h1>Average Rate of Change &amp; Secant Lines</h1>
+  <p class="subtitle">Module 5 spent twelve chapters building limits without much use for them yet. This module is where that machinery finally earns its keep — and it starts with a quantity you already know how to compute: an ordinary slope.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>If a trip covers 150 miles in 3 hours, the average speed is 50 mph — even though the speedometer almost certainly never sat still at exactly 50 the whole way. Average rate of change is that same idea for any function: not "what is <code>f</code> doing at one instant," but "over this whole interval, how much did <code>f</code> change per unit of <code>x</code>, on average." It's a completely ordinary slope calculation. What's new is the question it sets up: what happens to that average as the interval itself shrinks to nothing? That question is the entire subject of this module.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Average rate of change</div>
+    <div class="eqn"><div class="eq-body">\[ \text{avg. rate of change of } f \text{ on } [a,b] = \frac{f(b)-f(a)}{b-a} \]</div><div class="eq-num" id="eq-6-1-1">(6.1.1)</div></div>
+    <p>This is nothing more than Module 1 Chapter 5's slope formula, <code>(y₂−y₁)/(x₂−x₁)</code>, applied to the two points <code>(a, f(a))</code> and <code>(b, f(b))</code> on the graph of <code>f</code>. The line through those two points is called the <strong>secant line</strong> — "secant" just means a line that cuts through a curve at two points, rather than touching it at one. So (6.1.1) has two equivalent readings: it's the average rate <code>f</code> changed over <code>[a,b]</code>, <em>and</em> it's the slope of the secant line joining the endpoints. Same number, two ways of describing it.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>a: <input type="range" id="arc-a" min="-0.5" max="3" step="0.1" value="1"></label>
+    <label>Δx (width, b−a): <input type="range" id="arc-w" min="0.2" max="3" step="0.1" value="2"></label>
+  </div>
+  <div class="plot-wrap"><svg id="arc-svg" viewBox="0 0 480 320" width="480" height="320"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="arc-readout"></span></div>
+  <script>
+  (function () {
+    const svg = document.getElementById("arc-svg");
+    const aI = document.getElementById("arc-a"), wI = document.getElementById("arc-w");
+    const readout = document.getElementById("arc-readout");
+    const f = (x) => x * x;
+    const opts = { xMin: -0.5, xMax: 4, yMin: -1, yMax: 16, width: 480, height: 320, pad: 34, xStep: 1, yStep: 2 };
+    function update() {
+      const a = parseFloat(aI.value), w = parseFloat(wI.value);
+      const b = a + w;
+      const { px, py } = MCPlot.drawAxes(svg, opts);
+      MCPlot.plotFunction(svg, f, opts, "plot-curve");
+      const fa = f(a), fb = f(b);
+      const m = (fb - fa) / (b - a);
+      MCPlot.plotFunction(svg, (x) => m * (x - a) + fa, opts, "plot-curve-alt");
+      MCPlot.plotPoints(svg, [[a, fa]], opts, "plot-point");
+      MCPlot.plotPoints(svg, [[b, fb]], opts, "plot-point-alt");
+      readout.textContent = "a = " + a.toFixed(1) + ", b = " + b.toFixed(1) + "  →  slope = (f(b)−f(a))/(b−a) = (" + fb.toFixed(2) + " − " + fa.toFixed(2) + ")/(" + b.toFixed(1) + " − " + a.toFixed(1) + ") = " + m.toFixed(2);
+    }
+    [aI, wI].forEach((el) => el.addEventListener("input", update));
+    update();
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Curve: f(x) = x². The green line is the secant through the two marked points. Drag Δx down toward 0 and watch the secant's slope — that's where Chapter 2 is headed.</p>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the average rate of change of <code>f(x) = x²</code> on <code>[1,3]</code>, then on <code>[1,1.1]</code>.</p>
+    <details class="step" open><summary>Step 1 — on [1,3]: evaluate f at both endpoints</summary>
+      <div class="step-body"><p>\(f(1)=1\), \(f(3)=9\).</p></div></details>
+    <details class="step"><summary>Step 2 — apply (6.1.1)</summary>
+      <div class="step-body"><p>\(\dfrac{f(3)-f(1)}{3-1} = \dfrac{9-1}{2} = 4\)</p></div></details>
+    <details class="step"><summary>Step 3 — now on [1,1.1]: same formula, a much narrower interval</summary>
+      <div class="step-body"><p>\(f(1)=1\), \(f(1.1)=1.21\). \(\dfrac{f(1.1)-f(1)}{1.1-1} = \dfrac{1.21-1}{0.1} = \dfrac{0.21}{0.1} = 2.1\)</p></div></details>
+    <details class="step"><summary>Result — notice what happened</summary>
+      <div class="step-body"><p>Widening the interval to \([1,3]\) gave \(4\); narrowing it to \([1,1.1]\) gave \(2.1\) — much closer to \(2\). That's not a coincidence: as the interval keeps shrinking toward width \(0\) around \(x=1\), this average rate keeps sliding toward some specific limiting number. Finding that number exactly, for any \(f\) and any point, is the entire subject of Chapter 2.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Two separate errors show up constantly with this formula. First, a sign or order slip: <code>b</code> and <code>a</code> have to appear in the same order top and bottom — <code>(f(b)-f(a))/(b-a)</code>, never <code>(f(b)-f(a))/(a-b)</code>. Flipping just the denominator flips the sign of the whole answer. Second, and more conceptually: <strong>average rate of change is not the same thing as a function's average value</strong>. Average rate of change measures how fast <code>f</code> changed per unit of <code>x</code> over the interval (a slope, in units of "output per input"); average value is a completely different question about the typical height of the graph (a different calculation entirely, using areas — that's a Module 8 topic). Don't reach for one when the question means the other.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>Find the average rate of change of <code>f(x) = x²</code> on <code>[1,4]</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="average rate of change of x squared on 1 to 4">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the average rate of change of <code>f(x) = x²</code> on <code>[0,2]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\((4-0)/(2-0)=2\)</div></details></li>
+    <li>Find the average rate of change of <code>f(x) = 2x + 3</code> on <code>[1,5]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\((13-5)/(5-1)=2\) — a line's average rate of change is always its own slope, everywhere.</div></details></li>
+    <li>Find the average rate of change of <code>f(x) = x³</code> on <code>[0,2]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\((8-0)/(2-0)=4\)</div></details></li>
+    <li>Find the average rate of change of <code>f(x) = x² - 1</code> on <code>[-1,2]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(-1)=0,\ f(2)=3\); \((3-0)/(2-(-1))=1\)</div></details></li>
+    <li>Find the average rate of change of <code>f(x) = 1/x</code> on <code>[1,2]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(1)=1,\ f(2)=1/2\); \((1/2-1)/(2-1)=-1/2\)</div></details></li>
+    <li>A tank's volume is <code>V(t) = t² + 3t</code> liters at time <code>t</code> minutes. Find the average rate of change of <code>V</code> on <code>[2,5]</code>, and state its units.
+      <details class="answer"><summary></summary><div class="ans-body">\(V(2)=10,\ V(5)=40\); \((40-10)/(5-2)=10\) liters per minute.</div></details></li>
+    <li class="tag">bonus — Find the average rate of change of <code>f(x) = x²</code> on <code>[1,1.01]</code>, and compare it to the [1,1.1] result from the worked example.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(1.01)=1.0201\); \((1.0201-1)/0.01=2.01\) — even closer to 2 than the 2.1 from width 0.1, confirming the interval keeps sliding toward a limit of 2.</div></details></li>
+    <li class="tag">bonus — Find the average rate of change of <code>f(x) = x² - 4x</code> on <code>[0,4]</code>. Why might this answer feel surprising given the function isn't a straight line?
+      <details class="answer"><summary></summary><div class="ans-body">\(f(0)=0,\ f(4)=0\); \((0-0)/(4-0)=0\). Surprising only if you picture a straight secant needing a nonzero slope — but the curve dips below the x-axis and comes back up to the same height, so the net change over the whole interval is genuinely zero, even though the function was far from constant in between.</div></details></li>
+    <li class="tag">bonus — Find the average rate of change of <code>f(x) = √x</code> on <code>[4,9]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(4)=2,\ f(9)=3\); \((3-2)/(9-4)=1/5\)</div></details></li>
+    <li class="tag">bonus — True or false: the average rate of change of any linear function <code>f(x)=mx+k</code> on any interval <code>[a,b]</code> is always exactly <code>m</code>. Justify briefly.
+      <details class="answer"><summary></summary><div class="ans-body">True. \(\dfrac{f(b)-f(a)}{b-a}=\dfrac{(mb+k)-(ma+k)}{b-a}=\dfrac{m(b-a)}{b-a}=m\) — the \(k\)'s cancel and the \((b-a)\) factors cancel, leaving \(m\) regardless of which interval is chosen. This is exactly why a line's slope is a single fixed number rather than something that depends on where you measure it.</div></details></li>
+    <li class="tag">challenge — For <code>f(x) = x²</code>, find the average rate of change on <code>[a, a+h]</code> in terms of <code>a</code> and <code>h</code> (don't plug in numbers yet), then simplify as much as possible.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{f(a+h)-f(a)}{h} = \dfrac{(a+h)^2-a^2}{h} = \dfrac{a^2+2ah+h^2-a^2}{h} = \dfrac{2ah+h^2}{h} = 2a+h\) (for \(h\neq0\)). Keep this exact expression in mind — Chapter 2 asks what happens to it as \(h\to0\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m05-limits/ch12-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-the-derivative-definition.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 1 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:1", "content/m06-derivatives/ch01-average-rate-of-change.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

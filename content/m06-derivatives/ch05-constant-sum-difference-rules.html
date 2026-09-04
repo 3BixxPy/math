@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — Constant, Sum &amp; Difference Rules | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 5 of 16</div>
+  <div class="eyebrow">Chapter 5 · concept:derivative-linearity-rules</div>
+  <h1>Constant, Sum &amp; Difference Rules</h1>
+  <p class="subtitle">The power rule differentiates a single power of x. Three small rules — none of them individually surprising — are what let that rule loose on an entire polynomial, term by term.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Nothing in this chapter is deep on its own — each rule is a short, believable statement. What they do together is powerful: they justify differentiating a polynomial like <code>3x⁴ − 5x² + 7x − 2</code> exactly the way it looks like it should work — one term at a time, ignore the rest, add the results. That "obviously it should work like that" instinct is correct, but it needs these three rules to actually be true, not just convenient.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Constant rule</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[c\right] = 0 \]</div><div class="eq-num" id="eq-6-5-1">(6.5.1)</div></div>
+    <p>The derivative of a constant is always <code>0</code>. Makes sense from the definition (6.2.1) directly: if <code>f(x)=c</code> for every <code>x</code>, then <code>f(x+h)−f(x) = c−c = 0</code> for every <code>h</code>, so the whole difference quotient is <code>0</code> before any limit is even taken. Graphically: a constant function is a flat horizontal line, and a flat line's slope — everywhere, including its "tangent" — is <code>0</code>.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Constant multiple rule</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[c\cdot f(x)\right] = c\cdot f'(x) \]</div><div class="eq-num" id="eq-6-5-2">(6.5.2)</div></div>
+    <p>A constant factor just rides along unchanged — differentiate the function part, then multiply by the same constant you started with.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Sum &amp; difference rules</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[f(x)\pm g(x)\right] = f'(x)\pm g'(x) \]</div><div class="eq-num" id="eq-6-5-3">(6.5.3)</div></div>
+    <p>The derivative of a sum (or difference) is the sum (or difference) of the derivatives — differentiate each piece separately and combine. Together, (6.5.1)–(6.5.3) mean any polynomial can be differentiated term by term: apply the power rule (Chapter 4) to each power of <code>x</code>, scale by (6.5.2), drop any lone constant term via (6.5.1), and add the results via (6.5.3).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a full polynomial, term by term</div>
+    <p>Differentiate <code>f(x) = 3x⁴ − 5x² + 7x − 2</code>.</p>
+    <details class="step" open><summary>Step 1 — 3x⁴: power rule (Ch. 4) then constant multiple rule (6.5.2)</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[x^4]=4x^3\), so \(\dfrac{d}{dx}[3x^4] = 3\cdot4x^3 = 12x^3\).</p></div></details>
+    <details class="step"><summary>Step 2 — −5x²: same pattern</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[x^2]=2x\), so \(\dfrac{d}{dx}[-5x^2] = -5\cdot2x = -10x\).</p></div></details>
+    <details class="step"><summary>Step 3 — 7x: x¹, power rule gives 1, then scale</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[x]=1\), so \(\dfrac{d}{dx}[7x] = 7\cdot1 = 7\).</p></div></details>
+    <details class="step"><summary>Step 4 — −2: constant rule (6.5.1)</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[-2] = 0\) — it simply drops out.</p></div></details>
+    <details class="step"><summary>Result — recombine via the sum/difference rule (6.5.3)</summary>
+      <div class="step-body"><p>\(f'(x) = 12x^3 - 10x + 7 + 0 = 12x^3-10x+7\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating the derivative of a constant as anything other than <code>0</code> — most often by confusing "a lone constant" with "a constant <em>times x</em>." <code>d/dx[5] = 0</code> (a flat number, no <code>x</code> at all, per 6.5.1), but <code>d/dx[5x] = 5</code> (a constant multiplying a genuine power of <code>x</code>, per 6.5.2 combined with the power rule). These look superficially similar — both have a "5" sitting there — but they are structurally different terms, and mixing them up (writing <code>5</code> where <code>0</code> belongs, or vice versa) is one of the most common slips in an otherwise-correct polynomial differentiation.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="0">
+    <div class="label">Try it yourself</div>
+    <p>Find <code>d/dx[5]</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="derivative of the constant 5">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find <code>d/dx[9]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0\)</div></details></li>
+    <li>Find <code>d/dx[8x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(8\)</div></details></li>
+    <li>Find <code>d/dx[x³ + x²]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3x^2+2x\)</div></details></li>
+    <li>Find <code>d/dx[6x² − 4x + 9]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(12x-4\)</div></details></li>
+    <li>Find <code>d/dx[-2x³ + 3x - 1]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-6x^2+3\)</div></details></li>
+    <li>Find <code>d/dx[x⁵ − x⁴ + x³ − x² + x − 1]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(5x^4-4x^3+3x^2-2x+1\)</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[7x^(1/2) - 3x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(7\cdot\frac12x^{-1/2}-3 = \frac{7}{2\sqrt{x}}-3\)</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[4/x² + 2x²]</code>. (Rewrite the first term first.)
+      <details class="answer"><summary></summary><div class="ans-body">\(4x^{-2}+2x^2 \Rightarrow -8x^{-3}+4x = -8/x^3+4x\)</div></details></li>
+    <li class="tag">bonus — If <code>f(x) = ax² + bx + c</code> for constants a, b, c, find <code>f'(x)</code> in terms of a, b, c.
+      <details class="answer"><summary></summary><div class="ans-body">\(2ax+b\) — the same rules apply whether the coefficients are specific numbers or general letters.</div></details></li>
+    <li class="tag">bonus — Explain, using (6.5.1) and (6.5.2), why d/dx[7] and d/dx[7x⁰] must be the same number even though they look different.
+      <details class="answer"><summary></summary><div class="ans-body">\(x^0=1\) for \(x\neq0\), so \(7x^0=7\) is literally the same constant — both differentiate to \(0\) by (6.5.1) (or equivalently, power rule on \(x^0\) gives \(0\cdot x^{-1}=0\), then (6.5.2) scales that 0 by 7, still 0).</div></details></li>
+    <li class="tag">challenge — A polynomial's derivative has degree exactly one less than the original polynomial's degree, as long as the leading coefficient is nonzero. Explain why, using (6.4.1) and (6.5.2) together, and state what happens to the derivative of a degree-0 polynomial (a constant) as the one edge case.
+      <details class="answer"><summary></summary><div class="ans-body">The highest-degree term \(cx^n\) differentiates to \(cn\cdot x^{n-1}\) (power rule + 6.5.2), which is still nonzero whenever \(c\neq0\) and \(n\geq1\), and every lower-degree term drops to an even lower degree — so the new highest-degree term has degree exactly \(n-1\). The edge case: a degree-0 polynomial (a bare constant) differentiates to 0 by (6.5.1), which isn't a polynomial of degree \(-1\) — it's simply the zero function, breaking the "one less" pattern because there's no lower degree to drop to.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-power-rule.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-product-rule.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 5 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:5", "content/m06-derivatives/ch05-constant-sum-difference-rules.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

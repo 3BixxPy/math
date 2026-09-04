@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — Implicit Differentiation | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 12 of 16</div>
+  <div class="eyebrow">Chapter 12 · concept:implicit-differentiation</div>
+  <h1>Implicit Differentiation</h1>
+  <p class="subtitle">Every derivative so far started with y already isolated: f(x) = something in terms of x alone. Not every equation cooperates that way — a circle's equation never solves cleanly for a single y. This chapter differentiates anyway.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>An equation like <code>x²+y²=25</code> (a circle) genuinely can't be written as one function <code>y=f(x)</code> — for most x-values there are two y's, not one, so solving for y and differentiating that formula directly isn't an option without first splitting into two separate pieces (top half, bottom half) and picking one. Implicit differentiation sidesteps the split entirely: differentiate the whole equation as it stands, both sides, treating <code>y</code> the whole time as some unspecified function of <code>x</code> — which is exactly what the chain rule (Chapter 9) is built to handle.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — differentiating implicitly</div>
+    <ol>
+      <li>Differentiate <em>both sides</em> of the equation with respect to <code>x</code>, term by term.</li>
+      <li>Every time a term contains <code>y</code>, treat <code>y</code> as an unknown function of <code>x</code> and apply the chain rule to it — this produces a factor of <code>dy/dx</code> that a plain <code>x</code>-term would never get. In particular, a power of y follows this pattern:</li>
+    </ol>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[y^n\right] = n\,y^{n-1}\cdot\frac{dy}{dx} \]</div><div class="eq-num" id="eq-6-12-1">(6.12.1)</div></div>
+    <ol start="3">
+      <li>Once every term is differentiated, every <code>dy/dx</code> is still just an unknown factor sitting in the equation — collect all the terms containing <code>dy/dx</code> on one side, everything else on the other, factor out <code>dy/dx</code>, and solve for it algebraically (Module 0's linear-equation-solving skill, applied to an equation where the "unknown" happens to be <code>dy/dx</code> instead of a plain variable).</li>
+    </ol>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a circle</div>
+    <p>Find <code>dy/dx</code> for <code>x² + y² = 25</code>, then find the tangent line's slope at the point <code>(3,4)</code> on the circle.</p>
+    <details class="step" open><summary>Step 1 — differentiate both sides with respect to x</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[x^2] + \dfrac{d}{dx}[y^2] = \dfrac{d}{dx}[25]\)</p></div></details>
+    <details class="step"><summary>Step 2 — apply the power rule to x², (6.12.1) to y², and the constant rule to 25</summary>
+      <div class="step-body"><p>\(2x + 2y\cdot\dfrac{dy}{dx} = 0\)</p></div></details>
+    <details class="step"><summary>Step 3 — solve algebraically for dy/dx</summary>
+      <div class="step-body"><p>\(2y\dfrac{dy}{dx} = -2x \implies \dfrac{dy}{dx} = \dfrac{-2x}{2y} = -\dfrac{x}{y}\)</p></div></details>
+    <details class="step"><summary>Step 4 — evaluate at the specific point (3,4)</summary>
+      <div class="step-body"><p>\(\dfrac{dy}{dx}\bigg|_{(3,4)} = -\dfrac{3}{4}\) — the tangent line to the circle at \((3,4)\) has slope \(-3/4\). Geometrically, this checks out: a circle's tangent line at any point is always perpendicular to the radius drawn to that point, and the radius to \((3,4)\) has slope \(4/3\) — \(-3/4\) is exactly the number that makes those two slopes multiply to \(-1\), the signature of two perpendicular lines.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting to multiply by <code>dy/dx</code> when differentiating a term containing <code>y</code> — writing <code>d/dx[y²] = 2y</code> and stopping, instead of the correct <code>2y·(dy/dx)</code> from (6.12.1). This is the exact same chain-rule mistake as Chapter 9's (forgetting the inner-function derivative factor), just easy to miss here because the "inner function" is the mostly-invisible <code>y</code> itself rather than an obvious expression like <code>(x+3)</code>. The habit that prevents this: <code>y</code> is never a plain variable in this method — it's always secretly <code>y(x)</code>, a function of x, so <em>every single term with a y in it</em> needs a chain-rule pass, without exception, even a lone <code>y</code> by itself (which differentiates to <code>1·dy/dx</code>, not <code>1</code>).</p>
+  </div>
+
+  <div class="block practice checker" data-answers="-1/(2y),-1/2y">
+    <div class="label">Try it yourself</div>
+    <p>Implicitly differentiate <code>x + y² = 4</code>. Find <code>dy/dx</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. -1/(2y)" aria-label="dy dx for x plus y squared equals 4">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Implicitly differentiate <code>x² + y² = 9</code>. Find dy/dx.
+      <details class="answer"><summary></summary><div class="ans-body">\(2x+2y(dy/dx)=0 \Rightarrow dy/dx = -x/y\)</div></details></li>
+    <li>Implicitly differentiate <code>x²y = 6</code>. (You'll need the product rule on the left side, since x² and y are multiplied.)
+      <details class="answer"><summary></summary><div class="ans-body">\(2xy + x^2(dy/dx) = 0 \Rightarrow dy/dx = -2xy/x^2 = -2y/x\)</div></details></li>
+    <li>Implicitly differentiate <code>y³ = x</code>. Find dy/dx.
+      <details class="answer"><summary></summary><div class="ans-body">\(3y^2(dy/dx)=1 \Rightarrow dy/dx = 1/(3y^2)\)</div></details></li>
+    <li>Implicitly differentiate <code>x² - y² = 1</code>. Find dy/dx.
+      <details class="answer"><summary></summary><div class="ans-body">\(2x-2y(dy/dx)=0 \Rightarrow dy/dx=x/y\)</div></details></li>
+    <li>For <code>x² + y² = 9</code> (problem 1), find the slope of the tangent line at the point (0,3).
+      <details class="answer"><summary></summary><div class="ans-body">\(dy/dx=-x/y=-0/3=0\) — flat tangent at the very top of the circle, as expected.</div></details></li>
+    <li>Implicitly differentiate <code>3x + 2y = 10</code>, and check the result matches what you'd get by solving for y first and differentiating directly.
+      <details class="answer"><summary></summary><div class="ans-body">\(3+2(dy/dx)=0 \Rightarrow dy/dx=-3/2\). Direct: \(y=(10-3x)/2=5-\frac32x\), whose derivative is \(-3/2\). Match.</div></details></li>
+    <li class="tag">bonus — Implicitly differentiate <code>xy = 12</code> using the product rule, then check against solving for y=12/x and differentiating directly.
+      <details class="answer"><summary></summary><div class="ans-body">Implicit: \(1\cdot y+x(dy/dx)=0 \Rightarrow dy/dx=-y/x\). Direct: \(y=12/x=12x^{-1}\), \(dy/dx=-12x^{-2}=-12/x^2\). Since \(y=12/x\), \(-y/x=-12/x^2\) too — match.</div></details></li>
+    <li class="tag">bonus — Implicitly differentiate <code>x² + xy + y² = 7</code>. (The middle term needs the product rule.)
+      <details class="answer"><summary></summary><div class="ans-body">\(2x + [1\cdot y+x(dy/dx)] + 2y(dy/dx) = 0 \Rightarrow 2x+y+(x+2y)(dy/dx)=0 \Rightarrow dy/dx = -\dfrac{2x+y}{x+2y}\)</div></details></li>
+    <li class="tag">bonus — Implicitly differentiate <code>sin(y) = x</code>. (dy/dx will involve cos(y).)
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos(y)(dy/dx)=1 \Rightarrow dy/dx = 1/\cos(y)\)</div></details></li>
+    <li class="tag">bonus — For the circle <code>x² + y² = 25</code> (the worked example), find the one point where the tangent line is perfectly vertical (dy/dx undefined), and explain what that means about y there.
+      <details class="answer"><summary></summary><div class="ans-body">\(dy/dx=-x/y\) is undefined exactly when \(y=0\), i.e. at \((\pm5,0)\) — the circle's leftmost and rightmost points, where the tangent really is vertical, matching the picture directly.</div></details></li>
+    <li class="tag">challenge — Implicitly differentiate <code>x³ + y³ = 6xy</code> (a classic "folium" curve), a genuine three-term implicit problem needing the product rule on the right side as well as (6.12.1) on the y³ term.
+      <details class="answer"><summary></summary><div class="ans-body">\(3x^2 + 3y^2(dy/dx) = 6y + 6x(dy/dx)\) (right side via product rule: \(d/dx[6xy]=6y+6x(dy/dx)\)). Collect dy/dx terms: \(3y^2(dy/dx)-6x(dy/dx) = 6y-3x^2 \Rightarrow (dy/dx)(3y^2-6x)=6y-3x^2 \Rightarrow dy/dx = \dfrac{6y-3x^2}{3y^2-6x} = \dfrac{2y-x^2}{y^2-2x}\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch11-derivatives-of-exponentials-logs.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch13-higher-order-derivatives.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 12 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:12", "content/m06-derivatives/ch12-implicit-differentiation.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

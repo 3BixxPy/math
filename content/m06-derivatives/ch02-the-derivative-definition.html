@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — The Derivative: A Limit of Secant Slopes | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 2 of 16</div>
+  <div class="eyebrow">Chapter 2 · concept:derivative-definition</div>
+  <h1>The Derivative — A Limit of Secant Slopes</h1>
+  <p class="subtitle">Chapter 1 ended with exactly this expression, unsimplified: the average rate of change of <code>f(x)=x²</code> on <code>[a, a+h]</code> works out to <code>2a+h</code>. This chapter asks the one question that expression was built for: what happens as <code>h → 0</code>? That's a limit — Module 5, twelve chapters of it, applied to this one specific setup.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters — the whole point of Module 5</div>
+    <p>Chapter 1's secant line connects two points on a curve, a width <code>h</code> apart. Slide the second point toward the first — shrink <code>h</code> toward <code>0</code> — and the secant line rotates. It doesn't rotate forever; it settles into one specific line, the one that just grazes the curve at a single point instead of cutting through it at two. That settling-into line is the <strong>tangent line</strong>, and its slope is the <strong>derivative</strong>. Nothing about this is a new kind of mathematical object — it is precisely a limit, computed on the average-rate-of-change expression from Chapter 1, as the interval width goes to zero. Every ounce of care Module 5 spent on "does a limit exist," "how do you actually evaluate one," "what does 0/0 mean and how do you get past it" was spent so that this definition would not be a cold, unfamiliar symbol today.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Definition — The derivative</div>
+    <div class="eqn"><div class="eq-body">\[ f'(x) = \lim_{h\to0} \frac{f(x+h)-f(x)}{h} \]</div><div class="eq-num" id="eq-6-2-1">(6.2.1)</div></div>
+    <p>Compare this directly to Chapter 1's formula (6.1.1) with <code>a=x</code> and <code>b=x+h</code>: the average rate of change over <code>[x, x+h]</code> is exactly <code>[f(x+h)−f(x)]/h</code>. Equation (6.2.1) is that same secant slope, with a Module 5 limit wrapped around it, letting <code>h</code> shrink to <code>0</code>. <code>f'(x)</code> ("f prime of x") is read as "the derivative of <code>f</code> at <code>x</code>," and it means: the instantaneous rate of change of <code>f</code> at the single point <code>x</code> — the slope of the tangent line there, not an approximation of it. Other common notations for the same object: <code>dy/dx</code> (Leibniz notation, read "dee-y dee-x," which literally comes from an infinitesimal <code>Δy/Δx</code>), <code>y'</code>, and <code>d/dx[f(x)]</code>. When <code>f'(x)</code> exists at a point, <code>f</code> is called <strong>differentiable</strong> there — the subject of Chapter 3.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>x₀: <input type="range" id="der-x0" min="-1.5" max="2.5" step="0.1" value="1"></label>
+    <label>h: <input type="range" id="der-h" min="-2" max="2" step="0.1" value="1.5"></label>
+  </div>
+  <div class="plot-wrap"><svg id="der-svg" viewBox="0 0 480 320" width="480" height="320"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="der-readout"></span></div>
+  <script>
+  (function () {
+    const svg = document.getElementById("der-svg");
+    const x0I = document.getElementById("der-x0"), hI = document.getElementById("der-h");
+    const readout = document.getElementById("der-readout");
+    const f = (x) => x * x;
+    const opts = { xMin: -2.5, xMax: 5, yMin: -2, yMax: 22, width: 480, height: 320, pad: 34, xStep: 1, yStep: 4 };
+    function update() {
+      const x0 = parseFloat(x0I.value), h = parseFloat(hI.value);
+      const { px, py } = MCPlot.drawAxes(svg, opts);
+      MCPlot.plotFunction(svg, f, opts, "plot-curve");
+      const fx0 = f(x0);
+      const exact = 2 * x0;
+      if (Math.abs(h) < 0.05) {
+        MCPlot.plotFunction(svg, (x) => exact * (x - x0) + fx0, opts, "plot-curve-alt");
+        MCPlot.plotPoints(svg, [[x0, fx0]], opts, "plot-point");
+        readout.textContent = "x₀ = " + x0.toFixed(1) + ", h = 0  →  the secant HAS BECOME the tangent line: slope = f'(" + x0.toFixed(1) + ") = 2(" + x0.toFixed(1) + ") = " + exact.toFixed(2) + "  (this is the limit itself, not an approximation)";
+      } else {
+        const x1 = x0 + h, fx1 = f(x1);
+        const m = (fx1 - fx0) / h;
+        MCPlot.plotFunction(svg, (x) => m * (x - x0) + fx0, opts, "plot-curve-alt");
+        MCPlot.plotPoints(svg, [[x0, fx0]], opts, "plot-point");
+        MCPlot.plotPoints(svg, [[x1, fx1]], opts, "plot-point-alt");
+        readout.textContent = "x₀ = " + x0.toFixed(1) + ", h = " + h.toFixed(2) + "  →  secant slope = [f(x₀+h)−f(x₀)]/h = " + m.toFixed(2) + "   (as h → 0, this → f'(" + x0.toFixed(1) + ") = " + exact.toFixed(2) + ")";
+      }
+    }
+    [x0I, hI].forEach((el) => el.addEventListener("input", update));
+    update();
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Curve: f(x) = x². Drag h toward 0 from either side and watch the green secant rotate into the tangent line at x₀ — literally equation (6.2.1) happening on screen.</p>
+
+  <div class="block example">
+    <div class="label">Worked example — f(x) = x² from the definition, in full</div>
+    <p>Use (6.2.1) to find <code>f'(x)</code> for <code>f(x) = x²</code>.</p>
+    <details class="step" open><summary>Step 1 — set up the difference quotient</summary>
+      <div class="step-body"><p>\(f'(x) = \displaystyle\lim_{h\to0}\frac{f(x+h)-f(x)}{h} = \lim_{h\to0}\frac{(x+h)^2 - x^2}{h}\)</p></div></details>
+    <details class="step"><summary>Step 2 — expand (x+h)² fully (Module 0's FOIL)</summary>
+      <div class="step-body"><p>\((x+h)^2 = x^2 + 2xh + h^2\), so the numerator becomes \(x^2+2xh+h^2-x^2\).</p></div></details>
+    <details class="step"><summary>Step 3 — the x² terms cancel</summary>
+      <div class="step-body"><p>\(x^2+2xh+h^2-x^2 = 2xh+h^2\), so \(f'(x) = \displaystyle\lim_{h\to0}\frac{2xh+h^2}{h}\).</p></div></details>
+    <details class="step"><summary>Step 4 — factor h out of the numerator and cancel with the denominator</summary>
+      <div class="step-body"><p>\(\dfrac{2xh+h^2}{h} = \dfrac{h(2x+h)}{h} = 2x+h\) for \(h\neq0\) — this is exactly Chapter 1's challenge-problem result, \(2a+h\), with \(a\) renamed \(x\). Direct substitution now works, because the \(0/0\) form is gone (this is Module 5 Chapter 5's factor-and-cancel move, applied here instead of to a plain rational expression).</p></div></details>
+    <details class="step"><summary>Step 5 — now take the limit</summary>
+      <div class="step-body"><p>\(\displaystyle\lim_{h\to0}(2x+h) = 2x\) — direct substitution, since \(2x+h\) is just a polynomial in \(h\) (Module 5 Chapter 4).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(f'(x) = 2x\) for \(f(x)=x^2\). Check it against the diagram above: at \(x_0=1\), the formula gives \(f'(1)=2\) — exactly what the secant's slope converges to as \(h\to0\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Plugging in <code>h=0</code> before fully simplifying the fraction. Substitute <code>h=0</code> straight into <code>[f(x+h)-f(x)]/h</code> as written and you get <code>0/0</code> every single time — that's not wrong arithmetic, it's the definition working exactly as expected, because <code>x+h=x</code> the instant <code>h=0</code>. The whole reason (6.2.1) is a limit and not a direct evaluation is that direct substitution always fails here at first. The required move — same lesson as Module 5 Chapter 5 — is to expand and simplify algebraically <em>until the h in the denominator cancels</em>, exactly like Step 4 above, and only take the limit after that cancellation. Stopping at the unsimplified <code>0/0</code> form, or worse, declaring the derivative "undefined," throws away a limit that actually exists and is easy to find.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="3">
+    <div class="label">Try it yourself</div>
+    <p>Using the definition (6.2.1), find <code>f'(x)</code> for <code>f(x) = 3x</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="derivative of 3x from the definition">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Using (6.2.1), find <code>f'(x)</code> for <code>f(x) = 5x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\lim_{h\to0}[5(x+h)-5x]/h = \lim_{h\to0} 5h/h = 5\)</div></details></li>
+    <li>Using (6.2.1), find <code>f'(x)</code> for <code>f(x) = x² + 1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Numerator: \((x+h)^2+1-(x^2+1)=2xh+h^2\); divide by h, limit gives \(2x\) — the \(+1\) contributed nothing (it cancels immediately).</div></details></li>
+    <li>Using (6.2.1), find <code>f'(x)</code> for <code>f(x) = 7</code> (a constant function).
+      <details class="answer"><summary></summary><div class="ans-body">\(\lim_{h\to0}(7-7)/h = \lim_{h\to0} 0/h = 0\) — a constant function's tangent line is always flat.</div></details></li>
+    <li>Using (6.2.1), find <code>f'(x)</code> for <code>f(x) = x² - 3x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Numerator: \([(x+h)^2-3(x+h)]-[x^2-3x] = 2xh+h^2-3h = h(2x+h-3)\); divide and take the limit: \(2x-3\).</div></details></li>
+    <li>Using (6.2.1), find <code>f'(x)</code> for <code>f(x) = -4x + 2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Numerator: \([-4(x+h)+2]-[-4x+2]=-4h\); divide by h, limit gives \(-4\) — matches the line's own slope, as expected.</div></details></li>
+    <li>For <code>f(x)=x²</code> (this chapter's running example), evaluate <code>f'(3)</code> using the formula found in the worked example, and explain what that number means about the graph at <code>x=3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=2x \Rightarrow f'(3)=6\). It means the tangent line to \(y=x^2\) at the point \((3,9)\) has slope 6 — the instantaneous rate \(f\) is changing at exactly that point.</div></details></li>
+    <li class="tag">bonus — Using (6.2.1), find <code>f'(x)</code> for <code>f(x) = x³</code>. (You'll need \((x+h)^3 = x^3+3x^2h+3xh^2+h^3\).)
+      <details class="answer"><summary></summary><div class="ans-body">Numerator: \(3x^2h+3xh^2+h^3=h(3x^2+3xh+h^2)\); divide by h, take \(h\to0\): \(3x^2\).</div></details></li>
+    <li class="tag">bonus — Explain in one sentence why (6.2.1) always produces a \(0/0\) form if you substitute \(h=0\) before simplifying, for <em>any</em> function f, not just \(x^2\).
+      <details class="answer"><summary></summary><div class="ans-body">Because at \(h=0\) the numerator becomes \(f(x)-f(x)=0\) and the denominator becomes \(0\) as well, regardless of what \(f\) is — the cancellation step is unavoidable, not a quirk of any one function.</div></details></li>
+    <li class="tag">bonus — True or false: \(f'(x)\) is itself a function of <code>x</code> (a new function built from f), not just a single number.
+      <details class="answer"><summary></summary><div class="ans-body">True — e.g. \(f'(x)=2x\) for \(f(x)=x^2\) gives a different output at every input \(x\); it only becomes a single number once you plug in a specific \(x\), like \(f'(3)=6\).</div></details></li>
+    <li class="tag">bonus — Using (6.2.1) with the two-point form <code>f'(a) = lim_{x→a} [f(x)-f(a)]/(x-a)</code> (an equivalent version — let x play the role of x₀+h, approaching a instead of h approaching 0), find <code>f'(2)</code> for <code>f(x)=x²</code> directly, without first finding the general formula.
+      <details class="answer"><summary></summary><div class="ans-body">\(\lim_{x\to2}\dfrac{x^2-4}{x-2} = \lim_{x\to2}\dfrac{(x-2)(x+2)}{x-2}=\lim_{x\to2}(x+2)=4\) — same technique as Module 5 Chapter 5, and it matches \(f'(x)=2x\) at \(x=2\).</div></details></li>
+    <li class="tag">challenge — Using (6.2.1), find <code>f'(x)</code> for <code>f(x) = 1/x</code>. (You'll need to combine the two fractions in the numerator over a common denominator before the h in the overall denominator will cancel.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1/(x+h)-1/x}{h} = \dfrac{x-(x+h)}{hx(x+h)} = \dfrac{-h}{hx(x+h)}=\dfrac{-1}{x(x+h)}\) (h cancels). Taking \(h\to0\): \(f'(x)=-1/x^2\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-average-rate-of-change.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-differentiability-and-continuity.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 2 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:2", "content/m06-derivatives/ch02-the-derivative-definition.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

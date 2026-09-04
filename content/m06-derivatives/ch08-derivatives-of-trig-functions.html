@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Derivatives of Trig Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 8 of 16</div>
+  <div class="eyebrow">Chapter 8 · concept:trig-derivatives</div>
+  <h1>Derivatives of Trig Functions</h1>
+  <p class="subtitle">Module 5 Chapter 11 proved two limits — <code>lim sin(h)/h = 1</code> and <code>lim (1-cos h)/h = 0</code> — and promised they'd become the literal foundation of differentiating sine and cosine the moment this module began. This is that moment.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every trig derivative in this chapter traces back to those exact two limits — nothing else is needed. That's worth sitting with for a second: an entire family of six derivative rules, all deriveable from two specific number facts proven seven chapters ago. This is the payoff Module 5 was built for, made completely explicit rather than left as an abstract promise.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The two base trig derivatives</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[\sin x\right] = \cos x \]</div><div class="eq-num" id="eq-6-8-1">(6.8.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ \frac{d}{dx}\left[\cos x\right] = -\sin x \]</div><div class="eq-num" id="eq-6-8-2">(6.8.2)</div></div>
+    <p>Note the minus sign on cosine's derivative — it's real, and it's the single most common sign slip in this chapter (see the mistake box below).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked derivation — d/dx[sin x], in full</div>
+    <p>Derive (6.8.1) directly from the limit definition (6.2.1).</p>
+    <details class="step" open><summary>Step 1 — set up the difference quotient</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[\sin x] = \displaystyle\lim_{h\to0}\frac{\sin(x+h)-\sin x}{h}\)</p></div></details>
+    <details class="step"><summary>Step 2 — expand sin(x+h) with the angle-sum identity</summary>
+      <div class="step-body"><p>One trig fact from outside Module 2 is needed here: the angle-sum identity <code>sin(A+B) = sin A cos B + cos A sin B</code> (provable from the unit circle and rotation, but taken as given here). Applying it with \(A=x, B=h\): \(\sin(x+h) = \sin x\cos h + \cos x\sin h\), so the numerator becomes \(\sin x\cos h + \cos x\sin h - \sin x\).</p></div></details>
+    <details class="step"><summary>Step 3 — group the two sin x terms together</summary>
+      <div class="step-body"><p>\(\sin x\cos h - \sin x + \cos x\sin h = \sin x(\cos h - 1) + \cos x\sin h\)</p></div></details>
+    <details class="step"><summary>Step 4 — split into two limits (Module 5 Chapter 4's sum law) and factor out what doesn't depend on h</summary>
+      <div class="step-body"><p>\(\displaystyle\lim_{h\to0}\left[\sin x\cdot\frac{\cos h-1}{h} + \cos x\cdot\frac{\sin h}{h}\right] = \sin x\cdot\lim_{h\to0}\frac{\cos h-1}{h} \;+\; \cos x\cdot\lim_{h\to0}\frac{\sin h}{h}\)</p></div></details>
+    <details class="step"><summary>Step 5 — plug in Module 5 Chapter 11's two essential trig limits</summary>
+      <div class="step-body"><p>\(\displaystyle\lim_{h\to0}\frac{\sin h}{h}=1\) (equation 5.11.1) directly. And \(\displaystyle\lim_{h\to0}\frac{\cos h-1}{h} = -\lim_{h\to0}\frac{1-\cos h}{h} = -(0) = 0\) (equation 5.11.2, sign-flipped).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\sin x\cdot(0) + \cos x\cdot(1) = \cos x\). That's (6.8.1) — built entirely out of the angle-sum identity above and the two trig limits from Module 5, nothing more.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">The same computation for cos x</div>
+    <p>The derivation of (6.8.2) is structurally identical, using <code>cos(x+h) = cos x cos h − sin x sin h</code> in place of the sine sum formula.</p>
+    <details class="step" open><summary>Set up and expand</summary>
+      <div class="step-body"><p>\(\displaystyle\lim_{h\to0}\frac{\cos(x+h)-\cos x}{h} = \lim_{h\to0}\frac{\cos x\cos h - \sin x\sin h - \cos x}{h} = \lim_{h\to0}\left[\cos x\cdot\frac{\cos h-1}{h} - \sin x\cdot\frac{\sin h}{h}\right]\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Same two limits as before: \(\cos x\cdot(0) - \sin x\cdot(1) = -\sin x\). That's (6.8.2) — the minus sign comes directly out of the angle-sum expansion, not from anywhere arbitrary.</p></div></details>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The other four, via the quotient rule</div>
+    <div class="eqn"><div class="eq-body">\[ \begin{aligned} \frac{d}{dx}[\tan x] &= \sec^2 x \\ \frac{d}{dx}[\cot x] &= -\csc^2 x \\ \frac{d}{dx}[\sec x] &= \sec x\tan x \\ \frac{d}{dx}[\csc x] &= -\csc x\cot x \end{aligned} \]</div><div class="eq-num" id="eq-6-8-3">(6.8.3)</div></div>
+    <p>None of these need to be memorized as separate cold facts — every one of them comes straight out of Chapter 7's quotient rule applied to <code>tan x = sin x/cos x</code>, <code>cot x = cos x/sin x</code>, and the reciprocal definitions of sec and csc, combined with (6.8.1)–(6.8.2). For example: \(\dfrac{d}{dx}[\tan x] = \dfrac{d}{dx}\left[\dfrac{\sin x}{\cos x}\right] = \dfrac{\cos x\cos x - \sin x(-\sin x)}{\cos^2x} = \dfrac{\cos^2x+\sin^2x}{\cos^2x} = \dfrac{1}{\cos^2x} = \sec^2x\) — the Pythagorean identity (Module 2 Chapter 9) collapsing the numerator to exactly 1 is what makes this come out so clean.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — product rule + trig derivatives together</div>
+    <p>Differentiate <code>3sin(x) − x²cos(x)</code>.</p>
+    <details class="step" open><summary>Step 1 — the first term is a plain constant multiple (6.5.2)</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[3\sin x] = 3\cos x\)</p></div></details>
+    <details class="step"><summary>Step 2 — the second term needs the product rule (Ch. 6): f=x², g=cos x</summary>
+      <div class="step-body"><p>\(f'=2x\), \(g'=-\sin x\). \(\dfrac{d}{dx}[x^2\cos x] = 2x\cos x + x^2(-\sin x) = 2x\cos x - x^2\sin x\)</p></div></details>
+    <details class="step"><summary>Result — combine via the difference rule (6.5.3), watching the sign on the whole second term</summary>
+      <div class="step-body"><p>\(3\cos x - \left(2x\cos x - x^2\sin x\right) = 3\cos x - 2x\cos x + x^2\sin x\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Two sign/identity mix-ups happen constantly here. First: dropping the negative on cosine's derivative — writing <code>d/dx[cos x] = sin x</code> instead of <code>-sin x</code> (equation 6.8.2). Second: swapping which of <code>sec²x</code> and <code>sec(x)tan(x)</code> belongs to which function — <code>tan x</code>'s derivative is <code>sec²x</code> (no tan in the answer), while <code>sec x</code>'s derivative is <code>sec(x)tan(x)</code> (both functions appear, multiplied). One quick way to keep them straight: every "co-" function (cos, cot, csc) gets a <em>negative</em> derivative; the plain versions (sin, tan, sec) don't.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="-sin(x),-sinx,-sin x">
+    <div class="label">Try it yourself</div>
+    <p>Find <code>d/dx[cos x]</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. -sin(x)" aria-label="derivative of cosine of x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find <code>d/dx[sin x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos x\)</div></details></li>
+    <li>Find <code>d/dx[5cos x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-5\sin x\)</div></details></li>
+    <li>Find <code>d/dx[tan x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sec^2x\)</div></details></li>
+    <li>Find <code>d/dx[sec x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sec x\tan x\)</div></details></li>
+    <li>Find <code>d/dx[sin x + cos x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos x - \sin x\)</div></details></li>
+    <li>Differentiate <code>x·sin x</code> using the product rule.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\cdot\sin x + x\cos x = \sin x + x\cos x\)</div></details></li>
+    <li class="tag">bonus — Find <code>d/dx[cot x]</code>, deriving it from cos x/sin x via the quotient rule rather than recalling it from memory.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{-\sin x\sin x - \cos x\cos x}{\sin^2x} = \dfrac{-(\sin^2x+\cos^2x)}{\sin^2x} = \dfrac{-1}{\sin^2x}=-\csc^2x\)</div></details></li>
+    <li class="tag">bonus — Differentiate <code>cos(x)/x</code> using the quotient rule.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{-\sin x\cdot x - \cos x\cdot1}{x^2} = \dfrac{-x\sin x-\cos x}{x^2}\)</div></details></li>
+    <li class="tag">bonus — Differentiate <code>4tan x - 2sec x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(4\sec^2x - 2\sec x\tan x\)</div></details></li>
+    <li class="tag">bonus — Evaluate d/dx[sin x] at x=0 and at x=π/2. What do these two derivative values say about the steepness of the sine curve at those two points?
+      <details class="answer"><summary></summary><div class="ans-body">At x=0: \(\cos(0)=1\) — steepest, sine is rising fastest there. At x=π/2: \(\cos(\pi/2)=0\) — momentarily flat, exactly at sine's peak (Module 2's graph makes this visually obvious: the curve crests and flattens right at π/2).</div></details></li>
+    <li class="tag">challenge — Differentiate <code>sin²x</code> (that is, (sin x)²) by treating it as sin(x)·sin(x) and applying the product rule — don't use the chain rule yet, that's next chapter.
+      <details class="answer"><summary></summary><div class="ans-body">Product rule on \(\sin x\cdot\sin x\): \(\cos x\cdot\sin x + \sin x\cdot\cos x = 2\sin x\cos x\) — so \(d/dx[\sin^2x] = 2\sin x\cos x\), a result Chapter 9's chain rule will reproduce in one line instead of two.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-quotient-rule.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-chain-rule.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 8 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:8", "content/m06-derivatives/ch08-derivatives-of-trig-functions.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Differentiability &amp; Continuity | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 3 of 16</div>
+  <div class="eyebrow">Chapter 3 · concept:differentiability-continuity-relationship</div>
+  <h1>Differentiability &amp; Continuity</h1>
+  <p class="subtitle">Module 5 Chapter 8 built continuity out of limits: no jumps, no holes, no blow-ups. This chapter connects that idea to Chapter 2's new one — and shows they're related, but not the same relationship in both directions.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Before grinding through differentiation rules starting next chapter, it's worth knowing exactly when a derivative is guaranteed to exist at all — and, just as importantly, when it isn't. A function can be perfectly continuous (no break in the graph, Module 5 Chapter 8's three-part test fully satisfied) and still have no derivative at a point, if the graph has a sharp corner there. Knowing what that looks like now means it's never a mysterious "why did this rule fail" surprise later.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Differentiable implies continuous</div>
+    <div class="eqn"><div class="eq-body">\[ f \text{ is differentiable at } x=a \implies f \text{ is continuous at } x=a \]</div><div class="eq-num" id="eq-6-3-1">(6.3.1)</div></div>
+    <p>If <code>f'(a)</code> exists (the limit in equation 6.2.1 exists at that point), then <code>f</code> automatically satisfies all three of Module 5 Chapter 8's continuity conditions at <code>a</code>. Informally: a curve can't have a well-defined tangent line at a point where it jumps or has a hole — there'd be nothing single and stable for the secant slopes to converge to.</p>
+    <p><strong>The converse is false.</strong> Continuity does <em>not</em> guarantee differentiability. A function can be perfectly continuous at a point — no jump, no hole, the three-part test fully passed — and still fail to have a derivative there. The next section shows the standard example.</p>
+  </div>
+
+  <div class="plot-wrap"><svg id="abs-svg" viewBox="0 0 320 260" width="320" height="260"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">f(x) = |x|. No break in the graph anywhere — continuous everywhere, including at x=0. But that corner at the origin is exactly where the derivative fails to exist.</p>
+  <script>
+  (function () {
+    const svg = document.getElementById("abs-svg");
+    const opts = { xMin: -4, xMax: 4, yMin: -0.5, yMax: 4.5, width: 320, height: 260, pad: 30, xStep: 1, yStep: 1 };
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => Math.abs(x), opts, "plot-curve");
+    MCPlot.plotPoints(svg, [[0, 0]], opts, "plot-point-alt");
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — why |x| isn't differentiable at x=0</div>
+    <p>Show that <code>f(x) = |x|</code> is continuous at <code>x=0</code> but not differentiable there.</p>
+    <details class="step" open><summary>Step 1 — continuity check first (Module 5 Chapter 8, all three conditions)</summary>
+      <div class="step-body"><p>(1) \(f(0)=|0|=0\), defined. (2) \(\lim_{x\to0}|x|=0\) (both sides approach 0). (3) The limit \(0\) equals \(f(0)=0\). All three hold — \(f\) <strong>is</strong> continuous at \(x=0\).</p></div></details>
+    <details class="step"><summary>Step 2 — now try the derivative at 0, using (6.2.1)</summary>
+      <div class="step-body"><p>\(f'(0) = \displaystyle\lim_{h\to0}\frac{|0+h|-|0|}{h} = \lim_{h\to0}\frac{|h|}{h}\). Because of the absolute value, this needs one-sided limits — exactly Module 5 Chapter 2's tool.</p></div></details>
+    <details class="step"><summary>Step 3 — right-hand limit (h→0⁺, so h>0)</summary>
+      <div class="step-body"><p>For \(h>0\), \(|h|=h\), so \(\dfrac{|h|}{h}=\dfrac{h}{h}=1\). So \(\lim_{h\to0^+}\dfrac{|h|}{h}=1\).</p></div></details>
+    <details class="step"><summary>Step 4 — left-hand limit (h→0⁻, so h<0)</summary>
+      <div class="step-body"><p>For \(h<0\), \(|h|=-h\), so \(\dfrac{|h|}{h}=\dfrac{-h}{h}=-1\). So \(\lim_{h\to0^-}\dfrac{|h|}{h}=-1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The one-sided limits disagree (\(1\neq-1\)), so by Module 5 Chapter 2's existence rule (equation 5.2.1), \(\lim_{h\to0}\dfrac{|h|}{h}\) does not exist — meaning \(f'(0)\) does not exist. \(|x|\) is continuous but <strong>not differentiable</strong> at \(x=0\). Graphically, this disagreement is exactly the corner: the two one-sided secant slopes are heading toward two genuinely different tangent directions, so there's no single tangent line to settle on.</p></div></details>
+  </div>
+
+  <div class="block intuition">
+    <div class="label">Other ways differentiability can fail</div>
+    <p><code>|x|</code>'s sharp corner is the most common example, but two other shapes also break differentiability at an otherwise-continuous point: a <strong>cusp</strong> (like \(f(x)=x^{2/3}\) at \(x=0\), where the graph comes to an even sharper point and the one-sided slopes both head toward infinity but with opposite signs), and a <strong>vertical tangent</strong> (like \(f(x)=x^{1/3}\) at \(x=0\), where the curve is smooth with no corner, but the tangent line itself would have to be perfectly vertical — an undefined, infinite slope). In every case the diagnosis is the same: the difference-quotient limit in (6.2.1) fails to exist, even though the function itself never breaks.</p>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming continuity is enough to guarantee a derivative exists — reasoning "the graph doesn't break here, so it must be differentiable." (6.3.1) only runs in one direction. <code>f(x)=|x|</code> at <code>x=0</code> is the standing counterexample worth keeping in mind permanently: perfectly continuous, provably not differentiable. Whenever a function's graph might have a corner, a cusp, or a vertical tangent — often near an absolute value, a piecewise breakpoint, or a fractional power — continuity alone doesn't settle whether the derivative exists; it has to be checked directly with (6.2.1), one-sided if needed.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="no,not differentiable">
+    <div class="label">Try it yourself</div>
+    <p>Is <code>f(x) = |x|</code> differentiable at <code>x=0</code>? (yes/no)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="is absolute value of x differentiable at 0">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>If <code>f</code> is differentiable at <code>x=2</code>, must it also be continuous at <code>x=2</code>?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — by (6.3.1), differentiable always implies continuous.</div></details></li>
+    <li>If <code>g</code> is continuous at <code>x=5</code>, must it also be differentiable at <code>x=5</code>?
+      <details class="answer"><summary></summary><div class="ans-body">No — the converse of (6.3.1) is false; |x| at x=0 is the standing counterexample.</div></details></li>
+    <li>For <code>f(x) = |x - 3|</code>, at which x-value would you expect a differentiability failure, and why?
+      <details class="answer"><summary></summary><div class="ans-body">\(x=3\) — that's where the absolute value's corner sits, same structure as |x| at 0 but shifted right 3.</div></details></li>
+    <li>Compute <code>lim<sub>h→0⁺</sub> |h|/h</code> and <code>lim<sub>h→0⁻</sub> |h|/h</code> separately.
+      <details class="answer"><summary></summary><div class="ans-body">Right-hand: 1. Left-hand: -1.</div></details></li>
+    <li>If a function is not continuous at <code>x=a</code>, can it be differentiable there?
+      <details class="answer"><summary></summary><div class="ans-body">No — (6.3.1) says differentiable ⇒ continuous, so by contrapositive, not continuous ⇒ not differentiable.</div></details></li>
+    <li>Name the three shapes a graph can have at a point where it's continuous but not differentiable.
+      <details class="answer"><summary></summary><div class="ans-body">A corner, a cusp, or a vertical tangent.</div></details></li>
+    <li class="tag">bonus — For <code>f(x) = {x² if x&lt;1; 2x-1 if x≥1}</code>, is f continuous at x=1? (Check first — differentiability isn't even worth checking if this fails.)
+      <details class="answer"><summary></summary><div class="ans-body">Left-hand limit: \(1^2=1\). Right-hand limit: \(2(1)-1=1\). f(1)=1 (second piece). All match — continuous at x=1.</div></details></li>
+    <li class="tag">bonus — For the same f, is it differentiable at x=1? (Compute both one-sided difference-quotient limits using each piece's own slope formula.)
+      <details class="answer"><summary></summary><div class="ans-body">Left piece x² has derivative 2x → at x=1, slope 2. Right piece 2x-1 has derivative 2 → at x=1, slope 2. Both one-sided slopes agree (2=2), so f IS differentiable at x=1 — the pieces meet smoothly, no corner, despite being piecewise.</div></details></li>
+    <li class="tag">bonus — Explain briefly why a vertical tangent (like f(x)=x^(1/3) at x=0) breaks differentiability even though the graph has no corner or jump at all.
+      <details class="answer"><summary></summary><div class="ans-body">The difference-quotient limit still fails to exist as a finite number — it diverges to +∞ or -∞ instead, because the tangent line itself would have to be perfectly vertical (undefined slope). "Smooth-looking" isn't the same test as "the defining limit exists and is finite."</div></details></li>
+    <li class="tag">bonus — True or false: every polynomial is differentiable at every real number.
+      <details class="answer"><summary></summary><div class="ans-body">True — polynomials have no corners, cusps, or vertical tangents anywhere; Chapter 4 will show exactly why via the power rule.</div></details></li>
+    <li class="tag">challenge — Construct a function that is continuous at x=0 but fails to be differentiable there for a reason other than a corner or the standard |x| shape (i.e., using the cusp or vertical-tangent idea), and briefly justify why it fits.
+      <details class="answer"><summary></summary><div class="ans-body">E.g. \(f(x)=x^{2/3}\): continuous at 0 (f(0)=0, and the limit as x→0 is 0), but the difference quotient \([( 0+h)^{2/3}-0]/h = h^{2/3}/h = h^{-1/3}\) blows up to \(+\infty\) as \(h\to0^+\) and to \(-\infty\) as \(h\to0^-\) — a cusp, not a corner, but differentiability fails the same way: the defining limit in (6.2.1) doesn't exist.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-the-derivative-definition.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-power-rule.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 3 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:3", "content/m06-derivatives/ch03-differentiability-and-continuity.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

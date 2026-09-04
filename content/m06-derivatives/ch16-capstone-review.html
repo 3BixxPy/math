@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 16 — Module 6 Capstone | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 6 · Calculus I — Derivatives &amp; Rules</a> → Chapter 16 of 16</div>
+  <div class="eyebrow">Chapter 16 · Module 6 capstone</div>
+  <h1>Module 6 Capstone — Mixed Review &amp; Diagnostic Retake</h1>
+  <p class="subtitle">Fifteen chapters, shuffled together, plus a look back at what a totally blank calculus slate has become since Module 5's very first limit.</p>
+
+  <div class="block intuition">
+    <div class="label">Why mixed, not grouped by chapter</div>
+    <p>Same reasoning as every capstone before this one: a problem that doesn't announce its own chapter is the real test of whether a rule moved into durable memory, not just short-term pattern matching against a chapter title. This module in particular has fourteen genuinely distinct rules — power, sum/difference, product, quotient, six trig derivatives, chain, exponential/log, implicit, higher-order, and inverse (trig and otherwise) — and telling them apart on sight, unlabeled, is exactly the skill Module 7 is about to assume you already have.</p>
+  </div>
+
+  <h2>Mixed review (all of Module 6)</h2>
+  <ol class="problems">
+    <li>Find the average rate of change of <code>f(x) = x²</code> on <code>[2,5]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\((25-4)/(5-2)=7\) (Chapter 1)</div></details></li>
+    <li>Using the limit definition, find <code>f'(x)</code> for <code>f(x) = 4x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\lim_{h\to0}[4(x+h)-4x]/h = 4\) (Chapter 2)</div></details></li>
+    <li>Is <code>f(x) = |x|</code> differentiable at <code>x=0</code>?
+      <details class="answer"><summary></summary><div class="ans-body">No — continuous there, but not differentiable (Chapter 3)</div></details></li>
+    <li>Find <code>d/dx[x⁶]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(6x^5\) (Chapter 4)</div></details></li>
+    <li>Find <code>d/dx[7]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0\) (Chapter 5)</div></details></li>
+    <li>Differentiate <code>x(x-5)</code> using the product rule.
+      <details class="answer"><summary></summary><div class="ans-body">\(1(x-5)+x(1)=2x-5\) (Chapter 6)</div></details></li>
+    <li>Differentiate <code>2x/(x+3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{2(x+3)-2x(1)}{(x+3)^2}=\dfrac{6}{(x+3)^2}\) (Chapter 7)</div></details></li>
+    <li>Find <code>d/dx[cos x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-\sin x\) (Chapter 8)</div></details></li>
+    <li>Differentiate <code>(x+2)⁴</code> using the chain rule.
+      <details class="answer"><summary></summary><div class="ans-body">\(4(x+2)^3\) (Chapter 9)</div></details></li>
+    <li>Differentiate <code>x·(x+1)³</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1(x+1)^3+x\cdot3(x+1)^2 = (x+1)^2\left[(x+1)+3x\right]=(x+1)^2(4x+1)\) (Chapter 10)</div></details></li>
+    <li>Find <code>d/dx[e^(2x)]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2e^{2x}\) (Chapter 11)</div></details></li>
+    <li>Implicitly differentiate <code>x² + y² = 16</code>. Find dy/dx.
+      <details class="answer"><summary></summary><div class="ans-body">\(-x/y\) (Chapter 12)</div></details></li>
+    <li>Find <code>f''(x)</code> for <code>f(x) = x⁴</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=4x^3\), \(f''=12x^2\) (Chapter 13)</div></details></li>
+    <li>If <code>f(1) = 6</code> and <code>f'(1) = 2</code>, find <code>(f⁻¹)'(6)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1/2\) (Chapter 14)</div></details></li>
+    <li>Find <code>d/dx[arcsin x]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1/\sqrt{1-x^2}\) (Chapter 15)</div></details></li>
+    <li>Differentiate <code>x³/(x+2)²</code> — a second combined product/quotient-and-chain problem, same spirit as Chapter 10.
+      <details class="answer"><summary></summary><div class="ans-body">\(f=x^3,f'=3x^2\); \(g=(x+2)^2,g'=2(x+2)\). Quotient rule: \(\dfrac{3x^2(x+2)^2-x^3\cdot2(x+2)}{(x+2)^4} = \dfrac{(x+2)\left[3x^2(x+2)-2x^3\right]}{(x+2)^4} = \dfrac{3x^3+6x^2-2x^3}{(x+2)^3} = \dfrac{x^3+6x^2}{(x+2)^3} = \dfrac{x^2(x+6)}{(x+2)^3}\)</div></details></li>
+  </ol>
+
+  <hr class="div">
+
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">Two problems that each need multiple chapters' tools working together, not just one technique per problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 6 — product rule</span><span>Ch. 8 — trig derivatives</span><span>Ch. 9 — chain rule</span></div>
+    <p>Differentiate <code>f(x) = cos(x)·(x²+1)³</code>.</p>
+    <details class="step" open><summary>Step 1 — outermost structure is a product (Ch. 6): f=cos x, g=(x²+1)³</summary>
+      <div class="step-body"><p>Skeleton: \(f'g+fg'\).</p></div></details>
+    <details class="step"><summary>Step 2 — f' is a trig derivative (Ch. 8)</summary>
+      <div class="step-body"><p>\(f'=-\sin x\)</p></div></details>
+    <details class="step"><summary>Step 3 — g' needs the chain rule (Ch. 9): outside is "cubed," inside is x²+1</summary>
+      <div class="step-body"><p>\(g' = 3(x^2+1)^2\cdot2x = 6x(x^2+1)^2\)</p></div></details>
+    <details class="step"><summary>Result — assemble and factor</summary>
+      <div class="step-body"><p>\(-\sin(x)(x^2+1)^3 + \cos(x)\cdot6x(x^2+1)^2 = (x^2+1)^2\left[-\sin(x)(x^2+1) + 6x\cos(x)\right]\) — three chapters' rules, each doing exactly the job it was built for, combined by the product rule's skeleton.</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 4 — power rule</span><span>Ch. 12 — implicit differentiation</span></div>
+    <p>Find <code>dy/dx</code> for the curve <code>x⁴ + y⁴ = 2</code>, then find the slope of the tangent line at the point <code>(1,1)</code> (check first that this point is actually on the curve).</p>
+    <details class="step" open><summary>Step 1 — confirm (1,1) is on the curve</summary>
+      <div class="step-body"><p>\(1^4+1^4 = 1+1=2\) ✓</p></div></details>
+    <details class="step"><summary>Step 2 — differentiate both sides implicitly (Ch. 12), using the power rule (Ch. 4) on each term</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}\left[x^4\right] + \dfrac{d}{dx}\left[y^4\right] = \dfrac{d}{dx}[2] \implies 4x^3 + 4y^3\dfrac{dy}{dx} = 0\)</p></div></details>
+    <details class="step"><summary>Step 3 — solve algebraically for dy/dx</summary>
+      <div class="step-body"><p>\(4y^3\dfrac{dy}{dx} = -4x^3 \implies \dfrac{dy}{dx} = -\dfrac{x^3}{y^3}\)</p></div></details>
+    <details class="step"><summary>Result — evaluate at (1,1)</summary>
+      <div class="step-body"><p>\(\dfrac{dy}{dx}\bigg|_{(1,1)} = -\dfrac{1^3}{1^3} = -1\) — the tangent line at \((1,1)\) has slope \(-1\), found without ever solving the original equation for \(y\) explicitly (which, for a 4th-degree curve like this one, wouldn't have been practical anyway).</p></div></details>
+  </div>
+
+  <h2>Diagnostic retake</h2>
+  <p class="subtitle">The original diagnostic's calculus section came back completely blank — not a single attempt, not even a wrong guess. Module 5 spent twelve chapters turning that blank slate into real limit fluency, specifically so this module's entire toolkit would trace back to something solid. Here it is, tested directly.</p>
+
+  <div class="card">
+    <p><strong>1.</strong> Using the limit definition (6.2.1), find <code>f'(x)</code> for <code>f(x) = x²</code>.</p>
+    <p class="subtitle">Originally: this idea didn't exist for you yet — no calculus section on the diagnostic, and Module 5's limit machinery hadn't been built yet either.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=2x\), fully derived by expanding \((x+h)^2\), canceling, and taking a Module 5-style limit as \(h\to0\). See Chapter 2.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>2.</strong> Differentiate <code>(x-1)²</code> using the chain rule.</p>
+    <p class="subtitle">Originally: this idea didn't exist for you yet — no calculus section on the diagnostic.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(2(x-1)\cdot1 = 2(x-1)\). See Chapter 9.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>3.</strong> Implicitly differentiate <code>x + y = 10</code>. Find <code>dy/dx</code>.</p>
+    <p class="subtitle">Originally: this idea didn't exist for you yet — no calculus section on the diagnostic.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(1 + dy/dx = 0 \Rightarrow dy/dx = -1\) — and sure enough, that matches the ordinary slope of the line \(y=10-x\) directly, the same sanity check every implicit-differentiation result in Chapter 12 got. See Chapter 12.</div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Module 6 complete</div>
+    <p>Zero to a full differentiation toolkit in sixteen chapters — starting from a secant line's ordinary slope (average rate of change), shrinking that secant to a tangent via exactly the limit machinery Module 5 spent twelve chapters building (the derivative's actual definition), then layering on differentiability vs. continuity, the power/sum/difference rules, the product and quotient rules, all six trig derivatives (derived, not memorized, straight from Module 5's two essential trig limits), the chain rule, combined-rule fluency, exponential and logarithmic derivatives (the payoff for Module 3's <code>e</code>), implicit differentiation, higher-order derivatives, and finally the derivative of an inverse function applied to inverse trig functions — a genuine three-module synthesis to close things out. Every single rule in this module is traceable, in principle, back to one definition: equation (6.2.1), itself nothing more than a limit. Module 7 (Applications of Derivatives) is next on the <a href="../../roadmap.html">roadmap</a> — currently planned but not yet written. Ask your AI session to continue whenever you're ready.</p>
+  </div>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch15-derivatives-of-inverse-trig.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="../../roadmap.html">View full roadmap</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 6 · Calculus I — Derivatives &amp; Rules</span>
+  <span>Chapter 16 / 16 — Module complete</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:16", "content/m06-derivatives/ch16-capstone-review.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
