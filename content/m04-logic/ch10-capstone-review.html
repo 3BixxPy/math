@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — Module 4 Capstone | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 10 of 10</div>
+  <div class="eyebrow">Chapter 10 · Module 4 capstone</div>
+  <h1>Module 4 Capstone — Mixed Review &amp; Diagnostic Retake</h1>
+  <p class="subtitle">Nine chapters, shuffled together, plus a look back at day one — this was the one module that wasn't a knowledge gap. The diagnostic already showed real fluency with circuits and truth tables; what's new is the formal apparatus wrapped around it.</p>
+
+  <div class="block intuition">
+    <div class="label">Why mixed, not grouped by chapter</div>
+    <p>Same reasoning as every capstone before this one: a problem that doesn't announce its own chapter is the real test of whether the idea moved into durable memory, not just short-term pattern matching against a chapter title.</p>
+  </div>
+
+  <h2>Mixed review (all of Module 4)</h2>
+  <ol class="problems">
+    <li>Let <code>p = T</code>, <code>q = F</code>. Evaluate <code>¬p ∨ q</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg p = F\), so \(F \vee F = F\).</div></details></li>
+    <li>Evaluate <code>p ⇒ q</code> when <code>p = F</code>, <code>q = T</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(T\) — a conditional with a false antecedent is vacuously true.</div></details></li>
+    <li>Simplify <code>¬(p ∧ ¬q)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">De Morgan's: \(\neg p \vee \neg(\neg q) = \neg p \vee q\).</div></details></li>
+    <li>Negate: <code>∀x, x² ≥ 0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\exists x,\ x^2 &lt; 0\) (flip the quantifier, negate the inner predicate).</div></details></li>
+    <li>Is <code>5 ∈ {x | x is even, 0 &lt; x &lt; 10}</code>?
+      <details class="answer"><summary></summary><div class="ans-body">No — 5 is odd, so it fails the set's defining condition.</div></details></li>
+    <li>Translate <code>x ∈ A ∩ B</code> into a logical statement about <code>x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x \in A \wedge x \in B\).</div></details></li>
+    <li>To begin a direct proof about an odd integer <code>n</code>, what form do you write <code>n</code> in?
+      <details class="answer"><summary></summary><div class="ans-body">\(n = 2k+1\) for some integer \(k\).</div></details></li>
+    <li>State the contrapositive of "if <code>n</code> is even, then <code>n²</code> is even."
+      <details class="answer"><summary></summary><div class="ans-body">"If \(n^2\) is odd, then \(n\) is odd."</div></details></li>
+    <li>State the two parts a proof by induction requires.
+      <details class="answer"><summary></summary><div class="ans-body">A base case (verify \(P(1)\) directly) and an inductive step (assume \(P(k)\), show \(P(k+1)\) follows).</div></details></li>
+    <li>Let <code>p = T</code>, <code>q = F</code>. Evaluate <code>p ⇒ (q ∧ p)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(q \wedge p = F \wedge T = F\), so \(p \Rightarrow (q\wedge p) = T \Rightarrow F = F\).</div></details></li>
+  </ol>
+
+  <hr class="div">
+
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">Two problems that each need multiple chapters' tools working together, not just one technique per problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 4 — quantifier negation</span><span>Ch. 2 — contrapositive</span><span>Ch. 8 — proof by contrapositive</span></div>
+    <p>Consider the quantified claim <code>∀n, (n² is even ⇒ n is even)</code>. (a) Negate it fully. (b) Prove the original claim true, using contrapositive.</p>
+    <details class="step" open><summary>Step 1 — negate the quantifier (Chapter 4)</summary>
+      <div class="step-body"><p>\(\neg\big[\forall n,\ P(n)\Rightarrow Q(n)\big] \equiv \exists n,\ \neg\big(P(n)\Rightarrow Q(n)\big)\)</p></div></details>
+    <details class="step"><summary>Step 2 — negate the conditional inside it (Chapter 2's truth condition for ⇒)</summary>
+      <div class="step-body"><p>A conditional is false only when the antecedent is true and the consequent is false, so \(\neg(P\Rightarrow Q) \equiv P\wedge\neg Q\). The full negation: \(\exists n,\ (n^2\text{ is even}) \wedge (n\text{ is odd})\) — "there exists an \(n\) with \(n^2\) even but \(n\) odd."</p></div></details>
+    <details class="step"><summary>Step 3 — prove the original by contrapositive (Chapter 8)</summary>
+      <div class="step-body"><p>The contrapositive of "\(n^2\) even \(\Rightarrow\) \(n\) even" is "\(n\) odd \(\Rightarrow\) \(n^2\) odd" (Chapter 2's equivalence). Prove that instead: let \(n=2k+1\). Then \(n^2 = 4k^2+4k+1 = 2(2k^2+2k)+1\), which is odd by definition (Chapter 7's odd-integer form).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The contrapositive is proven directly, so the original claim is true — meaning the negation from Step 2 describes a case that can never actually happen. Three chapters, one argument: quantifier negation set up exactly what would have to fail, and the contrapositive/direct-proof machinery showed it can't.</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 6 — sets and logic correspondence</span><span>Ch. 3 — De Morgan's laws</span><span>Ch. 5 — set notation</span></div>
+    <p>Prove the second De Morgan's law for sets: <code>(A ∪ B)ᶜ = Aᶜ ∩ Bᶜ</code>.</p>
+    <details class="step" open><summary>Step 1 — translate set membership to logic (Chapter 6)</summary>
+      <div class="step-body"><p>\(x\in(A\cup B)^c \iff \neg(x\in A\cup B) \iff \neg(x\in A \vee x\in B)\)</p></div></details>
+    <details class="step"><summary>Step 2 — apply De Morgan's law (Chapter 3)</summary>
+      <div class="step-body"><p>\(\neg(x\in A \vee x\in B) \equiv \neg(x\in A) \wedge \neg(x\in B)\)</p></div></details>
+    <details class="step"><summary>Step 3 — translate back to set notation (Chapter 5)</summary>
+      <div class="step-body"><p>\(\neg(x\in A)\wedge\neg(x\in B) \iff x\in A^c \wedge x\in B^c \iff x\in(A^c\cap B^c)\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Every \(x\) satisfies \(x\in(A\cup B)^c\) exactly when it satisfies \(x\in A^c\cap B^c\), so the two sets are equal: \((A\cup B)^c = A^c\cap B^c\). The "set version" of De Morgan's isn't a new law at all — it's the logical one, wearing set notation, exactly Chapter 6's point.</p></div></details>
+  </div>
+
+  <h2>Diagnostic retake</h2>
+  <p class="subtitle">This module didn't start from zero the way Modules 1, 2, and 3 did — the diagnostic found real, working fluency with circuits and truth tables already in place. What follows isn't "now you can do this," it's "now you can write down, name, and prove what you already did by instinct."</p>
+
+  <div class="card">
+    <p><strong>1.</strong> Simplify <code>¬(p ∨ q)</code>, and name the rule you used.</p>
+    <p class="subtitle">Originally: could trace a NOR gate's truth table by hand instantly, but had no symbol or name for the rule underneath it.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(\neg(p\vee q) \equiv \neg p \wedge \neg q\) — De Morgan's Law. A NOR gate is exactly the circuit "invert both inputs, then AND them." See Chapter 3.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>2.</strong> Translate into quantifier notation: "every prime number greater than 2 is odd."</p>
+    <p class="subtitle">Originally: this "just made sense," but there was no way to write it down formally — no ∀, no ⇒.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(\forall n,\ (n \text{ is prime} \wedge n&gt;2) \Rightarrow n \text{ is odd}\). See Chapters 2 and 4.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>3.</strong> Prove: the sum of any two even integers is even — from the actual definition, not "everyone knows that."</p>
+    <p class="subtitle">Originally: obviously true by instinct, but never something that had been written as an actual proof with a definition behind it.</p>
+    <details class="answer"><summary></summary><div class="ans-body">Let \(a=2j\), \(b=2k\) for integers \(j,k\). Then \(a+b=2j+2k=2(j+k)\), which is even by definition, since \(j+k\) is an integer. See Chapter 7.</div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Module 4 complete</div>
+    <p>From propositions and connectives through quantifiers, set notation, the logic/set correspondence, and three real proof techniques (direct, contrapositive/contradiction, induction) — all of it built on top of boolean-logic instincts that were already solid on day one. Module 5 (Calculus I — Limits &amp; Continuity) is next on the <a href="../../roadmap.html">roadmap</a> — the first genuinely new kind of idea in the whole curriculum, not just new notation for something already known. Ask your AI session to continue whenever you're ready.</p>
+  </div>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-induction.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="../../roadmap.html">View full roadmap</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 10 / 10 — Module complete</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:10", "content/m04-logic/ch10-capstone-review.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
