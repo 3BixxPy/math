@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — Basis | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 7 of 12</div>
+  <div class="eyebrow">Chapter 7 · concept:basis</div>
+  <h1>Basis</h1>
+  <p class="subtitle">Chapter 4 asked what a set spans; Chapter 5 asked whether it's independent. This chapter asks for both at once — the single most important combination in the whole module.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A basis is the smallest possible spanning set — no redundant vectors, thanks to independence — and simultaneously the largest possible independent set for that space — nothing missing, thanks to spanning. It's the most efficient way to describe every vector in a space, and it's what makes both "dimension" (Chapter 8) and "coordinates" (Chapter 9) well-defined ideas at all.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Basis</div>
+    <div class="eqn"><div class="eq-body">\[ B=\{\mathbf b_1,\ldots,\mathbf b_n\}\text{ is a basis for }V \iff \begin{cases} B\text{ is linearly independent} \\ \operatorname{span}(B)=V \end{cases} \]</div><div class="eq-num" id="eq-11-7-1">(11.7.1)</div></div>
+    <p>Both conditions, always. The obvious default example is the <strong>standard basis</strong> of \(\mathbb R^n\): for \(\mathbb R^2\), that's \(\langle1,0\rangle,\langle0,1\rangle\); for \(\mathbb R^3\), \(\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\); and so on. It's independent (each vector is nonzero in a coordinate none of the others touch) and it spans (any \(\langle a_1,\ldots,a_n\rangle\) is trivially \(a_1\langle1,0,\ldots\rangle+\cdots\)).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a non-standard basis for R²</div>
+    <p>Verify that \(\langle1,1\rangle\) and \(\langle1,-1\rangle\) form a basis for \(\mathbb R^2\).</p>
+    <details class="step" open><summary>Step 1 — check independence</summary>
+      <div class="step-body"><p>\(c_1\langle1,1\rangle+c_2\langle1,-1\rangle=\langle0,0\rangle \Rightarrow c_1+c_2=0,\ c_1-c_2=0\). Adding: \(2c_1=0\Rightarrow c_1=0\), then \(c_2=0\). Only the trivial solution — independent.</p></div></details>
+    <details class="step"><summary>Step 2 — check spanning</summary>
+      <div class="step-body"><p>For an arbitrary target \(\langle a,b\rangle\): \(c_1+c_2=a\), \(c_1-c_2=b\) gives \(c_1=\frac{a+b}{2}\), \(c_2=\frac{a-b}{2}\) — a solution for <em>every</em> \(a,b\), no exceptions. So \(\operatorname{span}\{\langle1,1\rangle,\langle1,-1\rangle\}=\mathbb R^2\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Both conditions hold, so \(\{\langle1,1\rangle,\langle1,-1\rangle\}\) <strong>is</strong> a basis for \(\mathbb R^2\) — a perfectly valid alternative to the standard basis.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Checking only independence, or only spanning, and stopping there — a basis genuinely needs both. \(\{\langle1,0\rangle,\langle0,1\rangle,\langle1,1\rangle\}\) spans \(\mathbb R^2\) but has three vectors, so it must be dependent (indeed \(\langle1,1\rangle=\langle1,0\rangle+\langle0,1\rangle\)) — too large, fails independence. \(\{\langle2,0\rangle\}\) is independent (a single nonzero vector always is) but only spans a line — too small, fails spanning. A spanning set that's too big and an independent set that's too small each fail to be a basis, for two genuinely different reasons.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes,y">
+    <div class="label">Try it yourself</div>
+    <p>Assuming they're chosen well (independent and spanning), does a basis for \(\mathbb R^2\) need exactly 2 vectors?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Does a basis for R2 need exactly 2 vectors">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is \(\{\langle1,0\rangle,\langle0,1\rangle\}\) a basis for \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — the standard basis: clearly independent, and \(\langle a,b\rangle=a\langle1,0\rangle+b\langle0,1\rangle\) always, so it spans.</div></details></li>
+    <li>Is \(\{\langle1,0\rangle,\langle0,1\rangle,\langle1,1\rangle\}\) a basis for \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">No — it spans \(\mathbb R^2\), but three vectors in a 2-dimensional setting must be dependent; fails independence.</div></details></li>
+    <li>Is \(\{\langle2,0\rangle\}\) a basis for \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">No — independent, but only spans the \(x\)-axis, not all of \(\mathbb R^2\); fails spanning.</div></details></li>
+    <li>Is \(\{\langle1,1\rangle,\langle2,2\rangle\}\) a basis for \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">No — dependent (parallel vectors), and consequently only spans a line rather than all of \(\mathbb R^2\).</div></details></li>
+    <li>Is \(\{\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\}\) a basis for \(\mathbb R^3\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — the standard basis for \(\mathbb R^3\).</div></details></li>
+    <li>Verify whether \(\{\langle1,1,0\rangle,\langle0,1,1\rangle,\langle1,0,1\rangle\}\) is a basis for \(\mathbb R^3\) (test independence with the homogeneous system).
+      <details class="answer"><summary></summary><div class="ans-body">Matching coordinates gives \(c_1+c_3=0\), \(c_1+c_2=0\), \(c_2+c_3=0\). From the first two, \(c_3=-c_1\) and \(c_2=-c_1\); substituting both into the third, \((-c_1)+(-c_1)=-2c_1=0\Rightarrow c_1=0\), so \(c_2=c_3=0\) too — only the trivial solution, independent. Three independent vectors in \(\mathbb R^3\) automatically span it too (Chapter 8), so <strong>yes</strong>, a basis.</div></details></li>
+    <li class="tag">bonus — Can a basis for \(\mathbb R^2\) ever have only 1 vector?
+      <details class="answer"><summary></summary><div class="ans-body">No — one vector can span at most a line, never all of \(\mathbb R^2\).</div></details></li>
+    <li class="tag">bonus — Can a basis for \(\mathbb R^2\) ever have 3 or more vectors?
+      <details class="answer"><summary></summary><div class="ans-body">No — any 3 vectors in \(\mathbb R^2\) are automatically dependent, so they can never be independent, which disqualifies them regardless of spanning.</div></details></li>
+    <li class="tag">bonus — True or false: every vector space has exactly one basis.
+      <details class="answer"><summary></summary><div class="ans-body">False — typically infinitely many valid bases exist (e.g. both \(\{\langle1,0\rangle,\langle0,1\rangle\}\) and \(\{\langle1,1\rangle,\langle1,-1\rangle\}\) are bases for \(\mathbb R^2\)). What's fixed is only the <em>number</em> of vectors a basis needs — Chapter 8's dimension.</div></details></li>
+    <li class="tag">bonus — Is \(\{\langle1,0\rangle,\langle2,0\rangle\}\) a basis for \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">No — dependent (parallel), so it spans only the \(x\)-axis.</div></details></li>
+    <li class="tag">challenge — A friend claims that since \(\{\langle1,0\rangle,\langle0,1\rangle,\langle0,0\rangle\}\) spans \(\mathbb R^2\) (the zero vector contributes nothing new, but doesn't hurt spanning either), it must be a basis. Explain the flaw.
+      <details class="answer"><summary></summary><div class="ans-body">Including the zero vector always breaks independence (Chapter 5's practice: a set containing \(\mathbf 0\) is never independent, since a nonzero coefficient on \(\mathbf 0\) and zero elsewhere gives a nontrivial combination summing to \(\mathbf 0\)). So the set fails condition (1) of the basis definition even though it does satisfy condition (2) — spanning alone was never sufficient on its own; both conditions are required together.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-linear-dependence.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-dimension.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 7 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:7", "content/m11-vector-spaces/ch07-basis.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

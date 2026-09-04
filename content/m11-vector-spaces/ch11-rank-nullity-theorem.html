@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — The Rank-Nullity Theorem | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 11 of 12</div>
+  <div class="eyebrow">Chapter 11 · concept:rank-nullity-theorem</div>
+  <h1>The Rank-Nullity Theorem</h1>
+  <p class="subtitle">Chapter 10 introduced rank and null space as two separate numbers attached to a matrix. This chapter reveals they were never independent at all — one determines the other, given only the matrix's number of columns.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>This is the theorem that finally explains, in one clean equation, exactly why Module 10's three solution-type cases for a linear system — unique solution, no solution, infinitely many solutions — show up in the pattern they do. It isn't a coincidence tied to specific numbers; it's this identity, every single time.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Nullity</div>
+    <p>The <strong>nullity</strong> of a matrix \(A\) is \(\operatorname{nullity}(A)=\dim(\operatorname{Null}(A))\) — the dimension of its null space (Chapter 10).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Rank-nullity</div>
+    <div class="eqn"><div class="eq-body">\[ \operatorname{rank}(A)+\operatorname{nullity}(A)=n \]</div><div class="eq-num" id="eq-11-11-1">(11.11.1)</div></div>
+    <p>For an \(m\times n\) matrix \(A\), where \(n\) is the number of <strong>columns</strong> — the dimension of the space \(A\) maps <em>from</em>. This connects directly back to Module 10, Chapter 9's three cases: a full-rank square system (\(\operatorname{rank}=n\)) has \(\operatorname{nullity}=0\), meaning a trivial null space and a unique solution to \(A\mathbf x=\mathbf b\) whenever one exists at all; a rank deficiency (\(\operatorname{rank}<n\)) directly creates free variables — exactly \(\operatorname{nullity}\) of them — which is precisely what produces infinitely many solutions when the system is consistent. (Rank-nullity says nothing about whether a system is consistent in the first place — that's a separate question from Module 10, about whether \(\mathbf b\) lies in \(\operatorname{Col}(A)\) at all.)</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — predicting nullity, then verifying it directly</div>
+    <p>A 2×5 matrix has rank 2 (found via RREF, Module 10). Use the theorem to find its nullity, then verify with a concrete matrix.</p>
+    <details class="step" open><summary>Step 1 — apply the theorem directly</summary>
+      <div class="step-body"><p>\(n=5\) (columns), \(\operatorname{rank}(A)=2\), so \(\operatorname{nullity}(A)=n-\operatorname{rank}(A)=5-2=3\) — no elimination needed for this step.</p></div></details>
+    <details class="step"><summary>Step 2 — verify directly with a concrete matrix</summary>
+      <div class="step-body"><p>Take \(A=\begin{bmatrix}1&0&1&0&1\\0&1&-1&1&0\end{bmatrix}\) — already in a row-reduced form with rank 2 (pivots in columns 1 and 2). Solve \(A\mathbf x=\mathbf 0\): \(x_1+x_3+x_5=0\) and \(x_2-x_3+x_4=0\).</p></div></details>
+    <details class="step"><summary>Step 3 — count the free variables</summary>
+      <div class="step-body"><p>\(x_3,x_4,x_5\) are free (three of them); \(x_1=-x_3-x_5\) and \(x_2=x_3-x_4\) are determined by them. Three free variables means \(\dim(\operatorname{Null}(A))=3\) — matching the theorem's prediction exactly, with no separate elimination-counting surprise.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting that \(n\) in the formula is the number of <strong>columns</strong>, not rows — a genuinely easy index to swap under time pressure. For a 5×2 matrix (5 rows, 2 columns) with rank 2, the nullity is \(n-\operatorname{rank}=2-2=0\), <em>not</em> \(5-2=3\) — mixing up which dimension "\(n\)" refers to gives a completely different, wrong answer. Anchor it the same way Module 10 anchors matrix dimensions: \(n\) is always the number of unknowns in \(A\mathbf x=\mathbf 0\), i.e. how many columns \(A\) has, regardless of how many rows (equations) there are.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="3">
+    <div class="label">Try it yourself</div>
+    <p>A 3×5 matrix has rank 2. What is its nullity?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 3" aria-label="Nullity of a 3x5 rank-2 matrix">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>A 4×4 matrix has rank 4. Find its nullity.
+      <details class="answer"><summary></summary><div class="ans-body">\(4-4=0\).</div></details></li>
+    <li>A 3×6 matrix has rank 3. Find its nullity.
+      <details class="answer"><summary></summary><div class="ans-body">\(6-3=3\).</div></details></li>
+    <li>A 5×2 matrix has rank 2. Find its nullity.
+      <details class="answer"><summary></summary><div class="ans-body">\(2-2=0\) (\(n=2\), the number of columns).</div></details></li>
+    <li>A 4×4 matrix has nullity 0. What does that tell you about solutions to \(A\mathbf x=\mathbf 0\), and about whether \(A\) is invertible?
+      <details class="answer"><summary></summary><div class="ans-body">Only the trivial solution to \(A\mathbf x=\mathbf 0\) (since \(\operatorname{rank}=n-0=4\), full rank) — and \(A\) is invertible.</div></details></li>
+    <li>A 3×3 matrix has nullity 1. Find its rank.
+      <details class="answer"><summary></summary><div class="ans-body">\(\operatorname{rank}=n-\operatorname{nullity}=3-1=2\).</div></details></li>
+    <li>A homogeneous system in 4 unknowns has 2 free variables in its RREF. Find the coefficient matrix's rank and nullity.
+      <details class="answer"><summary></summary><div class="ans-body">Nullity \(=2\) (the number of free variables, directly); rank \(=n-\operatorname{nullity}=4-2=2\).</div></details></li>
+    <li class="tag">bonus — A 2×4 matrix has rank 2 (full row rank). Find its nullity.
+      <details class="answer"><summary></summary><div class="ans-body">\(4-2=2\).</div></details></li>
+    <li class="tag">bonus — True or false: rank-nullity guarantees a matrix's rank can never exceed its number of columns.
+      <details class="answer"><summary></summary><div class="ans-body">True — since \(\operatorname{nullity}\geq0\) always, \(\operatorname{rank}=n-\operatorname{nullity}\leq n\).</div></details></li>
+    <li class="tag">bonus — A 6×3 matrix has all 3 columns independent (rank 3). Find its nullity, and state what that means about solutions to \(A\mathbf x=\mathbf 0\).
+      <details class="answer"><summary></summary><div class="ans-body">Nullity \(=3-3=0\), so \(A\mathbf x=\mathbf 0\) has only the trivial solution — matching Chapter 10's link between independent columns and a trivial null space.</div></details></li>
+    <li class="tag">bonus — A 3×5 matrix's null space is spanned by exactly 2 vectors. Find its rank without any elimination.
+      <details class="answer"><summary></summary><div class="ans-body">Nullity \(=2\), \(n=5\), so \(\operatorname{rank}=5-2=3\).</div></details></li>
+    <li class="tag">challenge — A student row-reduces a 4×7 matrix and counts 3 pivot columns. Using rank-nullity alone (not elimination), find both the rank and nullity, and explain why you can be certain of the nullity's value without separately solving for and counting free variables.
+      <details class="answer"><summary></summary><div class="ans-body">Rank equals the number of pivot columns: \(\operatorname{rank}=3\) (a Module 10 fact). Nullity \(=n-\operatorname{rank}=7-3=4\). Certainty follows directly from the theorem itself: nullity is <em>defined</em> as \(n\) minus rank once rank is known, so no separate count of free variables is needed for the number to be correct — though Chapter 10's worked example shows you'd get the identical count if you did solve for them explicitly.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch10-row-space-column-space-null-space.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch12-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 11 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:11", "content/m11-vector-spaces/ch11-rank-nullity-theorem.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

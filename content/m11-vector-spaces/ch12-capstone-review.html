@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — Module 11 Capstone | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 12 of 12</div>
+  <div class="eyebrow">Chapter 12 · Module 11 capstone</div>
+  <h1>Module 11 Capstone — Mixed Review &amp; Diagnostic Retake</h1>
+  <p class="subtitle">Eleven chapters, shuffled together — the most abstract stretch of this curriculum so far, and the one where "does this look like the chapter it came from" would be the easiest kind of false confidence to fall for.</p>
+
+  <div class="block intuition">
+    <div class="label">Why mixed, not grouped by chapter</div>
+    <p>Same reasoning as every capstone since Module 0: a problem that doesn't announce its own chapter is the real test of whether an idea moved into durable memory, not just short-term pattern matching against a chapter title. That test matters even more here — span, independence, basis, and dimension all sound similar in the abstract, and the only way to know you can tell them apart under pressure is to meet them shuffled together, with no heading to lean on.</p>
+  </div>
+
+  <h2>Mixed review (all of Module 11)</h2>
+  <ol class="problems">
+    <li>(Ch. 1) Is the set of all 3×3 matrices, under matrix addition and scalar multiplication, a vector space?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — entrywise addition and scalar multiplication inherit every one of Chapter 1's ten axioms directly from real-number arithmetic (a zero matrix, additive inverses by negating entries, and so on).</div></details></li>
+    <li>(Ch. 7) Verify whether \(\{\langle2,1\rangle,\langle1,2\rangle\}\) is a basis for \(\mathbb R^2\).
+      <details class="answer"><summary></summary><div class="ans-body">Independence: \(2c_1+c_2=0\), \(c_1+2c_2=0\). From the first, \(c_2=-2c_1\); substituting into the second, \(c_1+2(-2c_1)=c_1-4c_1=-3c_1=0\Rightarrow c_1=0\), so \(c_2=0\) — only the trivial solution, independent. Two independent vectors in \(\mathbb R^2\) automatically span it (Chapter 8). Yes, a basis.</div></details></li>
+    <li>(Ch. 2) Is \(\{\langle x,y\rangle : x+y=0\}\) a subspace of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — contains \(\langle0,0\rangle\); closed under addition and scalar multiplication (a line through the origin).</div></details></li>
+    <li>(Ch. 3) Express \(\langle6,2\rangle\) as a linear combination of \(\langle1,1\rangle\) and \(\langle1,-1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1+c_2=6\), \(c_1-c_2=2\) → \(c_1=4,\ c_2=2\). \(4\langle1,1\rangle+2\langle1,-1\rangle=\langle4,4\rangle+\langle2,-2\rangle=\langle6,2\rangle\) ✓</div></details></li>
+    <li>(Ch. 4) Does \(\operatorname{span}\{\langle3,1\rangle,\langle6,2\rangle\}\) equal a line or all of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">Just a line — \(\langle6,2\rangle=2\langle3,1\rangle\), parallel, so the second vector contributes no new direction.</div></details></li>
+    <li>(Ch. 5) Are \(\langle1,3\rangle\) and \(\langle2,5\rangle\) linearly independent?
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1+2c_2=0\), \(3c_1+5c_2=0\) → \(c_1=-2c_2\), substituting: \(3(-2c_2)+5c_2=-6c_2+5c_2=-c_2=0\Rightarrow c_2=0,\ c_1=0\). Only the trivial solution — yes, independent.</div></details></li>
+    <li>(Ch. 6) Given \(\mathbf v_3=\mathbf v_1-\mathbf v_2\), is \(\{\mathbf v_1,\mathbf v_2,\mathbf v_3\}\) linearly dependent?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(\mathbf v_3\) is by construction a linear combination of the other two.</div></details></li>
+    <li>(Ch. 8) What is the dimension of the vector space of all 2×2 matrices?
+      <details class="answer"><summary></summary><div class="ans-body">4.</div></details></li>
+    <li>(Ch. 9) Find the coordinates of \(\langle3,3\rangle\) relative to the basis \(\{\langle1,1\rangle,\langle1,-1\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1+c_2=3\), \(c_1-c_2=3\) → \(c_1=3,\ c_2=0\). Coordinates \((3,0)\).</div></details></li>
+    <li>(Ch. 10) Find \(\operatorname{Null}(A)\) for \(A=\begin{bmatrix}1&3\\2&6\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">Row 2 is twice row 1: \(x_1+3x_2=0\Rightarrow x_1=-3t,\ x_2=t\). \(\operatorname{Null}(A)=\operatorname{span}\{\langle-3,1\rangle\}\).</div></details></li>
+    <li>(Ch. 11) A 4×6 matrix has rank 3. Find its nullity.
+      <details class="answer"><summary></summary><div class="ans-body">\(6-3=3\).</div></details></li>
+    <li>(Ch. 7, again) Is \(\{\langle1,0,0\rangle,\langle1,1,0\rangle,\langle1,1,1\rangle\}\) a basis for \(\mathbb R^3\)?
+      <details class="answer"><summary></summary><div class="ans-body">Independence: \(c_1+c_2+c_3=0\) (x), \(c_2+c_3=0\) (y), \(c_3=0\) (z). From the z-equation \(c_3=0\); then the y-equation gives \(c_2=0\); then the x-equation gives \(c_1=0\). Only the trivial solution — independent, and 3 independent vectors in \(\mathbb R^3\) automatically span it. Yes, a basis.</div></details></li>
+  </ol>
+
+  <hr class="div">
+
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">Two problems that each need multiple chapters' tools working together, not just one technique per problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 5 — linear independence</span><span>Ch. 10 — null space</span></div>
+    <p>Show that \(\mathbf v_1=\langle1,2\rangle\) and \(\mathbf v_2=\langle3,1\rangle\) are linearly independent by building the matrix with them as columns and showing its null space is trivial.</p>
+    <details class="step" open><summary>Step 1 — build the matrix with v₁, v₂ as columns</summary>
+      <div class="step-body"><p>\(A=\begin{bmatrix}1&3\\2&1\end{bmatrix}\) — Chapter 5's independence question for \(\{\mathbf v_1,\mathbf v_2\}\) is exactly the question "does \(A\mathbf x=\mathbf 0\) have only the trivial solution?"</p></div></details>
+    <details class="step"><summary>Step 2 — solve Ax = 0 (Module 10's elimination)</summary>
+      <div class="step-body"><p>\(x_1+3x_2=0\), \(2x_1+x_2=0\). From the first, \(x_1=-3x_2\). Substituting: \(2(-3x_2)+x_2=-6x_2+x_2=-5x_2=0\Rightarrow x_2=0\), then \(x_1=0\).</p></div></details>
+    <details class="step"><summary>Step 3 — conclude via Chapter 10's link</summary>
+      <div class="step-body"><p>Only the trivial solution exists, so \(\operatorname{Null}(A)=\{\mathbf 0\}\) — trivial. By Chapter 10's observation that a column-independence test <em>is</em> a null-space question, this means \(\mathbf v_1,\mathbf v_2\) are linearly independent, confirmed through the matrix machinery instead of Chapter 5's original c₁v₁+c₂v₂=0 bookkeeping — same question, same answer, two different chapters' vocabulary for it.</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 7 — basis</span><span>Ch. 9 — coordinates</span></div>
+    <p>Verify that \(B=\{\langle2,1\rangle,\langle-1,1\rangle\}\) is a basis for \(\mathbb R^2\), then find the coordinates of \(\langle7,-1\rangle\) relative to \(B\).</p>
+    <details class="step" open><summary>Step 1 — check independence</summary>
+      <div class="step-body"><p>\(c_1\langle2,1\rangle+c_2\langle-1,1\rangle=\langle0,0\rangle \Rightarrow 2c_1-c_2=0,\ c_1+c_2=0\). From the second, \(c_2=-c_1\); substituting into the first: \(2c_1-(-c_1)=3c_1=0\Rightarrow c_1=0\), then \(c_2=0\) — independent.</p></div></details>
+    <details class="step"><summary>Step 2 — spanning follows for free</summary>
+      <div class="step-body"><p>Two independent vectors in the 2-dimensional space \(\mathbb R^2\) automatically span it (Chapter 8's shortcut) — no separate spanning check needed. \(B\) is a basis.</p></div></details>
+    <details class="step"><summary>Step 3 — find the coordinates of ⟨7,-1⟩</summary>
+      <div class="step-body"><p>\(c_1\langle2,1\rangle+c_2\langle-1,1\rangle=\langle7,-1\rangle \Rightarrow 2c_1-c_2=7,\ c_1+c_2=-1\). Adding: \(3c_1=6\Rightarrow c_1=2\), then \(c_2=-1-2=-3\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Check: \(2\langle2,1\rangle+(-3)\langle-1,1\rangle=\langle4,2\rangle+\langle3,-3\rangle=\langle7,-1\rangle\) ✓. So \([\langle7,-1\rangle]_B=(2,-3)\) — a genuinely non-standard basis, handled with exactly the same two tools (Chapter 7's test, Chapter 9's coordinate system) used throughout the module.</p></div></details>
+  </div>
+
+  <h2>Diagnostic retake</h2>
+  <p class="subtitle">Module 9 built vector intuition entirely from arrows in 3D space — the original diagnostic never went further than that, since abstract vector spaces weren't on it at all. Here's what the same three ideas — subspace, span/independence, dimension — look like once "vector" stops meaning "arrow."</p>
+
+  <div class="card">
+    <p><strong>1.</strong> Is the set of all 2×2 matrices with equal diagonal entries (matrices of the form \(\begin{bmatrix}a&b\\c&a\end{bmatrix}\)) a subspace of the space of all 2×2 matrices?</p>
+    <p class="subtitle">Originally: this question couldn't exist yet — the diagnostic only ever tested arrow-vector subspaces, never matrices.</p>
+    <details class="answer"><summary></summary><div class="ans-body">Yes. Contains the zero matrix (\(a=0\)); the sum of two such matrices, \(\begin{bmatrix}a+a'&b+b'\\c+c'&a+a'\end{bmatrix}\), still has equal diagonal entries; a scalar multiple \(\begin{bmatrix}ka&kb\\kc&ka\end{bmatrix}\) still does too. Passes the Chapter 2 subspace test. See Chapters 1–2.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>2.</strong> In the vector space of polynomials, are \(p_1=x^2+x\), \(p_2=x^2-x\), \(p_3=2x^2\) linearly independent?</p>
+    <p class="subtitle">Originally: no polynomial-vector question existed on the diagnostic either.</p>
+    <details class="answer"><summary></summary><div class="ans-body">No. \(p_1+p_2=(x^2+x)+(x^2-x)=2x^2=p_3\), so \(p_3\) is a linear combination of \(p_1,p_2\) — by Chapter 6's equivalence, that alone makes the set dependent. See Chapters 3–6.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>3.</strong> What is the dimension of the vector space of all upper-triangular 2×2 matrices (matrices of the form \(\begin{bmatrix}a&b\\0&d\end{bmatrix}\))?</p>
+    <p class="subtitle">Originally: "dimension" of a non-arrow space was never asked, because non-arrow vector spaces weren't part of the picture yet.</p>
+    <details class="answer"><summary></summary><div class="ans-body">3. A basis is \(\left\{\begin{bmatrix}1&0\\0&0\end{bmatrix},\begin{bmatrix}0&1\\0&0\end{bmatrix},\begin{bmatrix}0&0\\0&1\end{bmatrix}\right\}\) — three independent matrices that together span every upper-triangular 2×2 matrix (\(a,b,d\) free, the bottom-left entry locked at 0). See Chapter 8.</div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Module 11 complete</div>
+    <p>Zero to a working command of abstract vector spaces in twelve chapters — the axioms themselves, subspaces and the three-part test, linear combinations, span, independence and dependence (both directions), basis, dimension, coordinates relative to a basis, and the three subspaces every matrix carries (row space, column space, null space) tied together by the rank-nullity theorem. The real payoff, as promised back in Chapter 1: every one of these ideas now applies just as well to matrices and polynomials as it does to the arrows Module 9 started with. Module 12 (<a href="../m12-eigen/ch01-linear-transformations.html">Linear Transformations, Eigenvalues &amp; Diagonalization</a>) is next — it reuses span, basis, and dimension immediately, on the very first page.</p>
+  </div>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch11-rank-nullity-theorem.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="../../roadmap.html">View full roadmap</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 12 / 12 — Module complete</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:12", "content/m11-vector-spaces/ch12-capstone-review.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

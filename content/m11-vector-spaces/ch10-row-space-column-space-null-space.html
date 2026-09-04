@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — Row Space, Column Space &amp; Null Space | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 10 of 12</div>
+  <div class="eyebrow">Chapter 10 · concept:matrix-fundamental-subspaces, concept:rank-of-a-matrix</div>
+  <h1>Row Space, Column Space &amp; Null Space</h1>
+  <p class="subtitle">Modules 9 and 10 mostly treated matrices as machines for solving systems, or (Chapter 1 here) as vectors in their own right. This chapter shows that every matrix quietly carries three subspaces around with it at all times — each one built from ideas already in this module.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Row space, column space, and null space aren't new inventions — they're just span (Chapter 4) and linear independence (Chapter 5) applied directly to a matrix's rows or columns, plus one direct callback to Module 10's homogeneous systems. Once you see a matrix this way, questions like "how many genuinely independent equations does this system have" and "is this coefficient matrix invertible" both become plain dimension questions.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Row space, column space, null space</div>
+    <p>For an \(m\times n\) matrix \(A\):</p>
+    <p><strong>Row space</strong>, \(\operatorname{Row}(A)\): the span of \(A\)'s rows — a subspace of \(\mathbb R^n\).</p>
+    <p><strong>Column space</strong>, \(\operatorname{Col}(A)\): the span of \(A\)'s columns — a subspace of \(\mathbb R^m\).</p>
+    <p><strong>Null space</strong>, \(\operatorname{Null}(A)\): the set of all solutions to \(A\mathbf x=\mathbf 0\) — a direct callback to Module 10's homogeneous systems. Notice: asking whether \(\operatorname{Null}(A)\) contains only the zero vector is exactly Chapter 5's independence test, applied to \(A\)'s columns — a null space bigger than just \(\{\mathbf 0\}\) means \(A\)'s columns are dependent.</p>
+    <p>Each of these three is a genuine subspace in its own right (a span always is, Chapter 4; the null space passes Chapter 2's test directly — it contains \(\mathbf 0\) since \(A\mathbf 0=\mathbf 0\) always, and is closed under addition and scalar multiplication since \(A(\mathbf x+\mathbf y)=A\mathbf x+A\mathbf y\) and \(A(c\mathbf x)=cA\mathbf x\)).</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Rank</div>
+    <p>The <strong>rank</strong> of \(A\) is \(\operatorname{rank}(A)=\dim(\operatorname{Row}(A))\). Stated here as a fact, not proven: this always equals \(\dim(\operatorname{Col}(A))\) too — the row space and column space of the same matrix always have the same dimension, even though they generally live in different-sized spaces (\(\mathbb R^n\) versus \(\mathbb R^m\)).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — finding a null space and a rank</div>
+    <p>For \(A=\begin{bmatrix}1&2\\2&4\end{bmatrix}\), find \(\operatorname{Null}(A)\) and \(\operatorname{rank}(A)\).</p>
+    <details class="step" open><summary>Step 1 — set up Ax = 0</summary>
+      <div class="step-body"><p>\(x_1+2x_2=0\), \(2x_1+4x_2=0\). The second equation is exactly twice the first — Gaussian elimination (Module 10) collapses it to a single independent equation.</p></div></details>
+    <details class="step"><summary>Step 2 — solve, with a free variable</summary>
+      <div class="step-body"><p>From \(x_1+2x_2=0\): \(x_1=-2x_2\). Let \(x_2=t\) (free); then \(x_1=-2t\). Every solution has the form \(\langle-2t,t\rangle=t\langle-2,1\rangle\).</p></div></details>
+    <details class="step"><summary>Step 3 — express as a span</summary>
+      <div class="step-body"><p>\(\operatorname{Null}(A)=\operatorname{span}\{\langle-2,1\rangle\}\) — a line, not just the single point \(\langle0,0\rangle\); \(\dim(\operatorname{Null}(A))=1\).</p></div></details>
+    <details class="step"><summary>Step 4 — rank, from the rows</summary>
+      <div class="step-body"><p>\(A\)'s rows are \(\langle1,2\rangle\) and \(\langle2,4\rangle\) — dependent (the second is twice the first), so \(\operatorname{Row}(A)\) is spanned by just one independent direction: \(\dim(\operatorname{Row}(A))=1\), so \(\operatorname{rank}(A)=1\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Confusing the null space with the zero vector itself. \(\operatorname{Null}(A)\) is the set of <em>input</em> vectors \(\mathbf x\) that \(A\) sends to the <em>output</em> \(\mathbf 0\) — as the worked example just showed, it's typically an entire subspace (here, a whole line of inputs), not just one point, unless the null space happens to be trivial (\(\{\mathbf 0\}\) only). "The null space contains the zero vector" and "the null space <em>is</em> the zero vector" are very different claims — the first is always true, the second is only sometimes true.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes,y">
+    <div class="label">Try it yourself</div>
+    <p>Is the zero vector always in a matrix's null space?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Is the zero vector always in the null space">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find \(\operatorname{Null}(A)\) for \(A=\begin{bmatrix}1&0\\0&0\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(x_1=0\), \(x_2\) free → \(\operatorname{Null}(A)=\operatorname{span}\{\langle0,1\rangle\}\) (the \(y\)-axis).</div></details></li>
+    <li>Find \(\operatorname{Row}(A)\) for \(A=\begin{bmatrix}1&2\\3&4\end{bmatrix}\) — are the rows independent?
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle1,2\rangle\) and \(\langle3,4\rangle\) are independent (not parallel), so \(\operatorname{Row}(A)=\mathbb R^2\), dimension 2.</div></details></li>
+    <li>Find \(\operatorname{Col}(A)\) for \(A=\begin{bmatrix}1&0\\0&0\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">Columns are \(\langle1,0\rangle\) and \(\langle0,0\rangle\); the zero column contributes nothing, so \(\operatorname{Col}(A)=\operatorname{span}\{\langle1,0\rangle\}\) (the \(x\)-axis).</div></details></li>
+    <li>What is \(\operatorname{rank}\begin{bmatrix}1&2\\3&4\end{bmatrix}\)?
+      <details class="answer"><summary></summary><div class="ans-body">2 — full rank, matching problem 2's independent rows.</div></details></li>
+    <li>What is \(\operatorname{rank}\begin{bmatrix}1&0\\0&0\end{bmatrix}\)?
+      <details class="answer"><summary></summary><div class="ans-body">1 — only one independent row (and one independent column).</div></details></li>
+    <li>If a 2×2 matrix has rank 2, what must its null space be?
+      <details class="answer"><summary></summary><div class="ans-body">Just \(\{\mathbf 0\}\), the trivial subspace — a full-rank square matrix's columns are independent, so only the zero vector maps to zero. (This is exactly Chapter 11's rank-nullity theorem, previewed.)</div></details></li>
+    <li class="tag">bonus — Find \(\operatorname{Null}(A)\) for \(A=\begin{bmatrix}2&4\\1&2\end{bmatrix}\).
+      <details class="answer"><summary></summary><div class="ans-body">Both rows give the same equation \(x_1+2x_2=0\) → \(\operatorname{Null}(A)=\operatorname{span}\{\langle-2,1\rangle\}\), same as the worked example.</div></details></li>
+    <li class="tag">bonus — True or false: the null space of an invertible (square, full-rank) matrix is always just \(\{\mathbf 0\}\).
+      <details class="answer"><summary></summary><div class="ans-body">True.</div></details></li>
+    <li class="tag">bonus — For \(A=\begin{bmatrix}1&1\\1&1\end{bmatrix}\), find \(\operatorname{Row}(A)\), \(\operatorname{rank}(A)\), and \(\operatorname{Null}(A)\).
+      <details class="answer"><summary></summary><div class="ans-body">Both rows are \(\langle1,1\rangle\): \(\operatorname{Row}(A)=\operatorname{span}\{\langle1,1\rangle\}\), \(\operatorname{rank}(A)=1\). \(\operatorname{Null}(A)\): \(x_1+x_2=0\Rightarrow x_1=-x_2\) → \(\operatorname{span}\{\langle-1,1\rangle\}\).</div></details></li>
+    <li class="tag">bonus — Can the column space of a matrix with only 2 rows ever equal all of \(\mathbb R^3\)?
+      <details class="answer"><summary></summary><div class="ans-body">No — a 2-row matrix's columns are 2-component vectors, so \(\operatorname{Col}(A)\subseteq\mathbb R^2\); it can never reach \(\mathbb R^3\), no matter how many columns the matrix has.</div></details></li>
+    <li class="tag">challenge — A 3×3 matrix has two identical rows. Without any further computation, what can you immediately conclude about its rank, and about whether it's invertible?
+      <details class="answer"><summary></summary><div class="ans-body">Two identical rows means \(\operatorname{Row}(A)\) is spanned by at most 2 independent vectors, so \(\operatorname{rank}(A)\leq2<3\) — not full rank. A square matrix that isn't full rank is not invertible.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-coordinates-relative-to-a-basis.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-rank-nullity-theorem.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 10 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:10", "content/m11-vector-spaces/ch10-row-space-column-space-null-space.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — Coordinates Relative to a Basis | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 9 of 12</div>
+  <div class="eyebrow">Chapter 9 · concept:coordinates-relative-to-basis</div>
+  <h1>Coordinates Relative to a Basis</h1>
+  <p class="subtitle">Chapters 7 and 8 established that a basis is the right "ruler" for a vector space, and that its size — the dimension — doesn't depend on which basis you pick. This chapter asks: for one fixed basis, how do you actually read off a vector's position on that ruler?</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>The components you're used to writing, like \(\langle3,4\rangle\), are secretly already coordinates relative to one particular basis — the standard one. Relative to any other, equally valid, basis, the exact same geometric vector gets completely different numbers. Recognizing this now avoids a very natural confusion later, once bases besides the standard one start appearing regularly (Module 12's eigenbasis, for one).</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Coordinates relative to a basis</div>
+    <p>Given a basis \(B=\{\mathbf b_1,\ldots,\mathbf b_n\}\) for a vector space \(V\), every vector \(\mathbf v\in V\) can be written as</p>
+    <p style="text-align:center; font-size:1.1rem;">\[ \mathbf v=c_1\mathbf b_1+c_2\mathbf b_2+\cdots+c_n\mathbf b_n \]</p>
+    <p>for a <em>unique</em> choice of scalars \(c_1,\ldots,c_n\). (Uniqueness follows directly from \(B\)'s independence: if two different coefficient lists both worked, subtracting one equation from the other would produce a nontrivial combination of \(B\) summing to \(\mathbf 0\) — impossible for an independent set, by Chapter 5.) The scalars \((c_1,\ldots,c_n)\) are the <strong>coordinates of \(\mathbf v\) relative to \(B\)</strong>, written \([\mathbf v]_B=(c_1,\ldots,c_n)\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — coordinates on Chapter 7's non-standard basis</div>
+    <p>Find the coordinates of \(\langle5,1\rangle\) relative to \(B=\{\langle1,1\rangle,\langle1,-1\rangle\}\).</p>
+    <details class="step" open><summary>Step 1 — set up the equation</summary>
+      <div class="step-body"><p>Want \(c_1\langle1,1\rangle+c_2\langle1,-1\rangle=\langle5,1\rangle \Rightarrow c_1+c_2=5,\ c_1-c_2=1\).</p></div></details>
+    <details class="step"><summary>Step 2 — solve</summary>
+      <div class="step-body"><p>Adding the two equations: \(2c_1=6\Rightarrow c_1=3\), then \(c_2=5-3=2\).</p></div></details>
+    <details class="step"><summary>Step 3 — check</summary>
+      <div class="step-body"><p>\(3\langle1,1\rangle+2\langle1,-1\rangle=\langle3,3\rangle+\langle2,-2\rangle=\langle5,1\rangle\) ✓</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\([\langle5,1\rangle]_B=(3,2)\) — genuinely different numbers than the vector's plain components \((5,1)\), even though it's the exact same arrow.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming a vector's "coordinates" are always just its plain components. They're only that simple relative to the <em>standard</em> basis \(\{\langle1,0\rangle,\langle0,1\rangle\}\) — there, \(\langle5,1\rangle=5\langle1,0\rangle+1\langle0,1\rangle\), so its coordinates genuinely are \((5,1)\), matching the components exactly. Relative to any other valid basis, like \(\{\langle1,1\rangle,\langle1,-1\rangle\}\) above, the same vector's coordinates are a completely different pair of numbers, \((3,2)\). "Components" is really just a nickname for "coordinates relative to the standard basis" — a special case, not the general rule.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="true,t">
+    <div class="label">Try it yourself</div>
+    <p>True or false: relative to the <em>standard</em> basis, the coordinates of \(\langle3,4\rangle\) are simply its plain components, \((3,4)\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="true or false" aria-label="Are coordinates relative to the standard basis just the components">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find \([\mathbf v]_B\) for \(\mathbf v=\langle4,2\rangle\), \(B=\{\langle1,0\rangle,\langle0,1\rangle\}\) (standard).
+      <details class="answer"><summary></summary><div class="ans-body">\((4,2)\) — trivial, since \(B\) is the standard basis.</div></details></li>
+    <li>Find \([\mathbf v]_B\) for \(\mathbf v=\langle7,1\rangle\), \(B=\{\langle1,1\rangle,\langle1,-1\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1+c_2=7\), \(c_1-c_2=1\) → \(c_1=4,\ c_2=3\). \([\mathbf v]_B=(4,3)\).</div></details></li>
+    <li>Find \([\mathbf v]_B\) for \(\mathbf v=\langle0,4\rangle\), \(B=\{\langle1,1\rangle,\langle1,-1\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1+c_2=0\), \(c_1-c_2=4\) → adding, \(2c_1=4\Rightarrow c_1=2,\ c_2=-2\). \([\mathbf v]_B=(2,-2)\).</div></details></li>
+    <li>Given \([\mathbf v]_B=(2,-1)\) with \(B=\{\langle1,1\rangle,\langle1,-1\rangle\}\), find \(\mathbf v\) in standard components.
+      <details class="answer"><summary></summary><div class="ans-body">\(\mathbf v=2\langle1,1\rangle+(-1)\langle1,-1\rangle=\langle2,2\rangle+\langle-1,1\rangle=\langle1,3\rangle\).</div></details></li>
+    <li>Why is the coordinate list \((c_1,\ldots,c_n)\) guaranteed unique for a given \(\mathbf v\) and basis \(B\), but would <em>not</em> be guaranteed unique if \(B\) were merely a spanning set (not necessarily independent)?
+      <details class="answer"><summary></summary><div class="ans-body">Uniqueness comes from independence: if two different coefficient lists both worked, subtracting them would give a nontrivial combination of \(B\) equal to \(\mathbf 0\), which independence forbids. Without independence, that contradiction disappears — a merely spanning (but dependent) set can represent the same vector multiple different ways.</div></details></li>
+    <li>Find \([\mathbf v]_B\) for \(\mathbf v=\langle6,0,0\rangle\), \(B=\{\langle2,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(2c_1=6\Rightarrow c_1=3\); \(c_2=0,\ c_3=0\). \([\mathbf v]_B=(3,0,0)\).</div></details></li>
+    <li class="tag">bonus — Find \([\mathbf v]_B\) for \(\mathbf v=\langle10,2\rangle\), \(B=\{\langle1,1\rangle,\langle1,-1\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1+c_2=10\), \(c_1-c_2=2\) → \(c_1=6,\ c_2=4\). \((6,4)\).</div></details></li>
+    <li class="tag">bonus — True or false: \([\mathbf v]_B\) always has the same number of entries as \(\mathbf v\)'s usual components.
+      <details class="answer"><summary></summary><div class="ans-body">True only when \(V=\mathbb R^n\) with an \(n\)-vector basis — more precisely, \([\mathbf v]_B\) always has exactly \(\dim(V)\) entries. For other vector spaces (like the 4-dimensional 2×2-matrix space from Chapter 8), that needn't match "how the vector is normally written" at all.</div></details></li>
+    <li class="tag">bonus — Can \([\mathbf v]_B=[\mathbf w]_B\) for two <em>different</em> vectors \(\mathbf v\neq\mathbf w\) (same basis \(B\))?
+      <details class="answer"><summary></summary><div class="ans-body">No — since \(\mathbf v=\sum c_i\mathbf b_i\) is a specific correspondence, identical coordinates force identical vectors; different vectors always get different coordinate tuples relative to the same basis.</div></details></li>
+    <li class="tag">bonus — Find \([\mathbf v]_B\) for \(\mathbf v=\langle3,-3\rangle\), \(B=\{\langle1,1\rangle,\langle1,-1\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1+c_2=3\), \(c_1-c_2=-3\) → \(c_1=0,\ c_2=3\). \((0,3)\).</div></details></li>
+    <li class="tag">challenge — Find the coordinates of the polynomial \(4x+7\) (as a "vector" in Chapter 1's polynomial vector space) relative to the basis \(\{x,1\}\), then relative to the unusual — but valid — basis \(\{x+1,\ x-1\}\).
+      <details class="answer"><summary></summary><div class="ans-body">Relative to \(\{x,1\}\): \(4x+7=4\cdot x+7\cdot1\), so coordinates \((4,7)\). Relative to \(\{x+1,x-1\}\): \(c_1(x+1)+c_2(x-1)=(c_1+c_2)x+(c_1-c_2)\), matching \(4x+7\) gives \(c_1+c_2=4\), \(c_1-c_2=7\) → \(c_1=5.5,\ c_2=-1.5\). Check: \(5.5(x+1)-1.5(x-1)=5.5x+5.5-1.5x+1.5=4x+7\) ✓. Same polynomial, two completely different coordinate pairs — "coordinates" generalizes exactly as far beyond arrows as "vector" itself did back in Chapter 1.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch08-dimension.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch10-row-space-column-space-null-space.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 9 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:9", "content/m11-vector-spaces/ch09-coordinates-relative-to-a-basis.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

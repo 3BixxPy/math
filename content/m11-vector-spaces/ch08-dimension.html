@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Dimension | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 8 of 12</div>
+  <div class="eyebrow">Chapter 8 · concept:dimension</div>
+  <h1>Dimension</h1>
+  <p class="subtitle">Chapter 7 defined a basis. This chapter asks the natural follow-up: does it matter which basis you pick, at least in terms of how many vectors it has?</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Dimension is one of the very few numbers you can attach to an entire vector space, rather than to one particular vector inside it — and it's only well-defined because of a genuinely nontrivial fact: no matter which basis you choose for a given space, it always has the same number of vectors. That shared number is the space's dimension.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Dimension</div>
+    <div class="eqn"><div class="eq-body">\[ \dim(V) = \text{the number of vectors in any basis for } V \]</div><div class="eq-num" id="eq-11-8-1">(11.8.1)</div></div>
+    <p>This is only a valid definition because of a fact stated here without proof: every basis of a given vector space \(V\) has exactly the same number of vectors. That's the nontrivial part — Chapter 7 showed several different valid bases for \(\mathbb R^2\), and this fact guarantees every single one of them has exactly 2 vectors, never 3, never 1.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — an arrow space and a matrix space</div>
+    <p>State \(\dim(\mathbb R^3)\), then find the dimension of the vector space of all 2×2 matrices.</p>
+    <details class="step" open><summary>Step 1 — R³</summary>
+      <div class="step-body"><p>The standard basis \(\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\) has 3 vectors, so \(\dim(\mathbb R^3)=3\).</p></div></details>
+    <details class="step"><summary>Step 2 — all 2×2 matrices (Chapter 1's callback)</summary>
+      <div class="step-body"><p>Consider \(E_{11}=\begin{bmatrix}1&0\\0&0\end{bmatrix}\), \(E_{12}=\begin{bmatrix}0&1\\0&0\end{bmatrix}\), \(E_{21}=\begin{bmatrix}0&0\\1&0\end{bmatrix}\), \(E_{22}=\begin{bmatrix}0&0\\0&1\end{bmatrix}\) — each has a single 1 and zeros elsewhere. Any 2×2 matrix \(\begin{bmatrix}a&b\\c&d\end{bmatrix}\) is exactly \(aE_{11}+bE_{12}+cE_{21}+dE_{22}\) (spanning), and the only way a combination \(aE_{11}+bE_{12}+cE_{21}+dE_{22}\) can equal the zero matrix is \(a=b=c=d=0\) (independence, since each coefficient controls one distinct entry). So \(\{E_{11},E_{12},E_{21},E_{22}\}\) is a basis, with 4 vectors.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\dim(M_{2,2})=4\) — a concrete, non-arrow example of a 4-dimensional vector space.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming "dimension" always means "how many numbers describe one element." For the 2×2 matrix space, each "vector" (each matrix) genuinely does have 4 numbers in it, and the space's dimension really is 4 — but that's a coincidence of this particular example, not a rule. "How many numbers describe one element" and "how many basis vectors are needed" are two different questions that happen to agree here. They won't always: later on, the vector space of polynomials of degree ≤ \(n\) needs \(n+1\) basis vectors (\(\{1,x,\ldots,x^n\}\)) — again coincidentally matching "\(n+1\) coefficients" — but never take that pattern for granted without actually checking a basis directly for whatever new space you meet.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="4">
+    <div class="label">Try it yourself</div>
+    <p>What is the dimension of \(\mathbb R^4\)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 4" aria-label="Dimension of R4">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>What is \(\dim(\mathbb R^2)\)?
+      <details class="answer"><summary></summary><div class="ans-body">2</div></details></li>
+    <li>What is \(\dim(\mathbb R^5)\)?
+      <details class="answer"><summary></summary><div class="ans-body">5</div></details></li>
+    <li>What is the dimension of the vector space of all 3×3 matrices?
+      <details class="answer"><summary></summary><div class="ans-body">9 — the basis of nine "single 1, rest zeros" matrices, one for each entry.</div></details></li>
+    <li>A basis for a vector space \(V\) has 6 vectors. What is \(\dim(V)\)?
+      <details class="answer"><summary></summary><div class="ans-body">6.</div></details></li>
+    <li>True or false: a vector space can have two different bases with different numbers of vectors.
+      <details class="answer"><summary></summary><div class="ans-body">False — this chapter's whole point: every basis of a given space shares the same size.</div></details></li>
+    <li>What is the dimension of the trivial vector space \(\{\mathbf 0\}\) (containing only the zero vector)?
+      <details class="answer"><summary></summary><div class="ans-body">0, by convention — its only independent-and-spanning set is the empty set, since the zero vector alone is never independent (Chapter 5).</div></details></li>
+    <li class="tag">bonus — What is the dimension of ordinary 2-component column vectors (i.e. \(\mathbb R^2\) again, written as columns)?
+      <details class="answer"><summary></summary><div class="ans-body">2 — writing the same vectors as columns instead of rows doesn't change the space.</div></details></li>
+    <li class="tag">bonus — A set of 5 vectors is given in \(\mathbb R^3\). Can it possibly be a basis for \(\mathbb R^3\)?
+      <details class="answer"><summary></summary><div class="ans-body">No — a basis for \(\mathbb R^3\) needs exactly 3 vectors; 5 vectors in \(\mathbb R^3\) are automatically dependent.</div></details></li>
+    <li class="tag">bonus — What is the dimension of the space of all polynomials of degree ≤ 3, with basis \(\{1,x,x^2,x^3\}\)?
+      <details class="answer"><summary></summary><div class="ans-body">4.</div></details></li>
+    <li class="tag">bonus — You're handed exactly 3 vectors in \(\mathbb R^3\) and told they're independent. Do you still need to separately check that they span \(\mathbb R^3\) before calling them a basis?
+      <details class="answer"><summary></summary><div class="ans-body">No — in a space of dimension \(n\), any \(n\) independent vectors automatically span it too (used already in Chapter 7's worked example). This shortcut only works when the count exactly matches the dimension.</div></details></li>
+    <li class="tag">challenge — Explain why "dimension" would stop being well-defined if different bases for the same space could have different sizes — what exactly would break?
+      <details class="answer"><summary></summary><div class="ans-body">If basis size could vary, "what is \(\dim(V)\)?" would have no single answer — the honest reply would always be "it depends which basis you happened to pick," which defeats the entire point of attaching one fixed number to the space itself rather than to a particular basis. The (unproven-here but true) fact that every basis of \(V\) shares exactly the same size is precisely what rescues "dimension" from that ambiguity.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-basis.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-coordinates-relative-to-a-basis.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 8 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:8", "content/m11-vector-spaces/ch08-dimension.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Span | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 4 of 12</div>
+  <div class="eyebrow">Chapter 4 · concept:span</div>
+  <h1>Span</h1>
+  <p class="subtitle">Chapter 3 asked, one target vector at a time, whether it happens to be a linear combination of some given vectors. This chapter asks the bigger question: what's the entire set of vectors reachable that way?</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Span is how you describe an entire subspace compactly, without listing its — usually infinite — elements one at a time. Instead of writing out every point on a line, you name the one vector that generates it; instead of describing every vector in a plane, you name two vectors that generate all of it together. It's the difference between listing and generating.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Span</div>
+    <p>The <strong>span</strong> of vectors \(\mathbf v_1,\ldots,\mathbf v_k\) is the set of <em>all</em> possible linear combinations of them:</p>
+    <p style="text-align:center; font-size:1.1rem;">\[ \operatorname{span}\{\mathbf v_1,\ldots,\mathbf v_k\}=\{c_1\mathbf v_1+\cdots+c_k\mathbf v_k : c_1,\ldots,c_k\text{ any scalars}\} \]</p>
+    <p>A span is always a subspace in its own right — worth a quick sanity check against Chapter 2's test: it contains \(\mathbf 0\) (take every \(c_i=0\)); it's closed under addition (a combination of combinations is still a combination — just add the coefficients); and it's closed under scalar multiplication (scale every coefficient by the same constant). A span always automatically passes the subspace test, no matter which vectors you started with.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a line versus the whole plane</div>
+    <p>Describe \(\operatorname{span}\{\langle2,1\rangle\}\), then describe \(\operatorname{span}\{\langle1,1\rangle,\langle1,-1\rangle\}\).</p>
+    <details class="step" open><summary>Step 1 — span of a single nonzero vector</summary>
+      <div class="step-body"><p>\(\operatorname{span}\{\langle2,1\rangle\}=\{c\langle2,1\rangle : c\in\mathbb R\}\) — every scalar multiple of \(\langle2,1\rangle\). Geometrically, that's exactly the line through the origin in the direction of \(\langle2,1\rangle\); one vector can only ever reach points along its own line.</p></div></details>
+    <details class="step"><summary>Step 2 — span of two non-parallel vectors</summary>
+      <div class="step-body"><p>For \(\langle1,1\rangle\) and \(\langle1,-1\rangle\), Chapter 3's challenge-style argument generalizes: given <em>any</em> target \(\langle a,b\rangle\), solve \(c_1+c_2=a\), \(c_1-c_2=b\) for \(c_1,c_2\) — adding gives \(c_1=\frac{a+b}{2}\), subtracting gives \(c_2=\frac{a-b}{2}\), and this works for every \(a,b\) with no exceptions. So every vector in \(\mathbb R^2\) is reachable: \(\operatorname{span}\{\langle1,1\rangle,\langle1,-1\rangle\}=\mathbb R^2\), the whole plane.</p></div></details>
+  </div>
+
+  <div class="row" style="justify-content:center; gap:2rem; text-align:center; margin-top:1rem;">
+    <div>
+      <div class="plot-wrap"><svg id="span-line-svg" viewBox="0 0 200 200" width="200" height="200"></svg></div>
+      <div class="live-readout-wrap"><span class="live-readout">span{⟨1,0⟩, ⟨2,0⟩} — parallel, just a line</span></div>
+    </div>
+    <div>
+      <div class="plot-wrap"><svg id="span-plane-svg" viewBox="0 0 200 200" width="200" height="200"></svg></div>
+      <div class="live-readout-wrap"><span class="live-readout">span{⟨1,1⟩, ⟨1,-1⟩} — non-parallel, all of R²</span></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    function drawVec(svg, opts, x, y, lineCls, pointCls) {
+      const { px, py } = MCPlot.mapper(opts);
+      svg.appendChild(MCPlot.el("line", { x1: px(0), y1: py(0), x2: px(x), y2: py(y), class: lineCls }));
+      svg.appendChild(MCPlot.el("circle", { cx: px(x), cy: py(y), r: 4, class: pointCls }));
+    }
+    const opts = { xMin: -3, xMax: 3, yMin: -3, yMax: 3, width: 200, height: 200, pad: 22, xStep: 1, yStep: 1 };
+
+    const svg1 = document.getElementById("span-line-svg");
+    MCPlot.drawAxes(svg1, opts);
+    MCPlot.dashedLine(svg1, -3, 0, 3, 0, opts, "plot-dashed");
+    drawVec(svg1, opts, 1, 0, "plot-curve", "plot-point");
+    drawVec(svg1, opts, 2, 0, "plot-curve-alt", "plot-point-alt");
+
+    const svg2 = document.getElementById("span-plane-svg");
+    MCPlot.drawAxes(svg2, opts);
+    drawVec(svg2, opts, 1, 1, "plot-curve", "plot-point");
+    drawVec(svg2, opts, 1, -1, "plot-curve-alt", "plot-point-alt");
+  })();
+  </script>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming two vectors always span all of \(\mathbb R^2\), no matter which two you pick. They don't: two <strong>parallel</strong> vectors — scalar multiples of each other — only ever span a line, no matter how many of them you throw in. \(\operatorname{span}\{\langle1,0\rangle,\langle2,0\rangle\}\) is still just the \(x\)-axis, because \(\langle2,0\rangle=2\langle1,0\rangle\) contributes no new direction — every combination of the two collapses right back onto the one line \(\langle1,0\rangle\) already generates alone.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="no,n">
+    <div class="label">Try it yourself</div>
+    <p>Does \(\operatorname{span}\{\langle1,0\rangle,\langle2,0\rangle\}\) cover all of \(\mathbb R^2\)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Does span of <1,0> and <2,0> cover all of R2">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Describe \(\operatorname{span}\{\langle0,3\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">The \(y\)-axis — every vector of the form \(\langle0,t\rangle\).</div></details></li>
+    <li>Describe \(\operatorname{span}\{\langle1,1\rangle,\langle2,2\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">Just the line \(y=x\) — the two vectors are parallel (\(\langle2,2\rangle=2\langle1,1\rangle\)), so the second contributes nothing new.</div></details></li>
+    <li>Does \(\operatorname{span}\{\langle1,2\rangle,\langle3,1\rangle\}\) equal all of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — the two vectors aren't parallel (\(1/3\neq2/1\)), so, exactly like the worked example, any target vector is reachable.</div></details></li>
+    <li>Is \(\langle2,5\rangle\) in \(\operatorname{span}\{\langle1,1\rangle,\langle1,-1\rangle\}\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — solve \(c_1+c_2=2\), \(c_1-c_2=5\): \(c_1=3.5,\ c_2=-1.5\), a valid (if non-integer) solution, and since this span is all of \(\mathbb R^2\), every vector is in it anyway.</div></details></li>
+    <li>Describe \(\operatorname{span}\{\langle1,0,0\rangle,\langle0,1,0\rangle\}\) as a subset of \(\mathbb R^3\).
+      <details class="answer"><summary></summary><div class="ans-body">The \(xy\)-plane — every vector \(\langle x,y,0\rangle\) (\(z=0\)).</div></details></li>
+    <li>Is \(\operatorname{span}\{\langle1,2\rangle\}\) the same set as \(\operatorname{span}\{\langle2,4\rangle\}\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — both are the same line through the origin, since \(\langle2,4\rangle\) is just a scalar multiple of \(\langle1,2\rangle\); scaling the generating vector doesn't change which line it generates.</div></details></li>
+    <li class="tag">bonus — Describe \(\operatorname{span}\{\langle1,0\rangle,\langle0,1\rangle,\langle1,1\rangle\}\) (three vectors in \(\mathbb R^2\)).
+      <details class="answer"><summary></summary><div class="ans-body">Still all of \(\mathbb R^2\) — the third vector is redundant (it's already a combination of the first two), a preview of Chapter 6's "dependence."</div></details></li>
+    <li class="tag">bonus — Is the zero vector always in the span of any set of vectors?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — take every coefficient to be 0.</div></details></li>
+    <li class="tag">bonus — Does \(\operatorname{span}\{\langle0,0\rangle\}\) (the span of just the zero vector) equal \(\{\langle0,0\rangle\}\) or all of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">Just \(\{\langle0,0\rangle\}\) — no matter what scalar \(c\) you pick, \(c\langle0,0\rangle=\langle0,0\rangle\); the zero vector alone can never generate anything else.</div></details></li>
+    <li class="tag">bonus — In \(\mathbb R^3\), describe \(\operatorname{span}\{\langle1,1,1\rangle,\langle2,2,2\rangle\}\).
+      <details class="answer"><summary></summary><div class="ans-body">A line — the two vectors are parallel, so together they still only reach the direction of \(\langle1,1,1\rangle\).</div></details></li>
+    <li class="tag">challenge — Explain why, no matter how many vectors you put into a set, if every one of them is parallel to a single fixed vector \(\mathbf v\), the span can never be more than a line. Connect this to what Chapter 6 will call "dependence."
+      <details class="answer"><summary></summary><div class="ans-body">Every vector in such a set is some scalar multiple of \(\mathbf v\), so every linear combination of them is a sum of scalar multiples of \(\mathbf v\) — which is itself just another scalar multiple of \(\mathbf v\). No combination can ever step off \(\mathbf v\)'s line, no matter how many parallel vectors you add. Chapter 6 will call a set like this "linearly dependent" — the vectors aren't contributing independent new directions.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-linear-combinations.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-linear-independence.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 4 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:4", "content/m11-vector-spaces/ch04-span.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

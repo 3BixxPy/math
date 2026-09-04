@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Subspaces | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 2 of 12</div>
+  <div class="eyebrow">Chapter 2 · concept:subspaces</div>
+  <h1>Subspaces</h1>
+  <p class="subtitle">Chapter 1 showed that "vector space" covers far more than arrows — but checking all ten axioms by hand every time you meet a new candidate would be exhausting. This chapter gives the shortcut you'll actually use from here on: a three-part test.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Most of the vector spaces you'll meet in practice aren't built from scratch — they sit <em>inside</em> a bigger space you already know is valid: a line or plane through the origin sitting inside \(\mathbb R^3\), or a special family of matrices sitting inside the space of all matrices. Recognizing "this is just a subset of something I already know is a vector space" means you never have to re-verify all ten of Chapter 1's axioms from scratch again — a short three-part test does the same job.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Subspace</div>
+    <p>Let \(V\) be a vector space. A subset \(W\subseteq V\) is a <strong>subspace</strong> of \(V\) if \(W\) is itself a vector space, using the exact same addition and scalar multiplication already defined on \(V\).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The subspace test</div>
+    <div class="eqn"><div class="eq-body">\[ W \text{ is a subspace of } V \iff \begin{cases} \mathbf 0 \in W \\ \mathbf u,\mathbf v\in W \Rightarrow \mathbf u+\mathbf v\in W \\ \mathbf v\in W,\ c \text{ a scalar} \Rightarrow c\mathbf v\in W \end{cases} \]</div><div class="eq-num" id="eq-11-2-1">(11.2.1)</div></div>
+    <p>If all three hold, \(W\) automatically satisfies every one of Chapter 1's ten axioms — commutativity, associativity, and the rest are all inherited directly from \(V\), since \(W\) uses \(V\)'s own operations. There is nothing left to check beyond these three. Check condition (1) — the zero vector — <em>first</em>: it's usually the fastest way to rule a candidate out, before doing any of the more tedious algebra in (2) and (3).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a line through the origin, and a line that isn't</div>
+    <p>Test whether \(W_1=\{\langle x,y\rangle : y=2x\}\) is a subspace of \(\mathbb R^2\), then test \(W_2=\{\langle x,y\rangle : y=2x+1\}\).</p>
+    <details class="step" open><summary>Step 1 — W₁: check the zero vector</summary>
+      <div class="step-body"><p>Is \(\langle0,0\rangle\) in \(W_1\)? Need \(0=2(0)=0\) ✓. Condition (1) holds.</p></div></details>
+    <details class="step"><summary>Step 2 — W₁: check closure under addition</summary>
+      <div class="step-body"><p>Take two general elements of \(W_1\): \(\langle x_1,2x_1\rangle\) and \(\langle x_2,2x_2\rangle\). Their sum is \(\langle x_1+x_2,\ 2x_1+2x_2\rangle=\langle x_1+x_2,\ 2(x_1+x_2)\rangle\) — still of the form \(\langle x,2x\rangle\). Closed.</p></div></details>
+    <details class="step"><summary>Step 3 — W₁: check closure under scalar multiplication</summary>
+      <div class="step-body"><p>\(c\langle x_1,2x_1\rangle=\langle cx_1,\ 2cx_1\rangle=\langle cx_1,\ 2(cx_1)\rangle\) — again of the form \(\langle x,2x\rangle\). Closed. All three conditions hold: \(W_1\) <strong>is</strong> a subspace of \(\mathbb R^2\).</p></div></details>
+    <details class="step"><summary>Step 4 — W₂: check the zero vector (and stop)</summary>
+      <div class="step-body"><p>Is \(\langle0,0\rangle\) in \(W_2\)? Need \(0=2(0)+1=1\) — false. \(\langle0,0\rangle\notin W_2\), so condition (1) already fails. There's no need to check closure under addition or scalar multiplication: \(W_2\) <strong>is not</strong> a subspace of \(\mathbb R^2\), full stop. (Geometrically: any line that misses the origin can never be a subspace, no matter how "linear" it looks.)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Skipping the zero-vector check and diving straight into testing closure under addition or scalar multiplication. It's not wrong to check the conditions in a different order — the theorem doesn't require checking (1) before (2) and (3) — but it's slower: verifying closure under addition symbolically, only to discover afterward that the set never even contained the origin, wastes real algebra. Checking (1) first costs one substitution and instantly rules out an entire category of non-subspaces (any line, plane, or curve that doesn't pass through the origin) before any heavier work begins.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes,y">
+    <div class="label">Try it yourself</div>
+    <p>Does a subspace have to contain the zero vector?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Must a subspace contain the zero vector">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is \(\{\langle0,0\rangle\}\) (just the origin, alone) a subspace of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — the "trivial" subspace: it contains \(\mathbf 0\), and \(\mathbf 0+\mathbf 0=\mathbf 0\), \(c\mathbf 0=\mathbf 0\) for every \(c\), so both closure conditions hold trivially.</div></details></li>
+    <li>Is all of \(\mathbb R^2\) a subspace of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — every vector space is automatically a subspace of itself.</div></details></li>
+    <li>Is \(\{\langle x,y\rangle : y=-3x\}\) a subspace of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — a line through the origin; it passes all three parts of the test the same way \(y=2x\) did above.</div></details></li>
+    <li>Is \(\{\langle x,y\rangle : y=x^2\}\) a subspace of \(\mathbb R^2\)? (It does contain the origin — check the other two conditions before deciding.)
+      <details class="answer"><summary></summary><div class="ans-body">No. It contains \(\langle0,0\rangle\), but it isn't closed under addition: \(\langle1,1\rangle\) and \(\langle1,1\rangle\) are both in the set (since \(1=1^2\)), but their sum \(\langle2,2\rangle\) is not (\(2\neq2^2=4\)). Passing condition (1) alone is never enough.</div></details></li>
+    <li>Is \(\{\langle x,y,z\rangle : x+y+z=0\}\) a subspace of \(\mathbb R^3\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — a plane through the origin. Contains \(\langle0,0,0\rangle\); if \(x_1+y_1+z_1=0\) and \(x_2+y_2+z_2=0\) then \((x_1+x_2)+(y_1+y_2)+(z_1+z_2)=0\) too (closed under addition); scaling every coordinate by \(c\) keeps the sum at \(c\cdot0=0\) (closed under scalar multiplication).</div></details></li>
+    <li>Is the first quadrant \(\{\langle x,y\rangle : x\geq0,\ y\geq0\}\) a subspace of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">No. It contains the origin and is closed under addition, but fails closure under scalar multiplication: multiplying \(\langle1,1\rangle\) by \(-1\) gives \(\langle-1,-1\rangle\), which has left the first quadrant.</div></details></li>
+    <li class="tag">bonus — Is the empty set \(\varnothing\) ever a subspace of any vector space?
+      <details class="answer"><summary></summary><div class="ans-body">No — a subspace must contain the zero vector by definition, and \(\varnothing\) contains nothing at all.</div></details></li>
+    <li class="tag">bonus — Is the set of 2×2 matrices with trace 0 (top-left entry plus bottom-right entry equals 0) a subspace of all 2×2 matrices?
+      <details class="answer"><summary></summary><div class="ans-body">Yes. The zero matrix has trace 0; the sum of two trace-0 matrices still has trace 0 (traces add); a scalar multiple of a trace-0 matrix still has trace 0 (trace scales along with every entry).</div></details></li>
+    <li class="tag">bonus — True or false: every subspace of \(\mathbb R^2\) is either \(\{\mathbf 0\}\), a line through the origin, or all of \(\mathbb R^2\) — nothing else is possible.
+      <details class="answer"><summary></summary><div class="ans-body">True — this is a genuinely complete list, tied directly to Chapter 8's idea of dimension (0, 1, and 2 respectively are the only possible subspace dimensions inside a 2-dimensional space).</div></details></li>
+    <li class="tag">bonus — Is \(\{\langle x,y\rangle : y=2x-1\}\) a subspace of \(\mathbb R^2\)?
+      <details class="answer"><summary></summary><div class="ans-body">No — same failure as \(W_2\) above: \(\langle0,0\rangle\) would need \(0=2(0)-1=-1\), which is false, so it fails condition (1) immediately.</div></details></li>
+    <li class="tag">challenge — Prove, in general (not just for slope 2), that any line through the origin in \(\mathbb R^2\) — that is, \(\{\langle x,y\rangle : y=mx\}\) for a fixed constant \(m\) — is always a subspace.
+      <details class="answer"><summary></summary><div class="ans-body">Zero vector: \(0=m(0)\) ✓. Addition: \(\langle x_1,mx_1\rangle+\langle x_2,mx_2\rangle=\langle x_1+x_2,\ m(x_1+x_2)\rangle\), still of the required form. Scalar multiplication: \(c\langle x_1,mx_1\rangle=\langle cx_1,\ m(cx_1)\rangle\), again of the required form. All three hold for <em>any</em> fixed \(m\) — the worked example's \(m=2\) was never special.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-vector-space-axioms.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-linear-combinations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 2 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:2", "content/m11-vector-spaces/ch02-subspaces.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

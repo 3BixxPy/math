@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Linear Combinations | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 3 of 12</div>
+  <div class="eyebrow">Chapter 3 · concept:linear-combinations</div>
+  <h1>Linear Combinations</h1>
+  <p class="subtitle">Chapter 2 gave you a fast test for recognizing a subspace once you already have one in hand. This chapter builds the single tool the rest of the module reuses constantly for constructing and describing subspaces in the first place.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Nearly every question left in this module — does this vector belong to that span, are these vectors independent, do they form a basis — reduces to the exact same underlying question: can this vector be written as \(c_1\mathbf v_1+\cdots+c_k\mathbf v_k\) for the right choice of scalars? Getting fluent with that one question now means every later chapter is really just a variation on a skill you already have.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Linear combination</div>
+    <p>Given vectors \(\mathbf v_1,\mathbf v_2,\ldots,\mathbf v_k\) in a vector space \(V\), a <strong>linear combination</strong> of them is any sum of the form</p>
+    <p style="text-align:center; font-size:1.1rem;">\[ c_1\mathbf v_1+c_2\mathbf v_2+\cdots+c_k\mathbf v_k \]</p>
+    <p>where \(c_1,\ldots,c_k\) are scalars. That's it — pick any scalars you like, scale each vector by its own, and add the results.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — finding the scalars</div>
+    <p>Express \(\langle7,4\rangle\) as a linear combination of \(\langle1,2\rangle\) and \(\langle3,1\rangle\).</p>
+    <details class="step" open><summary>Step 1 — set up the equation and turn it into a system</summary>
+      <div class="step-body"><p>Want \(c_1\langle1,2\rangle+c_2\langle3,1\rangle=\langle7,4\rangle\). Matching components: \(c_1+3c_2=7\) and \(2c_1+c_2=4\) — exactly the kind of two-variable system Module 10 spent chapters solving.</p></div></details>
+    <details class="step"><summary>Step 2 — solve the system</summary>
+      <div class="step-body"><p>From the first equation, \(c_1=7-3c_2\). Substituting into the second: \(2(7-3c_2)+c_2=4 \Rightarrow 14-6c_2+c_2=4 \Rightarrow -5c_2=-10 \Rightarrow c_2=2\), then \(c_1=7-3(2)=1\).</p></div></details>
+    <details class="step"><summary>Step 3 — check</summary>
+      <div class="step-body"><p>\(1\cdot\langle1,2\rangle+2\cdot\langle3,1\rangle=\langle1,2\rangle+\langle6,2\rangle=\langle7,4\rangle\) ✓</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — when no combination exists</div>
+    <p>Is \(\langle1,1\rangle\) a linear combination of \(\langle2,4\rangle\) and \(\langle1,2\rangle\)?</p>
+    <details class="step" open><summary>Step 1 — notice something about the two given vectors first</summary>
+      <div class="step-body"><p>\(\langle2,4\rangle=2\langle1,2\rangle\) — the second vector is just a scaled copy of the first. So any combination \(c_1\langle2,4\rangle+c_2\langle1,2\rangle\) simplifies to \((2c_1+c_2)\langle1,2\rangle\) — always some scalar multiple of \(\langle1,2\rangle\), no matter what \(c_1,c_2\) you pick.</p></div></details>
+    <details class="step"><summary>Step 2 — ask whether the target is a multiple of that one direction</summary>
+      <div class="step-body"><p>Is \(\langle1,1\rangle=t\langle1,2\rangle\) for some \(t\)? That needs \(t=1\) (from the first component) and \(2t=1\Rightarrow t=0.5\) (from the second) — contradiction, no single \(t\) works.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>No linear combination of \(\langle2,4\rangle\) and \(\langle1,2\rangle\) can ever produce \(\langle1,1\rangle\) — both given vectors point along the same line, so every combination of them is stuck on that line too, and \(\langle1,1\rangle\) isn't on it.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming every vector can be written as a combination of any given set, as if enough algebra will always find a way. It won't, when it isn't actually possible — as the second worked example just showed. Whether a target vector is reachable depends entirely on what the given vectors <em>can</em> reach in the first place, which is exactly what Chapter 4's idea of "span" makes precise. If you find yourself with an inconsistent system while hunting for coefficients, that's not an arithmetic slip to hunt down — it's the honest answer that no combination exists.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes,y">
+    <div class="label">Try it yourself</div>
+    <p>Is \(\langle5,5\rangle\) a linear combination of \(\langle1,0\rangle\) and \(\langle0,1\rangle\)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Is <5,5> a linear combination of <1,0> and <0,1>">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is \(\langle4,4\rangle\) a linear combination of \(\langle1,0\rangle\) and \(\langle0,1\rangle\)? If so, give the scalars.
+      <details class="answer"><summary></summary><div class="ans-body">Yes: \(4\langle1,0\rangle+4\langle0,1\rangle=\langle4,4\rangle\).</div></details></li>
+    <li>Express \(\langle3,-1\rangle\) as a linear combination of \(\langle1,1\rangle\) and \(\langle1,-1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1+c_2=3\), \(c_1-c_2=-1\) → adding gives \(2c_1=2\Rightarrow c_1=1,\ c_2=2\). \(1\langle1,1\rangle+2\langle1,-1\rangle=\langle1,1\rangle+\langle2,-2\rangle=\langle3,-1\rangle\) ✓</div></details></li>
+    <li>Is \(\langle2,3\rangle\) a linear combination of \(\langle1,1\rangle\) and \(\langle2,2\rangle\)?
+      <details class="answer"><summary></summary><div class="ans-body">No — both given vectors point along \(\langle1,1\rangle\)'s direction, so any combination is a multiple of \(\langle1,1\rangle\); \(\langle2,3\rangle\) isn't (would need \(t=2\) and \(t=3\) simultaneously).</div></details></li>
+    <li>Find a <em>nontrivial</em> linear combination (not all scalars zero) of \(\langle1,2\rangle\) and \(\langle2,4\rangle\) that equals \(\langle0,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Since \(\langle2,4\rangle=2\langle1,2\rangle\): \(2\langle1,2\rangle+(-1)\langle2,4\rangle=\langle2,4\rangle-\langle2,4\rangle=\langle0,0\rangle\). (This will matter directly in Chapter 5.)</div></details></li>
+    <li>Is \(\langle3,3,3\rangle\) a linear combination of \(\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes, trivially: \(3\langle1,0,0\rangle+3\langle0,1,0\rangle+3\langle0,0,1\rangle=\langle3,3,3\rangle\).</div></details></li>
+    <li>Thinking of \(p_1(x)=x\) and \(p_2(x)=1\) as "vectors" in the polynomial vector space from Chapter 1, express \(3x+5\) as a linear combination of \(p_1\) and \(p_2\).
+      <details class="answer"><summary></summary><div class="ans-body">\(3p_1+5p_2=3x+5\) — the exact same idea as the number-vector examples above, just with polynomials playing the role of vectors.</div></details></li>
+    <li class="tag">bonus — Express \(\langle6,2\rangle\) as a linear combination of \(\langle3,1\rangle\) and \(\langle1,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">From the \(y\)-component, \(c_1=2\); then \(3(2)+c_2=6\Rightarrow c_2=0\). So \(2\langle3,1\rangle+0\langle1,0\rangle=\langle6,2\rangle\).</div></details></li>
+    <li class="tag">bonus — Is \(\langle1,2,3\rangle\) a linear combination of just \(\langle1,0,0\rangle\) and \(\langle0,1,0\rangle\) (no third vector)?
+      <details class="answer"><summary></summary><div class="ans-body">No — every combination of these two has third component 0, but the target's third component is 3.</div></details></li>
+    <li class="tag">bonus — True or false: the zero vector is a linear combination of <em>any</em> set of vectors (take every scalar to be 0).
+      <details class="answer"><summary></summary><div class="ans-body">True — this "trivial" combination always works, for any set, and it's exactly what Chapter 5 builds on.</div></details></li>
+    <li class="tag">bonus — Express \(\langle4,-2\rangle\) as a linear combination of the single vector \(\langle2,-1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(c\langle2,-1\rangle=\langle4,-2\rangle\Rightarrow c=2\).</div></details></li>
+    <li class="tag">challenge — For an arbitrary target \(\langle a,b\rangle\), show algebraically that it's <em>always</em> a linear combination of \(\langle1,0\rangle\) and \(\langle0,1\rangle\), no matter what \(a,b\) are. Why does that make these two vectors special?
+      <details class="answer"><summary></summary><div class="ans-body">\(a\langle1,0\rangle+b\langle0,1\rangle=\langle a,b\rangle\) for <em>every</em> choice of \(a,b\) — no system to solve, the coefficients are just \(a\) and \(b\) themselves. That means these two vectors can reach every vector in \(\mathbb R^2\), which is exactly what Chapter 4 will call "spanning \(\mathbb R^2\)," and exactly why Chapter 7 will call them the "standard basis."</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-subspaces.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-span.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 3 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:3", "content/m11-vector-spaces/ch03-linear-combinations.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

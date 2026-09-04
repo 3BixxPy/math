@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Vector Spaces: The Abstract Definition | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 1 of 12</div>
+  <div class="eyebrow">Chapter 1 · concept:vector-space-axioms</div>
+  <h1>Vector Spaces — The Abstract Definition</h1>
+  <p class="subtitle">Modules 9 and 10 built real fluency with two objects that felt very different — arrows in \(\mathbb R^n\), and grids of numbers you row-reduced. This chapter's whole job is to show you they were secretly the same kind of thing all along, and to give that kind of thing a name.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Module 9 gave you a very physical picture of a vector: an arrow, with a length and a direction, living in the plane or in 3D space — a picture you already trusted from years of 3D game-dev work. That picture was never wrong. But it was also never the whole truth. Everything you actually <em>did</em> with those arrows — adding them, scaling them, checking whether one is a combination of others — only ever used two operations, addition and scalar multiplication, and a short list of rules those two operations always obeyed. Write that list of rules down explicitly, on its own, with nothing about "arrows" baked into it, and something useful happens: plenty of things that are obviously <em>not</em> arrows — polynomials, the 2×2 matrices Module 10 spent chapters row-reducing, even certain functions — turn out to satisfy the exact same list. The moment they do, every tool this module builds from Chapter 3 onward — span, independence, basis, dimension — applies to them immediately, with zero new theory required. That transfer is the entire payoff of going abstract here. This isn't a harder restart of Module 9; it's Module 9's toolkit turning out to be worth far more than it looked, because "vector" was never really about being an arrow — it was always about which rules the objects obey.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Vector space</div>
+    <p>A <strong>vector space</strong> is a set \(V\) together with two operations — <strong>vector addition</strong> (\(\mathbf u+\mathbf v\)) and <strong>scalar multiplication</strong> (\(c\mathbf v\), for real-number scalars \(c\)) — satisfying the following axioms for all \(\mathbf u,\mathbf v,\mathbf w\in V\) and scalars \(c,d\):</p>
+    <ol>
+      <li><strong>Closure under addition:</strong> \(\mathbf u+\mathbf v\in V\).</li>
+      <li><strong>Commutativity:</strong> \(\mathbf u+\mathbf v=\mathbf v+\mathbf u\).</li>
+      <li><strong>Associativity of addition:</strong> \((\mathbf u+\mathbf v)+\mathbf w=\mathbf u+(\mathbf v+\mathbf w)\).</li>
+      <li><strong>Zero vector:</strong> there is an element \(\mathbf 0\in V\) with \(\mathbf v+\mathbf 0=\mathbf v\) for every \(\mathbf v\).</li>
+      <li><strong>Additive inverses:</strong> for every \(\mathbf v\) there is a \(-\mathbf v\in V\) with \(\mathbf v+(-\mathbf v)=\mathbf 0\).</li>
+      <li><strong>Closure under scalar multiplication:</strong> \(c\mathbf v\in V\).</li>
+      <li><strong>Distributivity over vector addition:</strong> \(c(\mathbf u+\mathbf v)=c\mathbf u+c\mathbf v\).</li>
+      <li><strong>Distributivity over scalar addition:</strong> \((c+d)\mathbf v=c\mathbf v+d\mathbf v\).</li>
+      <li><strong>Compatibility of scalar multiplication:</strong> \(c(d\mathbf v)=(cd)\mathbf v\).</li>
+      <li><strong>Scalar identity:</strong> \(1\cdot\mathbf v=\mathbf v\).</li>
+    </ol>
+    <p>Ten conditions — but nothing here is new to you. Every one of them is a rule you've been relying on silently for arrows in \(\mathbb R^n\) since Module 9; \(\mathbb R^n\) satisfies all ten automatically, from ordinary real-number arithmetic applied component by component. Writing the list down explicitly is what lets a completely different-looking set qualify as a vector space too, the instant it's checked against this same list — which is exactly what the worked example below does.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the space of all 2×2 matrices</div>
+    <p>Module 10, Chapter 2 introduced 2×2 matrices as grids of numbers with their own addition and scalar multiplication. Check two of the ten axioms above for the set of <em>all</em> 2×2 matrices — call it \(M_{2,2}\) — as a demonstration, not an exhaustive proof.</p>
+    <details class="step" open><summary>Step 1 — closure under addition</summary>
+      <div class="step-body"><p>Take \(A=\begin{bmatrix}1&2\\3&4\end{bmatrix}\) and \(B=\begin{bmatrix}0&-1\\5&2\end{bmatrix}\). Matrix addition is entrywise, so \(A+B=\begin{bmatrix}1&1\\8&6\end{bmatrix}\) — still a 2×2 matrix. That's not a coincidence of these particular numbers: adding two real numbers always gives another real number, so adding two 2×2 matrices entry by entry always gives another 2×2 matrix. Closure holds.</p></div></details>
+    <details class="step"><summary>Step 2 — the zero vector</summary>
+      <div class="step-body"><p>The all-zero matrix \(\mathbf 0=\begin{bmatrix}0&0\\0&0\end{bmatrix}\) plays the role of axiom 4's zero vector: \(A+\mathbf 0=\begin{bmatrix}1&2\\3&4\end{bmatrix}=A\), exactly unchanged.</p></div></details>
+    <details class="step"><summary>The rest, briefly</summary>
+      <div class="step-body"><p>Commutativity and associativity hold because ordinary real-number addition is commutative and associative, applied entry by entry. Every matrix has an additive inverse (negate every entry: the inverse of \(\begin{bmatrix}1&2\\3&4\end{bmatrix}\) is \(\begin{bmatrix}-1&-2\\-3&-4\end{bmatrix}\)). Scalar multiplication distributes and combines exactly the way real-number multiplication does, again entrywise. Nothing about "a grid of numbers" can ever violate any of these — checking two of them concretely is enough to see why the rest go through the same way.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming "vector space" secretly still means "arrows in 2D or 3D space," and treating everything else as a loose metaphor for teaching purposes. It isn't a metaphor. The set of all 2×2 matrices above really is a vector space, by the actual definition — not by analogy. So is the set of all polynomials of degree at most \(n\) (add them term by term, scale every coefficient by the same constant), and so is the set of continuous functions on an interval (add two functions pointwise, scale a function by a constant). None of those are arrows. If a set has an addition and a scalar multiplication obeying the ten axioms above, it is a vector space — full stop. Module 9's arrows were one example, chosen first because it's the one you already had strong intuition for, not the definition itself.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes,y">
+    <div class="label">Try it yourself</div>
+    <p>Is the set of all 2×2 matrices, under matrix addition, <strong>closed</strong> — does adding any two 2×2 matrices always produce another 2×2 matrix?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Closure of 2x2 matrices under addition">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>True or false: every vector space must contain a zero vector.
+      <details class="answer"><summary></summary><div class="ans-body">True — axiom 4 requires it.</div></details></li>
+    <li>Is \(\mathbb R\) (the plain real numbers) a vector space, under ordinary addition and multiplication by real-number scalars?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — it satisfies all ten axioms; it's just the \(n=1\) case of the \(\mathbb R^n\) you already know from Module 9.</div></details></li>
+    <li>Name one example of a vector space other than arrows in \(\mathbb R^n\).
+      <details class="answer"><summary></summary><div class="ans-body">Any valid answer works, e.g. the set of all 2×2 matrices, or the set of all polynomials of degree ≤ 2.</div></details></li>
+    <li>In the vector space of all 2×2 matrices, what plays the role of the "zero vector"?
+      <details class="answer"><summary></summary><div class="ans-body">The 2×2 all-zero matrix, \(\begin{bmatrix}0&0\\0&0\end{bmatrix}\).</div></details></li>
+    <li>If \(A\) and \(B\) are both 2×2 matrices, is \(A+B\) guaranteed to be a 2×2 matrix?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — closure under addition.</div></details></li>
+    <li>A friend proposes "the set of all 2×2 matrices with determinant exactly 1" as a vector space. Which axiom fails first? (Hint: check the zero vector.)
+      <details class="answer"><summary></summary><div class="ans-body">The zero matrix has determinant 0, not 1, so it isn't even in the set — axiom 4 fails immediately, before any other axiom needs checking.</div></details></li>
+    <li class="tag">bonus — Is the set of polynomials of degree <em>exactly</em> 2 (not "at most 2") closed under addition?
+      <details class="answer"><summary></summary><div class="ans-body">No. \(x^2\) and \(-x^2+x\) are both degree exactly 2, but their sum is \(x\), degree 1 — the sum left the set.</div></details></li>
+    <li class="tag">bonus — Find the additive inverse of \(\begin{bmatrix}2&-1\\0&3\end{bmatrix}\) under matrix addition.
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}-2&1\\0&-3\end{bmatrix}\) — negate every entry.</div></details></li>
+    <li class="tag">bonus — True or false: scalar multiplication in a vector space only ever means multiplying by a whole number.
+      <details class="answer"><summary></summary><div class="ans-body">False — any real-number scalar is allowed, including fractions and negatives.</div></details></li>
+    <li class="tag">bonus — Name the two operations every vector space must come equipped with.
+      <details class="answer"><summary></summary><div class="ans-body">Vector addition and scalar multiplication.</div></details></li>
+    <li class="tag">challenge — Explain why confirming "\(\mathbb R^n\) is a vector space" was basically free, given everything Module 9 already established, but why writing the axiom list down explicitly is still useful even though it changes nothing about \(\mathbb R^n\) itself.
+      <details class="answer"><summary></summary><div class="ans-body">\(\mathbb R^n\) already satisfies all ten axioms through ordinary real-number arithmetic — nothing there needed proving. The value of the explicit list is that <em>any</em> new set satisfying the same ten rules — matrices, polynomials, and beyond — instantly inherits every tool built for \(\mathbb R^n\) from this module onward (span, independence, basis, dimension), without re-deriving any of it from scratch.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m10-matrices/ch12-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-subspaces.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 1 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:1", "content/m11-vector-spaces/ch01-vector-space-axioms.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

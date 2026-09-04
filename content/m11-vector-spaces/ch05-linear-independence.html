@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — Linear Independence | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 5 of 12</div>
+  <div class="eyebrow">Chapter 5 · concept:linear-independence</div>
+  <h1>Linear Independence</h1>
+  <p class="subtitle">Chapter 4 asked what a set of vectors can reach — its span. This chapter asks something different: is every vector in the set actually pulling its own weight, or is one of them redundant, reachable from the others alone?</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Independence is what makes a spanning set efficient — no wasted vectors, nothing that could be deleted without shrinking what it can reach. It's also exactly the second ingredient (alongside spanning) of what Chapter 7 will call a basis — the single most useful kind of set in the whole module.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Linear independence</div>
+    <div class="eqn"><div class="eq-body">\[ c_1\mathbf v_1+c_2\mathbf v_2+\cdots+c_k\mathbf v_k=\mathbf 0 \ \Longrightarrow\ c_1=c_2=\cdots=c_k=0 \]</div><div class="eq-num" id="eq-11-5-1">(11.5.1)</div></div>
+    <p>Vectors \(\mathbf v_1,\ldots,\mathbf v_k\) are <strong>linearly independent</strong> if the <em>only</em> solution to \(c_1\mathbf v_1+\cdots+c_k\mathbf v_k=\mathbf 0\) is the "trivial" one, every \(c_i=0\). If some other, nontrivial solution exists, the set is <strong>linearly dependent</strong> instead (Chapter 6 covers this side in full). Notice what this connects to directly: setting up \(c_1\mathbf v_1+\cdots+c_k\mathbf v_k=\mathbf 0\) and solving for the \(c_i\) is exactly Module 10's homogeneous system. A unique (trivial) solution means independent; infinitely many solutions means dependent. Testing independence <em>is</em> solving a homogeneous system by Gaussian elimination — nothing new is needed beyond Module 10's own tools.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — one dependent pair, one independent pair</div>
+    <p>Test \(\langle1,2\rangle,\langle2,4\rangle\) for independence, then test \(\langle1,2\rangle,\langle2,1\rangle\).</p>
+    <details class="step" open><summary>Step 1 — set up the homogeneous system for the first pair</summary>
+      <div class="step-body"><p>\(c_1\langle1,2\rangle+c_2\langle2,4\rangle=\langle0,0\rangle \Rightarrow c_1+2c_2=0,\ \ 2c_1+4c_2=0\). The second equation is exactly twice the first — it carries no new information.</p></div></details>
+    <details class="step"><summary>Step 2 — solve it</summary>
+      <div class="step-body"><p>One equation, two unknowns: \(c_1=-2c_2\), with \(c_2\) free. Nontrivial solutions exist, e.g. \(c_2=1,\ c_1=-2\): check \(-2\langle1,2\rangle+1\langle2,4\rangle=\langle-2,-4\rangle+\langle2,4\rangle=\langle0,0\rangle\) ✓. Since a nontrivial solution exists, \(\langle1,2\rangle,\langle2,4\rangle\) are <strong>dependent</strong>.</p></div></details>
+    <details class="step"><summary>Step 3 — now the second pair</summary>
+      <div class="step-body"><p>\(c_1\langle1,2\rangle+c_2\langle2,1\rangle=\langle0,0\rangle \Rightarrow c_1+2c_2=0,\ \ 2c_1+c_2=0\). From the first, \(c_1=-2c_2\); substituting: \(2(-2c_2)+c_2=-4c_2+c_2=-3c_2=0\Rightarrow c_2=0\), then \(c_1=0\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Only the trivial solution works for the second pair — \(\langle1,2\rangle\) and \(\langle2,1\rangle\) are <strong>independent</strong>.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Trying to eyeball independence for vectors with three or more components, the way you might glance at two 2D vectors and guess whether they look parallel. That visual shortcut stops being reliable past two dimensions — three vectors in \(\mathbb R^3\) can look scattered and unrelated while still being dependent. The only reliable method, every time, is to actually set up \(c_1\mathbf v_1+\cdots+c_k\mathbf v_k=\mathbf 0\) as a homogeneous system and solve it via Gaussian elimination (Module 10). If it has only the trivial solution, they're independent; if it has infinitely many, they're not. No amount of staring replaces this.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes,y">
+    <div class="label">Try it yourself</div>
+    <p>Are \(\langle1,0\rangle\) and \(\langle0,1\rangle\) linearly independent?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Are <1,0> and <0,1> linearly independent">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Are \(\langle3,0\rangle\) and \(\langle0,5\rangle\) independent?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(3c_1=0\) and \(5c_2=0\) force \(c_1=c_2=0\) directly; only the trivial solution.</div></details></li>
+    <li>Are \(\langle1,1\rangle\) and \(\langle-2,-2\rangle\) independent?
+      <details class="answer"><summary></summary><div class="ans-body">No — \(\langle-2,-2\rangle=-2\langle1,1\rangle\), so \(2\langle1,1\rangle+1\langle-2,-2\rangle=\langle0,0\rangle\) is a nontrivial solution.</div></details></li>
+    <li>Set up (you don't need to solve it yet) the homogeneous system for testing whether \(\langle1,1,0\rangle,\langle0,1,1\rangle,\langle1,0,-1\rangle\) are independent.
+      <details class="answer"><summary></summary><div class="ans-body">\(c_1\langle1,1,0\rangle+c_2\langle0,1,1\rangle+c_3\langle1,0,-1\rangle=\langle0,0,0\rangle\) gives \(c_1+c_3=0\), \(c_1+c_2=0\), \(c_2-c_3=0\).</div></details></li>
+    <li>Now solve the system from the previous problem. Independent or dependent?
+      <details class="answer"><summary></summary><div class="ans-body">From the equations: \(c_3=-c_1\), \(c_2=-c_1\), and the third equation \(c_2-c_3=-c_1-(-c_1)=0\) holds automatically for <em>any</em> \(c_1\) — so \(c_1\) is free (e.g. \(c_1=1,c_2=-1,c_3=-1\)). Nontrivial solutions exist: <strong>dependent</strong>.</div></details></li>
+    <li>Are \(\langle2,0,0\rangle,\langle0,3,0\rangle,\langle0,0,4\rangle\) independent?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — each equation \(2c_1=0\), \(3c_2=0\), \(4c_3=0\) forces its own coefficient to 0 directly (a nonzero entry in a coordinate no other vector touches).</div></details></li>
+    <li>True or false: a set that includes the zero vector can never be linearly independent.
+      <details class="answer"><summary></summary><div class="ans-body">True — put a nonzero coefficient on \(\mathbf 0\) and zero everywhere else: \(1\cdot\mathbf 0+0\cdot\mathbf v_2+\cdots=\mathbf 0\) is a nontrivial solution, so the set is automatically dependent.</div></details></li>
+    <li class="tag">bonus — Are \(\langle1,2\rangle\) and \(\langle3,6\rangle\) independent?
+      <details class="answer"><summary></summary><div class="ans-body">No — \(\langle3,6\rangle=3\langle1,2\rangle\).</div></details></li>
+    <li class="tag">bonus — Are \(\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle,\langle1,1,1\rangle\) (four vectors in \(\mathbb R^3\)) independent?
+      <details class="answer"><summary></summary><div class="ans-body">No — you can never have 4 independent vectors sitting in \(\mathbb R^3\) (a fact Chapter 8's "dimension" makes precise); indeed \(\langle1,1,1\rangle\) is a combination of the first three.</div></details></li>
+    <li class="tag">bonus — Set up and solve the homogeneous system to test \(\langle5,2\rangle\) and \(\langle10,4\rangle\) for independence.
+      <details class="answer"><summary></summary><div class="ans-body">\(5c_1+10c_2=0\), \(2c_1+4c_2=0\) (the second is \(\frac25\) times the first — dependent equations). Nontrivial solution e.g. \(c_1=2,c_2=-1\): dependent (they're parallel, \(\langle10,4\rangle=2\langle5,2\rangle\)).</div></details></li>
+    <li class="tag">bonus — Are \(\langle1,-1\rangle\) and \(\langle-3,3\rangle\) independent?
+      <details class="answer"><summary></summary><div class="ans-body">No — \(\langle-3,3\rangle=-3\langle1,-1\rangle\).</div></details></li>
+    <li class="tag">challenge — Prove that any single nonzero vector \(\mathbf v\) is always linearly independent by itself, and explain why the same is never true of the zero vector alone.
+      <details class="answer"><summary></summary><div class="ans-body">For a single vector, the equation is \(c\mathbf v=\mathbf 0\). If \(\mathbf v\neq\mathbf 0\), the only scalar making this true is \(c=0\) — only the trivial solution, so \(\{\mathbf v\}\) is independent. If \(\mathbf v=\mathbf 0\) instead, \(c\cdot\mathbf 0=\mathbf 0\) holds for <em>every</em> \(c\), so nontrivial solutions (any \(c\neq0\)) exist — the zero vector alone is always dependent.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-span.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-linear-dependence.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 5 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:5", "content/m11-vector-spaces/ch05-linear-independence.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

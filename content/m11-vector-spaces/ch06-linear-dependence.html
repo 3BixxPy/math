@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Linear Dependence | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 11 · Linear Algebra — Vector Spaces</a> → Chapter 6 of 12</div>
+  <div class="eyebrow">Chapter 6 · concept:linear-dependence</div>
+  <h1>Linear Dependence</h1>
+  <p class="subtitle">Chapter 5 defined independence in terms of the homogeneous system having only the trivial solution. This chapter restates dependence from the other direction — as an actual formula for one vector in terms of the rest — because both framings get used constantly, in different situations.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Knowing a set is dependent is only half useful until you know <em>which</em> vector is redundant and how to write it in terms of the others — that's often the more practically important fact, especially when you want to trim a spanning set down to something more efficient (Chapter 7's job).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Dependence as a combination</div>
+    <div class="eqn"><div class="eq-body">\[ \{\mathbf v_1,\ldots,\mathbf v_k\}\text{ is linearly dependent} \iff \text{some } \mathbf v_i \text{ is a linear combination of the others} \]</div><div class="eq-num" id="eq-11-6-1">(11.6.1)</div></div>
+    <p>This is the direct flip side of Chapter 5's definition, restated as its own explicit equivalence. Geometrically: in \(\mathbb R^2\), two dependent vectors are parallel — they lie on the same line through the origin. In \(\mathbb R^3\), three dependent vectors lie in a common plane through the origin.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — finding the redundant vector</div>
+    <p>The set \(\{\langle1,1\rangle,\langle2,2\rangle,\langle1,0\rangle\}\) is dependent (three vectors is more than the 2 needed to span \(\mathbb R^2\) — Chapter 8 makes this precise). Write one vector explicitly as a combination of the others.</p>
+    <details class="step" open><summary>Step 1 — notice the shortcut first</summary>
+      <div class="step-body"><p>\(\langle2,2\rangle=2\langle1,1\rangle\) already, using only the <em>first two</em> vectors. Only two of the three even need to be related for the whole set to count as dependent — the third vector, \(\langle1,0\rangle\), doesn't have to be involved at all.</p></div></details>
+    <details class="step"><summary>Step 2 — write the explicit combination</summary>
+      <div class="step-body"><p>\(\langle2,2\rangle=2\langle1,1\rangle+0\langle1,0\rangle\) — a genuine linear combination of the other two, confirming \(\langle2,2\rangle\) is the redundant one here (though it's not the only vector you could have singled out).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming a set is independent just because no two vectors are obviously parallel. That check alone isn't enough once you have three or more vectors: dependence can come from a combination of three or more vectors, with no single pair being multiples of each other. For instance, \(\langle1,0\rangle\), \(\langle0,1\rangle\), and \(\langle1,1\rangle\) — no two of these are parallel — yet \(\langle1,1\rangle=1\langle1,0\rangle+1\langle0,1\rangle\), so the set is dependent anyway. Pairwise-parallel-checking is a useful quick scan, never a substitute for Chapter 5's actual homogeneous-system test.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="no,n">
+    <div class="label">Try it yourself</div>
+    <p>If \(\mathbf v_3=2\mathbf v_1+\mathbf v_2\), is \(\{\mathbf v_1,\mathbf v_2,\mathbf v_3\}\) linearly independent?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="If v3 = 2v1 + v2 is the set independent">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is \(\{\langle1,2\rangle,\langle2,4\rangle\}\) dependent? If so, write one as a combination of the other.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(\langle2,4\rangle=2\langle1,2\rangle\).</div></details></li>
+    <li>Is \(\{\langle1,0\rangle,\langle0,1\rangle,\langle3,5\rangle\}\) dependent?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(\langle3,5\rangle=3\langle1,0\rangle+5\langle0,1\rangle\).</div></details></li>
+    <li>Three vectors in \(\mathbb R^3\) are dependent. What does that say about their geometric arrangement?
+      <details class="answer"><summary></summary><div class="ans-body">They're coplanar — they all lie in a common plane through the origin.</div></details></li>
+    <li>Is \(\{\langle1,0\rangle,\langle0,1\rangle,\langle1,1\rangle\}\) dependent? If so, express one vector as a combination of the other two.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(\langle1,1\rangle=1\langle1,0\rangle+1\langle0,1\rangle\).</div></details></li>
+    <li>Two vectors in \(\mathbb R^2\) are dependent. What must be true of them geometrically?
+      <details class="answer"><summary></summary><div class="ans-body">They're parallel — one is a scalar multiple of the other, both lying on the same line through the origin.</div></details></li>
+    <li>Given \(\mathbf v_1=\langle1,1,1\rangle\), \(\mathbf v_2=\langle2,2,2\rangle\), \(\mathbf v_3=\langle0,1,0\rangle\), is \(\{\mathbf v_1,\mathbf v_2,\mathbf v_3\}\) dependent? Show the redundant relationship.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(\mathbf v_2=2\mathbf v_1\), which alone is enough to make the full three-vector set dependent; \(\mathbf v_3\) doesn't need to be involved at all.</div></details></li>
+    <li class="tag">bonus — True or false: if no vector in a set is a scalar multiple of any single other vector, the set is automatically independent.
+      <details class="answer"><summary></summary><div class="ans-body">False — this chapter's whole point. Dependence can come from a joint combination of three or more vectors, as in \(\{\langle1,0\rangle,\langle0,1\rangle,\langle1,1\rangle\}\), where no pair is parallel yet the set is still dependent.</div></details></li>
+    <li class="tag">bonus — Can a set containing a single vector \(\{\langle1,2,3\rangle\}\) ever be linearly dependent?
+      <details class="answer"><summary></summary><div class="ans-body">Only if that vector is the zero vector; a single nonzero vector is always independent (Chapter 5's challenge problem).</div></details></li>
+    <li class="tag">bonus — If \(\{\mathbf v_1,\mathbf v_2\}\) is independent, and \(\mathbf v_3=\mathbf v_1+\mathbf v_2\), can \(\{\mathbf v_1,\mathbf v_2,\mathbf v_3\}\) still be independent?
+      <details class="answer"><summary></summary><div class="ans-body">No — \(\mathbf v_3\) is by construction a linear combination of \(\mathbf v_1,\mathbf v_2\), so by this chapter's theorem the enlarged set is automatically dependent, regardless of what \(\mathbf v_1,\mathbf v_2\) were.</div></details></li>
+    <li class="tag">bonus — Are the two rows of \(\begin{bmatrix}2&4\\1&2\end{bmatrix}\), viewed as vectors \(\langle2,4\rangle\) and \(\langle1,2\rangle\), dependent? What might that suggest about the matrix itself?
+      <details class="answer"><summary></summary><div class="ans-body">Yes, dependent (\(\langle2,4\rangle=2\langle1,2\rangle\)) — this foreshadows Chapter 10: a matrix whose rows are dependent will turn out to be "rank-deficient," not full rank.</div></details></li>
+    <li class="tag">challenge — Prove the theorem's "if" direction directly: show that if some \(\mathbf v_i\) equals a linear combination of the others, the whole set must be dependent by Chapter 5's definition (produce an explicit nontrivial combination summing to \(\mathbf 0\)).
+      <details class="answer"><summary></summary><div class="ans-body">Suppose \(\mathbf v_i=\sum_{j\neq i}c_j\mathbf v_j\). Moving \(\mathbf v_i\) to the other side: \(\left(\sum_{j\neq i}c_j\mathbf v_j\right)-\mathbf v_i=\mathbf 0\). This is a linear combination of <em>all</em> the vectors in the set, with the coefficient on \(\mathbf v_i\) equal to \(-1\) — nonzero. A nontrivial solution to \(c_1\mathbf v_1+\cdots+c_k\mathbf v_k=\mathbf 0\) exists, so by Chapter 5's definition the set is dependent.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-linear-independence.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-basis.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 11 · Linear Algebra — Vector Spaces</span>
+  <span>Chapter 6 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m11:6", "content/m11-vector-spaces/ch06-linear-dependence.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
