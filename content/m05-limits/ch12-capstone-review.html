@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — Module 5 Capstone | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 12 of 12</div>
+  <div class="eyebrow">Chapter 12 · Module 5 capstone</div>
+  <h1>Module 5 Capstone — Mixed Review &amp; Diagnostic Retake</h1>
+  <p class="subtitle">Eleven chapters, shuffled together, plus the calculus section of the very first diagnostic — the part that came back as a genuinely blank slate, not even a wrong guess.</p>
+
+  <div class="block intuition">
+    <div class="label">Why mixed, not grouped by chapter</div>
+    <p>Same reasoning as Module 0, 1, and every capstone since: a problem that doesn't announce its own chapter is the real test of whether the idea moved into durable memory, not just short-term pattern matching against a chapter title. Calculus makes this test even more meaningful than usual — every technique here was completely unavailable to you twelve chapters ago, so getting these right shuffled together is the clearest possible evidence that the ideas actually landed.</p>
+  </div>
+
+  <h2>Mixed review (all of Module 5)</h2>
+  <ol class="problems">
+    <li>Does <code>lim<sub>x→a</sub> f(x)</code> require that <code>f(a)</code> be defined?
+      <details class="answer"><summary></summary><div class="ans-body">No (Chapter 1) — the limit only describes behavior near \(a\), never at \(a\).</div></details></li>
+    <li>For <code>f(x) = {x−1 if x&lt;3; x+1 if x≥3}</code>, does <code>lim<sub>x→3</sub> f(x)</code> exist?
+      <details class="answer"><summary></summary><div class="ans-body">No (Chapter 2) — left-hand limit \(\to2\), right-hand limit \(\to4\); they disagree.</div></details></li>
+    <li>Which of the three ways a limit can fail to exist applies to <code>lim<sub>x→0</sub> sin(1/x)</code>?
+      <details class="answer"><summary></summary><div class="ans-body">Oscillation (Chapter 3) — bounded in \([-1,1]\), but never settles as \(x\to0\).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→2</sub> (3x²−5x+1)</code> using the limit laws.
+      <details class="answer"><summary></summary><div class="ans-body">\(12-10+1=3\) (Chapter 4).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→4</sub> (x²−16)/(x−4)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Factor and cancel: \(x+4\to8\) (Chapter 5).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→∞</sub> (2x²+1)/(x²+5x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Equal degrees, ratio of leading coefficients: \(2\) (Chapter 6).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→3⁺</sub> 1/(x−3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(+\infty\) (Chapter 7).</div></details></li>
+    <li>Is <code>f(x)=1/(x−2)</code> continuous at <code>x=2</code>?
+      <details class="answer"><summary></summary><div class="ans-body">No (Chapter 8) — condition (1) fails, \(f(2)\) is undefined.</div></details></li>
+    <li>Classify the discontinuity of <code>(x²−4)/(x−2)</code> at <code>x=2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Removable (Chapter 9) — the limit exists (\(=4\)), \(f(2)\) is undefined.</div></details></li>
+    <li>If <code>−x² ≤ f(x) ≤ x²</code> near <code>x=0</code>, find <code>lim<sub>x→0</sub> f(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0\) (Chapter 10, squeeze theorem).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> sin(4x)/x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(4\) (Chapter 11).</div></details></li>
+    <li>Classify the discontinuity of <code>g(x) = {x if x&lt;1; x+3 if x≥1}</code> at <code>x=1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Jump (Chapters 8–9) — left-hand limit \(1\), right-hand limit \(4\); they disagree, so no single redefinition of \(g(1)\) could fix it.</div></details></li>
+  </ol>
+
+  <hr class="div">
+
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">Two problems that each need multiple chapters' tools working together, not just one technique per problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 4 — limit laws</span><span>Ch. 5 — factoring</span></div>
+    <p>Evaluate <code>lim<sub>x→1</sub> [(x²−1)/(x−1) + (3x−2)]</code>.</p>
+    <details class="step" open><summary>Step 1 — split via the sum law (Ch. 4): handle each piece separately</summary>
+      <div class="step-body"><p>\(\displaystyle\lim_{x\to1}\left[\frac{x^2-1}{x-1}+(3x-2)\right] = \lim_{x\to1}\frac{x^2-1}{x-1} \;+\; \lim_{x\to1}(3x-2)\)</p></div></details>
+    <details class="step"><summary>Step 2 — first piece is 0/0; factor and cancel (Ch. 5)</summary>
+      <div class="step-body"><p>\(\dfrac{x^2-1}{x-1}=\dfrac{(x-1)(x+1)}{x-1}=x+1\) for \(x\neq1\), so this piece's limit is \(1+1=2\).</p></div></details>
+    <details class="step"><summary>Step 3 — second piece is a plain polynomial; direct substitution (Ch. 4)</summary>
+      <div class="step-body"><p>\(3(1)-2=1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The sum law recombines the two pieces: \(2+1=3\).</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 8 — continuity</span><span>Ch. 9 — discontinuity types</span></div>
+    <p>Let <code>f(x) = (x²−9)/(x−3)</code> for <code>x≠3</code>, and <code>f(3) = k</code>. For what value of <code>k</code> is <code>f</code> continuous at <code>x=3</code>? If <code>k=10</code> instead, what type of discontinuity results?</p>
+    <details class="step" open><summary>Step 1 — find the limit (factor and cancel, Ch. 5's tool, reused here)</summary>
+      <div class="step-body"><p>\(\dfrac{x^2-9}{x-3}=\dfrac{(x-3)(x+3)}{x-3}=x+3\) for \(x\neq3\), so \(\lim_{x\to3}f(x)=6\).</p></div></details>
+    <details class="step"><summary>Step 2 — apply the three-part continuity test (Ch. 8) with f(3)=k</summary>
+      <div class="step-body"><p>Condition (1): \(f(3)=k\), defined by construction, for any \(k\). Condition (2): the limit exists and equals \(6\). Condition (3) needs \(f(3)=\) the limit, i.e. \(k=6\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p><code>f</code> is continuous at \(x=3\) exactly when \(k=6\). If \(k=10\) instead, conditions (1) and (2) still hold but (3) fails (\(6\neq10\)) — by Chapter 9's classification, that's precisely a <strong>removable</strong> discontinuity: the hole would simply be patched with the wrong value.</p></div></details>
+  </div>
+
+  <h2>Diagnostic retake</h2>
+  <p class="subtitle">The original diagnostic had no calculus section at all — this entire subject was a clean slate, not a single wrong guess to correct. Here are three of its ideas, now fully derivable.</p>
+
+  <div class="card">
+    <p><strong>1.</strong> Evaluate <code>lim<sub>x→3</sub> (x²−9)/(x−3)</code>.</p>
+    <p class="subtitle">Originally: this idea didn't exist for you yet — no calculus section on the diagnostic.</p>
+    <details class="answer"><summary></summary><div class="ans-body">Factor and cancel: \(x+3\to6\). See Chapter 5.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>2.</strong> Classify the discontinuity of <code>f(x) = 1/(x−5)</code> at <code>x=5</code>.</p>
+    <p class="subtitle">Originally: this idea didn't exist for you yet — no calculus section on the diagnostic.</p>
+    <details class="answer"><summary></summary><div class="ans-body">Infinite — unbounded near \(x=5\), the numerator never cancels the zero denominator. See Chapters 7 and 9.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>3.</strong> Evaluate <code>lim<sub>x→∞</sub> (4x+1)/(2x−3)</code>.</p>
+    <p class="subtitle">Originally: this idea didn't exist for you yet — no calculus section on the diagnostic.</p>
+    <details class="answer"><summary></summary><div class="ans-body">Equal degrees, ratio of leading coefficients: \(4/2=2\). See Chapter 6.</div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Module 5 complete</div>
+    <p>Zero to a working command of limits and continuity in twelve days — the intuitive and formal meaning of a limit, one-sided limits, the three ways a limit can fail to exist, the limit laws, factoring and rationalizing through 0/0, limits at infinity, infinite limits and vertical asymptotes, the three-part continuity test, classifying discontinuities, the squeeze theorem, and the two trig limits that anchor differentiation itself. Module 6 (Derivatives) is next on the <a href="../../roadmap.html">roadmap</a> — currently planned but not yet written. Ask your AI session to continue whenever you're ready.</p>
+  </div>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch11-trig-limits.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="../../roadmap.html">View full roadmap</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 12 / 12 — Module complete</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:12", "content/m05-limits/ch12-capstone-review.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
