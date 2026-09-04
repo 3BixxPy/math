@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — The Definite Integral | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 5 of 16</div>
+  <div class="eyebrow">Chapter 5 · concept:definite-integral-properties</div>
+  <h1>The Definite Integral — Notation &amp; Properties</h1>
+  <p class="subtitle">Chapter 4 defined <code>∫ₐᵇ f(x)dx</code> as a limit. This chapter treats it as an object worth naming its own parts, with algebraic properties it inherits directly from being built out of ordinary sums.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A Riemann sum is, underneath the limit, an ordinary sum of ordinary numbers — and ordinary sums split apart, factor, and combine in predictable ways. Every property in this chapter is really just one of those familiar sum behaviors, carried through the limit unchanged. The one genuine surprise is the last one: this "area" isn't always the everyday kind.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — The Definite Integral</div>
+    <p>In <code>∫ₐᵇ f(x)dx</code>, <code>f(x)</code> is the <strong>integrand</strong>, <code>a</code> and <code>b</code> are the <strong>limits of integration</strong> (lower and upper), and <code>x</code> is the <strong>variable of integration</strong> — a placeholder; <code>∫ₐᵇ f(t)dt</code> means exactly the same thing. Unlike Chapter 1–2's indefinite integral (a family of functions), a definite integral's value — when the limit in (8.4.1) exists — is a single <em>number</em>, not a family, and carries no "+C."</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Linearity</div>
+    <div class="eqn"><div class="eq-body">\[ \int_a^b\!\big[f(x)\pm g(x)\big]dx = \int_a^b\! f(x)\,dx \pm \int_a^b\! g(x)\,dx \qquad \int_a^b\! c\,f(x)\,dx = c\int_a^b\! f(x)\,dx \]</div><div class="eq-num" id="eq-8-5-1">(8.5.1)</div></div>
+    <p>Both follow directly from the fact that a Riemann sum is an ordinary sum, and ordinary sums split and factor exactly this way — nothing about the limit changes that.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Additivity Over Adjacent Intervals</div>
+    <div class="eqn"><div class="eq-body">\[ \int_a^b f(x)\,dx + \int_b^c f(x)\,dx = \int_a^c f(x)\,dx \]</div><div class="eq-num" id="eq-8-5-2">(8.5.2)</div></div>
+    <p>Splitting (or joining) the interval doesn't change the total — the piece from <code>a</code> to <code>b</code> plus the piece from <code>b</code> to <code>c</code> is exactly the piece from <code>a</code> to <code>c</code>.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Signed Area</div>
+    <div class="eqn"><div class="eq-body">\[ \int_a^b f(x)\,dx = (\text{area above the x-axis}) \;-\; (\text{area below the x-axis}) \]</div><div class="eq-num" id="eq-8-5-3">(8.5.3)</div></div>
+    <p>This is the property most worth sitting with. The definite integral computes <strong>signed</strong> area, not literal (always-positive) area — regions below the x-axis subtract instead of add. It only equals the plain, everyday notion of "area between the curve and the x-axis" when \(f(x)\ge0\) throughout \([a,b]\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — using additivity</div>
+    <p>Given <code>∫[0,2] f = 5</code> and <code>∫[2,5] f = 3</code>, find <code>∫[0,5] f</code>.</p>
+    <details class="step" open><summary>Step 1 — recognize the adjacent-interval pattern of (8.5.2)</summary>
+      <div class="step-body"><p>\([0,2]\) and \([2,5]\) share the endpoint \(2\) and together cover \([0,5]\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\displaystyle\int_0^5 f = \int_0^2 f + \int_2^5 f = 5+3 = 8\).</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — when the integral isn't the visual area</div>
+    <p>Let <code>f(x) = x − 1</code> on <code>[0, 2]</code> — a line that dips below the x-axis on part of the interval. Find <code>∫[0,2] f(x)dx</code> using plain triangle geometry, and compare it to the region's unsigned area.</p>
+    <details class="step" open><summary>Step 1 — split at the zero, x = 1, where the line crosses the axis</summary>
+      <div class="step-body"><p>On \([0,1]\), \(f\) runs from \(-1\) up to \(0\) — a triangle below the axis, base \(1\), height \(1\), area \(0.5\), <strong>subtracting</strong> from the integral (8.5.3). On \([1,2]\), \(f\) runs from \(0\) up to \(1\) — a triangle above the axis, base \(1\), height \(1\), area \(0.5\), <strong>adding</strong>.</p></div></details>
+    <details class="step"><summary>Result — the integral and the unsigned area disagree</summary>
+      <div class="step-body"><p>\(\displaystyle\int_0^2(x-1)\,dx = -0.5+0.5 = 0\). But the region between the curve and the x-axis visibly occupies unsigned area \(0.5+0.5=1\). The integral being \(0\) doesn't mean "no region" — it means the below-axis and above-axis pieces exactly cancel.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating "the definite integral's value" and "the area of the region" as always the same question — they're the same number only when <code>f(x) ≥ 0</code> throughout the interval. For the constant function <code>f(x) = −3</code> on <code>[0, 4]</code>, the integral is <code>−12</code> (a rectangle's signed area, entirely below the axis) — that negative number is <em>correct</em>, not a sign to drop. The region's unsigned area is <code>12</code>, a different number answering a different question. Read the problem carefully: "evaluate the integral" and "find the area of the region" aren't always interchangeable requests.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="9">
+    <div class="label">Try it yourself</div>
+    <p>If <code>∫[0,3] f = 7</code> and <code>∫[3,8] f = 2</code>, find <code>∫[0,8] f</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="integral from 0 to 8">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Given <code>∫[1,4] f = 6</code>, find <code>∫[1,4] 3f(x)dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(18\) (8.5.1)</div></details></li>
+    <li>Given <code>∫[0,5] f = 10</code> and <code>∫[0,5] g = 4</code>, find <code>∫[0,5] [f(x)−g(x)]dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(6\) (8.5.1)</div></details></li>
+    <li>Given <code>∫[2,6] f = 9</code> and <code>∫[6,10] f = −2</code>, find <code>∫[2,10] f</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(7\) (8.5.2)</div></details></li>
+    <li>Given <code>∫[0,10] f = 15</code> and <code>∫[0,4] f = 6</code>, find <code>∫[4,10] f</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(15-6=9\), solving (8.5.2) for the missing piece.</div></details></li>
+    <li>If <code>f(x) ≤ 0</code> for every <code>x</code> in <code>[a,b]</code>, what can you say about the sign of <code>∫[a,b] f(x)dx</code>?
+      <details class="answer"><summary></summary><div class="ans-body">It's \(\le0\) — entirely below-axis area only subtracts (8.5.3), never adds.</div></details></li>
+    <li>True or false: <code>∫[a,b] f(x)dx</code> always equals the area of the region between the curve and the x-axis.
+      <details class="answer"><summary></summary><div class="ans-body">False — only when \(f(x)\ge0\) throughout \([a,b]\) (8.5.3).</div></details></li>
+    <li class="tag">bonus — Given <code>∫[−2,2] f = 0</code> and <code>f</code> is odd (<code>f(−x) = −f(x)</code>), does this make sense? Explain briefly using symmetry.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — for an odd function on a symmetric interval, the negative-side and positive-side contributions are exact mirror images with opposite sign, so by (8.5.3) they cancel exactly.</div></details></li>
+    <li class="tag">bonus — Given <code>∫[0,3] f = 4</code> and <code>∫[0,3] g = −1</code>, find <code>∫[0,3] (2f+3g)dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2(4)+3(-1)=8-3=5\) (8.5.1)</div></details></li>
+    <li class="tag">bonus — For the constant function <code>f(x) = −5</code> on <code>[0,6]</code>, find <code>∫[0,6] f(x)dx</code> using only rectangle-area reasoning.
+      <details class="answer"><summary></summary><div class="ans-body">\(-30\) — a \(5\times6=30\) rectangle, entirely below the axis, so it subtracts (8.5.3).</div></details></li>
+    <li class="tag">bonus — Given <code>∫[1,5] f = 8</code>, and <code>∫[1,3] f = 5</code>, find <code>∫[3,5] f</code> using additivity.
+      <details class="answer"><summary></summary><div class="ans-body">\(8-5=3\) (8.5.2)</div></details></li>
+    <li class="tag">challenge — For the worked example's <code>f(x) = x − 1</code> on <code>[0,2]</code>, compute the region's <em>unsigned</em> area (not the integral) using the two triangles, and explain in one sentence why it differs from <code>∫[0,2] f(x)dx = 0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Unsigned area \(=0.5+0.5=1\). It differs because the integral lets the below-axis piece subtract rather than add (8.5.3), while "area" always adds both pieces as positive.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-riemann-sums-formal.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-fundamental-theorem-part-1.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 5 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:5", "content/m08-integrals/ch05-the-definite-integral.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

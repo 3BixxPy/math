@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — Area Between Two Curves | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 12 of 16</div>
+  <div class="eyebrow">Chapter 12 · concept:area-between-curves</div>
+  <h1>Area Between Two Curves</h1>
+  <p class="subtitle">Chapters 6–7 turned "area under one curve" into ordinary antiderivative arithmetic. This chapter asks the natural next question: the area trapped between two curves instead of one.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>"Area under one curve" is really "area between that curve and the x-axis" — the x-axis was quietly playing the role of a second curve the whole time, just a flat one, <code>y = 0</code>. Once that's visible, letting the "bottom" curve be something other than the x-axis is barely a generalization at all: same integral, same FTC2 machinery, just a different function subtracted off at the end.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Area Between Two Curves</div>
+    <div class="eqn"><div class="eq-body">\[ \text{Area} = \int_a^b \big[\text{top}(x) - \text{bottom}(x)\big]\,dx \]</div><div class="eq-num" id="eq-8-12-1">(8.12.1)</div></div>
+    <p>where <code>a</code> and <code>b</code> are the curves' intersection points — found first, by setting the two functions equal and solving (a Module 0/1 equation-solving callback) — and "top"/"bottom" is whichever curve sits higher between those two points.</p>
+  </div>
+
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--accent)"></span>y = x</span><span><span class="swatch" style="background:var(--ex-border)"></span>y = x²</span></div>
+  <div class="plot-wrap"><svg id="abc-svg" viewBox="0 0 380 300" width="380" height="300"></svg></div>
+  <script>
+  (function () {
+    const svg = document.getElementById("abc-svg");
+    const opts = { xMin: -0.2, xMax: 1.3, yMin: -0.2, yMax: 1.3, width: 380, height: 300, pad: 30, xStep: 0.25, yStep: 0.25 };
+    const { px, py } = MCPlot.drawAxes(svg, opts);
+    const N = 40;
+    let d = "";
+    for (let i = 0; i <= N; i++) {
+      const x = i / N;
+      d += (i === 0 ? "M " : "L ") + px(x).toFixed(1) + " " + py(x).toFixed(1) + " ";
+    }
+    for (let i = N; i >= 0; i--) {
+      const x = i / N;
+      d += "L " + px(x).toFixed(1) + " " + py(x * x).toFixed(1) + " ";
+    }
+    d += "Z";
+    svg.appendChild(MCPlot.el("path", { d: d, style: "fill:var(--accent); fill-opacity:0.22; stroke:none" }));
+    MCPlot.plotFunction(svg, (x) => x, opts, "plot-curve");
+    MCPlot.plotFunction(svg, (x) => x * x, opts, "plot-curve-alt");
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">The shaded region between y = x and y = x² on [0, 1] — the "try it yourself" widget below asks for its area.</p>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the area between <code>y = x²</code> and <code>y = x + 2</code>.</p>
+    <details class="step" open><summary>Step 1 — find the intersection points</summary>
+      <div class="step-body"><p>\(x^2=x+2 \Rightarrow x^2-x-2=0 \Rightarrow (x-2)(x+1)=0 \Rightarrow x=-1,\ 2\).</p></div></details>
+    <details class="step"><summary>Step 2 — decide which curve is on top (test a point between the bounds)</summary>
+      <div class="step-body"><p>At \(x=0\): \(x+2=2\) vs. \(x^2=0\) — the line is on top.</p></div></details>
+    <details class="step"><summary>Step 3 — set up and integrate, via (8.12.1)</summary>
+      <div class="step-body"><p>\(\displaystyle\int_{-1}^{2}\big[(x+2)-x^2\big]dx = \Big[\frac{x^2}{2}+2x-\frac{x^3}{3}\Big]_{-1}^{2}\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>At \(x=2\): \(2+4-\tfrac83=\tfrac{10}{3}\). At \(x=-1\): \(\tfrac12-2+\tfrac13=-\tfrac76\). Area \(=\tfrac{10}{3}-\left(-\tfrac76\right)=\tfrac{20}{6}+\tfrac76=\tfrac{27}{6}=\tfrac92=4.5\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Two ways this goes wrong. First: integrating <code>bottom − top</code> instead of <code>top − bottom</code>, which flips every sign and produces a negative "area." Second: skipping the intersection-solving step entirely and just guessing the bounds from a rough sketch — the bounds in (8.12.1) aren't optional inputs to choose freely, they're determined by exactly where the two curves cross.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1/6">
+    <div class="label">Try it yourself</div>
+    <p>Find the area between <code>y = x</code> and <code>y = x²</code> on <code>[0, 1]</code> (the shaded region above):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 1/6" aria-label="area between y=x and y=x squared">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the area between <code>y = x²</code> and <code>y = 4</code>, for <code>x</code> in <code>[−2, 2]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\int_{-2}^2(4-x^2)dx=\big[4x-x^3/3\big]_{-2}^2=(8-8/3)-(-8+8/3)=32/3\)</div></details></li>
+    <li>Find the area enclosed between <code>y = x</code> and <code>y = x³</code>, for <code>x</code> in <code>[0, 1]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">On \([0,1]\), \(x\ge x^3\): \(\int_0^1(x-x^3)dx=\big[x^2/2-x^4/4\big]_0^1=1/2-1/4=1/4\)</div></details></li>
+    <li>Find the intersection points of <code>y = x²</code> and <code>y = 2x</code> (set up only).
+      <details class="answer"><summary></summary><div class="ans-body">\(x^2=2x \Rightarrow x^2-2x=0 \Rightarrow x(x-2)=0 \Rightarrow x=0,2\)</div></details></li>
+    <li>For <code>y = 6 − x²</code> and <code>y = x</code>, find the intersection points and determine which function is on top between them.
+      <details class="answer"><summary></summary><div class="ans-body">\(6-x^2=x \Rightarrow x^2+x-6=0 \Rightarrow (x+3)(x-2)=0 \Rightarrow x=-3,2\). Test \(x=0\): \(6\) vs. \(0\) — the parabola is on top.</div></details></li>
+    <li>Using the previous problem's curves and bounds, find the area between them.
+      <details class="answer"><summary></summary><div class="ans-body">\(\int_{-3}^2\big[(6-x^2)-x\big]dx=\big[6x-x^3/3-x^2/2\big]_{-3}^{2}\). At \(2\): \(12-8/3-2=22/3\). At \(-3\): \(-18+9-4.5=-13.5=-27/2\). Area \(=22/3+27/2=\frac{44+81}{6}=\frac{125}{6}\)</div></details></li>
+    <li>In one sentence, explain why the intersection points must be found before setting up the bounds of a "between two curves" integral.
+      <details class="answer"><summary></summary><div class="ans-body">The bounds in (8.12.1) have to be exactly where the curves cross — that's what makes "top" and "bottom" well-defined and unchanging across the whole interval.</div></details></li>
+    <li class="tag">bonus — Set up (don't evaluate) the integral for the area between <code>y = x² − 4</code> and the x-axis, for <code>x</code> in <code>[−2, 2]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Since \(x^2-4\le0\) on \([-2,2]\), the x-axis (\(y=0\)) is on top: \(\int_{-2}^2\big[0-(x^2-4)\big]dx=\int_{-2}^2(4-x^2)dx\)</div></details></li>
+    <li class="tag">bonus — Evaluate the previous problem's setup.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[4x-x^3/3\big]_{-2}^2=(8-8/3)-(-8+8/3)=32/3\)</div></details></li>
+    <li class="tag">bonus — True or false: the area between two curves can always be found by taking <code>|∫(f−g)dx|</code> over the whole given interval, regardless of how many times the curves cross inside it.
+      <details class="answer"><summary></summary><div class="ans-body">False in general — only safe if the curves don't cross again inside the interval. If top/bottom switches partway through, the interval must be split at every internal crossing and each piece handled with the correct top/bottom, then summed; a single \(|{\int}(f-g)dx|\) over the whole span can silently give a too-small answer.</div></details></li>
+    <li class="tag">bonus — Find the area between <code>y = x²</code> and <code>y = −x² + 8</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Intersections: \(x^2=-x^2+8 \Rightarrow x^2=4 \Rightarrow x=\pm2\). Top: \(-x^2+8\) (test \(x=0\): 8 vs. 0). \(\int_{-2}^2(8-2x^2)dx=\big[8x-\tfrac23x^3\big]_{-2}^2=(16-16/3)-(-16+16/3)=64/3\)</div></details></li>
+    <li class="tag">challenge — Find the area enclosed between <code>y = x² − 1</code> and <code>y = 1 − x²</code>. State the intersection points you find first, then evaluate.
+      <details class="answer"><summary></summary><div class="ans-body">\(x^2-1=1-x^2 \Rightarrow 2x^2=2 \Rightarrow x=\pm1\). Test \(x=0\): \(1-x^2=1\) vs. \(x^2-1=-1\) — \(1-x^2\) on top. \(\int_{-1}^1\big[(1-x^2)-(x^2-1)\big]dx=\int_{-1}^1(2-2x^2)dx=\big[2x-\tfrac23x^3\big]_{-1}^1=(2-\tfrac23)-(-2+\tfrac23)=\tfrac83\)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch11-integrals-of-trig-functions.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch13-average-value-of-a-function.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 12 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:12", "content/m08-integrals/ch12-area-between-curves.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

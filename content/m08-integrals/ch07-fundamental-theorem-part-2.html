@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — Fundamental Theorem of Calculus II | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 7 of 16</div>
+  <div class="eyebrow">Chapter 7 · concept:ftc-part-2</div>
+  <h1>The Fundamental Theorem of Calculus, Part 2</h1>
+  <p class="subtitle">Part 1 showed that differentiation undoes accumulation. Part 2 is the payoff for actual computation — it turns Chapter 4's intractable limit-of-a-sum into ordinary antiderivative arithmetic.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Chapter 4 wrote down the exact definition of a definite integral — and then admitted evaluating it by hand, term by term, is painful even for a simple polynomial. Part 2 sidesteps that entirely. It doesn't require re-deriving anything new about limits; it leans on Part 1, and on Chapters 1–2's antiderivative rules, to turn "evaluate this limit of a sum" into "find an antiderivative, then subtract."</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Fundamental Theorem of Calculus, Part 2</div>
+    <div class="eqn"><div class="eq-body">\[ \int_a^b f(x)\,dx = F(b) - F(a) \]</div><div class="eq-num" id="eq-8-7-1">(8.7.1)</div></div>
+    <p>where <code>F</code> is <em>any</em> antiderivative of <code>f</code>. This is the workhorse formula for the rest of the module. A convenient shorthand for "plug in the top, plug in the bottom, subtract" gets its own bracket notation, used from here on:</p>
+    <p style="text-align:center;">\[ \Big[F(x)\Big]_a^b = F(b) - F(a) \]</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Evaluate <code>∫[0,2] x² dx</code> via FTC2, and compare it to Chapter 3's rectangle estimates for the exact same function and interval.</p>
+    <details class="step" open><summary>Step 1 — find an antiderivative (Chapter 2's power rule)</summary>
+      <div class="step-body"><p>\(F(x) = \dfrac{x^3}{3}\) is one antiderivative of \(x^2\).</p></div></details>
+    <details class="step"><summary>Step 2 — apply (8.7.1)</summary>
+      <div class="step-body"><p>\(\displaystyle\int_0^2 x^2\,dx = \Big[\frac{x^3}{3}\Big]_0^2 = \frac{8}{3} - 0 = \frac{8}{3} \approx 2.667\)</p></div></details>
+    <details class="step"><summary>Result — checking against Chapter 3</summary>
+      <div class="step-body"><p>Chapter 3's 4-rectangle estimates for this exact function and interval were \(1.75\) (left) and \(3.75\) (right) — they bracketed \(1.75 \le \text{true area} \le 3.75\), and \(8/3\approx2.667\) sits comfortably inside that bracket. What Chapter 3 could only estimate, FTC2 computes exactly, with no limit taken by hand at all.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Carrying a "+C" into a definite-integral evaluation, out of habit from Chapters 1–2's indefinite integrals. It's harmless — but pointless, since it always cancels: using \(F(x)+C\) in (8.7.1) gives \(\big[F(b)+C\big]-\big[F(a)+C\big] = F(b)-F(a)\), the same \(C\) subtracting itself away every time. A definite integral's value never depends on which antiderivative you pick, so just drop the "+C" for definite integrals — its absence here (versus its required presence in Chapters 1–2) is exactly the kind of detail that trips learners up when first switching between the two.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="9">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>∫[0,3] 2x dx</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="integral of 2x from 0 to 3">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>∫[0,1] x³ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^4/4\big]_0^1 = 1/4\)</div></details></li>
+    <li>Evaluate <code>∫[1,3] 2x dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^2\big]_1^3 = 9-1=8\)</div></details></li>
+    <li>Evaluate <code>∫[π/2,π] cos(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[\sin x\big]_{\pi/2}^{\pi} = 0-1=-1\)</div></details></li>
+    <li>Evaluate <code>∫[−1,1] x² dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^3/3\big]_{-1}^{1} = 1/3-(-1/3)=2/3\)</div></details></li>
+    <li>Evaluate <code>∫[0,2] (3x² − 1) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^3-x\big]_0^2 = (8-2)-0=6\)</div></details></li>
+    <li>Evaluate <code>∫[1,2] (1/x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[\ln|x|\big]_1^2 = \ln2-\ln1=\ln2\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[0,1] eˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(e-1\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[−2,2] x³ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^4/4\big]_{-2}^{2}=4-4=0\) — an odd function on a symmetric interval (Chapter 5's bonus idea, confirmed again).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[0,4] √x dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Rewrite as \(x^{1/2}\): \(\big[\frac23 x^{3/2}\big]_0^4 = \frac23(8)-0=\frac{16}{3}\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[2,5] 4 dx</code> (a constant function) using FTC2, and check it matches simple rectangle reasoning.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[4x\big]_2^5=20-8=12\), matching a \(3\times4\) rectangle exactly.</div></details></li>
+    <li class="tag">challenge — Evaluate <code>∫[0,2] (x² − 2x) dx</code>. Then, using Chapter 5's signed-area idea, explain why a negative result makes sense here.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^3/3-x^2\big]_0^2 = (8/3-4)-0=-4/3\). \(f(x)=x^2-2x=x(x-2)\) is \(\le0\) for every \(x\) in \([0,2]\) (between its two roots), so the entire region lies below the x-axis — a negative integral is exactly what (8.5.3) predicts.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-fundamental-theorem-part-1.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-evaluating-definite-integrals.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 7 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:7", "content/m08-integrals/ch07-fundamental-theorem-part-2.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

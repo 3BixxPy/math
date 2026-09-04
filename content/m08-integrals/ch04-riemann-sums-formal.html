@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Riemann Sums, Formally | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 4 of 16</div>
+  <div class="eyebrow">Chapter 4 · concept:riemann-sum-formal, concept:definite-integral-as-limit</div>
+  <h1>Riemann Sums — the Formal Limit</h1>
+  <p class="subtitle">Chapter 3 built rectangles by hand and watched the estimate improve as they got thinner. This chapter writes down, precisely, what "thinner and more numerous" means — using the exact limit machinery Module 5 spent twelve chapters building, seemingly for its own sake at the time.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>"Use more rectangles" is an instruction, not a number. To turn Chapter 3's improving estimates into one exact value, "more and thinner" has to become a genuine limit — the same kind of limit Module 5 spent an entire module formalizing, applied here to a sum instead of a single expression. This is precisely the moment that machinery was built for.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Riemann Sum</div>
+    <p>Partition <code>[a, b]</code> into <code>n</code> equal subintervals of width <code>Δx = (b−a)/n</code>, and pick a sample point <code>xᵢ</code> in each one (the right endpoint, say). The <strong>Riemann sum</strong> is the total area of the resulting rectangles, written compactly with sigma notation:</p>
+    <p style="text-align:center;">\[ \sum_{i=1}^{n} f(x_i)\,\Delta x \]</p>
+    <p>This is just Chapter 3's left/right-endpoint sums, given a name and a compact notation — nothing new happened yet, only formalizing what was already being computed by hand.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The Definite Integral, Defined as a Limit</div>
+    <div class="eqn"><div class="eq-body">\[ \int_a^b f(x)\,dx \;=\; \lim_{n\to\infty} \sum_{i=1}^{n} f(x_i)\,\Delta x \]</div><div class="eq-num" id="eq-8-4-1">(8.4.1)</div></div>
+    <p>This is the formal definition of the symbol <code>∫ₐᵇ f(x) dx</code> — not a computation shortcut, the actual definition. As <code>n → ∞</code>, <code>Δx = (b−a)/n → 0</code> automatically, so "infinitely many, infinitesimally thin rectangles" is exactly what this limit captures. Whatever number this limit settles on (when it exists) <em>is</em>, by definition, the value of the definite integral — Chapter 3's bracketing left/right estimates were sandwiching this exact number the whole time, even before it had a name.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Set up (not evaluate) the Riemann sum limit for the area under <code>f(x) = x²</code> on <code>[0, 2]</code> — the exact function and interval from Chapter 3.</p>
+    <details class="step" open><summary>Step 1 — find Δx and the sample points (right endpoints)</summary>
+      <div class="step-body"><p>\(\Delta x = \dfrac{2-0}{n} = \dfrac{2}{n}\). Right endpoints: \(x_i = 0 + i\Delta x = \dfrac{2i}{n}\), for \(i=1,\dots,n\).</p></div></details>
+    <details class="step"><summary>Step 2 — write the Riemann sum</summary>
+      <div class="step-body"><p>\(\displaystyle\sum_{i=1}^n f(x_i)\Delta x = \sum_{i=1}^n \left(\frac{2i}{n}\right)^2 \cdot \frac{2}{n}\)</p></div></details>
+    <details class="step"><summary>Result — the full limit expression, by (8.4.1)</summary>
+      <div class="step-body"><p>\(\displaystyle\int_0^2 x^2\,dx = \lim_{n\to\infty}\sum_{i=1}^n \left(\frac{2i}{n}\right)^2\frac{2}{n}\). This is exact — no approximation left — but evaluating a limit of a growing sum by hand, term by term, is genuinely painful. The rest of this module is about to hand you a shortcut that never requires taking a limit like this directly.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Misindexing the sigma notation — using the wrong <code>x</code>-value for the wrong rectangle. For a right-endpoint sum over <code>n</code> pieces, the sample points are \(x_1,x_2,\dots,x_n\) (starting the count at \(i=1\)); for a left-endpoint sum, they're \(x_0,x_1,\dots,x_{n-1}\) (starting at \(i=0\)). Mixing these up — say, writing \(x_i = a+i\Delta x\) for \(i=1,\dots,n\) but intending left endpoints — silently shifts every rectangle over by one, quietly turning a left-endpoint sum into a right-endpoint one (or vice versa) without changing the notation's appearance. Always double check which endpoint your index is actually landing on before trusting the formula.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Write the right-endpoint Riemann sum (sigma notation) for <code>f(x) = x³</code> on <code>[1, 4]</code> with <code>n</code> subintervals — state <code>Δx</code> and <code>xᵢ</code> first.
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x=\frac{3}{n}\), \(x_i=1+\frac{3i}{n}\). Sum: \(\displaystyle\sum_{i=1}^n\left(1+\frac{3i}{n}\right)^3\frac{3}{n}\).</div></details></li>
+    <li>Write the left-endpoint Riemann sum for <code>f(x) = cos(x)</code> on <code>[0, π]</code> with <code>n</code> subintervals.
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x=\frac{\pi}{n}\), \(x_i=\frac{i\pi}{n}\) for \(i=0,\dots,n-1\). Sum: \(\displaystyle\sum_{i=0}^{n-1}\cos\!\left(\frac{i\pi}{n}\right)\frac{\pi}{n}\).</div></details></li>
+    <li>For <code>f(x) = x²</code> on <code>[0, 6]</code>, <code>n = 12</code>, what is <code>Δx</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x = 6/12 = 0.5\)</div></details></li>
+    <li>For <code>f(x) = 1/x</code> on <code>[1, 5]</code>, <code>n</code> subintervals, what is the right-endpoint sample point <code>xᵢ</code> in terms of <code>i</code> and <code>n</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(x_i = 1 + \dfrac{4i}{n}\)</div></details></li>
+    <li>True or false: increasing <code>n</code> always makes a Riemann sum a better approximation of the exact area.
+      <details class="answer"><summary></summary><div class="ans-body">True (for the well-behaved functions this course works with) — more, thinner rectangles track the curve more closely, which is exactly why the limit as \(n\to\infty\) is defined to be the exact value (8.4.1).</div></details></li>
+    <li>What does "<code>Δx → 0</code>" correspond to in terms of <code>n</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(n\to\infty\) — since \(\Delta x=(b-a)/n\) with \(a,b\) fixed, letting \(n\) grow without bound forces \(\Delta x\) to shrink toward 0.</div></details></li>
+    <li class="tag">bonus — Write, but don't evaluate, the definite-integral notation for the limit of the Riemann sum for <code>f(x) = eˣ</code> on <code>[0, 1]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\displaystyle\int_0^1 e^x\,dx\)</div></details></li>
+    <li class="tag">bonus — If <code>Δx = (b−a)/n</code> and <code>a = 2, b = 10, n = 16</code>, find <code>Δx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x = 8/16 = 0.5\)</div></details></li>
+    <li class="tag">bonus — In one sentence each, distinguish a Riemann sum using left-endpoints, right-endpoints, and midpoints.
+      <details class="answer"><summary></summary><div class="ans-body">Left: each rectangle's height comes from the curve at the left edge of its subinterval. Right: from the right edge. Midpoint: from the point exactly halfway across each subinterval.</div></details></li>
+    <li class="tag">bonus — For <code>f(x) = x²</code> on <code>[0, 2]</code>, <code>n = 4</code>, list the four right-endpoint sample points <code>x₁,…,x₄</code> explicitly (values only, don't evaluate <code>f</code> yet).
+      <details class="answer"><summary></summary><div class="ans-body">\(0.5,\ 1,\ 1.5,\ 2\)</div></details></li>
+    <li class="tag">challenge — Explain, using Module 5's vocabulary, why "the Riemann sum as <code>n → ∞</code>" is itself a limit statement, and why its precise meaning is stated as <code>Δx → 0</code> rather than just "<code>n</code> gets bigger."
+      <details class="answer"><summary></summary><div class="ans-body">"<code>n</code> gets bigger" describes a process, not a target value — exactly the kind of informal phrasing Module 5 replaced with precise limit language. Since \(\Delta x=(b-a)/n\) for a fixed interval, \(n\to\infty\) forces \(\Delta x\to0\) automatically; writing it as \(\Delta x\to0\) is the version that directly names what's actually shrinking (the rectangles' width) and connects cleanly to the same "approaching a value" idea Module 5 formalized for ordinary limits — this is that same idea, just applied to a sum with a growing number of terms instead of a single expression.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-area-under-a-curve-intro.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-the-definite-integral.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 4 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:4", "content/m08-integrals/ch04-riemann-sums-formal.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

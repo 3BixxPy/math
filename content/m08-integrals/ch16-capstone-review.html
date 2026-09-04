@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 16 — Module 8 Capstone | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 16 of 16</div>
+  <div class="eyebrow">Chapter 16 · Module 8 capstone</div>
+  <h1>Module 8 Capstone — Mixed Review &amp; Diagnostic Retake</h1>
+  <p class="subtitle">Fifteen chapters, shuffled together, plus a look back at the very first diagnostic — where calculus itself was a blank page, let alone its reverse operation.</p>
+
+  <div class="block intuition">
+    <div class="label">Why mixed, not grouped by chapter</div>
+    <p>Same reasoning as every capstone since Module 0: a problem that doesn't announce its own chapter is the real test of whether an idea moved into durable memory, not just short-term pattern matching against a chapter title. This module in particular built two threads — antiderivatives (Chapters 1–2) and definite integrals (Chapters 3–5) — that stayed deliberately separate until Chapters 6–7 revealed they were the same thing all along. Shuffling the review is one more chance to notice how thoroughly that fusion held.</p>
+  </div>
+
+  <h2>Mixed review (all of Module 8)</h2>
+  <ol class="problems">
+    <li>Given <code>∫[0,4] f = 6</code> and <code>∫[4,9] f = −2</code>, find <code>∫[0,9] f</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(6+(-2)=4\) (Chapter 5, additivity).</div></details></li>
+    <li>Find the area between <code>y = x²</code> and <code>y = 4x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Intersections: \(x^2=4x\Rightarrow x=0,4\); line on top. \(\int_0^4(4x-x^2)dx=\big[2x^2-x^3/3\big]_0^4=32-64/3=32/3\) (Chapter 12).</div></details></li>
+    <li>Evaluate <code>∫(6x² + cos x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2x^3+\sin x+C\) (Chapter 2).</div></details></li>
+    <li>Evaluate <code>∫2x(x² + 5)³ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2+5\): \(\dfrac{(x^2+5)^4}{4}+C\) (Chapter 9).</div></details></li>
+    <li>Evaluate <code>∫[1,4] (2x − 1/x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^2-\ln|x|\big]_1^4=(16-\ln4)-(1-0)=15-\ln4\) (Chapters 2 &amp; 7).</div></details></li>
+    <li>With 3 rectangles, find the left-endpoint estimate for <code>f(x) = x</code> on <code>[0, 3]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x=1\); left edges \(0,1,2\); heights \(0,1,2\); sum \(=3\) (Chapter 3).</div></details></li>
+    <li>Evaluate <code>∫[0,3] x² dx</code> via FTC2.
+      <details class="answer"><summary></summary><div class="ans-body">\(9\) (Chapter 7).</div></details></li>
+    <li>If <code>v(t) = 4t</code> (m/s), find the net displacement from <code>t = 0</code> to <code>t = 2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[2t^2\big]_0^2=8\) m (Chapter 14).</div></details></li>
+    <li>Find the general antiderivative of <code>f(x) = x⁴</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x^5}{5}+C\) (Chapter 1).</div></details></li>
+    <li>Evaluate <code>∫[0,1] 2x(x² + 3)² dx</code>, converting the bounds.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2+3\), bounds \(3\to4\): \(\big[u^3/3\big]_3^4=64/3-27/3=37/3\) (Chapter 10).</div></details></li>
+    <li>If <code>g(x) = ∫[0,x] (t³ + 2) dt</code>, find <code>g′(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x^3+2\) — directly by FTC1 (Chapter 6).</div></details></li>
+    <li>Evaluate <code>∫3x²eˣ³ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^3\): \(e^{x^3}+C\) (Chapter 15).</div></details></li>
+    <li>Write (don't evaluate) the right-endpoint Riemann sum limit for <code>∫[0,5] x³ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\left(\frac{5i}{n}\right)^3\frac{5}{n}\) (Chapter 4).</div></details></li>
+    <li>Evaluate <code>∫[0,π] cos(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[\sin x\big]_0^\pi=0\) (Chapter 8).</div></details></li>
+    <li>Find the average value of <code>f(x) = 3x²</code> on <code>[0, 2]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac12\int_0^23x^2dx=\frac12(8)=4\) (Chapter 13).</div></details></li>
+    <li>Evaluate <code>∫sin(2x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=2x\): \(-\dfrac12\cos(2x)+C\) (Chapter 11).</div></details></li>
+  </ol>
+
+  <hr class="div">
+
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">Two problems that each need multiple chapters' tools working together, not just one technique per problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 12 — area between curves</span><span>Ch. 9 — u-substitution</span></div>
+    <p>Find the area of the region bounded by <code>y = x√(x² + 4)</code>, the x-axis, and the vertical line <code>x = √5</code>, for <code>x</code> in <code>[0, √5]</code>.</p>
+    <details class="step" open><summary>Step 1 — set up as an area-between-curves integral (Ch. 12), with the x-axis as "bottom"</summary>
+      <div class="step-body"><p>Since \(x\sqrt{x^2+4}\ge0\) on \([0,\sqrt5]\), the curve is "top" and \(y=0\) is "bottom": \(\displaystyle\text{Area}=\int_0^{\sqrt5} x\sqrt{x^2+4}\,dx\). The integrand isn't a bare power — it needs Chapter 9's technique before it can actually be integrated.</p></div></details>
+    <details class="step"><summary>Step 2 — substitute (Ch. 9) and convert the bounds (Ch. 10)</summary>
+      <div class="step-body"><p>\(u=x^2+4,\ du=2x\,dx\Rightarrow x\,dx=du/2\). Bounds: \(x=0\Rightarrow u=4\); \(x=\sqrt5\Rightarrow u=9\).</p></div></details>
+    <details class="step"><summary>Step 3 — integrate entirely in u</summary>
+      <div class="step-body"><p>\(\displaystyle\frac12\int_4^9\sqrt u\,du = \frac12\Big[\frac23u^{3/2}\Big]_4^9 = \frac13\big(27-8\big) = \frac{19}{3}\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Area \(=\dfrac{19}{3}\). The area-between-curves <em>setup</em> is pure Chapter 12; actually carrying out the integration needed Chapter 9's substitution — neither chapter alone gets there.</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 6 — FTC Part 1</span><span>Ch. 7 — FTC Part 2</span><span>Ch. 9 — u-substitution</span></div>
+    <p>Let <code>g(x) = ∫[0,x] t·cos(t²) dt</code>. Find <code>g′(x)</code>. Then evaluate <code>g(√(π/2))</code> exactly.</p>
+    <details class="step" open><summary>Step 1 — g′(x), via FTC1 (Ch. 6) — no integration needed at all</summary>
+      <div class="step-body"><p>\(g'(x)=x\cos(x^2)\), read straight off the integrand by (8.6.1). Notice: actually <em>integrating</em> \(t\cos(t^2)\) would require Chapter 9's u-substitution — but FTC1 makes that entirely unnecessary just to find \(g'\).</p></div></details>
+    <details class="step"><summary>Step 2 — but evaluating g itself does need to integrate, so substitute (Ch. 9)</summary>
+      <div class="step-body"><p>\(u=t^2,\ du=2t\,dt\Rightarrow t\,dt=du/2\): \(\displaystyle\int t\cos(t^2)\,dt=\frac12\int\cos u\,du=\frac12\sin u+C=\frac12\sin(t^2)+C\).</p></div></details>
+    <details class="step"><summary>Step 3 — evaluate via FTC2 (Ch. 7) from 0 to √(π/2)</summary>
+      <div class="step-body"><p>\(\Big[\frac12\sin(t^2)\Big]_0^{\sqrt{\pi/2}} = \frac12\sin\!\left(\frac\pi2\right)-\frac12\sin(0) = \frac12(1)-0=\frac12\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p><code>g′(x) = x cos(x²)</code> (immediate, Chapter 6) — while <code>g(√(π/2)) = 1/2</code> (needs Chapters 7 and 9 together). Same function <code>g</code>, two genuinely different questions, two different toolkits.</p></div></details>
+  </div>
+
+  <h2>Diagnostic retake</h2>
+  <p class="subtitle">On day one of this course, calculus was a clean slate — the original diagnostic had no section for it at all. Sixteen chapters later, differentiation and integration are visibly the same coin, thanks to the Fundamental Theorem.</p>
+
+  <div class="card">
+    <p><strong>1.</strong> Find the general antiderivative of <code>f(x) = 6x²</code>.</p>
+    <p class="subtitle">Originally: this idea didn't exist for you yet — no calculus section on the diagnostic.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(2x^3+C\). See Chapters 1–2.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>2.</strong> Evaluate <code>∫[0,2] (3x² + 1) dx</code> using FTC2.</p>
+    <p class="subtitle">Originally: no calculus section on the diagnostic.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(\big[x^3+x\big]_0^2=8+2=10\). See Chapter 7.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>3.</strong> A ball is thrown so its velocity is <code>v(t) = −32t + 64</code> (ft/s) for <code>t</code> in <code>[0, 2]</code> seconds. Before computing anything, predict whether the net displacement over <code>[0, 2]</code> will be positive, negative, or zero — then verify by evaluating <code>∫[0,2] v(t)dt</code>.</p>
+    <p class="subtitle">Originally: no calculus section on the diagnostic.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(v(t)\ge0\) throughout \([0,2]\) (it only reaches \(0\) exactly at \(t=2\)) — the ball is rising the whole interval, so displacement should be strongly positive. Verify: \(\big[-16t^2+64t\big]_0^2=(-64+128)-0=64\) ft. Matches the prediction. See Chapter 14.</div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Module 8 complete</div>
+    <p>From "what's the reverse of a derivative" to a full integration toolkit: antiderivatives and their rules, the area-estimation problem and formal Riemann sums, the definite integral and its properties, both halves of the Fundamental Theorem of Calculus, fluent FTC2 evaluation, u-substitution (indefinite and definite), the trig integral table, area between curves, average value, and the net change theorem — sixteen chapters that turned two completely independent ideas, antiderivatives and area, into one theorem. That completes Calculus I. Module 9 (Linear Algebra — Vectors) is next on the <a href="../../roadmap.html">roadmap</a> — planned but not yet written. Ask your AI session to continue whenever you're ready.</p>
+  </div>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch15-integration-practice.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="../../roadmap.html">View full roadmap</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 16 / 16 — Module complete</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:16", "content/m08-integrals/ch16-capstone-review.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

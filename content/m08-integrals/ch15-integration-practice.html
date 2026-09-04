@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 15 — Mixed Integration Practice | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 15 of 16</div>
+  <div class="eyebrow">Chapter 15 · concept:mixed-integration-technique-selection</div>
+  <h1>Mixed Integration Practice</h1>
+  <p class="subtitle">No new tool this chapter — the final fluency pass, mixing every technique from Chapters 1–14 with no chapter label to tell you which one applies. That's the actual skill being built here.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every chapter so far has practically announced its own technique in its title. Real integrals don't come labeled. The one habit worth building before the capstone: scan the integrand for an <strong>"inside function and its derivative sitting right next to it"</strong> — that's the tell for u-substitution (Chapters 9–10). If it's not there, check whether it's a plain sum of power/trig/exponential terms (Chapters 1–2, 11) instead. Getting fast at that first triage step matters more, at this point, than any single technique alone.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — spotting the substitution</div>
+    <p>Evaluate <code>∫eˣcos(eˣ) dx</code>.</p>
+    <details class="step" open><summary>Step 1 — the diagnostic habit: is there an "inside function and its derivative" here?</summary>
+      <div class="step-body"><p>\(e^x\) sits inside \(\cos(\cdot)\), <em>and</em> a loose \(e^x\) is sitting right next to it — and \(\frac{d}{dx}[e^x]=e^x\), so the "inside's derivative" is already present. That's the u-substitution tell.</p></div></details>
+    <details class="step"><summary>Step 2 — substitute and integrate</summary>
+      <div class="step-body"><p>\(u=e^x,\ du=e^x dx\): \(\displaystyle\int\cos u\,du=\sin u+C\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\sin(e^x)+C\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a definite integral needing both substitution and bound conversion</div>
+    <p>Evaluate <code>∫[0,1] x²eˣ³ dx</code>.</p>
+    <details class="step" open><summary>Step 1 — spot the substitution</summary>
+      <div class="step-body"><p>\(u=x^3\), \(du=3x^2dx \Rightarrow x^2dx=du/3\).</p></div></details>
+    <details class="step"><summary>Step 2 — convert the bounds (Chapter 10)</summary>
+      <div class="step-body"><p>\(x=0\Rightarrow u=0\); \(x=1\Rightarrow u=1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\displaystyle\frac13\int_0^1e^u\,du=\frac13\big[e^u\big]_0^1=\frac13(e-1)\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Not recognizing which technique a given integrand actually calls for. Given <code>∫x·sin(x²) dx</code>, a common wrong move is guessing an antiderivative outright — writing something like <code>−cos(x²)</code> without the necessary correction factor, or reaching for a product-rule-flavored guess entirely by instinct — instead of first running the diagnostic habit above: is there an inside function (<code>x²</code>) with its derivative (<code>2x</code>, matching the loose <code>x</code> up to a constant) sitting right next to it? Yes — that's the u-substitution signal, not a guess-and-check problem.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>∫[0,2] (3x² + 2x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">No substitution needed: \(\big[x^3+x^2\big]_0^2=8+4=12\)</div></details></li>
+    <li>Evaluate <code>∫4x³(x⁴+1)⁵ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^4+1\): \(\dfrac{(x^4+1)^6}{6}+C\)</div></details></li>
+    <li>Evaluate <code>∫[0,π] sin(x/2) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x/2\), bounds \(0\to\pi/2\): \(2\big[-\cos u\big]_0^{\pi/2}=2(0-(-1))=2\)</div></details></li>
+    <li>Evaluate <code>∫e⁻ˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=-x\): \(-e^{-x}+C\)</div></details></li>
+    <li>Evaluate <code>∫[1,e] (1/x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[\ln|x|\big]_1^e=\ln e-\ln1=1\)</div></details></li>
+    <li>Evaluate <code>∫x²cos(x³+1) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^3+1\): \(\dfrac13\sin(x^3+1)+C\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[0,4] √(2x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=2x\), bounds \(0\to8\): \(\frac12\big[\frac23u^{3/2}\big]_0^8=\frac13(8^{3/2})=\frac{16\sqrt2}{3}\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫(6x² − 4) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">No substitution needed — a plain polynomial: \(2x^3-4x+C\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫sec²(x)eᵗᵃⁿˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=\tan x\): \(e^{\tan x}+C\)</div></details></li>
+    <li class="tag">bonus — For <code>∫(x+1)/(x²+2x+5) dx</code>, identify what you'd choose for <code>u</code> and explain the "tell" that signals u-substitution here (don't fully solve).
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2+2x+5\), \(du=(2x+2)dx=2(x+1)dx\) — the numerator, \(x+1\), is exactly half of \(du\)'s coefficient: the inside function's derivative is sitting right there, up to a constant multiple.</div></details></li>
+    <li class="tag">challenge — Evaluate <code>∫[0,1] x·2ˣ² dx</code>. (Recall Module 3: the antiderivative of <code>bˣ</code> is <code>bˣ/ln b</code>.)
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2,\ x\,dx=du/2\), bounds \(0\to1\): \(\displaystyle\frac12\int_0^12^u\,du=\frac12\Big[\frac{2^u}{\ln2}\Big]_0^1=\frac12\cdot\frac{2-1}{\ln2}=\frac{1}{2\ln2}\)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch14-net-change-and-accumulation.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch16-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 15 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:15", "content/m08-integrals/ch15-integration-practice.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — u-Substitution, Definite Integrals | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 10 of 16</div>
+  <div class="eyebrow">Chapter 10 · concept:u-substitution-definite-bounds</div>
+  <h1>u-Substitution with Definite Integrals</h1>
+  <p class="subtitle">Same technique as Chapter 9, one extra bookkeeping step: the bounds themselves have to switch from x-values to u-values.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A definite integral's bounds, <code>a</code> and <code>b</code>, are x-values — but once everything else in the integral has been rewritten in terms of <code>u</code>, those bounds are now describing the wrong variable. Two approaches both work: convert the bounds to <code>u</code>-values right away and never look back at <code>x</code>, or find the antiderivative in terms of <code>u</code>, substitute back to <code>x</code>, and evaluate at the original bounds. Both are valid — but converting the bounds is cleaner, since it means the entire rest of the problem stays in <code>u</code>, with no substitution-back step at all.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — Converting the Bounds</div>
+    <ol>
+      <li>Choose <code>u = g(x)</code> and compute <code>du</code>, exactly as in Chapter 9.</li>
+      <li>Convert <em>both</em> bounds: plug the original lower bound into <code>g(x)</code> to get the new lower <code>u</code>-bound, and the original upper bound to get the new upper <code>u</code>-bound.</li>
+      <li>Rewrite the whole integral — integrand, <code>du</code>, <em>and</em> bounds — entirely in <code>u</code>.</li>
+      <li>Evaluate directly in <code>u</code> via FTC2 (Chapter 7) — no return trip to <code>x</code> needed.</li>
+    </ol>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Evaluate <code>∫[0,1] 2x(x²+1)³ dx</code>.</p>
+    <details class="step" open><summary>Step 1 — substitute</summary>
+      <div class="step-body"><p>\(u=x^2+1\), \(du=2x\,dx\) — matches the integrand exactly.</p></div></details>
+    <details class="step"><summary>Step 2 — convert the bounds</summary>
+      <div class="step-body"><p>\(x=0 \Rightarrow u=0^2+1=1\). \(x=1 \Rightarrow u=1^2+1=2\). New bounds: \(u=1\) to \(u=2\).</p></div></details>
+    <details class="step"><summary>Step 3 — rewrite entirely in u</summary>
+      <div class="step-body"><p>\(\displaystyle\int_1^2 u^3\,du\)</p></div></details>
+    <details class="step"><summary>Result — evaluate directly in u, no return to x needed</summary>
+      <div class="step-body"><p>\(\Big[\dfrac{u^4}{4}\Big]_1^2 = \dfrac{16}{4}-\dfrac14 = 4-0.25 = \dfrac{15}{4}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Two distinct errors, both worth naming. First — and by far the more serious one: forgetting to convert the bounds at all, and plugging the <em>original</em> x-bounds straight into the u-antiderivative. In the worked example, that would mean evaluating \(\big[u^4/4\big]\) at \(u=0\) and \(u=1\) instead of the correct \(u=1\) and \(u=2\) — simply wrong, not just messy. Second — harmless, just inefficient: converting the substitution correctly, but then switching the antiderivative back to <code>x</code> before evaluating at the original x-bounds anyway. That still gives the right answer, it's just the "long way" this chapter's Method box exists to skip.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="6">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>∫[0,2] x(x²+1) dx</code> (u-substitution, or direct expansion — both work):</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="integral of x times x squared plus 1">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>∫[0,1] 3x²(x³+2)² dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^3+2\), bounds \(2\to3\): \(\big[u^3/3\big]_2^3=9-8/3=19/3\)</div></details></li>
+    <li>Evaluate <code>∫[0,2] x(x²+1)² dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2+1,\ x\,dx=du/2\), bounds \(1\to5\): \(\frac12\big[u^3/3\big]_1^5=\frac12\left(\frac{125}{3}-\frac13\right)=\frac{62}{3}\)</div></details></li>
+    <li>Evaluate <code>∫[0,π/2] cos(x)sin²(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=\sin x\), bounds \(0\to1\): \(\big[u^3/3\big]_0^1=1/3\)</div></details></li>
+    <li>Evaluate <code>∫[0,1] 2xeˣ² dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2\), bounds \(0\to1\): \(\big[e^u\big]_0^1=e-1\)</div></details></li>
+    <li>Evaluate <code>∫[1,2] x²(x³−1) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^3-1,\ x^2dx=du/3\), bounds \(0\to7\): \(\frac13\big[u^2/2\big]_0^7=\frac{49}{6}\)</div></details></li>
+    <li>For <code>∫[0,3] f(g(x))g′(x) dx</code> with <code>u=g(x)</code>, state in words (not symbols) how to find the new lower and upper bounds.
+      <details class="answer"><summary></summary><div class="ans-body">Plug the original x-bounds into \(g(x)\) itself: the new lower bound is \(g(\text{lower }x)\), the new upper bound is \(g(\text{upper }x)\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[0,1] x(1−x²)³ dx</code>. (Notice what happens to the bound order.)
+      <details class="answer"><summary></summary><div class="ans-body">\(u=1-x^2,\ x\,dx=-du/2\). Bounds: \(x=0\Rightarrow u=1\); \(x=1\Rightarrow u=0\) — the bounds flip order. \(\displaystyle-\frac12\int_1^0u^3du=\frac12\int_0^1u^3du=\frac12\cdot\frac14=\frac18\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[0,4] √(2x+1) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=2x+1,\ dx=du/2\), bounds \(1\to9\): \(\frac12\big[\frac23u^{3/2}\big]_1^9=\frac13(27-1)=\frac{26}{3}\)</div></details></li>
+    <li class="tag">bonus — True or false: after converting both the integrand and the bounds to <code>u</code>, the final numeric answer must be converted back to <code>x</code> before it's valid.
+      <details class="answer"><summary></summary><div class="ans-body">False — a definite integral's value is just a number. Once the bounds are in \(u\), evaluating entirely in \(u\) gives the correct final number directly; there's nothing left to convert back.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[0,1] 6x(x²+2)² dx</code> two ways: (a) convert the bounds and stay in u, (b) find the antiderivative in x first, then evaluate at the original bounds. Confirm both agree.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2+2,\ du=2x\,dx\), so \(6x\,dx=3\,du\). (a) Bounds \(2\to3\): \(3\displaystyle\int_2^3u^2du=\big[u^3\big]_2^3=27-8=19\). (b) Antiderivative in x: \(3\cdot\frac{u^3}{3}=(x^2+2)^3+C\); evaluate at the original bounds \(0\to1\): \(3^3-2^3=27-8=19\). Both agree: \(19\).</div></details></li>
+    <li class="tag">challenge — Evaluate <code>∫[0,3] x/√(x²+16) dx</code> via u-substitution with bound conversion.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2+16,\ x\,dx=du/2\), bounds \(16\to25\): \(\displaystyle\frac12\int_{16}^{25}u^{-1/2}du=\Big[\sqrt u\Big]_{16}^{25}=5-4=1\)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-u-substitution-intro.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-integrals-of-trig-functions.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 10 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:10", "content/m08-integrals/ch10-u-substitution-definite.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

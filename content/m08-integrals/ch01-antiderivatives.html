@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Antiderivatives | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 1 of 16</div>
+  <div class="eyebrow">Chapter 1 · concept:antiderivative-definition</div>
+  <h1>Antiderivatives</h1>
+  <p class="subtitle">Modules 6 and 7 spent twenty-eight chapters building one machine: given a function, produce its derivative. This chapter runs that machine backward for the first time — given a derivative, can you recover the function it came from?</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Reverse operations show up everywhere in math, and each one has needed its own careful treatment: squaring is easy, square-rooting needs a ± and a domain restriction; multiplying is easy, dividing needs the divisor to be nonzero. Differentiation is no different. Running it backward isn't automatic just because you know the forward rules cold — it's a genuinely new operation, with its own name, its own subtleties, and (starting next chapter) its own rulebook. This chapter is just the definition and the single most important subtlety it hides.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Antiderivative</div>
+    <p>A function \(F\) is an <strong>antiderivative</strong> of \(f\) on an interval if</p>
+    <p style="text-align:center;">\[ F'(x) = f(x) \]</p>
+    <p>for every \(x\) in that interval. It's exactly the reverse of Module 6's whole project: there, you were handed \(F\) and asked for \(F'\); here, you're handed \(f\) and asked to find some \(F\) whose derivative is it.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The General Antiderivative</div>
+    <div class="eqn"><div class="eq-body">\[ F'(x) = G'(x) = f(x) \ \Longrightarrow\ G(x) = F(x) + C \]</div><div class="eq-num" id="eq-8-1-1">(8.1.1)</div></div>
+    <p>If \(F\) is <em>one</em> antiderivative of \(f\), every antiderivative of \(f\) on that interval has this exact form — some constant \(C\) added to \(F\). The "+C" is not optional bookkeeping tacked on out of habit: a genuinely different constant gives a genuinely different, still-valid antiderivative, because constants vanish under differentiation (Module 6's constant rule). \(x^3\), \(x^3+7\), and \(x^3-\pi\) are three <em>different</em> functions that all have the exact same derivative, \(3x^2\) — so "the" antiderivative of \(3x^2\) doesn't exist as a single function; only the whole family \(x^3+C\) does.</p>
+    <p>This family gets its own compact notation, written \(\int f(x)\,dx\), read "the integral of \(f\) with respect to \(x\)." For now treat it purely as shorthand for "the general antiderivative of \(f\)" — nothing more is being claimed about it yet.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the general antiderivative of <code>f(x) = x²</code>, then verify the answer by differentiating it back.</p>
+    <details class="step" open><summary>Step 1 — guess a candidate by pattern-matching against the power rule</summary>
+      <div class="step-body"><p>Module 6's power rule says \(\frac{d}{dx}[x^3] = 3x^2\) — close, but it has an extra factor of 3 we don't want. Dividing the candidate by that same 3 should cancel it: try \(F(x) = \dfrac{x^3}{3}\).</p></div></details>
+    <details class="step"><summary>Step 2 — verify by differentiating the candidate</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}\left[\dfrac{x^3}{3}\right] = \dfrac{3x^2}{3} = x^2\) ✓ — matches \(f(x)\) exactly.</p></div></details>
+    <details class="step"><summary>Result — the general antiderivative</summary>
+      <div class="step-body"><p>By (8.1.1), every antiderivative of \(x^2\) has the form \(\dfrac{x^3}{3}+C\). Written with integral notation: \(\displaystyle\int x^2\,dx = \frac{x^3}{3}+C\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Two versions of the same slip. First: dropping the "+C" entirely — writing \(x^3/3\) as "the" answer, as if it were unique. Second, a reversed-power-rule error: dividing by the <em>original</em> exponent instead of the <em>new</em> one. For \(f(x)=x^2\), that would mean writing \(x^3/2\) (dividing by the old exponent, 2) instead of the correct \(x^3/3\) (dividing by the new exponent, 3). Always check by differentiating your answer back — if you don't recover the original \(f(x)\) exactly, something's wrong, and the check catches both mistakes instantly.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="x^2+c,x²+c">
+    <div class="label">Try it yourself</div>
+    <p>Find the general antiderivative of <code>f(x) = 2x</code> (type e.g. <code>x^2+C</code>):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. x^2+C" aria-label="general antiderivative of 2x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the general antiderivative of <code>f(x) = x⁵</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x^6}{6}+C\)</div></details></li>
+    <li>Find the general antiderivative of the constant function <code>f(x) = 7</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(7x+C\) — check: \(\frac{d}{dx}[7x+C]=7\) ✓</div></details></li>
+    <li>Is <code>F(x) = x⁴/4 + C</code> an antiderivative of <code>f(x) = x³</code>? Verify.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(\frac{d}{dx}[x^4/4]=x^3\) ✓, and the "+C" survives differentiation as 0 either way.</div></details></li>
+    <li>Find the general antiderivative of <code>f(x) = 1</code> (the constant function 1).
+      <details class="answer"><summary></summary><div class="ans-body">\(x+C\)</div></details></li>
+    <li>True or false: <code>x³ + 5</code> and <code>x³ − 2</code> are both valid antiderivatives of <code>f(x) = 3x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">True — they differ only by a constant (7), and both differentiate to \(3x^2\) (8.1.1).</div></details></li>
+    <li>Find the general antiderivative of <code>f(x) = x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x^2}{2}+C\)</div></details></li>
+    <li class="tag">bonus — If <code>F'(x) = 0</code> for every <code>x</code>, what can you conclude about <code>F</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(F\) must be a constant function — \(F(x)=C\) for some fixed \(C\), since 0 is the derivative of every constant and (8.1.1) says that's the whole family.</div></details></li>
+    <li class="tag">bonus — Find the general antiderivative of <code>f(x) = x¹⁰</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x^{11}}{11}+C\)</div></details></li>
+    <li class="tag">bonus — A student says the general antiderivative of <code>f(x) = 4x³</code> is <code>x⁴</code>. What's incomplete about that answer?
+      <details class="answer"><summary></summary><div class="ans-body">It's missing the "+C." \(x^4\) alone is only <em>one</em> antiderivative; \(x^4+9\), \(x^4-\sqrt2\), and infinitely many others all differentiate to \(4x^3\) as well, by (8.1.1).</div></details></li>
+    <li class="tag">bonus — Is <code>G(x) = x³/3 + 5</code> an antiderivative of <code>f(x) = x²</code>?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(\frac{d}{dx}[x^3/3+5]=x^2+0=x^2\) ✓. The "+5" is just one particular choice of the "+C."</div></details></li>
+    <li class="tag">challenge — Try differentiating <code>F(x) = x³/3 + x</code> and confirm it does <strong>not</strong> equal <code>x²</code>. Explain, using Module 6's constant rule, exactly why "+C" is required to be a genuine constant and not a term like "+x."
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac{d}{dx}[x^3/3+x] = x^2+1 \neq x^2\) — off by 1, because \(\frac{d}{dx}[x]=1\), not 0. Module 6's constant rule (\(\frac{d}{dx}[C]=0\)) only kills terms with <em>no</em> \(x\) in them. "+C" works precisely because it contributes nothing to the derivative; any term that still depends on \(x\) — even something as simple as "+x" — changes the derivative and breaks the equality, so it can never be substituted for "+C."</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m07-derivative-applications/ch12-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-antiderivative-rules.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 1 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:1", "content/m08-integrals/ch01-antiderivatives.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

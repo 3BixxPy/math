@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Fundamental Theorem of Calculus I | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 6 of 16</div>
+  <div class="eyebrow">Chapter 6 · concept:ftc-part-1</div>
+  <h1>The Fundamental Theorem of Calculus, Part 1</h1>
+  <p class="subtitle">Chapters 1–2 built the antiderivative, entirely without a single mention of area. Chapters 3–5 built the definite integral, entirely as a limit of rectangles, without a single mention of antiderivatives. This chapter is where those two completely separate threads turn out to be the same thing.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Define a new function out of an integral: for a fixed starting point <code>a</code>, let <code>g(x) = ∫[a,x] f(t)dt</code> — the signed area accumulated from <code>a</code> up to <code>x</code>, as a function of where <code>x</code> stops. Nothing about building <code>g</code> ever mentioned an antiderivative; it's pure Chapter 3–5 machinery, rectangles and limits. Now ask the most natural question in the world: what's <code>g′(x)</code>? The answer is genuinely surprising — differentiating this area-accumulation function hands back, exactly, the original function you started with. Area-accumulation and antiderivative-taking are inverse processes. That's not a coincidence being pointed out; it's a theorem, and it's the reason this entire module exists.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Fundamental Theorem of Calculus, Part 1</div>
+    <p>If <code>g(x) = ∫[a,x] f(t)dt</code>, then:</p>
+    <div class="eqn"><div class="eq-body">\[ g'(x) = f(x) \]</div><div class="eq-num" id="eq-8-6-1">(8.6.1)</div></div>
+    <p>Here's why it's plausible: \(g(x+h)-g(x)\) is the sliver of accumulated area between \(x\) and \(x+h\). For small \(h\), that sliver is nearly a thin rectangle of width \(h\) and height \(f(x)\), so \(g(x+h)-g(x)\approx f(x)\cdot h\), meaning \(\dfrac{g(x+h)-g(x)}{h}\approx f(x)\). That's exactly Module 5 and 6's difference-quotient definition of a derivative — take \(h\to0\), and it becomes \(g'(x)=f(x)\) exactly, not just approximately.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Let <code>g(x) = ∫[0,x] (t² + 1)dt</code>. Find <code>g′(x)</code> directly via FTC1 — without ever computing the integral itself.</p>
+    <details class="step" open><summary>Step 1 — identify f(t), the integrand</summary>
+      <div class="step-body"><p>Here \(f(t) = t^2+1\).</p></div></details>
+    <details class="step"><summary>Step 2 — apply (8.6.1) directly</summary>
+      <div class="step-body"><p>\(g'(x) = f(x) = x^2+1\).</p></div></details>
+    <details class="step"><summary>Result — no integration happened</summary>
+      <div class="step-body"><p>\(g'(x)=x^2+1\). Notice what didn't happen: at no point did this require finding an antiderivative of \(t^2+1\) or evaluating the integral defining \(g\). FTC1 reads the integrand straight off — that's the entire theorem.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Trying to evaluate the integral first — attempting to find an antiderivative of \(f\), plug in the bounds, get an explicit formula for \(g(x)\), <em>then</em> differentiate that formula — when FTC1 says all of that work is entirely unnecessary. The whole point of the theorem is that differentiating an accumulation function just gives back the original integrand, immediately, with zero integration required. Reaching for the long way isn't wrong exactly, it's just needless extra work that (8.6.1) exists specifically to skip.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="cos(x),cosx,cos x">
+    <div class="label">Try it yourself</div>
+    <p>If <code>g(x) = ∫[0,x] cos(t)dt</code>, find <code>g′(x)</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. cos(x)" aria-label="derivative of g">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li><code>g(x) = ∫[0,x] 3t² dt</code>. Find <code>g′(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3x^2\)</div></details></li>
+    <li><code>g(x) = ∫[1,x] (5−t) dt</code>. Find <code>g′(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(5-x\)</div></details></li>
+    <li><code>g(x) = ∫[0,x] eᵗ dt</code>. Find <code>g′(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(e^x\)</div></details></li>
+    <li><code>g(x) = ∫[2,x] sin(t) dt</code>. Find <code>g′(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sin x\)</div></details></li>
+    <li><code>h(x) = ∫[0,x] (t³ + 2t) dt</code>. Find <code>h′(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x^3+2x\)</div></details></li>
+    <li>True or false: to find <code>g′(x)</code> where <code>g(x) = ∫[a,x] f(t)dt</code>, you must first find an antiderivative of <code>f</code>.
+      <details class="answer"><summary></summary><div class="ans-body">False — FTC1 (8.6.1) gives \(g'(x)=f(x)\) directly, no antiderivative required.</div></details></li>
+    <li class="tag">bonus — <code>g(x) = ∫[−1,x] (4t−7) dt</code>. Find <code>g′(3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(g'(x)=4x-7\), so \(g'(3)=12-7=5\).</div></details></li>
+    <li class="tag">bonus — If <code>g(x) = ∫[0,x] f(t)dt</code> and <code>g′(x) = x² − 4</code>, what is <code>f(x)</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(f(x)=x^2-4\) — read directly off (8.6.1).</div></details></li>
+    <li class="tag">bonus — <code>g(x) = ∫[5,x] √t dt</code> (for <code>x &gt; 0</code>). Find <code>g′(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sqrt{x}\)</div></details></li>
+    <li class="tag">bonus — In one sentence, explain what <code>g(x) = ∫[a,x] f(t)dt</code> represents as <code>x</code> varies.
+      <details class="answer"><summary></summary><div class="ans-body">The (signed) area accumulated from \(a\) up to \(x\), as a function of where the accumulation stops.</div></details></li>
+    <li class="tag">challenge — Without evaluating any integral, explain why <code>g(x) = ∫[a,x] f(t)dt</code> must be an increasing function everywhere <code>f(x) &gt; 0</code>, using FTC1 together with Module 6/7's derivative-sign test.
+      <details class="answer"><summary></summary><div class="ans-body">By FTC1 (8.6.1), \(g'(x)=f(x)\). Wherever \(f(x)>0\), that means \(g'(x)>0\) there too — and Module 6/7's increasing-function test says a positive derivative on an interval means the function is increasing on it. So \(g\) increases exactly where \(f\) is positive, with zero integration needed to see it.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-the-definite-integral.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-fundamental-theorem-part-2.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 6 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:6", "content/m08-integrals/ch06-fundamental-theorem-part-1.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

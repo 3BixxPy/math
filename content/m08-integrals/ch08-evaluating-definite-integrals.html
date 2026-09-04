@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Evaluating Definite Integrals | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 8 of 16</div>
+  <div class="eyebrow">Chapter 8 · concept:evaluating-definite-integrals</div>
+  <h1>Evaluating Definite Integrals — Practice</h1>
+  <p class="subtitle">No new tool this chapter. FTC2 is now the whole method — what's left is fluency: applying it cleanly across polynomial, trig, and exponential integrands, without a sign error creeping in.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Chapter 7 introduced the formula; this chapter is where it becomes automatic. The mechanics never change — find an antiderivative, evaluate at the top, evaluate at the bottom, subtract — but the integrands are about to get varied enough, and the arithmetic careful enough, that fluency is worth building deliberately rather than assuming it for free.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a trig integrand</div>
+    <p>Evaluate <code>∫[0,π] sin(x) dx</code>.</p>
+    <details class="step" open><summary>Step 1 — antiderivative (Chapter 2)</summary>
+      <div class="step-body"><p>\(F(x)=-\cos x\)</p></div></details>
+    <details class="step"><summary>Step 2 — apply FTC2 (8.7.1)</summary>
+      <div class="step-body"><p>\(\Big[-\cos x\Big]_0^\pi = -\cos\pi - (-\cos0) = -(-1) - (-1) = 1+1 = 2\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — an exponential integrand</div>
+    <p>Evaluate <code>∫[0,1] eˣ dx</code>.</p>
+    <details class="step" open><summary>Step 1 — antiderivative (Chapter 2)</summary>
+      <div class="step-body"><p>\(F(x)=e^x\)</p></div></details>
+    <details class="step"><summary>Step 2 — apply FTC2</summary>
+      <div class="step-body"><p>\(\Big[e^x\Big]_0^1 = e^1-e^0 = e-1\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Sign errors in <code>F(b) − F(a)</code>, especially when <code>F(a)</code> itself is negative — a genuine Module 0 signed-arithmetic callback. Evaluate <code>∫[−2,1] x dx</code>: \(F(x)=x^2/2\), so \(F(1)=0.5\) and \(F(-2)=(-2)^2/2=2\). The answer is \(F(1)-F(-2)=0.5-2=-1.5\). The two places this goes wrong: miscomputing \(F(-2)\) itself as \(-2\) instead of \(2\) (forgetting that squaring a negative kills the sign before halving), or computing \(0.5-2\) correctly but then "fixing" the negative result by hand, as if a negative answer must be a mistake. It isn't — a negative definite integral just means net signed area below the axis (Chapter 5), a perfectly legitimate answer.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>∫[0,π/2] cos(x) dx</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="integral of cos x from 0 to pi/2">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>∫[0,3] x² dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^3/3\big]_0^3=9\)</div></details></li>
+    <li>Evaluate <code>∫[0,π/2] sin(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[-\cos x\big]_0^{\pi/2}=0-(-1)=1\)</div></details></li>
+    <li>Evaluate <code>∫[0,2] eˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[e^x\big]_0^2=e^2-1\)</div></details></li>
+    <li>Evaluate <code>∫[−1,2] (2x+1) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[x^2+x\big]_{-1}^{2}=(4+2)-(1-1)=6\)</div></details></li>
+    <li>Evaluate <code>∫[1,2] 3/x dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[3\ln|x|\big]_1^2=3\ln2\)</div></details></li>
+    <li>Evaluate <code>∫[−3,3] x³ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0\) — odd function, symmetric interval, cancels exactly.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[0,π] cos(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[\sin x\big]_0^\pi=0-0=0\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[−1,0] eˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[e^x\big]_{-1}^{0}=1-e^{-1}=1-\tfrac1e\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫[1,4] √x dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[\tfrac23 x^{3/2}\big]_1^4 = \tfrac{16}{3}-\tfrac23=\tfrac{14}{3}\)</div></details></li>
+    <li class="tag">bonus — A student evaluates <code>∫[−3,2] x dx</code>, gets <code>F(2)−F(−3) = 2−4.5 = −2.5</code>, then drops the negative sign "because area can't be negative." What's wrong with that reasoning, and what's the correct final answer?
+      <details class="answer"><summary></summary><div class="ans-body">The correct answer is \(-2.5\) — the sign is meaningful (Chapter 5's signed area), not an error to erase. This interval has more below-axis contribution than above-axis, and the integral is supposed to reflect that.</div></details></li>
+    <li class="tag">challenge — Evaluate <code>∫[0,4] (x−2) dx</code>. Before computing, predict the sign using Chapter 5's signed-area idea (where is <code>x−2</code> negative vs. positive on <code>[0,4]</code>?), then verify.
+      <details class="answer"><summary></summary><div class="ans-body">\(x-2<0\) on \([0,2)\) and \(>0\) on \((2,4]\) — symmetric around \(x=2\), so the two triangular pieces should cancel: predict \(0\). Verify: \(\big[x^2/2-2x\big]_0^4=(8-8)-0=0\) ✓.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-fundamental-theorem-part-2.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-u-substitution-intro.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 8 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:8", "content/m08-integrals/ch08-evaluating-definite-integrals.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

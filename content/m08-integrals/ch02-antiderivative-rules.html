@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Antiderivative Rules | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 2 of 16</div>
+  <div class="eyebrow">Chapter 2 · concept:antiderivative-rules</div>
+  <h1>Antiderivative Rules</h1>
+  <p class="subtitle">Chapter 1 defined the general antiderivative and its "+C," and found one by guess-and-check. This chapter builds an actual toolkit — direct mirror images of Module 6's own differentiation rules, each one run backward.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Guessing worked for \(x^2\) because the answer was easy to see coming. It won't stay easy once terms pile up. But every rule Module 6 built for taking derivatives can, in principle, be read in reverse — and for the simplest ones (a power, a sum, a constant multiple, and a handful of named functions) reading them backward gives a clean, mechanical rule with no guessing required.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The Power Rule, Reversed</div>
+    <div class="eqn"><div class="eq-body">\[ \int x^n\,dx = \frac{x^{n+1}}{n+1} + C \qquad (n \neq -1) \]</div><div class="eq-num" id="eq-8-2-1">(8.2.1)</div></div>
+    <p>Raise the exponent by 1, then divide by that <em>new</em> exponent — exactly the reverse order of Module 6's power rule, which multiplies by the old exponent then lowers it. The \(n\neq-1\) restriction isn't fine print; the mistake block below shows exactly where it bites.</p>
+  </div>
+
+  <p>Two more direct reversals round out the basic toolkit, mirroring Module 6 Chapter 5's sum/difference and constant-multiple rules:</p>
+  <p style="text-align:center;">\[ \int \big[f(x)\pm g(x)\big]\,dx = \int f(x)\,dx \pm \int g(x)\,dx \qquad\qquad \int c\,f(x)\,dx = c\int f(x)\,dx \]</p>
+  <p>In plain terms: integrate term by term, and constant factors ride along unchanged. A short reference list of named functions, each the direct reverse of a Module 6 fact (full trig table comes in Chapter 11):</p>
+  <p style="text-align:center;">\[ \int \sin x\,dx = -\cos x + C \qquad \int \cos x\,dx = \sin x + C \qquad \int e^x\,dx = e^x + C \]</p>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the general antiderivative of <code>f(x) = 3x⁴ − 2sin(x) + eˣ</code>, term by term.</p>
+    <details class="step" open><summary>Step 1 — split the sum/difference, keep constants along for the ride</summary>
+      <div class="step-body"><p>\(\displaystyle\int\!\big(3x^4-2\sin x+e^x\big)dx = 3\!\int\! x^4\,dx \;-\; 2\!\int\!\sin x\,dx \;+\!\int\! e^x\,dx\)</p></div></details>
+    <details class="step"><summary>Step 2 — apply the power rule (8.2.1) to the first term</summary>
+      <div class="step-body"><p>\(3\displaystyle\int x^4\,dx = 3\cdot\frac{x^5}{5} = \frac{3x^5}{5}\)</p></div></details>
+    <details class="step"><summary>Step 3 — apply the sine and exponential facts to the rest</summary>
+      <div class="step-body"><p>\(-2\displaystyle\int\sin x\,dx = -2(-\cos x) = 2\cos x\), and \(\displaystyle\int e^x\,dx = e^x\).</p></div></details>
+    <details class="step"><summary>Result — combine, one "+C" for the whole family</summary>
+      <div class="step-body"><p>\(\dfrac{3x^5}{5} + 2\cos x + e^x + C\). Each piece could in principle carry its own constant, but any sum of constants is still just some constant — one "+C" at the end covers the whole family.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Trying to apply the reversed power rule (8.2.1) to \(f(x)=x^{-1}=1/x\). The rule says divide by \(n+1\) — but here \(n=-1\), so \(n+1=0\), and dividing by zero breaks the formula completely; it simply doesn't apply. This case genuinely needs a different rule:</p>
+    <p style="text-align:center;">\[ \int \frac{1}{x}\,dx = \ln|x| + C \]</p>
+    <p>This is worth naming even though its full justification is still a few chapters off (Chapter 7 supplies it) — for now, treat it as the one named exception that the power rule can never cover, no matter how it's rewritten.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="x^4/4+c,x⁴/4+c">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>∫x³ dx</code> (type e.g. <code>x^4/4+C</code>):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. x^4/4+C" aria-label="integral of x cubed">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>∫x⁶ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x^7}{7}+C\)</div></details></li>
+    <li>Evaluate <code>∫5x² dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{5x^3}{3}+C\)</div></details></li>
+    <li>Evaluate <code>∫(x³ + x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x^4}{4}+\dfrac{x^2}{2}+C\)</div></details></li>
+    <li>Evaluate <code>∫cos(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sin x + C\)</div></details></li>
+    <li>Evaluate <code>∫3eˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3e^x+C\)</div></details></li>
+    <li>Evaluate <code>∫(4x³ − 6x + 1) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x^4-3x^2+x+C\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫1 dx</code> (the constant function 1, i.e. <code>x⁰</code>).
+      <details class="answer"><summary></summary><div class="ans-body">\(x+C\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫(sin x + cos x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-\cos x+\sin x+C\)</div></details></li>
+    <li class="tag">bonus — In one sentence, explain why <code>n = −1</code> breaks the power rule.
+      <details class="answer"><summary></summary><div class="ans-body">The rule divides by \(n+1\); at \(n=-1\) that's division by zero, which is undefined.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫(2/x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2\ln|x|+C\) — constant-multiple rule applied to the \(\ln|x|\) exception.</div></details></li>
+    <li class="tag">challenge — Evaluate <code>∫(x² − 3/x + 4eˣ) dx</code>, combining every rule from this chapter in one problem.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{x^3}{3} - 3\ln|x| + 4e^x + C\)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-antiderivatives.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-area-under-a-curve-intro.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 2 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:2", "content/m08-integrals/ch02-antiderivative-rules.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

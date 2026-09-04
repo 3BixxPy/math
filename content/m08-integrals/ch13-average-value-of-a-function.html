@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 13 — Average Value of a Function | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 13 of 16</div>
+  <div class="eyebrow">Chapter 13 · concept:average-value-function</div>
+  <h1>The Average Value of a Function</h1>
+  <p class="subtitle">Averaging a handful of numbers is old news — add them up, divide by how many. Averaging a function's value over a continuum of infinitely many inputs needs the integral to make "add them all up" mean anything at all.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>The average of \(n\) numbers is \(\frac1n\sum\) of them — a sum divided by a count. A function takes infinitely many values on an interval, so there's no "count" to divide by in the usual sense. But a Riemann sum <em>is</em> a sum, and \((b-a)\) plays the role the count would — this chapter's formula is exactly that averaging idea, carried through the same limit that built the integral in the first place.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Average Value of a Function</div>
+    <div class="eqn"><div class="eq-body">\[ f_{\text{avg}} = \frac{1}{b-a}\int_a^b f(x)\,dx \]</div><div class="eq-num" id="eq-8-13-1">(8.13.1)</div></div>
+    <p>The <strong>Mean Value Theorem for Integrals</strong> guarantees that, for a continuous <code>f</code>, some point <code>c</code> in <code>[a,b]</code> actually achieves this average: <code>f(c) = f_avg</code> — the function doesn't just average out to this number abstractly, it genuinely equals it somewhere on the interval.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the average value of <code>f(x) = x²</code> on <code>[0, 3]</code>.</p>
+    <details class="step" open><summary>Step 1 — evaluate the integral (Chapter 7)</summary>
+      <div class="step-body"><p>\(\displaystyle\int_0^3 x^2\,dx = \Big[\frac{x^3}{3}\Big]_0^3 = 9\)</p></div></details>
+    <details class="step"><summary>Step 2 — divide by (b − a), by (8.13.1)</summary>
+      <div class="step-body"><p>\(f_{\text{avg}} = \dfrac{1}{3-0}(9) = 3\)</p></div></details>
+    <details class="step"><summary>Result — confirming the Mean Value Theorem for Integrals</summary>
+      <div class="step-body"><p>Somewhere in \([0,3]\), \(f(c)=3\) exactly: \(c^2=3 \Rightarrow c=\sqrt3\approx1.73\), which is indeed in \([0,3]\) ✓.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Confusing <strong>average value of a function</strong> (this chapter — an integral, divided by interval length) with <strong>average rate of change</strong> (Module 6 Chapter 1 — a difference quotient, <code>(f(b)−f(a))/(b−a)</code>). They sound alike and both involve dividing by <code>b−a</code>, but they're different questions about different things: one asks "what value does <code>f</code> spend most of its 'time' near," the other asks "how much did <code>f</code> change, on average, per unit of <code>x</code>." Take <code>f(x) = x³</code> on <code>[0,2]</code>: average <em>value</em> is \(\frac12\int_0^2x^3dx=\frac12(4)=2\), while average <em>rate of change</em> is \(\frac{f(2)-f(0)}{2}=\frac{8}{2}=4\) — genuinely different numbers, from genuinely different formulas.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="4">
+    <div class="label">Try it yourself</div>
+    <p>Find the average value of <code>f(x) = 2x</code> on <code>[0, 4]</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="average value of 2x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the average value of <code>f(x) = x</code> on <code>[0, 6]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac16\int_0^6x\,dx=\frac16(18)=3\)</div></details></li>
+    <li>Find the average value of the constant function <code>f(x) = 3</code> on <code>[0, 10]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3\) — a constant function's average value is always just itself.</div></details></li>
+    <li>Find the average value of <code>f(x) = x²</code> on <code>[0, 1]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac11\int_0^1x^2dx=1/3\)</div></details></li>
+    <li>Find the average value of <code>f(x) = eˣ</code> on <code>[0, 1]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac11(e-1)=e-1\) — since \(b-a=1\) here, the average value equals the integral itself.</div></details></li>
+    <li>Find the average <em>rate of change</em> (not average value) of <code>f(x) = x²</code> on <code>[1, 4]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{f(4)-f(1)}{4-1}=\dfrac{16-1}{3}=5\)</div></details></li>
+    <li>True or false: the average value of <code>f</code> on <code>[a,b]</code> always equals <code>f((a+b)/2)</code>, its value at the midpoint.
+      <details class="answer"><summary></summary><div class="ans-body">False in general — only true for linear functions. A curved function spends unequal "amounts" above and below its midpoint value.</div></details></li>
+    <li class="tag">bonus — Find the average value of <code>f(x) = 4 − x²</code> on <code>[−2, 2]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac14\int_{-2}^2(4-x^2)dx=\frac14\left(\frac{32}{3}\right)=\frac83\)</div></details></li>
+    <li class="tag">bonus — Find the average value of <code>f(x) = sin(x)</code> on <code>[0, π]</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac1\pi\int_0^\pi\sin x\,dx=\frac1\pi(2)=\frac2\pi\)</div></details></li>
+    <li class="tag">bonus — For the chapter's own worked example (<code>f(x)=x²</code> on <code>[0,3]</code>), the Mean Value Theorem for Integrals guarantees some <code>c</code> with <code>f(c)=3</code>. Find both real solutions of <code>c²=3</code>, and explain why only one qualifies.
+      <details class="answer"><summary></summary><div class="ans-body">\(c=\pm\sqrt3\); only \(c=\sqrt3\approx1.73\) lies in \([0,3]\), so that's the one the theorem is pointing to.</div></details></li>
+    <li class="tag">bonus — A car's velocity is <code>v(t) = 3t²</code> (m/s) for <code>t</code> in <code>[0, 4]</code>. Find its average velocity over this interval.
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac14\int_0^4 3t^2\,dt=\frac14\big[t^3\big]_0^4=\frac14(64)=16\) m/s</div></details></li>
+    <li class="tag">challenge — Explain why the Mean Value Theorem for Integrals is the "integral-flavored twin" of Module 7's Mean Value Theorem for derivatives — specifically, using FTC2, show that <code>f</code>'s average value equals the average rate of change of one of its own antiderivatives.
+      <details class="answer"><summary></summary><div class="ans-body">Let \(F\) be an antiderivative of \(f\), so \(F'=f\). By FTC2, \(\int_a^bf(x)dx=F(b)-F(a)\), so \(f_{\text{avg}}=\frac{1}{b-a}\int_a^bf(x)dx=\frac{F(b)-F(a)}{b-a}\) — exactly \(F\)'s average rate of change over \([a,b]\). Module 7's MVT guarantees a point where \(F'(c)\) equals that average rate of change; since \(F'=f\), that's precisely \(f(c)=f_{\text{avg}}\) — the same guarantee, viewed through \(F\) instead of \(f\) directly.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch12-area-between-curves.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch14-net-change-and-accumulation.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 13 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:13", "content/m08-integrals/ch13-average-value-of-a-function.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

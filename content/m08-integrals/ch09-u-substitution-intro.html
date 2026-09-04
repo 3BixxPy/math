@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — u-Substitution | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 9 of 16</div>
+  <div class="eyebrow">Chapter 9 · concept:u-substitution</div>
+  <h1>u-Substitution — Reversing the Chain Rule</h1>
+  <p class="subtitle">Every rule so far reverses one specific differentiation rule directly, term by term. This one reverses Module 6's most tangled rule — the chain rule — and it needs an actual technique, not just a lookup table.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>An integrand like <code>2x(x²+1)⁵</code> isn't a sum, and it isn't a bare power — it's the result of a <em>composition</em>, exactly Module 6 Chapter 9's <code>f(g(x))</code> shape, already differentiated once. Reversing a chain-rule result can't work term by term the way Chapter 2's rules did, because a composed function's pieces are tangled together, not sitting side by side. What's needed is a way to <em>untangle</em> it back into a simple power-rule integral — that's exactly what substitution does.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — u-Substitution</div>
+    <p>If <code>F</code> is an antiderivative of <code>f</code>, the chain rule says <code>d/dx[F(g(x))] = f(g(x))·g′(x)</code> — so running that backward:</p>
+    <p style="text-align:center;">\[ \int f(g(x))\,g'(x)\,dx = F(g(x)) + C \]</p>
+    <ol>
+      <li>Spot the "inside function" — call it <code>u = g(x)</code>.</li>
+      <li>Compute <code>du = g′(x)dx</code>.</li>
+      <li>Rewrite the entire integral in terms of <code>u</code> and <code>du</code> only — no <code>x</code> should remain.</li>
+      <li>Integrate in terms of <code>u</code> (Chapters 1–2's ordinary rules now apply).</li>
+      <li>Substitute <code>u = g(x)</code> back, to return the answer in terms of <code>x</code>.</li>
+    </ol>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Evaluate <code>∫2x(x²+1)⁵ dx</code>.</p>
+    <details class="step" open><summary>Step 1 — spot the inside function</summary>
+      <div class="step-body"><p>Let \(u = x^2+1\).</p></div></details>
+    <details class="step"><summary>Step 2 — compute du</summary>
+      <div class="step-body"><p>\(du = 2x\,dx\) — and \(2x\,dx\) is <em>exactly</em> what's sitting next to \((x^2+1)^5\) in the original integral.</p></div></details>
+    <details class="step"><summary>Step 3 — rewrite fully in terms of u</summary>
+      <div class="step-body"><p>\(\displaystyle\int (x^2+1)^5 \cdot 2x\,dx = \int u^5\,du\)</p></div></details>
+    <details class="step"><summary>Step 4 — integrate (Chapter 2's power rule)</summary>
+      <div class="step-body"><p>\(\displaystyle\int u^5\,du = \frac{u^6}{6}+C\)</p></div></details>
+    <details class="step"><summary>Result — substitute back</summary>
+      <div class="step-body"><p>\(\dfrac{(x^2+1)^6}{6}+C\). Verify by the chain rule: \(\frac{d}{dx}\left[\frac{(x^2+1)^6}{6}\right] = \frac{6(x^2+1)^5\cdot2x}{6} = 2x(x^2+1)^5\) ✓ — exactly the original integrand.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting to actually solve for the leftover variable in terms of <code>du</code> — dropping a needed constant multiple along the way. For <code>∫x(x²+1)⁵ dx</code> (no leading 2 this time), let <code>u = x²+1</code>, so <code>du = 2x dx</code>, meaning <code>x dx = du/2</code> — <strong>not</strong> just <code>du</code>. Forgetting that "/2" and writing <code>∫u⁵ du</code> directly gives an answer twice too large. The fix: after computing <code>du</code>, always solve it for whatever's actually sitting in the integral (here, <code>x dx</code>) before substituting — don't assume the leftover piece matches <code>du</code> exactly just because it looks similar.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="sin(x^2)+c,sin(x²)+c">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>∫2x·cos(x²) dx</code> using u-substitution (type e.g. <code>sin(x^2)+C</code>):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. sin(x^2)+C" aria-label="integral of 2x cos x squared">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>∫2x(x²+3)⁴ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2+3\): \(\dfrac{(x^2+3)^5}{5}+C\)</div></details></li>
+    <li>Evaluate <code>∫cos(x)eˢⁱⁿˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=\sin x\): \(e^{\sin x}+C\)</div></details></li>
+    <li>Evaluate <code>∫6x²(x³+5)³ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^3+5,\ du=3x^2dx\), so \(6x^2dx=2\,du\): \(\displaystyle\int2u^3du=\frac{u^4}{2}+C=\frac{(x^3+5)^4}{2}+C\)</div></details></li>
+    <li>Evaluate <code>∫x(x²−4)³ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2-4,\ x\,dx=du/2\): \(\dfrac{(x^2-4)^4}{8}+C\)</div></details></li>
+    <li>Evaluate <code>∫3x²sin(x³) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^3\): \(-\cos(x^3)+C\)</div></details></li>
+    <li>Identify the substitution <code>u</code> you'd choose for <code>∫5x⁴eˣ⁵ dx</code> (state <code>u</code> and <code>du</code>, don't fully solve).
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^5,\ du=5x^4dx\) — matches the integrand exactly, no constant adjustment needed.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫4x³(x⁴+1)² dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^4+1\): \(\dfrac{(x^4+1)^3}{3}+C\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫e²ˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=2x,\ dx=du/2\): \(\dfrac12 e^{2x}+C\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫sec²(x)eᵗᵃⁿˣ dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=\tan x\): \(e^{\tan x}+C\)</div></details></li>
+    <li class="tag">bonus — True or false: u-substitution can be applied to any integrand, not just ones shaped like a chain-rule result.
+      <details class="answer"><summary></summary><div class="ans-body">False — it only works cleanly when the integrand actually contains an "inside function and its derivative" pattern, as this chapter's Method box describes.</div></details></li>
+    <li class="tag">challenge — Evaluate <code>∫x²√(x³+1) dx</code>. Choose <code>u</code>, rewrite fully, and integrate.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^3+1,\ x^2dx=du/3\): \(\displaystyle\int u^{1/2}\cdot\frac{du}{3} = \frac13\cdot\frac23u^{3/2}+C = \frac{2}{9}(x^3+1)^{3/2}+C\)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch08-evaluating-definite-integrals.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch10-u-substitution-definite.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 9 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:9", "content/m08-integrals/ch09-u-substitution-intro.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

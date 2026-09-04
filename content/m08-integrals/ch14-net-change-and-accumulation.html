@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 14 — Net Change &amp; Accumulation | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 14 of 16</div>
+  <div class="eyebrow">Chapter 14 · concept:net-change-theorem</div>
+  <h1>Net Change &amp; Accumulation</h1>
+  <p class="subtitle">FTC2, restated for interpretation rather than computation: integrating a rate of change gives the total net change — displacement from velocity, and the running theme for the rest of applied calculus.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p><code>f′</code> measures how fast <code>f</code> is changing at each instant; integrating it should, intuitively, add all those instantaneous changes back up into one total change. FTC2 already says exactly this — this chapter doesn't add new mathematics, it names the interpretation explicitly, because "integrating a rate gives total change" is the single most common way this module's tools get used in the real world.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The Net Change Theorem</div>
+    <div class="eqn"><div class="eq-body">\[ \int_a^b f'(x)\,dx = f(b) - f(a) \]</div><div class="eq-num" id="eq-8-14-1">(8.14.1)</div></div>
+    <p>This is FTC2 (8.7.1) with \(F=f\) and the integrand relabeled as a derivative — same theorem, new emphasis: integrating a rate of change over <code>[a,b]</code> gives the <strong>total net change</strong> in the original quantity over that interval.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — net displacement vs. total distance</div>
+    <p>An object's velocity is <code>v(t) = t − 2</code> (m/s) on <code>[0, 4]</code>. Find its net displacement, then its total distance traveled.</p>
+    <details class="step" open><summary>Step 1 — net displacement, directly via (8.14.1)</summary>
+      <div class="step-body"><p>\(\displaystyle\int_0^4(t-2)\,dt = \Big[\frac{t^2}{2}-2t\Big]_0^4 = (8-8)-0 = 0\). The object ends up exactly where it started.</p></div></details>
+    <details class="step"><summary>Step 2 — notice the velocity changes sign at t = 2</summary>
+      <div class="step-body"><p>\(v(t)<0\) on \([0,2)\) (moving backward) and \(v(t)>0\) on \((2,4]\) (moving forward). Total distance needs each piece's <em>unsigned</em> contribution, so the interval must be split at \(t=2\).</p></div></details>
+    <details class="step"><summary>Step 3 — integrate |v(t)| on each piece separately</summary>
+      <div class="step-body"><p>On \([0,2]\): \(\displaystyle\int_0^2(2-t)\,dt = \Big[2t-\frac{t^2}{2}\Big]_0^2 = 4-2=2\). On \([2,4]\): \(\displaystyle\int_2^4(t-2)\,dt=\Big[\frac{t^2}{2}-2t\Big]_2^4=(8-8)-(2-4)=2\).</p></div></details>
+    <details class="step"><summary>Result — a striking contrast</summary>
+      <div class="step-body"><p>Net displacement: \(0\). Total distance: \(2+2=4\) meters. The object traveled a full 4 meters — 2 backward, then 2 forward — yet its <em>net</em> change in position is exactly zero. Net change and total distance answer genuinely different questions whenever the object reverses direction.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Computing net displacement when a problem actually asks for total distance, or vice versa. In the worked example above, an object traveling <code>v(t) = t − 2</code> on <code>[0,4]</code> has net displacement <code>0</code> but total distance <code>4</code> — reporting "0 meters" as the answer to "how far did it travel" would be flatly wrong, even though the net-change theorem (8.14.1) really does give <code>0</code> for the displacement question. The fix is always the same: check whether velocity changes sign anywhere in the interval. If it never does, net displacement and total distance are the same number. If it does, total distance needs the interval split at every sign change, with each piece's contribution taken as positive.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="9">
+    <div class="label">Try it yourself</div>
+    <p>If <code>v(t) = 2t</code> (m/s), find the net displacement from <code>t = 0</code> to <code>t = 3</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="net displacement">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li><code>v(t) = 4</code> (constant, m/s) on <code>[0, 5]</code>. Find the net displacement.
+      <details class="answer"><summary></summary><div class="ans-body">\(\int_0^5 4\,dt=20\) m</div></details></li>
+    <li><code>v(t) = 3t²</code> (m/s) on <code>[0, 2]</code>. Find the net displacement.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[t^3\big]_0^2=8\) m</div></details></li>
+    <li><code>v(t) = t − 3</code> (m/s) on <code>[0, 3]</code>. Find the net displacement.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[t^2/2-3t\big]_0^3=(4.5-9)-0=-4.5\) m — negative, meaning the object ends up behind where it started.</div></details></li>
+    <li>Using the previous problem's <code>v(t) = t − 3</code> on <code>[0, 3]</code>: does the object's velocity change sign on this interval? What does that mean for whether total distance differs from net displacement here?
+      <details class="answer"><summary></summary><div class="ans-body">\(v(t)=t-3\le0\) throughout \([0,3]\) (it only reaches \(0\) right at the endpoint \(t=3\)) — no sign change, so the object moves in one direction the whole time. Total distance equals \(|{-4.5}|=4.5\) m exactly, no splitting needed.</div></details></li>
+    <li>A pump fills a tank at rate <code>r(t) = 2t + 1</code> (liters/min) for <code>t</code> in <code>[0, 10]</code>. Find the net change in volume.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[t^2+t\big]_0^{10}=110\) liters — the net change theorem applies to any rate, not just velocity.</div></details></li>
+    <li>True or false: total distance traveled is always ≥ the absolute value of net displacement, with equality exactly when the object never reverses direction.
+      <details class="answer"><summary></summary><div class="ans-body">True.</div></details></li>
+    <li class="tag">bonus — <code>v(t) = t² − 9</code> (m/s) on <code>[0, 4]</code>. Find the net displacement.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[t^3/3-9t\big]_0^4=(64/3-36)-0=-\frac{44}{3}\) m</div></details></li>
+    <li class="tag">bonus — Using the previous problem's <code>v(t) = t² − 9</code> on <code>[0, 4]</code>, set up (don't fully evaluate) the total-distance integral, splitting correctly at the sign change (<code>t = 3</code>).
+      <details class="answer"><summary></summary><div class="ans-body">\(v<0\) on \([0,3)\), \(v>0\) on \((3,4]\): total distance \(=\displaystyle\int_0^3(9-t^2)\,dt+\int_3^4(t^2-9)\,dt\)</div></details></li>
+    <li class="tag">bonus — A leak drains water from a tank at the constant rate <code>r(t) = −5</code> (liters/min) for <code>t</code> in <code>[0, 6]</code>. Find the net change in volume.
+      <details class="answer"><summary></summary><div class="ans-body">\(\int_0^6(-5)\,dt=-30\) liters — a net <em>decrease</em> of 30 liters.</div></details></li>
+    <li class="tag">bonus — If <code>f′(x) = 6x²</code> and <code>f(1) = 5</code>, find <code>f(4)</code> using the net change theorem (rather than finding the general antiderivative with "+C" first).
+      <details class="answer"><summary></summary><div class="ans-body">\(\int_1^46x^2dx=f(4)-f(1)\). \(\big[2x^3\big]_1^4=128-2=126=f(4)-5 \Rightarrow f(4)=131\).</div></details></li>
+    <li class="tag">challenge — A particle's velocity is <code>v(t) = 3 − t²</code> (m/s) for <code>t</code> in <code>[0, 3]</code>. Find (a) the net displacement, (b) the total distance traveled, and (c) explain in one sentence why they differ.
+      <details class="answer"><summary></summary><div class="ans-body">\(v(t)=0\) at \(t=\sqrt3\), positive before, negative after. (a) Net: \(\big[3t-t^3/3\big]_0^3=(9-9)-0=0\). (b) Distance: split at \(\sqrt3\). On \([0,\sqrt3]\): \(\big[3t-t^3/3\big]_0^{\sqrt3}=3\sqrt3-\sqrt3=2\sqrt3\). On \([\sqrt3,3]\), \(v<0\), integrate \(|v|=t^2-3\): \(\big[t^3/3-3t\big]_{\sqrt3}^{3}=(9-9)-(\sqrt3-3\sqrt3)=2\sqrt3\). Total \(=4\sqrt3\approx6.93\) m. (c) They differ because the particle reverses direction at \(t=\sqrt3\), so the backward half of the trip cancels part of the forward half in the net total, but both halves still count fully toward distance traveled.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch13-average-value-of-a-function.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch15-integration-practice.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 14 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:14", "content/m08-integrals/ch14-net-change-and-accumulation.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

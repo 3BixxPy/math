@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — Integrals of Trig Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 11 of 16</div>
+  <div class="eyebrow">Chapter 11 · concept:trig-integrals</div>
+  <h1>Integrals of Trig Functions</h1>
+  <p class="subtitle">A focused reference chapter: the three trig antiderivatives worth having memorized cold, now combined with Chapter 9's substitution technique.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Module 6 Chapter 8 built the derivatives of sine, cosine, and tangent. Each of those facts has a direct reverse — an antiderivative fact this chapter simply names. The only real subtlety is a sign: cosine's derivative loses one, but sine's antiderivative <em>gains</em> one, and mixing that up is the single most common slip in this chapter.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Trig Integrals (Reference Table)</div>
+    <div class="eqn"><div class="eq-body">\[ \begin{aligned} \int \sin x\,dx &amp;= -\cos x + C \\ \int \cos x\,dx &amp;= \sin x + C \\ \int \sec^2 x\,dx &amp;= \tan x + C \end{aligned} \]</div><div class="eq-num" id="eq-8-11-1">(8.11.1)</div></div>
+    <p>Each is the direct reverse of a Module 6 Chapter 8 derivative fact, checkable by differentiating the right-hand side straight back.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — combined with u-substitution</div>
+    <p>Evaluate <code>∫sin(3x) dx</code>.</p>
+    <details class="step" open><summary>Step 1 — substitute the inside function</summary>
+      <div class="step-body"><p>\(u=3x\), \(du=3\,dx \Rightarrow dx=du/3\).</p></div></details>
+    <details class="step"><summary>Step 2 — rewrite and integrate using (8.11.1)</summary>
+      <div class="step-body"><p>\(\displaystyle\int\sin u\cdot\frac{du}{3} = \frac13(-\cos u)+C = -\frac13\cos u + C\)</p></div></details>
+    <details class="step"><summary>Result — substitute back</summary>
+      <div class="step-body"><p>\(-\dfrac13\cos(3x)+C\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a second combination</div>
+    <p>Evaluate <code>∫x·sec²(x²) dx</code>.</p>
+    <details class="step" open><summary>Step 1 — substitute</summary>
+      <div class="step-body"><p>\(u=x^2\), \(du=2x\,dx \Rightarrow x\,dx=du/2\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\displaystyle\int\sec^2u\cdot\frac{du}{2} = \frac12\tan u+C = \frac12\tan(x^2)+C\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Mixing up which trig antiderivative picks up a negative sign. Compare carefully: <code>d/dx[cos x] = −sin x</code>, but <code>∫sin x dx = −cos x + C</code> — the negative moves from being on the <em>derivative</em> of cosine to being on the <em>antiderivative</em> of sine. Meanwhile <code>d/dx[sin x] = cos x</code> and <code>∫cos x dx = sin x + C</code> — no sign change either direction. It's tempting to assume the negative "belongs" to whichever function looks like it should carry it, but it's specifically sine's antiderivative that flips sign, not cosine's.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="-cos(x)+c,-cosx+c">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>∫sin(x) dx</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. -cos(x)+C" aria-label="integral of sin x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>∫cos(5x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac15\sin(5x)+C\)</div></details></li>
+    <li>Evaluate <code>∫sec²(4x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac14\tan(4x)+C\)</div></details></li>
+    <li>Evaluate <code>∫3sin(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-3\cos x+C\)</div></details></li>
+    <li>Evaluate <code>∫x²sec²(x³) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^3\): \(\dfrac13\tan(x^3)+C\)</div></details></li>
+    <li>Evaluate <code>∫[0,π/4] sec²(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\big[\tan x\big]_0^{\pi/4}=1-0=1\)</div></details></li>
+    <li>Evaluate <code>∫cos(x)sin⁴(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=\sin x\): \(\dfrac{\sin^5x}{5}+C\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫sin(x)cos(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=\sin x\): \(\dfrac{\sin^2x}{2}+C\) (an equally valid equivalent form, \(-\cos^2x/2+C'\), comes from choosing \(u=\cos x\) instead — both are correct, differing only in which constant absorbs the shift).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫4x sin(x²) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=x^2\), \(4x\,dx=2\,du\): \(-2\cos(x^2)+C\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>∫sec²(x)tan(x) dx</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(u=\tan x\): \(\dfrac{\tan^2x}{2}+C\)</div></details></li>
+    <li class="tag">bonus — True or false: <code>∫cos(x) dx = −sin(x) + C</code>.
+      <details class="answer"><summary></summary><div class="ans-body">False — \(\int\cos x\,dx=\sin x+C\), no negative. The negative sign belongs to sine's antiderivative, not cosine's (8.11.1).</div></details></li>
+    <li class="tag">challenge — Evaluate <code>∫[0,π] sin(x)cos(x) dx</code> using bound conversion (Chapter 10), and sanity-check the result using symmetry (is <code>sin(x)cos(x)</code> positive, negative, or does it change sign on <code>[0,π]</code>?).
+      <details class="answer"><summary></summary><div class="ans-body">\(u=\sin x\). Bounds: \(x=0\Rightarrow u=0\); \(x=\pi\Rightarrow u=0\) — both bounds map to the <em>same</em> u-value, so \(\int_0^0u\,du=0\) trivially. Sanity check: \(\sin x\cos x=\tfrac12\sin(2x)\) is positive on \((0,\pi/2)\) and negative on \((\pi/2,\pi)\), and by symmetry the two halves cancel exactly — confirming \(0\) makes sense.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch10-u-substitution-definite.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch12-area-between-curves.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 11 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:11", "content/m08-integrals/ch11-integrals-of-trig-functions.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

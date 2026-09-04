@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Area Under a Curve | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 8 · Calculus I — Integrals &amp; FTC</a> → Chapter 3 of 16</div>
+  <div class="eyebrow">Chapter 3 · concept:riemann-sum-estimation</div>
+  <h1>Area Under a Curve — the Estimation Problem</h1>
+  <p class="subtitle">Set the antiderivative toolkit aside for a moment. This chapter starts on something that looks completely different: finding the exact area trapped between a curve and the x-axis.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>The area of a rectangle is base times height. The area of a triangle is half of that. Even oddly-shaped polygons reduce to a handful of triangles. But a region bounded by a genuine curve — say, the area under <code>y = x²</code> from 0 to 2 — has no polygon formula to fall back on. There's no obvious "exact" answer at all yet, only a question worth taking seriously: can it even be pinned down precisely, and if so, how?</p>
+  </div>
+
+  <p>The natural move is to approximate the region with shapes that <em>do</em> have a known area — rectangles — and get more honest about it than a single guess. Slice the interval <code>[a,b]</code> into <code>n</code> equal pieces of width <code>Δx = (b−a)/n</code>, and on each piece, build a rectangle as tall as the curve at one particular x-value in that piece:</p>
+  <ul>
+    <li><strong>Left-endpoint rule</strong> — use the height of the curve at the <em>left</em> edge of each piece.</li>
+    <li><strong>Right-endpoint rule</strong> — use the height of the curve at the <em>right</em> edge of each piece.</li>
+  </ul>
+  <p>Neither one is exactly right — a rectangle's flat top can't match a curved top perfectly — but summing the rectangles' areas gives a number that's at least in the right neighborhood. The question worth exploring first: what happens to that number as the rectangles get thinner and more numerous?</p>
+
+  <div class="live-diagram-controls">
+    <label>rectangles (n): <input type="range" id="riemann-n" min="1" max="20" step="1" value="4"></label>
+    <label><input type="radio" name="riemann-method" value="left" checked> left-endpoint</label>
+    <label><input type="radio" name="riemann-method" value="right"> right-endpoint</label>
+  </div>
+  <div class="plot-wrap"><svg id="riemann-svg" viewBox="0 0 480 300" width="480" height="300"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="riemann-readout">n = 4, left-endpoint estimate ≈ 1.7500</span></div>
+  <script>
+  (function () {
+    const svg = document.getElementById("riemann-svg");
+    const nSlider = document.getElementById("riemann-n");
+    const readout = document.getElementById("riemann-readout");
+    const f = (x) => x * x;
+    const a = 0, b = 2;
+    const opts = { xMin: -0.3, xMax: 2.3, yMin: -0.3, yMax: 4.3, width: 480, height: 300, pad: 32, xStep: 0.5, yStep: 1 };
+    const { px, py } = MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, f, opts, "plot-curve");
+    const rectsGroup = MCPlot.el("g", { id: "riemann-rects" });
+    svg.appendChild(rectsGroup);
+
+    function method() {
+      const checked = document.querySelector('input[name="riemann-method"]:checked');
+      return checked ? checked.value : "left";
+    }
+
+    function update() {
+      const n = parseInt(nSlider.value, 10);
+      const dx = (b - a) / n;
+      const m = method();
+      while (rectsGroup.firstChild) rectsGroup.removeChild(rectsGroup.firstChild);
+      let sum = 0;
+      for (let i = 0; i < n; i++) {
+        const xLeft = a + i * dx;
+        const xSample = m === "left" ? xLeft : xLeft + dx;
+        const h = f(xSample);
+        sum += h * dx;
+        const rx = px(xLeft), rw = px(xLeft + dx) - px(xLeft);
+        const ry = py(h), rh = py(0) - py(h);
+        rectsGroup.appendChild(MCPlot.el("rect", { x: rx, y: ry, width: rw, height: rh, style: "fill:var(--accent); fill-opacity:0.28; stroke:var(--accent); stroke-width:1" }));
+      }
+      readout.textContent = "n = " + n + ", " + m + "-endpoint estimate ≈ " + sum.toFixed(4);
+    }
+    nSlider.addEventListener("input", update);
+    document.querySelectorAll('input[name="riemann-method"]').forEach((r) => r.addEventListener("change", update));
+    update();
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">f(x) = x² on [0, 2]. Drag the slider, and switch between left- and right-endpoint rectangles.</p>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Approximate the area under <code>f(x) = x²</code> on <code>[0, 2]</code> using 4 rectangles, both left- and right-endpoint.</p>
+    <details class="step" open><summary>Step 1 — find Δx and the four subinterval edges</summary>
+      <div class="step-body"><p>\(\Delta x = \dfrac{2-0}{4} = 0.5\). Edges: \(0,\ 0.5,\ 1,\ 1.5,\ 2\).</p></div></details>
+    <details class="step"><summary>Step 2 — left-endpoint sum (use the left edge of each piece: 0, 0.5, 1, 1.5)</summary>
+      <div class="step-body"><p>Heights: \(f(0)=0,\ f(0.5)=0.25,\ f(1)=1,\ f(1.5)=2.25\). Sum: \((0+0.25+1+2.25)\times0.5 = 3.5\times0.5 = 1.75\).</p></div></details>
+    <details class="step"><summary>Step 3 — right-endpoint sum (use the right edge of each piece: 0.5, 1, 1.5, 2)</summary>
+      <div class="step-body"><p>Heights: \(f(0.5)=0.25,\ f(1)=1,\ f(1.5)=2.25,\ f(2)=4\). Sum: \((0.25+1+2.25+4)\times0.5 = 7.5\times0.5 = 3.75\).</p></div></details>
+    <details class="step"><summary>Result — the estimates bracket the true value</summary>
+      <div class="step-body"><p>Left estimate \(1.75\), right estimate \(3.75\) — since \(f(x)=x^2\) is increasing on \([0,2]\), the true area has to sit somewhere between them: \(1.75 \le \text{true area} \le 3.75\). Neither one alone is exact, but together they trap it.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming left- and right-endpoint estimates are equally (in)accurate no matter what the function looks like. They're not — it depends entirely on whether the function is increasing or decreasing. For an <strong>increasing</strong> function (like the worked example), the left edge of each piece is always the <em>shortest</em> point on that piece and the right edge the <em>tallest</em>, so left-endpoint <strong>always underestimates</strong> and right-endpoint <strong>always overestimates</strong>. For a <strong>decreasing</strong> function, it's exactly reversed: left overestimates, right underestimates. There's no universal rule like "left is always smaller" — it flips with the function's direction.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="4">
+    <div class="label">Try it yourself</div>
+    <p>Using 2 rectangles, find the right-endpoint estimate for <code>f(x) = x</code> on <code>[0, 2]</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="right-endpoint estimate">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li><code>f(x) = x</code> on <code>[0, 4]</code>, <code>n = 2</code>. Find the right-endpoint estimate.
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x=2\); right edges \(2,4\); heights \(2,4\); sum \(=(2+4)(2)=12\).</div></details></li>
+    <li>Same function and interval as above. Find the left-endpoint estimate.
+      <details class="answer"><summary></summary><div class="ans-body">Left edges \(0,2\); heights \(0,2\); sum \(=(0+2)(2)=4\). (True area, a triangle, is \(8\) — this brackets it: \(4\le8\le12\).)</div></details></li>
+    <li><code>f(x) = 3</code> (constant) on <code>[0, 5]</code>, <code>n = 5</code>. Find the right-endpoint estimate.
+      <details class="answer"><summary></summary><div class="ans-body">\(15\) — for a constant function, left and right endpoints give the exact same (exact) answer every time, no approximation error at all.</div></details></li>
+    <li><code>f(x) = x²</code> on <code>[0, 1]</code>, <code>n = 2</code>. Find the left-endpoint estimate.
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x=0.5\); left edges \(0,0.5\); heights \(0,0.25\); sum \(=(0+0.25)(0.5)=0.125\).</div></details></li>
+    <li><code>f(x) = 4 − x</code> (a decreasing function) on <code>[0, 4]</code>, <code>n = 2</code>. Find the right-endpoint estimate, and state whether it over- or underestimates the true area.
+      <details class="answer"><summary></summary><div class="ans-body">Right edges \(2,4\); heights \(2,0\); sum \(=(2+0)(2)=4\). True area (a triangle) is \(8\) — right-endpoint <strong>underestimates</strong> here, matching the mistake block's rule for a decreasing function.</div></details></li>
+    <li>For a decreasing function, does left-endpoint overestimate or underestimate the true area? Justify briefly.
+      <details class="answer"><summary></summary><div class="ans-body">Overestimates — the left edge of each piece is the <em>tallest</em> point on a decreasing piece, so every rectangle sits above the curve.</div></details></li>
+    <li class="tag">bonus — <code>f(x) = 2x</code> on <code>[0, 3]</code>, <code>n = 3</code>. Find the left-endpoint estimate.
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x=1\); left edges \(0,1,2\); heights \(0,2,4\); sum \(=(0+2+4)(1)=6\).</div></details></li>
+    <li class="tag">bonus — Same function and interval as above. Find the right-endpoint estimate, and confirm both bracket the true area of \(9\).
+      <details class="answer"><summary></summary><div class="ans-body">Right edges \(1,2,3\); heights \(2,4,6\); sum \(=(2+4+6)(1)=12\). Bracket: \(6\le9\le12\) ✓.</div></details></li>
+    <li class="tag">bonus — If a function is constant on an interval, what's true about its left- and right-endpoint estimates, no matter how many rectangles are used?
+      <details class="answer"><summary></summary><div class="ans-body">They're equal to each other, and both equal the true area exactly — a constant function has no approximation error to begin with.</div></details></li>
+    <li class="tag">bonus — <code>f(x) = x²</code> on <code>[0, 1]</code>, <code>n = 4</code>. Find the right-endpoint estimate.
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x=0.25\); right edges \(0.25,0.5,0.75,1\); heights \(0.0625,0.25,0.5625,1\); sum \(=(1.875)(0.25)=0.46875\).</div></details></li>
+    <li class="tag">challenge — For <code>f(x) = x</code> on <code>[0, b]</code> with a general <code>n</code> (not a specific number), write the right-endpoint sum and simplify it using <code>1+2+⋯+n = n(n+1)/2</code>. What value does it approach as <code>n → ∞</code>, and does that match the known triangle-area formula?
+      <details class="answer"><summary></summary><div class="ans-body">\(\Delta x=b/n\), right edges \(x_i=ib/n\). Sum \(=\displaystyle\sum_{i=1}^n \frac{ib}{n}\cdot\frac{b}{n} = \frac{b^2}{n^2}\sum_{i=1}^n i = \frac{b^2}{n^2}\cdot\frac{n(n+1)}{2} = \frac{b^2(n+1)}{2n}\). As \(n\to\infty\), \(\frac{n+1}{n}\to1\), so the sum \(\to \frac{b^2}{2}\) — exactly \(\frac12\cdot b\cdot b\), the ordinary triangle-area formula. The rectangles really do converge to the right answer.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-antiderivative-rules.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-riemann-sums-formal.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 8 · Calculus I — Integrals &amp; FTC</span>
+  <span>Chapter 3 / 16</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m08:3", "content/m08-integrals/ch03-area-under-a-curve-intro.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
