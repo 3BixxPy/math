@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 14 — Law of Sines &amp; Law of Cosines | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 14 of 15</div>
+  <div class="eyebrow">Chapter 14 · concept:law-of-sines, concept:law-of-cosines</div>
+  <h1>Law of Sines &amp; Law of Cosines</h1>
+  <p class="subtitle">Chapter 5's SOH-CAH-TOA only works on <em>right</em> triangles. These two laws solve any triangle at all — and the second one turns out to contain the Pythagorean theorem as a special case.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Most real-world triangles — surveying a plot of land, triangulating a position, laying out a truss — aren't conveniently right triangles. These two laws are the general-purpose toolkit: which one to reach for depends only on which pieces of the triangle you already know.</p>
+  </div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 280 200" width="280" role="img" aria-label="Triangle with vertices A, B, and C, and sides a, b, c each labeled opposite the vertex of the same letter">
+      <polygon points="40,170 230,170 140,40" style="fill:var(--thm-bg); stroke:var(--thm-border); stroke-width:2"/>
+      <text x="26" y="184" style="font-size:13px; fill:var(--thm-text); font-family:sans-serif; font-weight:600">A</text>
+      <text x="234" y="184" style="font-size:13px; fill:var(--thm-text); font-family:sans-serif; font-weight:600">B</text>
+      <text x="135" y="30" style="font-size:13px; fill:var(--thm-text); font-family:sans-serif; font-weight:600">C</text>
+      <text x="190" y="112" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">a</text>
+      <text x="80" y="112" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">b</text>
+      <text x="132" y="188" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">c</text>
+    </svg>
+  </div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Convention: lowercase side names sit opposite the uppercase angle of the same letter — side a is opposite angle A, and so on.</p>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Law of Sines</div>
+    <div class="eqn"><div class="eq-body">\[ \frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} \]</div><div class="eq-num" id="eq-2-14-1">(2.14.1)</div></div>
+    <p>True for <em>any</em> triangle, not just right ones. Use it when you know an angle and its opposite side (a full ratio), plus one more piece — typically an AAS or ASA setup.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Law of Cosines</div>
+    <div class="eqn"><div class="eq-body">\[ c^2 = a^2 + b^2 - 2ab\cos C \]</div><div class="eq-num" id="eq-2-14-2">(2.14.2)</div></div>
+    <p>Also true for any triangle. Use it when you know two sides and the angle between them (SAS), or all three sides (SSS). Notice: if \(C=90°\), \(\cos C=0\) and this collapses to \(c^2=a^2+b^2\) — the Law of Cosines <em>is</em> the Pythagorean theorem, generalized to angles other than 90°.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — Law of Sines, AAS</div>
+    <p>Triangle with <code>A = 40°</code>, <code>B = 60°</code>, and side <code>a = 8</code> (opposite A). Find side <code>b</code>.</p>
+    <details class="step" open><summary>Step 1 — set up the ratio using known angle-side pairs</summary>
+      <div class="step-body"><p>\(\dfrac{a}{\sin A} = \dfrac{b}{\sin B} \Rightarrow \dfrac{8}{\sin40°} = \dfrac{b}{\sin60°}\)</p></div></details>
+    <details class="step"><summary>Step 2 — solve for b</summary>
+      <div class="step-body"><p>\(b = \dfrac{8\sin60°}{\sin40°} \approx \dfrac{8(0.866)}{0.643} \approx 10.78\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — Law of Cosines, SAS</div>
+    <p>Triangle with sides <code>a = 7</code>, <code>b = 9</code>, and the included angle <code>C = 50°</code>. Find side <code>c</code>.</p>
+    <details class="step" open><summary>Step 1 — plug directly into equation 2.14.2</summary>
+      <div class="step-body"><p>\(c^2 = 7^2+9^2-2(7)(9)\cos50° = 49+81-126\cos50°\)</p></div></details>
+    <details class="step"><summary>Step 2 — evaluate</summary>
+      <div class="step-body"><p>\(c^2 \approx 130 - 126(0.643) \approx 130-81.0 = 49.0 \Rightarrow c\approx7.0\)</p></div></details>
+    <details class="step"><summary>Note — why Law of Sines couldn't start this one</summary>
+      <div class="step-body"><p>SAS gives no complete angle/opposite-side pair to build a Law of Sines ratio from directly — that's exactly why Law of Cosines has to go first here. Once <code>c</code> is known, Law of Sines <em>can</em> be used to find the remaining angles.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Reaching for the Law of Sines on an SAS or SSS triangle where it doesn't apply cleanly. Law of Sines needs a complete angle/opposite-side <em>pair</em> to set up a ratio — with only two sides and the angle between them (SAS), or three sides and no angles (SSS), no such pair exists yet. Start with the Law of Cosines instead to find the missing piece, then switch to Law of Sines if convenient.</p>
+    <p><strong>Also worth knowing:</strong> SSA (two sides and a non-included angle) is genuinely tricky — the "ambiguous case." Depending on the numbers, it can produce zero, one, or <em>two</em> valid triangles, because the given angle doesn't pin the triangle down uniquely the way SAS or ASA does. This module doesn't work through the ambiguous case in full, but recognize the setup so you don't assume a single clean answer exists.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>Using the Law of Cosines: if <code>a = 3</code>, <code>b = 4</code>, and <code>C = 90°</code>, find <code>c</code>. (Notice what this reduces to.)</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="e.g. 5" aria-label="find side c">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Triangle with <code>A = 50°</code>, <code>C = 70°</code>, side <code>a = 10</code>. Find side <code>c</code>. (First find angle C's opposite ratio partner — you have A and a already.)
+      <details class="answer"><summary></summary><div class="ans-body">\(c = 10\sin70°/\sin50° \approx 12.27\)</div></details></li>
+    <li>Triangle with sides <code>a = 5</code>, <code>b = 6</code>, included angle <code>C = 60°</code>. Find side <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(c^2=25+36-60\cos60°=61-30=31 \Rightarrow c\approx5.57\)</div></details></li>
+    <li>Which law would you use for a triangle where all three sides are known but no angles? Why?
+      <details class="answer"><summary></summary><div class="ans-body">Law of Cosines — Law of Sines needs an angle/opposite-side pair, which SSS doesn't provide.</div></details></li>
+    <li>Triangle with <code>B = 35°</code>, <code>C = 85°</code>, side <code>b = 12</code>. Find side <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(c = 12\sin85°/\sin35° \approx 20.84\)</div></details></li>
+    <li>Triangle with sides <code>a = 8</code>, <code>c = 10</code>, included angle <code>B = 45°</code>. Find side <code>b</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(b^2=64+100-160\cos45°\approx164-113.1=50.9 \Rightarrow b\approx7.13\)</div></details></li>
+    <li>Explain why the Law of Cosines reducing to the Pythagorean theorem when <code>C = 90°</code> is not a coincidence.
+      <details class="answer"><summary></summary><div class="ans-body">cos(90°) = 0 (Chapter 2), so the "-2ab cos C" correction term vanishes entirely, leaving c² = a² + b² — the Law of Cosines is a strict generalization of the Pythagorean theorem to non-right angles.</div></details></li>
+    <li class="tag">bonus — Triangle with <code>A = 30°</code>, <code>B = 45°</code>, side <code>a = 6</code>. Find side <code>b</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(b=6\sin45°/\sin30°=6(0.707)/0.5\approx8.49\)</div></details></li>
+    <li class="tag">bonus — Triangle with sides <code>a = 4</code>, <code>b = 4</code>, included angle <code>C = 120°</code>. Find side <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(c^2=16+16-32\cos120°=32-32(-0.5)=32+16=48 \Rightarrow c=\sqrt{48}=4\sqrt3\approx6.93\)</div></details></li>
+    <li class="tag">bonus — A triangle has all three angles given (<code>A=60°, B=70°, C=50°</code>) but no sides. Can the Law of Sines find the actual side lengths? Why or why not?
+      <details class="answer"><summary></summary><div class="ans-body">No — with only angle ratios and no single known length, the Law of Sines can find the <em>relative</em> proportions between sides but not their absolute lengths (infinitely many similar triangles share those angles). At least one side length is required.</div></details></li>
+    <li class="tag">bonus — In the SSA "ambiguous case," what does it mean geometrically for two different triangles to both satisfy the same given side-side-angle information?
+      <details class="answer"><summary></summary><div class="ans-body">The given angle and adjacent side fix a ray and a circle (the other side's length) that can intersect the triangle's third side's line at two different points — swinging the unknown side to either intersection produces a valid, different triangle satisfying the same three given measurements.</div></details></li>
+    <li class="tag">challenge — Triangle with sides <code>a = 5</code>, <code>b = 7</code>, <code>c = 10</code>. Find angle <code>C</code> (the angle opposite the longest side) using the Law of Cosines solved for an angle.
+      <details class="answer"><summary></summary><div class="ans-body">Solve 2.14.2 for cos C: \(\cos C = \dfrac{a^2+b^2-c^2}{2ab} = \dfrac{25+49-100}{70} = \dfrac{-26}{70}\approx-0.371\). So \(C = \arccos(-0.371) \approx 111.8°\) (Chapter 13's arccos, applied to a real triangle problem).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch13-inverse-trig.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch15-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 14 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:14", "content/m02-trigonometry/ch14-law-of-sines-cosines.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
