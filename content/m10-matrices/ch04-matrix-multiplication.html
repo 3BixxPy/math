@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 4 — Matrix Multiplication | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -60,7 +60,7 @@
     <p>Multiplying matrices entrywise, the way addition works — computing \(\begin{bmatrix}1&2\\3&4\end{bmatrix}\begin{bmatrix}5&6\\7&8\end{bmatrix}\) as \(\begin{bmatrix}1\cdot5&2\cdot6\\3\cdot7&4\cdot8\end{bmatrix}=\begin{bmatrix}5&12\\21&32\end{bmatrix}\). This is <strong>wrong</strong> — that's not what matrix multiplication means. The correct row-by-column computation gives entry \((1,1)\) as row 1 of the first matrix dotted with column 1 of the second: \([1,2]\cdot[5,7]=1(5)+2(7)=19\), not \(5\). Full correct product: \(\begin{bmatrix}19&22\\43&50\end{bmatrix}\). Because addition genuinely is entrywise, it's an easy (and very common) first instinct to assume multiplication works the same way — it doesn't, and there's no shortcut around doing the dot products.</p>
   </div>
 
-  <div class="block practice checker" data-answers="no,n,not commutative">
+  <div class="block practice checker" data-answers="no|n|not commutative">
     <div class="label">Try it yourself</div>
     <p>Is matrix multiplication commutative in general (does \(AB=BA\) always hold)?</p>
     <div class="row">
@@ -114,7 +114,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:4", "content/m10-matrices/ch04-matrix-multiplication.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>

@@ -304,7 +304,7 @@ const MC = (() => {
       const btn = box.querySelector(".checker-btn");
       const feedback = box.querySelector(".checker-feedback");
       if (!input || !btn || !feedback) return;
-      const accepted = (box.dataset.answers || "").split(",").map(normalizeAnswer).filter(Boolean);
+      const accepted = (box.dataset.answers || "").split("|").map(normalizeAnswer).filter(Boolean);
       const tolerance = box.dataset.tolerance !== undefined ? parseFloat(box.dataset.tolerance) : null;
 
       function check() {

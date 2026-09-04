@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 10 — The Identity Matrix &amp; Matrix Inverses | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -54,7 +54,7 @@
     <p>Assuming every square matrix has an inverse. It's tempting to think "square" is the whole requirement, since square is what's necessary just to attempt \(AA^{-1}=I\) — but plenty of square matrices are singular. For example, \(\begin{bmatrix}2&4\\1&2\end{bmatrix}\) is square, yet no matrix \(X\) satisfies \(\begin{bmatrix}2&4\\1&2\end{bmatrix}X=I\) (row 2 is exactly half of row 1, so the rows collapse together under row reduction instead of reaching two independent pivots — a preview of Chapter 11's determinant test). Being square makes a matrix an inverse <em>candidate</em>; it doesn't guarantee an inverse exists.</p>
   </div>
 
-  <div class="block practice checker" data-answers="yes,y">
+  <div class="block practice checker" data-answers="yes|y">
     <div class="label">Try it yourself</div>
     <p>Does \(AI=A\) hold for <em>any</em> matrix \(A\) (with \(I\) of compatible dimensions)?</p>
     <div class="row">
@@ -108,7 +108,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:10", "content/m10-matrices/ch10-the-identity-matrix-and-inverses.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>

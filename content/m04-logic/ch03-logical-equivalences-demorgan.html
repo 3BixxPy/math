@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 3 — Logical Equivalence &amp; De Morgan's Laws | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -83,7 +83,7 @@
     <p>Distributing the negation but forgetting to flip the connective: writing <code>¬(p ∧ q) ≡ ¬p ∧ ¬q</code> (wrong — that keeps the ∧). Check it against row TT: left side is <code>¬(T∧T) = ¬T = F</code>, but the miswritten right side is <code>¬T ∧ ¬T = F ∧ F = F</code> — that row happens to match, which is exactly what makes this mistake sneaky. Check row TF instead: left side <code>¬(T∧F) = ¬F = T</code>, miswritten right side <code>¬T∧¬F = F∧T = F</code> — they disagree. One mismatched row is enough to disprove an equivalence, which is also why "checking one row" is never a valid way to <em>prove</em> one (more on that trap in Chapter 7). The rule to lock in: negating always flips ∧↔∨.</p>
   </div>
 
-  <div class="block practice checker" data-answers="¬p∧¬q,notpandnotq,not p and not q,~p&~q">
+  <div class="block practice checker" data-answers="¬p∧¬q|notpandnotq|not p and not q|~p&~q">
     <div class="label">Try it yourself</div>
     <p><code>¬(p ∨ q)</code> is equivalent to ___ (type using ¬, ∧ if you can, or "not p and not q"):</p>
     <div class="row">
@@ -137,7 +137,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:3", "content/m04-logic/ch03-logical-equivalences-demorgan.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 9 — Mathematical Induction | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -67,7 +67,7 @@
     <p>Two distinct ways an induction proof breaks, both common: <strong>(1) skipping the base case</strong> — the inductive step alone, however careful, never establishes a starting point; without it you've only shown "if it's ever true, it stays true," never that it's true anywhere at all. <strong>(2) writing an inductive step that never actually uses P(k)</strong> — for example, "proving" P(k+1) for the sum formula by writing "\(1+2+\cdots+(k+1) = (k+1)(k+2)/2\), which is true by the pattern" without ever substituting in the assumed value of \(1+2+\cdots+k\) from the IH. That's not a proof — it's restating the k+1 case and asserting it, which is exactly what needed proving in the first place. If your inductive-step algebra never touches the assumption "P(k) is true," you haven't built the chain link; you've skipped it and hoped no one checks.</p>
   </div>
 
-  <div class="block practice checker" data-answers="inductive,inductive step,induction step">
+  <div class="block practice checker" data-answers="inductive|inductive step|induction step">
     <div class="label">Try it yourself</div>
     <p>In induction, the step that assumes P(k) is true and shows P(k+1) follows is called the ___ step.</p>
     <div class="row">
@@ -121,7 +121,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:9", "content/m04-logic/ch09-induction.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>

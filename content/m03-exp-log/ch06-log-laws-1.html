@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 6 — Log Laws I: Product &amp; Quotient | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -59,7 +59,7 @@
     <p>Believing <code>log(M + N) = log M + log N</code>. This is false — there is no rule for the log of a <em>sum</em>; addition inside a log doesn't simplify at all. The real rule (equation 3.6.1) is about a <em>product</em>: <code>log(MN) = log M + log N</code>. Test it with numbers to see the false version fail immediately: <code>log(2+2) = log(4) ≈ 0.602</code>, but <code>log(2)+log(2) ≈ 0.301+0.301 = 0.602</code> — wait, those happen to match because \(2+2=2\cdot2\) here. Try <code>log(3+5)</code> against <code>log(3)+log(5)</code> instead: \(\log(8)\approx0.903\) vs. \(\log3+\log5\approx0.477+0.699=1.176\) — clearly different. The product rule works because multiplying bases adds exponents; addition inside the log has no such exponent-counting structure to exploit.</p>
   </div>
 
-  <div class="block practice checker" data-answers="log7+logx,log(7)+log(x),logx+log7,log(x)+log(7)">
+  <div class="block practice checker" data-answers="log7+logx|log(7)+log(x)|logx+log7|log(x)+log(7)">
     <div class="label">Try it yourself</div>
     <p>Expand <code>log(7x)</code> as a sum of two logs:</p>
     <div class="row">
@@ -113,7 +113,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m03:6", "content/m03-exp-log/ch06-log-laws-1.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>

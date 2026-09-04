@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 9 — The Chain Rule | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -63,7 +63,7 @@
     <p>Differentiating the outside function correctly, then simply stopping — forgetting to multiply by the inner function's own derivative at all. For <code>(x²+1)⁵</code>, this looks like writing <code>5(x²+1)⁴</code> and calling it done, silently dropping the required <code>·2x</code> factor. This is the single most common chain-rule error, and it's easy to miss precisely because <code>5(x²+1)⁴</code> looks like a complete, reasonable-looking answer on its own — nothing about it screams "incomplete." The fix is procedural, not conceptual: after differentiating the outside, always ask "what's the derivative of what's inside the parentheses?" and multiply by it, every single time, even when the inside looks simple.</p>
   </div>
 
-  <div class="block practice checker" data-answers="24x^2,24x2">
+  <div class="block practice checker" data-answers="24x^2|24x2">
     <div class="label">Try it yourself</div>
     <p>Differentiate <code>(2x)³</code> using the chain rule.</p>
     <div class="row">
@@ -117,7 +117,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:9", "content/m06-derivatives/ch09-chain-rule.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>

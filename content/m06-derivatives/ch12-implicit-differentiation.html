@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 12 — Implicit Differentiation | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -56,7 +56,7 @@
     <p>Forgetting to multiply by <code>dy/dx</code> when differentiating a term containing <code>y</code> — writing <code>d/dx[y²] = 2y</code> and stopping, instead of the correct <code>2y·(dy/dx)</code> from (6.12.1). This is the exact same chain-rule mistake as Chapter 9's (forgetting the inner-function derivative factor), just easy to miss here because the "inner function" is the mostly-invisible <code>y</code> itself rather than an obvious expression like <code>(x+3)</code>. The habit that prevents this: <code>y</code> is never a plain variable in this method — it's always secretly <code>y(x)</code>, a function of x, so <em>every single term with a y in it</em> needs a chain-rule pass, without exception, even a lone <code>y</code> by itself (which differentiates to <code>1·dy/dx</code>, not <code>1</code>).</p>
   </div>
 
-  <div class="block practice checker" data-answers="-1/(2y),-1/2y">
+  <div class="block practice checker" data-answers="-1/(2y)|-1/2y">
     <div class="label">Try it yourself</div>
     <p>Implicitly differentiate <code>x + y² = 4</code>. Find <code>dy/dx</code>.</p>
     <div class="row">
@@ -110,7 +110,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:12", "content/m06-derivatives/ch12-implicit-differentiation.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>

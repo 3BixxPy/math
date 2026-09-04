@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 7 — Optimization, More Problems | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -60,7 +60,7 @@
     <p>Optimizing the wrong quantity: minimizing <code>D</code> directly instead of <code>D²</code>. Differentiating <code>D(x)=\sqrt{x^4-5x^2+9}</code> requires the chain rule wrapped around a messy inner polynomial — technically doable, but error-prone and slow. Minimizing <code>D²</code> instead gives the exact same critical x-values, because squaring is a strictly increasing operation for non-negative numbers: whatever \(x\) makes \(D^2\) smallest also makes \(D=\sqrt{D^2}\) smallest, since the square root preserves order. This isn't a shortcut that risks the wrong answer — it's a deliberate, standard technique. Always minimize the squared distance when the objective is a distance.</p>
   </div>
 
-  <div class="block practice checker" data-answers="1,x=1">
+  <div class="block practice checker" data-answers="1|x=1">
     <div class="label">Try it yourself</div>
     <p>An open-top box is folded from a <code>6×6</code> sheet, cutting squares of side <code>x</code> from each corner. What value of <code>x</code> maximizes the volume?</p>
     <div class="row">
@@ -114,7 +114,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:7", "content/m07-derivative-applications/ch07-optimization-practice.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ch. 15 — Derivatives of Inverse Trig Functions | Math Curriculum</title>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
-<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
 </head>
 <body>
 <header class="topnav">
@@ -68,7 +68,7 @@
     <p>Forgetting the chain rule's inner-derivative factor whenever the argument isn't just plain <code>x</code> — exactly Chapter 9's mistake, showing up again in this new family of functions. For <code>arctan(3x)</code>, it's tempting to write <code>1/(1+(3x)²)</code> and stop — but that's only the "outside" piece from (6.15.2); the inside function <code>3x</code> has its own derivative, <code>3</code>, that still needs to be multiplied in. The correct derivative is <code>3/(1+9x²)</code>, not <code>1/(1+9x²)</code>. Any time the argument of arcsin, arccos, or arctan is something other than a bare <code>x</code>, the chain rule is in play, no exceptions.</p>
   </div>
 
-  <div class="block practice checker" data-answers="1/(1+x^2),1/(1+x2)">
+  <div class="block practice checker" data-answers="1/(1+x^2)|1/(1+x2)">
     <div class="label">Try it yourself</div>
     <p>Find <code>d/dx[arctan x]</code>.</p>
     <div class="row">
@@ -122,7 +122,7 @@
 
 <script src="../../assets/katex/katex.min.js"></script>
 <script src="../../assets/katex/auto-render.min.js"></script>
-<script src="../../assets/app.js?v=7"></script>
+<script src="../../assets/app.js?v=8"></script>
 <script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m06:15", "content/m06-derivatives/ch15-derivatives-of-inverse-trig.html"); MC.initAskAi("ask-ai-card");</script>
 </body>
 </html>
