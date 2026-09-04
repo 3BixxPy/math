@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — The Dot Product — Algebraic Definition | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 4 of 12</div>
+  <div class="eyebrow">Chapter 4 · concept:dot-product-algebraic</div>
+  <h1>The Dot Product — Algebraic Definition</h1>
+  <p class="subtitle">Every operation so far — addition, subtraction, scalar multiplication — takes vector-shaped things in and gives a vector-shaped thing back out. This chapter introduces something genuinely different: an operation that takes two vectors in and hands back a single plain number.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>You've almost certainly called <code>Vector3.Dot(a, b)</code> before — it's one of the most-used functions in any game-math library, driving lighting, aiming, and view checks. This chapter is deliberately narrow: just the mechanical definition, the "what do you actually type into a calculator" version. Chapter 5 unpacks <em>why</em> this particular combination of multiplications and additions turns out to measure something as geometrically meaningful as "how aligned are two directions." For now, focus on getting comfortable with the arithmetic itself.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — the dot product</div>
+    <div class="eqn"><div class="eq-body">\[ \vec u \cdot \vec v \;=\; u_1v_1 + u_2v_2 + \cdots + u_nv_n \]</div><div class="eq-num" id="eq-9-4-1">(9.4.1)</div></div>
+    <p>Multiply matching components together, then add up all those products. That's the entire computation. The two vectors going in must have the same dimension (same reasoning as addition — every component needs a partner to multiply with), but what comes <em>out</em> is not a vector at all: it's a single real number, called a <strong>scalar</strong>. This is the sharpest possible contrast with Chapter 2 — vector \(+\) vector gives another vector; vector \(\cdot\) vector gives a plain number with no components, no direction, nothing further to combine with another vector using vector rules.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — computing a dot product</div>
+    <p>Compute \(\langle1,2,3\rangle \cdot \langle4,-5,6\rangle\).</p>
+    <details class="step" open><summary>Step 1 — multiply matching components</summary>
+      <div class="step-body"><p>\(1\cdot4=4\), \(\ 2\cdot(-5)=-10\), \(\ 3\cdot6=18\)</p></div></details>
+    <details class="step"><summary>Step 2 — add the three products</summary>
+      <div class="step-body"><p>\(4 + (-10) + 18 = 12\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\langle1,2,3\rangle \cdot \langle4,-5,6\rangle = 12\) — one number, not a vector. There's no "\(\langle12,\dots\rangle\)" to write; the answer to a dot product is always fully done as soon as you've written a single scalar.</div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating the dot product's output as if it were still a vector — trying to ask "which direction does \(12\) point?" or attempting to add a dot-product result directly onto a vector with \(+\). It doesn't point anywhere; it's a number, exactly like \(7\) or \(-3.5\). Whatever you do with it next (compare it to zero, plug it into another formula, use it to compute an angle in Chapter 5), treat it exactly like any ordinary real number — because that's precisely what it is.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="11">
+    <div class="label">Try it yourself</div>
+    <p>Compute \(\langle1,2\rangle \cdot \langle3,4\rangle\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="e.g. 11" aria-label="dot product">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Compute \(\langle2,3\rangle \cdot \langle1,-4\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(2(1)+3(-4)=2-12=-10\)</div></details></li>
+    <li>Compute \(\langle0,5\rangle \cdot \langle3,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(0(3)+5(0)=0\)</div></details></li>
+    <li>Compute \(\langle1,1,1\rangle \cdot \langle1,1,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(1+1+1=3\)</div></details></li>
+    <li>Compute \(\langle-2,4\rangle \cdot \langle3,3\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(-6+12=6\)</div></details></li>
+    <li>Compute \(\langle2,-1,3\rangle \cdot \langle0,4,-2\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(0-4-6=-10\)</div></details></li>
+    <li>Is \(\vec u \cdot \vec v\) always positive? Give an example where it's negative.
+      <details class="answer"><summary></summary><div class="ans-body">No. Example: \(\langle1,0\rangle \cdot \langle-1,0\rangle = -1\).</div></details></li>
+    <li class="tag">bonus — Compute \(\vec v \cdot \vec v\) for \(\vec v = \langle3,4\rangle\), then compare it to \(|\vec v|^2\) from Chapter 3.
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec v\cdot\vec v = 9+16=25\). \(|\vec v|^2=5^2=25\) — identical. A vector dotted with itself is always its own magnitude squared, since that's exactly the sum-of-squares under Chapter 3's square root.</div></details></li>
+    <li class="tag">bonus — Is the dot product defined between a 2D vector and a 3D vector? Why not?
+      <details class="answer"><summary></summary><div class="ans-body">No — same reason as addition: every component needs a matching partner to multiply, and there's no third component on the 2D side.</div></details></li>
+    <li class="tag">bonus — \(\vec u\cdot\vec v\) produces a scalar; \(\vec u+\vec v\) produces a vector. Explain in one sentence why you can't add "\(\vec u\cdot\vec v\)" directly to a vector \(\vec w\) using vector addition.
+      <details class="answer"><summary></summary><div class="ans-body">Vector addition needs two vectors of matching dimension; \(\vec u\cdot\vec v\) is a plain number with no components at all, so it isn't the right kind of object to add to \(\vec w\) that way.</div></details></li>
+    <li class="tag">bonus — <code>Vector3.Dot(a, b)</code> returns \(-1\) for two specific <em>unit</em> vectors <code>a</code> and <code>b</code>. Based on what you already know about dot products from game code, what do you expect must be geometrically true about <code>a</code> and <code>b</code>? (Chapter 5 proves it.)
+      <details class="answer"><summary></summary><div class="ans-body">They must point in exactly opposite directions — the dot product of two unit vectors tops out at \(1\) (same direction) and bottoms out at \(-1\) (opposite direction).</div></details></li>
+    <li class="tag">challenge — Using the general component formula (equation 9.4.1), show algebraically that \(\vec u\cdot\vec v = \vec v\cdot\vec u\) for any two vectors of matching dimension.
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec u\cdot\vec v = u_1v_1+\cdots+u_nv_n = v_1u_1+\cdots+v_nu_n = \vec v\cdot\vec u\), since ordinary real-number multiplication commutes term by term (\(u_iv_i=v_iu_i\) for every \(i\)). Order never matters for the dot product — worth remembering once Chapter 7 introduces a product where order very much does.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-magnitude-and-unit-vectors.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-dot-product-and-angles.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 4 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:4", "content/m09-vectors/ch04-the-dot-product.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

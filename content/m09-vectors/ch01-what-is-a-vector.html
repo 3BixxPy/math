@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — What Is a Vector? | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 1 of 12</div>
+  <div class="eyebrow">Chapter 1 · concept:vector-definition</div>
+  <h1>What Is a Vector?</h1>
+  <p class="subtitle">Module 8's capstone closed out Calculus I. This is a genuinely different branch of math — and, unlike every earlier module, it isn't starting from zero: the diagnostic that shaped this whole curriculum flagged real, working vector intuition from years of 3D game-dev code and physics. Module 9's job isn't to teach you what a vector <em>is</em>. You already know that. Its job is to attach the formal notation and rigor to something you've been computing correctly for a long time.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>You've written this line more times than you can count: <code>Vector2 dir = new Vector2(3, 4);</code> or <code>transform.position += velocity * Time.deltaTime;</code>. Every time you did, you were using a <strong>vector</strong> — something with a <strong>magnitude</strong> (how much) and a <strong>direction</strong> (which way), packed into a small list of numbers. A movement vector, a velocity, a direction the camera is facing, the offset from the player to an enemy — all vectors, all along. This module gives that object a name, a precise definition, and a set of operations you can prove things about instead of just calling library functions on. The formal notation is new; the underlying idea has been sitting in your muscle memory the whole time.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Vector (component form)</div>
+    <p>A <strong>vector</strong> in \(n\) dimensions is an ordered list of \(n\) real numbers, written in <strong>component form</strong> using angle brackets:</p>
+    <p style="text-align:center; font-size:1.1rem;">\(\vec v = \langle v_1,\ v_2,\ \dots,\ v_n \rangle\)</p>
+    <p>In 2D that's \(\langle v_1, v_2\rangle\) — exactly a <code>Vector2</code>'s <code>(x, y)</code>. In 3D it's \(\langle v_1, v_2, v_3\rangle\) — exactly a <code>Vector3</code>'s <code>(x, y, z)</code>. The number of components (the <strong>dimension</strong>) is fixed for a given vector — you can't add a 2D vector to a 3D one, any more than a compiler would let you add a <code>Vector2</code> to a <code>Vector3</code> without an explicit cast.</p>
+    <p>The single most important fact about a vector: <strong>it has no fixed location.</strong> A vector only records "how far in each direction" — it can be drawn starting at the origin, at a game object's current position, at the tip of another vector, anywhere at all, and it's still the <em>same vector</em> as long as its components don't change. This is exactly why calling <code>velocity</code> a "vector" makes sense even though the object it's attached to is constantly moving to a new position — the velocity vector itself doesn't care where the object currently is.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Vector vs. point</div>
+    <p>A <strong>point</strong> like \((3,4)\) is a fixed location — one specific spot in space, written with parentheses. A <strong>vector</strong> like \(\langle 3,4\rangle\) is a displacement — "3 right, 4 up from wherever you start it," written with angle brackets. They use the same two numbers and look almost identical on paper, which is exactly why this chapter exists: keeping the notation distinct (parentheses for points, angle brackets for vectors) is what keeps the two ideas from blurring together, in math and in code alike. A game object's <code>transform.position</code> is stored as a <code>Vector3</code>, but conceptually it's playing the role of a <strong>position vector</strong> — a vector drawn from the origin whose tip happens to sit at a specific point. That's the one case where "point" and "vector" are two views of the same numbers; every other vector (a direction, a velocity, an offset) has no such fixed anchor.</p>
+  </div>
+
+  <div class="eqn"><div class="eq-body">\[ \overrightarrow{PQ} \;=\; Q - P \;=\; \langle q_1-p_1,\ q_2-p_2,\ \dots,\ q_n-p_n\rangle \]</div><div class="eq-num" id="eq-9-1-1">(9.1.1)</div></div>
+  <p>Equation 9.1.1 is the vector <strong>from</strong> point \(P\) <strong>to</strong> point \(Q\): subtract the tail point's coordinates from the head point's coordinates, component by component — head minus tail, always in that order. This is exactly <code>target.position - transform.position</code>, the line of code behind essentially every "face the enemy," "move toward the objective," or "aim at the cursor" behavior you've ever written.</p>
+
+  <div class="block example">
+    <div class="label">Worked example — the vector between two points</div>
+    <p>Find the vector from \(A = (-2, 3)\) to \(B = (4, -1)\).</p>
+    <details class="step" open><summary>Step 1 — identify which point is the tail and which is the head</summary>
+      <div class="step-body"><p>"From \(A\) to \(B\)" means \(A\) is the tail (start) and \(B\) is the head (end) — same convention as <code>target - current</code>: the thing you're subtracting is where you currently are.</p></div></details>
+    <details class="step"><summary>Step 2 — apply equation 9.1.1: head minus tail, component-wise</summary>
+      <div class="step-body"><p>\(\overrightarrow{AB} = B - A = \langle 4-(-2),\ -1-3\rangle = \langle 6,\ -4\rangle\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\overrightarrow{AB} = \langle 6, -4\rangle\) — from \(A\), go 6 right and 4 down to land exactly on \(B\). Note this says nothing about where \(A\) or \(B\) actually are; the same displacement \(\langle 6,-4\rangle\) would carry <em>any</em> starting point 6 right and 4 down.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating \(\langle 3,4\rangle\) as "the point \((3,4)\)" instead of "a displacement of 3 right, 4 up from wherever you start it." This is the exact bug behind a certain class of game-dev glitch: adding a direction vector directly to a UI element's absolute screen position, or accidentally treating a <code>Vector3</code> that represents a <em>relative offset</em> (like an attack range or a spawn offset) as if it were an absolute world position. The numbers are identical; the meaning is not. Before doing anything with a vector, ask: is this a location, or a "how far and which way"? Angle brackets vs. parentheses is the notation's way of forcing that question.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="<3,4>|(3,4)|⟨3,4⟩">
+    <div class="label">Try it yourself</div>
+    <p>Find the vector from point \((1,2)\) to point \((4,6)\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. <3,4>" aria-label="vector from (1,2) to (4,6)">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the vector from point \((0,0)\) to point \((5,-2)\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle 5,-2\rangle\)</div></details></li>
+    <li>Find the vector from point \((3,3)\) to point \((1,1)\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle -2,-2\rangle\) — pointing back toward the origin.</div></details></li>
+    <li>Let \(A=(2,-1)\), \(B=(2,4)\). Find \(\overrightarrow{AB}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle 0,5\rangle\) — a purely vertical vector; a zero component is perfectly normal.</div></details></li>
+    <li>The pair \((0,0)\)/\((3,4)\) and the pair \((1,1)\)/\((4,5)\) both produce the same vector. Compute both and explain why that isn't a coincidence.
+      <details class="answer"><summary></summary><div class="ans-body">Both give \(\langle 3,4\rangle\). A vector has no fixed location — sliding both points by the same amount (here, \(\langle1,1\rangle\)) doesn't change the displacement between them.</div></details></li>
+    <li>In 3D, find the vector from \((1,2,3)\) to \((4,0,-1)\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle 3,-2,-4\rangle\) — same head-minus-tail rule, one more component.</div></details></li>
+    <li>Is "the origin" a vector or a point? Is "5 units right and 2 units down" a vector or a point? Explain the difference in one sentence each.
+      <details class="answer"><summary></summary><div class="ans-body">The origin, \((0,0)\), is a point — one fixed location. "5 units right and 2 units down" is a vector, \(\langle5,-2\rangle\) — a displacement with no location of its own until you choose where to start drawing it.</div></details></li>
+    <li class="tag">bonus — A game object at position \((10,4)\) needs to end up at \((13,9)\) after exactly 5 frames of constant movement. What displacement vector should be added to its position once per frame?
+      <details class="answer"><summary></summary><div class="ans-body">Total displacement: \(\langle 13-10,\ 9-4\rangle=\langle3,5\rangle\). Per frame: \(\langle 3,5\rangle/5=\langle0.6,1\rangle\), added once each frame.</div></details></li>
+    <li class="tag">bonus — What is the vector from a point to itself, e.g. from \((2,2)\) to \((2,2)\)? What does that mean physically?
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle 0,0\rangle\), the <strong>zero vector</strong> — zero magnitude and, meaningfully, no defined direction. It represents "no displacement at all."</div></details></li>
+    <li class="tag">bonus — In your own words: why is a <code>Vector3</code> field storing a game object's <em>position</em> a special case of "vector" rather than a fully general one?
+      <details class="answer"><summary></summary><div class="ans-body">It's a <em>position vector</em> — implicitly anchored to start at the origin, so its tip lands exactly on the object's location. A general vector (a velocity, an offset) carries no such anchor; it can be drawn starting anywhere and still mean the same thing.</div></details></li>
+    <li class="tag">bonus — Ship 1 moves from \((0,0)\) to \((6,8)\). Ship 2 starts at \((10,10)\) and applies that exact same displacement. Where does ship 2 end up?
+      <details class="answer"><summary></summary><div class="ans-body">Displacement is \(\langle6,8\rangle\). Applied to \((10,10)\): \((10+6,\ 10+8)=(16,18)\).</div></details></li>
+    <li class="tag">challenge — Quadrilateral \(ABCD\) has \(A=(0,0)\), \(B=(4,0)\), \(C=(6,3)\), \(D=(2,3)\). Compute \(\overrightarrow{AB}\) and \(\overrightarrow{DC}\). What do you notice, and what does it tell you about the shape?
+      <details class="answer"><summary></summary><div class="ans-body">\(\overrightarrow{AB}=B-A=\langle4,0\rangle\). \(\overrightarrow{DC}=C-D=\langle4,0\rangle\) — the exact same vector. Two opposite sides of \(ABCD\) are equal <em>as vectors</em> (same length, same direction), which is precisely the defining property of a parallelogram.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m08-integrals/ch16-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-vector-operations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 1 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:1", "content/m09-vectors/ch01-what-is-a-vector.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

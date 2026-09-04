@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Cross Product — Geometric Meaning | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 8 of 12</div>
+  <div class="eyebrow">Chapter 8 · concept:cross-product-geometry</div>
+  <h1>Cross Product — Geometric Meaning</h1>
+  <p class="subtitle">Chapter 7 gave the cross product a formula and a direction rule. This chapter explains what its length actually measures, and nails down exactly why "perpendicular to both inputs" is the property that makes it so useful for surface normals.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>This is the exact technique behind computing a surface normal from a triangle or polygon's own edges: take two edge vectors of the face, cross them, and the result is perpendicular to the whole flat surface — automatically, with no separate "figure out what's perpendicular" step. Every mesh-normal calculation you've ever seen a game engine do under the hood works this way. This chapter makes precise both halves of why that works: what direction the result points (proven, not just asserted), and what its length tells you (the area of the surface those two edges bound).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — magnitude of the cross product = parallelogram area</div>
+    <div class="eqn"><div class="eq-body">\[ |\vec u \times \vec v| \;=\; |\vec u|\,|\vec v|\sin\theta \]</div><div class="eq-num" id="eq-9-8-1">(9.8.1)</div></div>
+    <p>where \(\theta\) is the angle between \(\vec u\) and \(\vec v\). This number is exactly the area of the parallelogram with \(\vec u\) and \(\vec v\) as two of its sides — a nice mirror of Chapter 5's \(\cos\theta\) formula, but with \(\sin\theta\) instead, and a length instead of a scalar with a sign. Half of that parallelogram is a triangle, so \(\frac12|\vec u\times\vec v|\) gives the area of the triangle spanned by \(\vec u\) and \(\vec v\) from a shared vertex — a direct, practical way to get a triangle's area (in 3D, where the shoelace-formula-style 2D tricks don't apply) straight from two of its edge vectors.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — the cross product is perpendicular to both inputs</div>
+    <div class="eqn"><div class="eq-body">\[ (\vec u\times\vec v)\cdot\vec u = 0 \qquad\text{and}\qquad (\vec u\times\vec v)\cdot\vec v = 0 \]</div><div class="eq-num" id="eq-9-8-2">(9.8.2)</div></div>
+    <p>\(\vec u\times\vec v\) is perpendicular to <em>both</em> \(\vec u\) and \(\vec v\) — checkable directly with Chapter 5's orthogonality test, since a dot product of zero is exactly what "perpendicular" means. This is precisely why crossing two edge vectors of a flat surface gives you a normal to that surface: any vector lying in the plane of the surface can be written as some combination of the two edges, and \(\vec u\times\vec v\) is perpendicular to both of them at once.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — verifying perpendicularity, and a parallelogram's area</div>
+    <p>Verify that \(\langle1,0,0\rangle\times\langle0,1,0\rangle=\langle0,0,1\rangle\) (Chapter 7's worked example) is perpendicular to both inputs. Then find the area of the parallelogram spanned by \(\langle2,0,0\rangle\) and \(\langle0,3,0\rangle\).</p>
+    <details class="step" open><summary>Step 1 — dot the result with each original vector</summary>
+      <div class="step-body"><p>\(\langle0,0,1\rangle\cdot\langle1,0,0\rangle = 0\). \(\langle0,0,1\rangle\cdot\langle0,1,0\rangle = 0\). Both zero — perpendicular to both, confirming equation 9.8.2.</p></div></details>
+    <details class="step"><summary>Step 2 — cross the two new vectors</summary>
+      <div class="step-body"><p>\(\langle2,0,0\rangle\times\langle0,3,0\rangle = \langle 0(0)-0(3),\ 0(0)-2(0),\ 2(3)-0(0)\rangle = \langle0,0,6\rangle\)</p></div></details>
+    <details class="step"><summary>Step 3 — take its magnitude</summary>
+      <div class="step-body"><p>\(|\langle0,0,6\rangle| = 6\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The perpendicularity checks out exactly. The parallelogram spanned by \(\langle2,0,0\rangle\) and \(\langle0,3,0\rangle\) has area \(6\) — which also checks out by eye: it's literally a \(2\times3\) rectangle sitting in the xy-plane.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Trying to take the cross product of two 2D vectors directly, the same way you'd take their dot product. It isn't defined — "perpendicular to a flat plane" requires a third dimension to point into, which a 2D vector simply doesn't have. What some engines and textbooks call the "2D cross product" (Chapter 7's bonus problem: the single number \(u_1v_2-u_2v_1\)) is a genuinely different, related convention — a signed area, not a vector — and it's really just the \(\mathbf k\)-component of the true 3D cross product once both vectors are extended into the xy-plane with a zero \(z\). Don't treat the two as interchangeable notation for the same operation.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1">
+    <div class="label">Try it yourself</div>
+    <p>Find the area of the parallelogram spanned by \(\langle1,0,0\rangle\) and \(\langle0,1,0\rangle\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="e.g. 1" aria-label="parallelogram area">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the area of the parallelogram spanned by \(\langle4,0,0\rangle\) and \(\langle0,1,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Cross product is \(\langle0,0,4\rangle\), magnitude \(4\).</div></details></li>
+    <li>Find the area of the parallelogram spanned by \(\langle1,1,0\rangle\) and \(\langle1,0,1\rangle\) (reuse Chapter 7's cross product, \(\langle1,-1,-1\rangle\)).
+      <details class="answer"><summary></summary><div class="ans-body">\(|\langle1,-1,-1\rangle|=\sqrt{1+1+1}=\sqrt3\)</div></details></li>
+    <li>Confirm \(\langle2,0,0\rangle\times\langle0,3,0\rangle=\langle0,0,6\rangle\) (worked example) is perpendicular to both \(\langle2,0,0\rangle\) and \(\langle0,3,0\rangle\), using dot products.
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle0,0,6\rangle\cdot\langle2,0,0\rangle=0\); \(\langle0,0,6\rangle\cdot\langle0,3,0\rangle=0\). Both zero, confirming equation 9.8.2.</div></details></li>
+    <li>Two vectors are perpendicular, with \(|\vec u|=5\) and \(|\vec v|=2\). Find \(|\vec u\times\vec v|\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\sin90°=1\), so \(|\vec u\times\vec v| = 5(2)(1)=10\).</div></details></li>
+    <li>Two vectors point in exactly the same direction (\(\theta=0°\)). What is \(|\vec u\times\vec v|\), and why does that match the parallelogram picture?
+      <details class="answer"><summary></summary><div class="ans-body">\(\sin0°=0\), so \(|\vec u\times\vec v|=0\). Two parallel vectors span a degenerate "parallelogram" with zero height — zero area, matching the formula.</div></details></li>
+    <li>A triangular mesh face has edge vectors \(\langle3,0,0\rangle\) and \(\langle0,4,0\rangle\) from a shared vertex. Find the triangle's area.
+      <details class="answer"><summary></summary><div class="ans-body">Cross product \(=\langle0,0,12\rangle\), magnitude \(12\) (parallelogram area). Triangle area \(=\frac12(12)=6\).</div></details></li>
+    <li class="tag">bonus — Floor-polygon edge vectors are \(e_1=\langle1,0,0\rangle\) and \(e_2=\langle0,0,1\rangle\), with "up" defined as \(+y\). Compute \(e_1\times e_2\). Does it point up or down — and what would fix it if it's the wrong way?
+      <details class="answer"><summary></summary><div class="ans-body">\(e_1\times e_2=\langle0,-1,0\rangle\) — points straight down (\(-y\)), the wrong way for an upward-facing floor normal. Swapping the order, \(e_2\times e_1\), flips the sign (Chapter 7's anticommutativity) and points it up instead.</div></details></li>
+    <li class="tag">bonus — Confirm \(|\mathbf i\times\mathbf j|\), \(|\mathbf j\times\mathbf k|\), and \(|\mathbf k\times\mathbf i|\) are each exactly \(1\). Why does that make sense?
+      <details class="answer"><summary></summary><div class="ans-body">Each pair is two perpendicular unit vectors, so equation 9.8.1 gives \(1\cdot1\cdot\sin90° = 1\) every time — geometrically, each spans a literal \(1\times1\) unit square.</div></details></li>
+    <li class="tag">bonus — Explain why the "2D cross product" \(u_1v_2-u_2v_1\) (Chapter 7) can be read as a signed area, using equation 9.8.1.
+      <details class="answer"><summary></summary><div class="ans-body">When both vectors lie in the xy-plane, the true 3D cross product's only nonzero component is that same number (the \(\mathbf k\)-component); its absolute value is the parallelogram's area by equation 9.8.1, and its sign encodes orientation (positive when \(\vec v\) is counterclockwise from \(\vec u\)).</div></details></li>
+    <li class="tag">bonus — Could \(|\vec u\times\vec v|\) ever come out negative? Explain using equation 9.8.1.
+      <details class="answer"><summary></summary><div class="ans-body">No. \(|\vec u|\) and \(|\vec v|\) are never negative, and \(\theta\) (the angle between two vectors) is always taken in \([0°,180°]\), where \(\sin\theta\ge0\) throughout. The product of three non-negative numbers can't be negative — and a magnitude couldn't be negative anyway.</div></details></li>
+    <li class="tag">challenge — A triangular mesh face has vertices \(A=(0,0,0)\), \(B=(4,0,0)\), \(C=(0,3,0)\). Using edge vectors from \(A\), find a normal vector to the triangle and the triangle's area.
+      <details class="answer"><summary></summary><div class="ans-body">\(\overrightarrow{AB}=\langle4,0,0\rangle\), \(\overrightarrow{AC}=\langle0,3,0\rangle\). \(\overrightarrow{AB}\times\overrightarrow{AC}=\langle0,0,12\rangle\) — a normal pointing along \(+z\). Parallelogram area \(=|\langle0,0,12\rangle|=12\), so the triangle's area is \(6\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-the-cross-product.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-lines-in-space.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 8 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:8", "content/m09-vectors/ch08-cross-product-geometry.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

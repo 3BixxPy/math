@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Magnitude &amp; Unit Vectors | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 3 of 12</div>
+  <div class="eyebrow">Chapter 3 · concept:vector-magnitude, concept:unit-vectors-normalization</div>
+  <h1>Magnitude &amp; Unit Vectors</h1>
+  <p class="subtitle">Chapter 2 combined vectors. This chapter measures one: how "long" a vector is, and what it means to keep only its direction and throw the length away.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p><code>rigidbody.velocity.magnitude</code>. <code>Vector3.Distance(a, b)</code>. <code>direction.normalized</code>. You've called all three, probably without thinking hard about what's underneath them. <strong>Magnitude</strong> is the vector's own length — how fast, how far, how much. <strong>Normalizing</strong> — dividing a vector by its own magnitude to get a length-1 version pointing the same way — is the operation behind almost every direction-only calculation in a game: aiming, lighting, "which way should this thing move," all need pure direction with the speed/distance information stripped out first. Get magnitude and normalizing exactly right here and Chapters 4–8 (dot products, cross products, angles) all lean on them directly.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — magnitude (length) of a vector</div>
+    <div class="eqn"><div class="eq-body">\[ |\vec v| \;=\; \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} \]</div><div class="eq-num" id="eq-9-3-1">(9.3.1)</div></div>
+    <p>This is the Pythagorean theorem, restated with as many terms as the vector has dimensions. In 2D, \(|\langle v_1,v_2\rangle| = \sqrt{v_1^2+v_2^2}\) is literally "the hypotenuse of the right triangle with legs \(v_1\) and \(v_2\)" — Module 0's theorem, unchanged. In 3D it's the same idea one dimension up (the 3D diagonal-of-a-box formula, if you've seen it); in \(n\) dimensions it's the exact same pattern, no new idea required, just more terms under the root.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Unit vector &amp; normalizing</div>
+    <p>A <strong>unit vector</strong> is any vector with magnitude exactly 1. To <strong>normalize</strong> a nonzero vector \(\vec v\) — the exact term used by <code>Vector3.normalized</code> and every game-math library — means dividing it by its own magnitude:</p>
+    <div class="eqn"><div class="eq-body">\[ \hat v \;=\; \frac{\vec v}{|\vec v|} \]</div><div class="eq-num" id="eq-9-3-2">(9.3.2)</div></div>
+    <p>(The "hat" notation \(\hat v\) specifically means "this is a unit vector.") Dividing a vector by a scalar is scalar multiplication by \(1/|\vec v|\) (Chapter 2), applied to every component. The result always has magnitude exactly 1 and points in the exact same direction as the original — normalizing changes <em>only</em> the length, never the direction. This is why the zero vector can never be normalized: there's no direction to preserve, and equation 9.3.2 would divide by zero.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — magnitude and normalizing</div>
+    <p>Find the magnitude of \(\langle3,4\rangle\), then normalize it.</p>
+    <details class="step" open><summary>Step 1 — apply equation 9.3.1</summary>
+      <div class="step-body"><p>\(|\langle3,4\rangle| = \sqrt{3^2+4^2} = \sqrt{9+16} = \sqrt{25} = 5\) — the familiar 3-4-5 right triangle, now read as a vector's length.</p></div></details>
+    <details class="step"><summary>Step 2 — divide every component by that magnitude (equation 9.3.2)</summary>
+      <div class="step-body"><p>\(\hat v = \dfrac{\langle3,4\rangle}{5} = \left\langle \dfrac35,\ \dfrac45\right\rangle = \langle0.6,\ 0.8\rangle\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(|\langle3,4\rangle| = 5\), and its unit vector is \(\langle0.6,0.8\rangle\). Check: \(\sqrt{0.6^2+0.8^2}=\sqrt{0.36+0.64}=\sqrt1=1\) — exactly length 1, as required.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Two ways this goes wrong. First: stopping at the sum of squares and forgetting the square root — \(3^2+4^2=25\) is <em>not</em> the magnitude, \(\sqrt{25}=5\) is. Second, when normalizing: dividing by the wrong thing — dividing every component by just one component (say, dividing both \(3\) and \(4\) by \(3\)) instead of dividing both by the <em>magnitude</em> \(5\). Only dividing by the actual magnitude guarantees the result has length exactly 1; dividing by anything else gives a vector that still points the same way but isn't actually a unit vector, which will quietly break any downstream formula that assumes one.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>Find \(|\langle3,4\rangle|\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="e.g. 5" aria-label="magnitude of <3,4>">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find \(|\langle6,8\rangle|\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\sqrt{36+64}=\sqrt{100}=10\)</div></details></li>
+    <li>Find \(|\langle1,1\rangle|\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\sqrt{1+1}=\sqrt2\approx1.414\)</div></details></li>
+    <li>Find \(|\langle2,3,6\rangle|\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\sqrt{4+9+36}=\sqrt{49}=7\)</div></details></li>
+    <li>Normalize \(\langle0,5\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(|\langle0,5\rangle|=5\), so \(\hat v=\langle0,1\rangle\).</div></details></li>
+    <li>Normalize \(\langle1,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(|\langle1,1\rangle|=\sqrt2\), so \(\hat v=\left\langle\frac{1}{\sqrt2},\frac{1}{\sqrt2}\right\rangle\approx\langle0.707,0.707\rangle\).</div></details></li>
+    <li>A direction vector \(\langle-3,4\rangle\) is used before normalizing. Find its magnitude and its normalized form.
+      <details class="answer"><summary></summary><div class="ans-body">\(|\langle-3,4\rangle|=\sqrt{9+16}=5\); normalized: \(\langle-0.6,0.8\rangle\).</div></details></li>
+    <li class="tag">bonus — Why is \(|\vec v|\) always \(\ge0\)? When is it exactly 0?
+      <details class="answer"><summary></summary><div class="ans-body">Every term under the root is a square, never negative, and a square root of a nonnegative number is nonnegative. It equals exactly 0 only for the zero vector \(\langle0,\dots,0\rangle\).</div></details></li>
+    <li class="tag">bonus — A physics call expects a unit direction vector, but a script passes \(\langle2,0,0\rangle\) (length 2) instead. In general terms, what kind of bug does this cause downstream?
+      <details class="answer"><summary></summary><div class="ans-body">Any formula that assumes length 1 (angle formulas, "move exactly this far along the ray") gets silently scaled — results come out roughly twice as large as intended, in the right direction but the wrong amount.</div></details></li>
+    <li class="tag">bonus — What is \(|\langle0,0\rangle|\)? Can the zero vector be normalized? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">\(|\langle0,0\rangle|=0\). It cannot be normalized — equation 9.3.2 would divide by 0, and the zero vector has no direction to preserve in the first place.</div></details></li>
+    <li class="tag">bonus — Find the unit vector pointing in the same direction as \(\langle5,12\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(|\langle5,12\rangle|=\sqrt{25+144}=\sqrt{169}=13\), so \(\hat v=\left\langle\frac{5}{13},\frac{12}{13}\right\rangle\).</div></details></li>
+    <li class="tag">challenge — Normalize both \(\langle3,4\rangle\) and \(\langle6,8\rangle\). What do you get, and what does this prove about what normalizing keeps and what it discards?
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle3,4\rangle\) has magnitude 5 → \(\langle0.6,0.8\rangle\). \(\langle6,8\rangle\) has magnitude 10 → \(\langle6/10,8/10\rangle=\langle0.6,0.8\rangle\) — identical. This proves normalizing discards magnitude completely and keeps only direction: any positive scalar multiple of a vector normalizes to the exact same unit vector.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-vector-operations.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-the-dot-product.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 3 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:3", "content/m09-vectors/ch03-magnitude-and-unit-vectors.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Vector Addition, Subtraction &amp; Scalar Multiplication | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+<script src="../../assets/plot.js?v=8"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 2 of 12</div>
+  <div class="eyebrow">Chapter 2 · concept:vector-addition-scalar-multiplication</div>
+  <h1>Vector Addition, Subtraction &amp; Scalar Multiplication</h1>
+  <p class="subtitle">Chapter 1 gave vectors a precise notation. This chapter gives them arithmetic — and it's arithmetic you've already run millions of times, once per frame, inside a game loop.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every physics-driven game loop runs a line that looks like <code>position += velocity * deltaTime;</code>. That single line is both operations in this chapter at once: <strong>scalar multiplication</strong> (stretching <code>velocity</code> by the small number <code>deltaTime</code>) followed by <strong>vector addition</strong> (adding the result onto <code>position</code>). A negative scalar — <code>-velocity</code>, or an impulse applied "backward" for knockback — reverses a vector's direction without changing its line of action. And "walk this displacement, then walk that one" — a patrol route, a multi-hit combo's total knockback, two forces acting on a body — is exactly vector addition, tip to tail.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — component-wise addition and subtraction</div>
+    <div class="eqn"><div class="eq-body">\[ \langle u_1,u_2,\dots,u_n\rangle \pm \langle v_1,v_2,\dots,v_n\rangle \;=\; \langle u_1 \pm v_1,\ u_2 \pm v_2,\ \dots,\ u_n \pm v_n\rangle \]</div><div class="eq-num" id="eq-9-2-1">(9.2.1)</div></div>
+    <p>Add or subtract matching components — first with first, second with second, and so on. Both vectors must have the same dimension; there's no "matching partner" for a component otherwise, exactly why a compiler refuses to compile <code>Vector2 + Vector3</code>.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — scalar multiplication</div>
+    <div class="eqn"><div class="eq-body">\[ k\langle v_1,v_2,\dots,v_n\rangle \;=\; \langle kv_1,\ kv_2,\ \dots,\ kv_n\rangle \]</div><div class="eq-num" id="eq-9-2-2">(9.2.2)</div></div>
+    <p>Multiply every component by the same number \(k\) (a <strong>scalar</strong> — an ordinary real number, as opposed to a vector). Geometrically, \(k\) <strong>stretches</strong> the vector when \(|k|>1\), <strong>shrinks</strong> it when \(0<|k|<1\), and <strong>flips</strong> its direction entirely when \(k\) is negative — the vector's line stays the same, but it now points the opposite way. This is exactly what <code>-velocity</code> or a knockback force scaled by <code>-2</code> does.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>v₁ (x): <input type="range" id="add-vx" min="-4" max="5" step="1" value="2"></label>
+    <label>v₂ (y): <input type="range" id="add-vy" min="-3" max="5" step="1" value="3"></label>
+  </div>
+  <div class="plot-wrap"><svg id="add-svg" viewBox="0 0 340 340" width="340" height="340"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="add-readout">u = ⟨3,1⟩, v = ⟨2,3⟩ → u + v = ⟨5,4⟩</span></div>
+  <p class="subtitle" style="text-align:center;">Blue: \(u=\langle3,1\rangle\) (fixed). Green: \(v\) drawn tip-to-tail onto the end of \(u\) — this is "walk \(u\), then walk \(v\)." Faint dashed: \(v\) drawn from the origin instead — same vector, different starting point, exactly Chapter 1's lesson. Purple: the resultant \(u+v\), straight from the origin to \(v\)'s final tip.</p>
+  <script>
+  (function () {
+    const svg = document.getElementById("add-svg");
+    const sx = document.getElementById("add-vx");
+    const sy = document.getElementById("add-vy");
+    const opts = { xMin: -4, xMax: 8, yMin: -4, yMax: 8, xStep: 1, yStep: 1, width: 340, height: 340, pad: 32 };
+    const u = [3, 1];
+    function arrow(svg, px, py, x1, y1, x2, y2, color, width) {
+      width = width || 2.5;
+      const X1 = px(x1), Y1 = py(y1), X2 = px(x2), Y2 = py(y2);
+      svg.appendChild(MCPlot.el("line", { x1: X1, y1: Y1, x2: X2, y2: Y2, style: "stroke:" + color + "; stroke-width:" + width }));
+      const ang = Math.atan2(Y2 - Y1, X2 - X1), len = 8 + width, spread = 0.42;
+      const ax = X2 - len * Math.cos(ang - spread), ay = Y2 - len * Math.sin(ang - spread);
+      const bx = X2 - len * Math.cos(ang + spread), by = Y2 - len * Math.sin(ang + spread);
+      svg.appendChild(MCPlot.el("polygon", { points: X2 + "," + Y2 + " " + ax + "," + ay + " " + bx + "," + by, style: "fill:" + color }));
+    }
+    function label(svg, px, py, x, y, dx, dy, text, color) {
+      const t = MCPlot.el("text", { x: px(x) + dx, y: py(y) + dy, "text-anchor": "middle", style: "font-size:12px; fill:" + color + "; font-family:sans-serif; font-weight:700" });
+      t.textContent = text;
+      svg.appendChild(t);
+    }
+    function update() {
+      const vx = parseFloat(sx.value), vy = parseFloat(sy.value);
+      const { px, py } = MCPlot.drawAxes(svg, opts);
+      MCPlot.dashedLine(svg, 0, 0, vx, vy, opts, "plot-dashed");
+      arrow(svg, px, py, 0, 0, u[0], u[1], "var(--accent)");
+      arrow(svg, px, py, u[0], u[1], u[0] + vx, u[1] + vy, "var(--ex-border)");
+      arrow(svg, px, py, 0, 0, u[0] + vx, u[1] + vy, "var(--thm-border)", 3);
+      label(svg, px, py, u[0] / 2, u[1] / 2, -6, -8, "u", "var(--accent)");
+      label(svg, px, py, u[0] + vx / 2, u[1] + vy / 2, 10, -6, "v", "var(--ex-border)");
+      label(svg, px, py, (u[0] + vx) / 2, (u[1] + vy) / 2, 8, 16, "u+v", "var(--thm-border)");
+      document.getElementById("add-readout").textContent =
+        "u = ⟨" + u[0] + "," + u[1] + "⟩, v = ⟨" + vx + "," + vy + "⟩ → u + v = ⟨" + (u[0] + vx) + "," + (u[1] + vy) + "⟩";
+    }
+    sx.addEventListener("input", update);
+    sy.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — addition and scalar multiplication</div>
+    <p>Compute \(\langle 2,3\rangle + \langle -1,4\rangle\), then compute \(-2\langle 1,1\rangle\).</p>
+    <details class="step" open><summary>Step 1 — add component-wise (equation 9.2.1)</summary>
+      <div class="step-body"><p>\(\langle 2,3\rangle + \langle -1,4\rangle = \langle 2+(-1),\ 3+4\rangle = \langle 1,7\rangle\)</p></div></details>
+    <details class="step"><summary>Step 2 — scalar-multiply component-wise (equation 9.2.2)</summary>
+      <div class="step-body"><p>\(-2\langle 1,1\rangle = \langle -2(1),\ -2(1)\rangle = \langle -2,-2\rangle\) — same line through the origin as \(\langle1,1\rangle\), twice as long, pointing the opposite way.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\langle 2,3\rangle + \langle -1,4\rangle = \langle1,7\rangle\), and \(-2\langle1,1\rangle = \langle-2,-2\rangle\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Two related errors show up constantly here. First: trying to add vectors of different dimensions (a <code>Vector2</code> and a <code>Vector3</code>) — there's no rule for it, because there's no third component on one side to add to. Second, and sneakier: adding two vectors' <em>magnitudes</em> instead of their components, e.g. assuming a \(3\)-long vector plus a \(4\)-long vector must give a \(7\)-long vector. It doesn't, unless they point the exact same direction — direction matters, and equation 9.2.1 only ever combines matching components, never lengths directly. (Chapter 3 makes this precise once magnitude has a formula.)</p>
+  </div>
+
+  <div class="block practice checker" data-answers="<4,1>|(4,1)|⟨4,1⟩">
+    <div class="label">Try it yourself</div>
+    <p>Compute \(\langle1,2\rangle + \langle3,-1\rangle\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. <4,1>" aria-label="sum of vectors">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Compute \(\langle5,-2\rangle + \langle1,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle6,-1\rangle\)</div></details></li>
+    <li>Compute \(\langle3,4\rangle - \langle1,4\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle2,0\rangle\)</div></details></li>
+    <li>Compute \(3\langle2,-1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle6,-3\rangle\)</div></details></li>
+    <li>Compute \(-\langle4,-2\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle-4,2\rangle\) — same length, reversed direction.</div></details></li>
+    <li>Compute \(\langle1,0,2\rangle + \langle-3,5,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle-2,5,3\rangle\)</div></details></li>
+    <li>An NPC's patrol moves it by \(\langle4,0\rangle\), then by \(\langle0,3\rangle\). What single displacement takes it directly from start to end?
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle4,0\rangle+\langle0,3\rangle=\langle4,3\rangle\) — the tip-to-tail sum.</div></details></li>
+    <li class="tag">bonus — Explain why \(\langle1,2\rangle + \langle1,2,3\rangle\) is undefined, in terms of what a compiler would say about <code>Vector2 + Vector3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Different dimensions have no matching third component to add on the 2D side — equation 9.2.1 requires both vectors to have the same number of components, same reason the types don't unify in code.</div></details></li>
+    <li class="tag">bonus — A velocity of \(\langle2,0\rangle\) m/s is applied for one frame with \(\Delta t = 0.1\)s. What displacement is added to position this frame?
+      <details class="answer"><summary></summary><div class="ans-body">\(0.1\langle2,0\rangle = \langle0.2,0\rangle\)</div></details></li>
+    <li class="tag">bonus — Find one pair of vectors where \(|u|+|v| = |u+v|\), and one pair where it's false.
+      <details class="answer"><summary></summary><div class="ans-body">True when \(u,v\) point the same way, e.g. \(u=\langle1,0\rangle,\ v=\langle2,0\rangle\): both sides equal 3. False in general, e.g. \(u=\langle1,0\rangle,\ v=\langle0,1\rangle\): \(|u|+|v|=2\) but \(|u+v|=\sqrt2\).</div></details></li>
+    <li class="tag">bonus — Compute \(0\cdot\langle5,-3\rangle\). What is the result for <em>any</em> vector multiplied by the scalar 0?
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle0,0\rangle\) — the zero vector, always, regardless of which vector was multiplied.</div></details></li>
+    <li class="tag">challenge — A ship at the origin applies displacement \(\langle3,4\rangle\), then applies a second displacement equal to exactly twice the reverse of the first. Write this as one combined vector expression, then find where the ship ends up.
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle3,4\rangle + 2\big({-}\langle3,4\rangle\big) = \langle3,4\rangle - 2\langle3,4\rangle = -\langle3,4\rangle = \langle-3,-4\rangle\). Net effect: as if it had only ever traveled backward once from the origin.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-what-is-a-vector.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-magnitude-and-unit-vectors.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 2 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:2", "content/m09-vectors/ch02-vector-operations.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

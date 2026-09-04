@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — The Dot Product — Geometric Meaning &amp; Angles | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+<script src="../../assets/plot.js?v=8"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 5 of 12</div>
+  <div class="eyebrow">Chapter 5 · concept:dot-product-angle-formula, concept:orthogonality-test</div>
+  <h1>The Dot Product — Geometric Meaning &amp; Angles</h1>
+  <p class="subtitle">Chapter 4 gave you the arithmetic: multiply components, add them up. This chapter answers the question that arithmetic alone can't: why does that particular combination of multiplications end up measuring "how aligned" two directions are?</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>This is the formula behind two things you've written before without necessarily deriving why they work: <strong>lighting</strong> (a surface's brightness comes from dotting its normal vector with the direction to the light — the more directly the light hits the surface, the bigger the dot product, the brighter the pixel) and <strong>view-angle checks</strong> ("is this target in front of me or behind me" — dot the camera's forward vector with the direction to the target, and the sign alone tells you which). Both of those are the exact same idea: the dot product is a number that grows as two directions point more alike, shrinks toward zero as they become perpendicular, and goes negative once they start pointing apart.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — the dot product and the angle between vectors</div>
+    <div class="eqn"><div class="eq-body">\[ \vec u \cdot \vec v \;=\; |\vec u|\,|\vec v|\cos\theta \]</div><div class="eq-num" id="eq-9-5-1">(9.5.1)</div></div>
+    <p>where \(\theta\) is the angle between \(\vec u\) and \(\vec v\) when both are drawn from the same starting point. Solving for \(\theta\) gives the version you'll actually use to compute an angle:</p>
+    <p style="text-align:center;">\[ \cos\theta = \frac{\vec u \cdot \vec v}{|\vec u|\,|\vec v|} \]</p>
+    <p>Since \(|\vec u|\) and \(|\vec v|\) are always positive (Chapter 3), the <em>sign</em> of \(\vec u\cdot\vec v\) is entirely controlled by \(\cos\theta\): positive when \(\theta<90°\) (pointing "the same general way"), zero at exactly \(\theta=90°\), negative when \(\theta>90°\) (pointing "generally apart"). That's the whole "how aligned" reading in one sentence.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — the orthogonality test</div>
+    <div class="eqn"><div class="eq-body">\[ \vec u \perp \vec v \iff \vec u\cdot\vec v = 0 \qquad (\vec u,\vec v \text{ both nonzero}) \]</div><div class="eq-num" id="eq-9-5-2">(9.5.2)</div></div>
+    <p>Two nonzero vectors are <strong>perpendicular</strong> (orthogonal) exactly when their dot product is zero — read straight off equation 9.5.1, since \(\cos\theta=0\) only at \(\theta=90°\) (and \(|\vec u|,|\vec v|\) can't be zero for nonzero vectors). This is by far the fastest way to check perpendicularity: no square roots, no inverse cosine, just multiply-and-add and compare to zero.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>angle of L: <input type="range" id="dp-slider" min="0" max="360" step="5" value="60"></label>
+  </div>
+  <div class="plot-wrap"><svg id="dp-svg" viewBox="0 0 300 300" width="300" height="300"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="dp-readout">θ = 60° → N·L = cos 60° = 0.500 → lit at 50% (clamped ≥ 0)</span></div>
+  <p class="subtitle" style="text-align:center;">Blue: a fixed surface normal \(N=\langle1,0\rangle\). Green: a unit light direction \(L\) at angle \(\theta\). Both are unit vectors, so equation 9.5.1 collapses to \(N\cdot L=\cos\theta\) — visually, exactly the dashed "shadow" of \(L\) onto \(N\)'s axis (a preview of Chapter 6's projection).</p>
+  <script>
+  (function () {
+    const svg = document.getElementById("dp-svg");
+    const slider = document.getElementById("dp-slider");
+    const cx = 150, cy = 150, r = 110;
+    function update() {
+      const deg = parseInt(slider.value, 10);
+      const rad = (deg * Math.PI) / 180;
+      const cosT = Math.cos(rad), sinT = Math.sin(rad);
+      const Lx = cx + r * cosT, Ly = cy - r * sinT;
+      const Nx = cx + r, Ny = cy;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      svg.appendChild(MCPlot.el("line", { x1: 15, y1: cy, x2: 285, y2: cy, style: "stroke:var(--text-dim); stroke-width:1.5" }));
+      svg.appendChild(MCPlot.el("line", { x1: cx, y1: 15, x2: cx, y2: 285, style: "stroke:var(--text-dim); stroke-width:1.5" }));
+      svg.appendChild(MCPlot.el("circle", { cx, cy, r, style: "fill:none; stroke:var(--border); stroke-width:2" }));
+      svg.appendChild(MCPlot.el("line", { x1: Lx, y1: Ly, x2: Lx, y2: cy, style: "stroke:var(--mis-border); stroke-width:1.5; stroke-dasharray:4 3" }));
+      svg.appendChild(MCPlot.el("line", { x1: cx, y1: cy, x2: Nx, y2: Ny, style: "stroke:var(--accent); stroke-width:2.5" }));
+      svg.appendChild(MCPlot.el("circle", { cx: Nx, cy: Ny, r: 4.5, style: "fill:var(--accent)" }));
+      svg.appendChild(MCPlot.el("line", { x1: cx, y1: cy, x2: Lx, y2: Ly, style: "stroke:var(--ex-border); stroke-width:2.5" }));
+      svg.appendChild(MCPlot.el("circle", { cx: Lx, cy: Ly, r: 4.5, style: "fill:var(--ex-border)" }));
+      const nLabel = MCPlot.el("text", { x: Nx, y: Ny - 10, "text-anchor": "middle", style: "font-size:12px; fill:var(--accent); font-family:sans-serif; font-weight:700" });
+      nLabel.textContent = "N";
+      svg.appendChild(nLabel);
+      const lLabel = MCPlot.el("text", { x: Lx + (cosT >= 0 ? 12 : -12), y: Ly + (sinT >= 0 ? -6 : 14), "text-anchor": cosT >= 0 ? "start" : "end", style: "font-size:12px; fill:var(--ex-border); font-family:sans-serif; font-weight:700" });
+      lLabel.textContent = "L";
+      svg.appendChild(lLabel);
+      const shadowLabel = MCPlot.el("text", { x: Lx, y: cy + (sinT >= 0 ? 16 : -8), "text-anchor": "middle", style: "font-size:10.5px; fill:var(--mis-border); font-family:sans-serif; font-weight:600" });
+      shadowLabel.textContent = "N·L";
+      svg.appendChild(shadowLabel);
+      const brightness = Math.max(0, cosT);
+      let note;
+      if (cosT > 0.999) note = "directly facing — fully lit";
+      else if (cosT > 0.05) note = "partially lit";
+      else if (cosT >= -0.05) note = "grazing (perpendicular) — ~0 light";
+      else note = "facing away — unlit (clamped to 0)";
+      document.getElementById("dp-readout").textContent =
+        "θ = " + deg + "° → N·L = cos " + deg + "° = " + cosT.toFixed(3) + " → lit at " + Math.round(brightness * 100) + "% (" + note + ")";
+    }
+    slider.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — an angle, and a perpendicularity check</div>
+    <p>Find the angle between \(\langle1,0\rangle\) and \(\langle1,1\rangle\). Then check whether \(\langle2,3\rangle\) and \(\langle3,-2\rangle\) are perpendicular.</p>
+    <details class="step" open><summary>Step 1 — for the angle problem, find the dot product and both magnitudes</summary>
+      <div class="step-body"><p>\(\langle1,0\rangle\cdot\langle1,1\rangle = 1(1)+0(1)=1\). \(|\langle1,0\rangle|=1\), \(|\langle1,1\rangle|=\sqrt2\).</p></div></details>
+    <details class="step"><summary>Step 2 — solve for θ using equation 9.5.1</summary>
+      <div class="step-body"><p>\(\cos\theta = \dfrac{1}{(1)(\sqrt2)} = \dfrac{1}{\sqrt2}\ \Rightarrow\ \theta = \cos^{-1}\!\left(\dfrac{1}{\sqrt2}\right) = 45°\)</p></div></details>
+    <details class="step"><summary>Step 3 — check ⟨2,3⟩ and ⟨3,-2⟩ using equation 9.5.2</summary>
+      <div class="step-body"><p>\(\langle2,3\rangle\cdot\langle3,-2\rangle = 2(3)+3(-2) = 6-6 = 0\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\langle1,0\rangle\) and \(\langle1,1\rangle\) meet at \(45°\). \(\langle2,3\rangle\) and \(\langle3,-2\rangle\) have dot product exactly \(0\), so by equation 9.5.2 they're perpendicular — no square roots or inverse cosine required, just the sign check.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Seeing \(\vec u\cdot\vec v = 0\) and concluding "one of these vectors must be the zero vector." That's a very different fact. A dot product of zero, for two <em>nonzero</em> vectors, means exactly one thing by equation 9.5.2: they're perpendicular. Nonzero perpendicular vectors dot to zero constantly — \(\langle1,0\rangle\) and \(\langle0,1\rangle\) do it every time, and neither one has vanished. Keep "dot product is zero" and "vector is zero" as two completely separate ideas.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes|y|perpendicular|true">
+    <div class="label">Try it yourself</div>
+    <p>Are \(\langle1,0\rangle\) and \(\langle0,5\rangle\) perpendicular?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="Yes or No" aria-label="perpendicular check">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find \(\cos\theta\) between \(\langle1,0\rangle\) and \(\langle0,1\rangle\), and state \(\theta\).
+      <details class="answer"><summary></summary><div class="ans-body">Dot product is \(0\), so \(\cos\theta=0\) and \(\theta=90°\).</div></details></li>
+    <li>Find the angle between \(\langle1,1\rangle\) and \(\langle2,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=2\), \(|\langle1,1\rangle|=\sqrt2\), \(|\langle2,0\rangle|=2\). \(\cos\theta=\dfrac{2}{2\sqrt2}=\dfrac{1}{\sqrt2}\Rightarrow\theta=45°\).</div></details></li>
+    <li>Are \(\langle4,2\rangle\) and \(\langle-1,2\rangle\) perpendicular?
+      <details class="answer"><summary></summary><div class="ans-body">\(4(-1)+2(2)=-4+4=0\) — yes, perpendicular.</div></details></li>
+    <li>Are \(\langle3,1\rangle\) and \(\langle1,3\rangle\) perpendicular?
+      <details class="answer"><summary></summary><div class="ans-body">\(3(1)+1(3)=6\ne0\) — no.</div></details></li>
+    <li>In 3D, is \(\langle1,0,0\rangle\) perpendicular to \(\langle0,1,1\rangle\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(1(0)+0(1)+0(1)=0\) — yes, perpendicular.</div></details></li>
+    <li>A camera faces direction \(\langle0,1\rangle\); an enemy lies in direction \(\langle1,0\rangle\) from the camera. Compute \(\cos\theta\) between them and interpret: is the enemy ahead, to the side, or behind?
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=0\), so \(\cos\theta=0\), \(\theta=90°\) — the enemy is directly to the side, neither ahead nor behind.</div></details></li>
+    <li class="tag">bonus — Two unit vectors have \(\vec u\cdot\vec v=-1\). What does that say about their directions?
+      <details class="answer"><summary></summary><div class="ans-body">They point in exactly opposite directions — \(\cos\theta=-1\) only at \(\theta=180°\).</div></details></li>
+    <li class="tag">bonus — Without computing an actual angle, explain why \(\vec u\cdot\vec v>0\) always means the angle is acute (\(<90°\)), and \(\vec u\cdot\vec v<0\) always means it's obtuse (\(>90°\)).
+      <details class="answer"><summary></summary><div class="ans-body">\(|\vec u|\) and \(|\vec v|\) are always positive, so the sign of \(\vec u\cdot\vec v=|\vec u||\vec v|\cos\theta\) matches the sign of \(\cos\theta\) exactly. \(\cos\theta>0\) precisely on \((0°,90°)\), and \(\cos\theta<0\) precisely on \((90°,180°)\).</div></details></li>
+    <li class="tag">bonus — A student sees \(\vec u\cdot\vec v=0\) for two nonzero vectors and concludes "one of them must be the zero vector." What's wrong with that reasoning?
+      <details class="answer"><summary></summary><div class="ans-body">A dot product of zero for nonzero vectors means perpendicular, not vanished — e.g. \(\langle1,0\rangle\cdot\langle0,1\rangle=0\) and neither vector is \(\langle0,0\rangle\).</div></details></li>
+    <li class="tag">bonus — A unit light direction \(L=\langle0.6,0.8\rangle\) hits a surface with unit normal \(N=\langle0,1\rangle\). Compute \(N\cdot L\) and interpret it as a brightness percentage.
+      <details class="answer"><summary></summary><div class="ans-body">\(N\cdot L = 0(0.6)+1(0.8)=0.8\) — the surface is lit at \(80\%\) intensity.</div></details></li>
+    <li class="tag">challenge — Two vectors have \(|\vec u|=3\), \(|\vec v|=4\), and the angle between them is \(120°\). Find \(\vec u\cdot\vec v\) without knowing either vector's components.
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec u\cdot\vec v = |\vec u||\vec v|\cos\theta = 3(4)\cos120° = 12(-0.5) = -6\) — negative, as expected for an obtuse angle.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-the-dot-product.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-vector-projections.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 5 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:5", "content/m09-vectors/ch05-dot-product-and-angles.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

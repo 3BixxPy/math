@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — Planes in Space | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 10 of 12</div>
+  <div class="eyebrow">Chapter 10 · concept:vector-equation-of-a-plane</div>
+  <h1>Planes in Space</h1>
+  <p class="subtitle">Chapter 9 described a line using one point and one direction. A plane needs one point and something that points straight out of it — and Chapter 8 just handed you exactly the tool that produces that.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A collision plane, a ground plane, a wall — every flat surface in a 3D world is defined the same way: a point on the surface, plus a normal vector telling you which way "out of the surface" points. Physics engines lean on this constantly (which side of the plane is something on, how far is a point from the surface). And Chapter 8's cross product is precisely how that normal usually gets computed in the first place: two edge vectors lying in the plane, crossed, gives a vector perpendicular to both — which means perpendicular to the whole flat surface they span.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — vector equation of a plane</div>
+    <div class="eqn"><div class="eq-body">\[ \vec n \cdot (\vec r - P_0) = 0 \]</div><div class="eq-num" id="eq-9-10-1">(9.10.1)</div></div>
+    <p>where \(P_0=(x_0,y_0,z_0)\) is a known point on the plane, \(\vec n = \langle a,b,c\rangle\) is a <strong>normal vector</strong> (perpendicular to the plane), and \(\vec r=(x,y,z)\) is any point. The logic: \(\vec r - P_0\) is a vector lying <em>in</em> the plane (it connects two points on the plane), and anything lying in the plane must be perpendicular to the plane's normal — exactly Chapter 5's orthogonality test, dot product zero. Expanding the dot product gives the familiar form:</p>
+    <p style="text-align:center;">\[ a(x-x_0)+b(y-y_0)+c(z-z_0)=0 \quad\Longrightarrow\quad ax+by+cz=d \]</p>
+    <p>where \(d=ax_0+by_0+cz_0\) collects all the constants. That's the payoff: \(a,b,c\) — the coefficients you'd read directly off a plane's equation — <em>are</em> the normal vector's components. No extra work needed to find a plane's normal once you have its equation in this form.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Method — finding a normal from three points</div>
+    <p>Given three points known to lie on a plane (not all in one line), find two edge vectors between them — say \(\overrightarrow{AB}\) and \(\overrightarrow{AC}\) (Chapter 1) — and take their <strong>cross product</strong> (Chapters 7–8). Both edge vectors lie in the plane, so a vector perpendicular to both of them is perpendicular to the whole plane: exactly a normal vector, ready to drop into equation 9.10.1.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the plane through three points</div>
+    <p>Find the equation of the plane through \(A=(1,0,0)\), \(B=(0,1,0)\), and \(C=(0,0,1)\).</p>
+    <details class="step" open><summary>Step 1 — find two edge vectors from A</summary>
+      <div class="step-body"><p>\(\overrightarrow{AB} = B-A = \langle-1,1,0\rangle\), \(\ \overrightarrow{AC} = C-A = \langle-1,0,1\rangle\)</p></div></details>
+    <details class="step"><summary>Step 2 — cross them to get a normal vector</summary>
+      <div class="step-body"><p>\(\vec n = \overrightarrow{AB}\times\overrightarrow{AC} = \big\langle\,1(1)-0(0),\ \ 0(-1)-(-1)(1),\ \ (-1)(0)-1(-1)\,\big\rangle = \langle1,1,1\rangle\)</p></div></details>
+    <details class="step"><summary>Step 3 — plug n and point A into equation 9.10.1</summary>
+      <div class="step-body"><p>\(1(x-1)+1(y-0)+1(z-0)=0 \ \Rightarrow\ x+y+z-1=0 \ \Rightarrow\ x+y+z=1\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The plane through \(A,B,C\) is \(x+y+z=1\) — worth double-checking by eye: all three of \(A,B,C\) plug in to give exactly \(1\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Using one of the plane's own <em>edge</em> vectors as if it were the normal, instead of crossing two of them. An edge vector like \(\overrightarrow{AB}=\langle-1,1,0\rangle\) from the example above lies <em>in</em> the plane — it's perpendicular <em>to</em> the true normal (\(\langle-1,1,0\rangle\cdot\langle1,1,1\rangle=-1+1+0=0\)), not equal to it. This mix-up shows up constantly right after learning the cross product: remember a plane needs a vector pointing <em>out of</em> it, and the only vectors you're handed directly (the edges) point <em>along</em> it instead.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes|y|true">
+    <div class="label">Try it yourself</div>
+    <p>Is \(\langle1,1,1\rangle\) a normal vector to the plane \(x+y+z=5\)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="Yes or No" aria-label="normal vector check">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the normal vector to the plane \(2x+3y-z=7\) by inspection.
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle2,3,-1\rangle\) — the coefficients of \(x,y,z\), directly.</div></details></li>
+    <li>A plane has normal \(\langle0,0,1\rangle\) and passes through \((2,5,3)\). Write its equation.
+      <details class="answer"><summary></summary><div class="ans-body">\(0(x-2)+0(y-5)+1(z-3)=0 \Rightarrow z=3\) — a plane parallel to the xy-plane.</div></details></li>
+    <li>Find a normal vector to the plane through \(A=(0,0,0)\), \(B=(1,0,0)\), \(C=(0,1,0)\), using the cross product of two edge vectors.
+      <details class="answer"><summary></summary><div class="ans-body">\(\overrightarrow{AB}=\langle1,0,0\rangle\), \(\overrightarrow{AC}=\langle0,1,0\rangle\); cross product \(=\langle0,0,1\rangle\) — this plane is just \(z=0\), the xy-plane itself.</div></details></li>
+    <li>Is \(\langle2,3,-1\rangle\) a normal vector to the plane \(4x+6y-2z=10\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — the plane's coefficient vector is \(\langle4,6,-2\rangle=2\langle2,3,-1\rangle\), a scalar multiple, so it points in the same normal direction.</div></details></li>
+    <li>Does the point \((4,0,0)\) lie on the plane \(x-y+2z=4\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(4-0+2(0)=4\) ✓ — yes.</div></details></li>
+    <li>Points \(D=(1,1,0)\), \(E=(1,0,1)\), \(F=(0,1,1)\) lie on a plane. Find a normal vector using two edges from \(D\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\overrightarrow{DE}=\langle0,-1,1\rangle\), \(\overrightarrow{DF}=\langle-1,0,1\rangle\); cross product \(=\langle-1,-1,-1\rangle\) (equivalently, normal direction \(\langle1,1,1\rangle\)).</div></details></li>
+    <li class="tag">bonus — Explain why any nonzero scalar multiple of a correct normal vector is also a valid normal vector for the same plane.
+      <details class="answer"><summary></summary><div class="ans-body">"Normal" just means perpendicular to the plane. Scaling a perpendicular vector by any nonzero number keeps it pointing the same (or exactly opposite) direction — still perpendicular to everything in the plane.</div></details></li>
+    <li class="tag">bonus — A vector lying in a plane is dotted with that plane's true normal. What must the result always be, and why?
+      <details class="answer"><summary></summary><div class="ans-body">Always \(0\) — any vector lying in the plane is, by the very definition of "normal to the plane," perpendicular to the normal.</div></details></li>
+    <li class="tag">bonus — Find the equation of the plane parallel to \(x+2y-z=5\) but passing through the origin instead.
+      <details class="answer"><summary></summary><div class="ans-body">Same normal \(\langle1,2,-1\rangle\), through \((0,0,0)\): \(1(x)+2(y)-1(z)=0 \Rightarrow x+2y-z=0\).</div></details></li>
+    <li class="tag">bonus — Planes \(x+y+z=1\) and \(x+y+z=5\) share the same normal but different constants. What's the geometric relationship between them?
+      <details class="answer"><summary></summary><div class="ans-body">They're parallel — identical orientation (same normal), just shifted to different positions along that normal direction, so they never intersect.</div></details></li>
+    <li class="tag">challenge — Points \(A=(2,0,0)\), \(B=(0,3,0)\), \(C=(0,0,4)\) determine a plane. Find its equation using two edge vectors and their cross product, then verify \(A\) satisfies your final equation.
+      <details class="answer"><summary></summary><div class="ans-body">\(\overrightarrow{AB}=\langle-2,3,0\rangle\), \(\overrightarrow{AC}=\langle-2,0,4\rangle\); cross product \(=\langle12,8,6\rangle\), or simplified, \(\langle6,4,3\rangle\). Using \(A\): \(6(x-2)+4y+3z=0 \Rightarrow 6x+4y+3z=12\). Check \(A=(2,0,0)\): \(6(2)+0+0=12\) ✓. (Dividing by 12 gives \(\frac{x}{2}+\frac{y}{3}+\frac{z}{4}=1\) — the plane's intercepts are exactly \(2,3,4\), matching \(A,B,C\).)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-lines-in-space.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-vector-applications.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 10 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:10", "content/m09-vectors/ch10-planes-in-space.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

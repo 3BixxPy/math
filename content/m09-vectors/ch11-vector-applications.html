@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — Applications — Work, Distance &amp; Combining Techniques | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 11 of 12</div>
+  <div class="eyebrow">Chapter 11 · concept:vector-applications</div>
+  <h1>Applications — Work, Distance, and Combining Techniques</h1>
+  <p class="subtitle">No new rule this chapter — everything here is Chapters 1–10's toolkit, pointed at two problems worth solving by name: how much energy a force actually transfers, and how far a point sits from a line or plane.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Physics engines compute <strong>work</strong> constantly — how much energy a force actually delivers along a motion — and it's a direct, named use of the dot product, not a new idea. Distance from a point to a wall, a floor, or a rail is another constant physics-engine query, and it falls straight out of Chapter 6's projection once you frame it right: project the vector from a known point on the surface to your target point onto the surface's normal (or perpendicular) direction, and the length of that projection <em>is</em> the distance.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Work (a dot-product application)</div>
+    <div class="eqn"><div class="eq-body">\[ W = \vec F \cdot \vec d \]</div><div class="eq-num" id="eq-9-11-1">(9.11.1)</div></div>
+    <p>Work done by a constant force \(\vec F\) over a displacement \(\vec d\) is exactly their dot product — nothing more than Chapter 4's formula, applied to physics quantities instead of abstract vectors. By equation 9.5.1, this equals \(|\vec F||\vec d|\cos\theta\): full force magnitude times full displacement magnitude only when they point the same way (\(\theta=0\)); less whenever they don't; zero when the force is perpendicular to the motion; negative when the force opposes the motion (like friction).</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Method — distance from a point to a plane</div>
+    <div class="eqn"><div class="eq-body">\[ \text{distance from } Q \text{ to the plane} \;=\; \frac{|\vec n\cdot(Q-P_0)|}{|\vec n|} \]</div><div class="eq-num" id="eq-9-11-2">(9.11.2)</div></div>
+    <p>where \(P_0\) is any known point on the plane and \(\vec n\) is its normal (Chapter 10). This is exactly the absolute value of Chapter 6's scalar projection (equation 9.6.2) of \(\vec v = Q-P_0\) onto \(\vec n\) — the "shadow" \(\vec v\) casts along the direction that already points straight out of the plane, which is precisely how far off the plane \(Q\) sits. The same idea handles a point-to-line distance in 2D: project the vector from a known point on the line onto a direction perpendicular to the line instead of onto the line's own direction.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — work done, and a distance to a plane</div>
+    <p>Find the work done by force \(\vec F=\langle3,4\rangle\) over displacement \(\vec d=\langle6,0\rangle\). Then find the distance from \(Q=(2,2,2)\) to the plane \(x+y+z=1\) (Chapter 10's worked-example plane, with \(P_0=(1,0,0)\) and \(\vec n=\langle1,1,1\rangle\)).</p>
+    <details class="step" open><summary>Step 1 — work, via the dot product (equation 9.11.1)</summary>
+      <div class="step-body"><p>\(W = \langle3,4\rangle\cdot\langle6,0\rangle = 3(6)+4(0) = 18\)</p></div></details>
+    <details class="step"><summary>Step 2 — for the distance, find v = Q − P₀</summary>
+      <div class="step-body"><p>\(\vec v = Q-P_0 = (2,2,2)-(1,0,0) = \langle1,2,2\rangle\)</p></div></details>
+    <details class="step"><summary>Step 3 — apply equation 9.11.2</summary>
+      <div class="step-body"><p>\(\vec n\cdot\vec v = 1(1)+1(2)+1(2) = 5\), \(\ |\vec n| = \sqrt3\). Distance \(= \dfrac{|5|}{\sqrt3} \approx 2.89\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The force does \(18\) units of work. \(Q=(2,2,2)\) sits about \(2.89\) units off the plane \(x+y+z=1\) — a single projection, straight from Chapter 6, answers a question that sounds like it needs something new.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Computing work as \(|\vec F||\vec d|\) — multiplying magnitudes instead of taking the dot product. For the worked example's numbers, that would give \(|\langle3,4\rangle||\langle6,0\rangle| = 5(6) = 30\) instead of the correct \(18\) — silently wrong by a full third, because the force and displacement in that example don't point the same way. This error gives the <em>right</em> answer only in the one special case where \(\vec F\) and \(\vec d\) are perfectly aligned (\(\theta=0\), so \(\cos\theta=1\)); for any other angle, multiplying magnitudes overcounts the work, since it silently assumes 100% of the force acted along the motion.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="12">
+    <div class="label">Try it yourself</div>
+    <p>Find the work done by force \(\langle3,0\rangle\) over displacement \(\langle4,0\rangle\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="e.g. 12" aria-label="work done">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Compute the work done by force \(\langle2,5\rangle\) over displacement \(\langle3,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(W=2(3)+5(0)=6\)</div></details></li>
+    <li>A force \(\langle0,10\rangle\) (straight up) acts over a purely horizontal displacement \(\langle4,0\rangle\). Find the work done, and explain why the result makes physical sense.
+      <details class="answer"><summary></summary><div class="ans-body">\(W=0(4)+10(0)=0\). A force perpendicular to the motion (Chapter 5's orthogonality test) transfers no energy along that motion at all — lifting hard doesn't help you move sideways.</div></details></li>
+    <li>Find the distance from the point \((3,0,0)\) to the plane \(2x+2y+z=6\) (a point on the plane: \((0,3,0)\)).
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec v=(3,0,0)-(0,3,0)=\langle3,-3,0\rangle\); \(\vec n=\langle2,2,1\rangle\), \(|\vec n|=3\). \(\vec n\cdot\vec v = 6-6+0=0\) — the point is actually ON the plane.</div></details></li>
+    <li>Find the distance from the origin to the plane \(2x+2y+z=6\) (use the point \((3,0,0)\) on the plane).
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec v=(0,0,0)-(3,0,0)=\langle-3,0,0\rangle\); \(\vec n\cdot\vec v=-6\); \(|\vec n|=3\). Distance \(=6/3=2\).</div></details></li>
+    <li>Compute the work done by force \(\langle1,1\rangle\) over displacement \(\langle1,-1\rangle\). Explain why the answer is exactly zero even though neither vector is the zero vector.
+      <details class="answer"><summary></summary><div class="ans-body">\(W=1(1)+1(-1)=0\). The two vectors are perpendicular (dot product zero), so none of the force acts along the displacement's direction.</div></details></li>
+    <li>A constant 10 N force acts at a \(60°\) angle to a straight-line 5 m displacement. Find the work done.
+      <details class="answer"><summary></summary><div class="ans-body">\(W=|F||d|\cos\theta = 10(5)\cos60° = 50(0.5)=25\) J.</div></details></li>
+    <li class="tag">bonus — A force \(\vec F=\langle-2,0\rangle\) acts exactly opposite a displacement \(\vec d=\langle5,0\rangle\) (like friction). Compute the work done. What does the negative sign mean physically?
+      <details class="answer"><summary></summary><div class="ans-body">\(W=-2(5)+0(0)=-10\). Negative work means the force removes energy from the motion (decelerates it) rather than adding to it.</div></details></li>
+    <li class="tag">bonus — Find the distance from \((5,5,5)\) to the plane \(z=0\) using equation 9.11.2, and check it matches what you'd expect just by reading the z-coordinate.
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec n=\langle0,0,1\rangle\), \(P_0=(0,0,0)\), \(\vec v=\langle5,5,5\rangle\). \(\vec n\cdot\vec v=5\), \(|\vec n|=1\). Distance \(=5\) — exactly the z-coordinate, as expected, since the xy-plane's normal is purely vertical.</div></details></li>
+    <li class="tag">bonus — Explain why \(|\vec F||\vec d|\) overestimates work whenever force and displacement aren't perfectly aligned, but gives the exact right answer when they are.
+      <details class="answer"><summary></summary><div class="ans-body">\(W=|\vec F||\vec d|\cos\theta\) always. \(\cos\theta=1\) only when \(\theta=0\) (perfect alignment), making \(|\vec F||\vec d|\cos\theta=|\vec F||\vec d|\) exactly. For any other angle, \(\cos\theta<1\), so the true work is strictly less than the naive product of magnitudes.</div></details></li>
+    <li class="tag">bonus — A robot arm applies force \(\langle0,0,8\rangle\) (straight up) while a payload moves along displacement \(\langle3,3,0\rangle\) (purely horizontal). Compute the work done. Does the size of the force change the answer here?
+      <details class="answer"><summary></summary><div class="ans-body">\(W=0(3)+0(3)+8(0)=0\), regardless of how large the vertical force is — a purely vertical force does zero work on a purely horizontal motion, no matter its magnitude.</div></details></li>
+    <li class="tag">challenge — A force \(\vec F=\langle6,8\rangle\) (magnitude 10) acts over a displacement of magnitude 4 that makes a \(30°\) angle with \(\vec F\). Find the exact work done. Then find what displacement magnitude, applied by a force of magnitude 5 perfectly aligned with it instead (\(\theta=0\)), would produce the <em>same</em> amount of work.
+      <details class="answer"><summary></summary><div class="ans-body">\(W = 10(4)\cos30° = 40\left(\dfrac{\sqrt3}{2}\right) = 20\sqrt3 \approx 34.64\). For a perfectly aligned 5 N force to match that: \(20\sqrt3 = 5\,d \Rightarrow d = 4\sqrt3 \approx 6.93\) m.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch10-planes-in-space.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch12-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 11 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:11", "content/m09-vectors/ch11-vector-applications.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

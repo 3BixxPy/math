@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — Lines in Space — Vector &amp; Parametric Form | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+<script src="../../assets/plot.js?v=8"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 9 of 12</div>
+  <div class="eyebrow">Chapter 9 · concept:vector-equation-of-a-line</div>
+  <h1>Lines in Space — Vector &amp; Parametric Form</h1>
+  <p class="subtitle">The first eight chapters built up a full vector toolkit in isolation. Starting here, that toolkit gets used to describe actual geometric objects — starting with the simplest one: a line.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>This is the exact math behind a raycast: start at a point \(P_0\), pick a direction \(\vec d\), and step along it — \(P_0 + \vec d\), \(P_0 + 2\vec d\), \(P_0+3\vec d\), or any fractional step in between. Every point the ray ever touches is \(P_0\) plus <em>some</em> multiple of \(\vec d\); nothing more is needed to describe the entire infinite line, because a line is exactly "a starting point, plus every possible amount of travel in one fixed direction."</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — vector (parametric) equation of a line</div>
+    <div class="eqn"><div class="eq-body">\[ \vec r(t) \;=\; P_0 + t\,\vec d \]</div><div class="eq-num" id="eq-9-9-1">(9.9.1)</div></div>
+    <p>where \(P_0\) is any known point on the line, \(\vec d\) is a nonzero <strong>direction vector</strong> for the line, and \(t\) is a real-number parameter — one real number in, one point in space out. As \(t\) ranges over all real numbers, \(\vec r(t)\) traces out every point on the line. \(t=0\) always gives back \(P_0\) exactly; positive \(t\) moves forward along \(\vec d\), negative \(t\) moves backward (behind the starting point — usually excluded for an actual raycast, which only wants \(t\ge0\), but mathematically part of the full line).</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>t: <input type="range" id="ln-t" min="-3" max="3" step="0.25" value="1"></label>
+  </div>
+  <div class="plot-wrap"><svg id="ln-svg" viewBox="0 0 340 340" width="340" height="340"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="ln-readout">t = 1.00 → r(t) = (3.00, 2.00)</span></div>
+  <p class="subtitle" style="text-align:center;">Line: \(P_0=(1,1)\), \(\vec d=\langle2,1\rangle\). Green: the direction vector \(\vec d\), drawn from \(P_0\). Purple: the current point \(\vec r(t)=P_0+t\vec d\) as \(t\) slides — exactly one raycast step.</p>
+  <script>
+  (function () {
+    const svg = document.getElementById("ln-svg");
+    const slider = document.getElementById("ln-t");
+    const opts = { xMin: -5, xMax: 7, yMin: -4, yMax: 8, xStep: 1, yStep: 1, width: 340, height: 340, pad: 30 };
+    const P0 = [1, 1], d = [2, 1];
+    function arrow(svg, px, py, x1, y1, x2, y2, color, width) {
+      width = width || 2.5;
+      const X1 = px(x1), Y1 = py(y1), X2 = px(x2), Y2 = py(y2);
+      svg.appendChild(MCPlot.el("line", { x1: X1, y1: Y1, x2: X2, y2: Y2, style: "stroke:" + color + "; stroke-width:" + width }));
+      const ang = Math.atan2(Y2 - Y1, X2 - X1), len = 8 + width, spread = 0.42;
+      const ax = X2 - len * Math.cos(ang - spread), ay = Y2 - len * Math.sin(ang - spread);
+      const bx = X2 - len * Math.cos(ang + spread), by = Y2 - len * Math.sin(ang + spread);
+      svg.appendChild(MCPlot.el("polygon", { points: X2 + "," + Y2 + " " + ax + "," + ay + " " + bx + "," + by, style: "fill:" + color }));
+    }
+    function update() {
+      const t = parseFloat(slider.value);
+      const { px, py } = MCPlot.drawAxes(svg, opts);
+      const e1x = P0[0] - 3 * d[0], e1y = P0[1] - 3 * d[1];
+      const e2x = P0[0] + 3 * d[0], e2y = P0[1] + 3 * d[1];
+      MCPlot.dashedLine(svg, e1x, e1y, e2x, e2y, opts, "plot-dashed");
+      arrow(svg, px, py, P0[0], P0[1], P0[0] + d[0], P0[1] + d[1], "var(--ex-border)");
+      svg.appendChild(MCPlot.el("circle", { cx: px(P0[0]), cy: py(P0[1]), r: 4.5, style: "fill:var(--accent)" }));
+      const p0Label = MCPlot.el("text", { x: px(P0[0]) - 10, y: py(P0[1]) + 16, "text-anchor": "middle", style: "font-size:12px; fill:var(--accent); font-family:sans-serif; font-weight:700" });
+      p0Label.textContent = "P₀";
+      svg.appendChild(p0Label);
+      const rx = P0[0] + t * d[0], ry = P0[1] + t * d[1];
+      svg.appendChild(MCPlot.el("circle", { cx: px(rx), cy: py(ry), r: 5.5, style: "fill:var(--thm-border)" }));
+      const rLabel = MCPlot.el("text", { x: px(rx), y: py(ry) - 10, "text-anchor": "middle", style: "font-size:12px; fill:var(--thm-border); font-family:sans-serif; font-weight:700" });
+      rLabel.textContent = "r(t)";
+      svg.appendChild(rLabel);
+      document.getElementById("ln-readout").textContent =
+        "t = " + t.toFixed(2) + " → r(t) = (" + rx.toFixed(2) + ", " + ry.toFixed(2) + ")";
+    }
+    slider.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — the line through two points, and where it crosses the xy-plane</div>
+    <p>Find the vector equation of the line through \(A=(1,2,-3)\) and \(B=(3,0,3)\). Then find where it crosses the xy-plane (\(z=0\)).</p>
+    <details class="step" open><summary>Step 1 — find a direction vector (Chapter 1: head minus tail)</summary>
+      <div class="step-body"><p>\(\vec d = \overrightarrow{AB} = B - A = \langle3-1,\ 0-2,\ 3-(-3)\rangle = \langle2,-2,6\rangle\)</p></div></details>
+    <details class="step"><summary>Step 2 — plug \(A\) and \(\vec d\) into equation 9.9.1</summary>
+      <div class="step-body"><p>\(\vec r(t) = \langle1,2,-3\rangle + t\langle2,-2,6\rangle = \langle1+2t,\ 2-2t,\ -3+6t\rangle\)</p></div></details>
+    <details class="step"><summary>Step 3 — set the z-component to 0 and solve for t</summary>
+      <div class="step-body"><p>\(-3+6t=0 \ \Rightarrow\ t=\dfrac12\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>At \(t=\frac12\): \(x=1+2(\frac12)=2\), \(y=2-2(\frac12)=1\). The line crosses the xy-plane at \((2,1,0)\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Plugging a <em>point</em> in for \(\vec d\) instead of a direction vector — writing \(\vec r(t)=A+tB\) instead of \(\vec r(t)=A+t(B-A)\). Equation 9.9.1 needs a displacement (Chapter 1's whole distinction between vectors and points), not a location. Using a raw point as if it were a direction gives a formula that doesn't actually pass through both \(A\) and \(B\) at any two values of \(t\) — always compute \(\vec d\) as head-minus-tail first.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="(5,2,0)|<5,2,0>|⟨5,2,0⟩">
+    <div class="label">Try it yourself</div>
+    <p>For \(\vec r(t) = (1,0,0) + t\langle2,1,0\rangle\), find the point at \(t=2\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. (5,2,0)" aria-label="point on line at t=2">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Write the vector equation of the line through \(P_0=(2,-1,0)\) with direction \(\vec d=\langle1,3,-2\rangle\), and find the point at \(t=2\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec r(t)=\langle2+t,-1+3t,-2t\rangle\); at \(t=2\): \((4,5,-4)\).</div></details></li>
+    <li>Find a direction vector for the line through \(A=(0,0,0)\) and \(B=(3,3,3)\), and write \(\vec r(t)\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec d = B-A=\langle3,3,3\rangle\); \(\vec r(t)=\langle3t,3t,3t\rangle\). (Any nonzero scalar multiple of \(\vec d\), like \(\langle1,1,1\rangle\), describes the exact same line.)</div></details></li>
+    <li>At what value of \(t\) does \(\vec r(t)=(0,0,0)+t\langle1,2,3\rangle\) reach the point \((2,4,6)\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(t=2\) — check all three components: \(1(2)=2\), \(2(2)=4\), \(3(2)=6\). All consistent, confirming the point is really on the line.</div></details></li>
+    <li>Does the point \((1,1,1)\) lie on \(\vec r(t)=(0,0,0)+t\langle2,2,2\rangle\)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes, at \(t=0.5\): every component gives \(2(0.5)=1\), consistently.</div></details></li>
+    <li>Find where \(\vec r(t)=(2,3,-6)+t\langle0,0,2\rangle\) crosses the xy-plane.
+      <details class="answer"><summary></summary><div class="ans-body">\(-6+2t=0\Rightarrow t=3\). Point: \((2,3,0)\).</div></details></li>
+    <li>A raycast starts at the origin with direction \(\langle0,0,-1\rangle\) (straight down). Write \(\vec r(t)\) and find where it hits the ground plane \(z=-5\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec r(t)=\langle0,0,-t\rangle\). Solve \(-t=-5\Rightarrow t=5\). Hit point: \((0,0,-5)\).</div></details></li>
+    <li class="tag">bonus — Two different points on the same line can each serve as \(P_0\), giving equations that look different. Explain why that isn't a contradiction.
+      <details class="answer"><summary></summary><div class="ans-body">A line is the full <em>set</em> of points it passes through, not a unique formula. Any point on it works as \(P_0\), and any nonzero scalar multiple of a valid direction vector works as \(\vec d\) — different-looking \((P_0,\vec d)\) pairs can trace out the identical set of points.</div></details></li>
+    <li class="tag">bonus — Can \(t\) be negative in equation 9.9.1? What does a negative \(t\) represent for a raycast?
+      <details class="answer"><summary></summary><div class="ans-body">Yes, mathematically — negative \(t\) gives points behind \(P_0\), opposite \(\vec d\)'s direction. An actual raycast usually restricts to \(t\ge0\) since it only cares about what's ahead of the ray's start.</div></details></li>
+    <li class="tag">bonus — Show that \(P_0\) itself always satisfies equation 9.9.1, and name the value of \(t\) it corresponds to.
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec r(0)=P_0+0\cdot\vec d=P_0\) — always true at \(t=0\), regardless of what \(\vec d\) is.</div></details></li>
+    <li class="tag">bonus — What goes wrong if \(\vec d=\langle0,0,0\rangle\) is used in equation 9.9.1?
+      <details class="answer"><summary></summary><div class="ans-body">\(\vec r(t)=P_0\) for every \(t\) — it doesn't trace a line at all, just sits at the single point \(P_0\). A valid direction vector for a line must be nonzero.</div></details></li>
+    <li class="tag">challenge — Lines \(\vec r_1(t)=(1,0,0)+t\langle1,1,0\rangle\) and \(\vec r_2(s)=(0,1,0)+s\langle1,-1,0\rangle\) — find their intersection point by setting the two forms equal and solving for \(t\) and \(s\).
+      <details class="answer"><summary></summary><div class="ans-body">\(x\): \(1+t=s\). \(y\): \(t=1-s\). Substituting \(s=1+t\) into the second: \(t=1-(1+t)=-t\Rightarrow t=0\), so \(s=1\). Both give the point \((1,0,0)\): \(\vec r_1(0)=(1,0,0)\) and \(\vec r_2(1)=(0+1,\ 1-1,\ 0)=(1,0,0)\). ✓</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch08-cross-product-geometry.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch10-planes-in-space.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 9 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:9", "content/m09-vectors/ch09-lines-in-space.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

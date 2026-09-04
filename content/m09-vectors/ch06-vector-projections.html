@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Vector Projections | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+<script src="../../assets/plot.js?v=8"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 6 of 12</div>
+  <div class="eyebrow">Chapter 6 · concept:vector-projection</div>
+  <h1>Vector Projections</h1>
+  <p class="subtitle">Chapter 5's diagram already showed a hint of this: the dashed "shadow" a vector casts onto another vector's line. This chapter turns that shadow into a formula you can compute exactly.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Think about a top-down collision response: an object moving with velocity \(\vec u\) hits a wall running in direction \(\vec v\). To make it slide along the wall instead of stopping dead, you need to split \(\vec u\) into two pieces — the part running <em>along</em> the wall (which should survive the collision) and the part running <em>into</em> the wall (which should get cancelled). That "part of \(\vec u\) running along \(\vec v\)" is exactly a <strong>projection</strong>: how much of one vector points in another vector's direction, expressed as an actual vector (or, if you only need the length of that piece, a single signed number).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — vector and scalar projection</div>
+    <div class="eqn"><div class="eq-body">\[ \operatorname{proj}_{\vec v}(\vec u) \;=\; \left(\frac{\vec u\cdot\vec v}{|\vec v|^2}\right)\vec v \]</div><div class="eq-num" id="eq-9-6-1">(9.6.1)</div></div>
+    <p>The <strong>vector projection</strong> of \(\vec u\) onto \(\vec v\) — the actual "along-\(\vec v\)" piece of \(\vec u\), still a vector, still pointing along \(\vec v\)'s line.</p>
+    <div class="eqn"><div class="eq-body">\[ \operatorname{comp}_{\vec v}(\vec u) \;=\; \frac{\vec u\cdot\vec v}{|\vec v|} \]</div><div class="eq-num" id="eq-9-6-2">(9.6.2)</div></div>
+    <p>The <strong>scalar projection</strong> — just the signed length of that shadow (positive if \(\vec u\) leans toward \(\vec v\)'s direction, negative if it leans away). Notice \(\operatorname{proj}_{\vec v}(\vec u) = \operatorname{comp}_{\vec v}(\vec u)\cdot\hat v\): the scalar projection is a length, \(\hat v\) is a direction, and (length)\(\times\)(direction) rebuilds the full vector projection.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>u₁ (x): <input type="range" id="pr-ux" min="-2" max="7" step="0.5" value="1"></label>
+    <label>u₂ (y): <input type="range" id="pr-uy" min="-2" max="7" step="0.5" value="4"></label>
+  </div>
+  <div class="plot-wrap"><svg id="pr-svg" viewBox="0 0 340 340" width="340" height="340"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="pr-readout">u = ⟨1,4⟩, v = ⟨4,1⟩ → comp_v(u) = 1.94, proj_v(u) = ⟨1.88,0.47⟩</span></div>
+  <p class="subtitle" style="text-align:center;">Green: \(u\), adjustable. Blue: fixed \(v=\langle4,1\rangle\), with its full line dashed through the origin. Dashed red: the "shadow" dropped straight from \(u\)'s tip onto that line. Purple: \(\operatorname{proj}_v(u)\), the vector from the origin to where the shadow lands.</p>
+  <script>
+  (function () {
+    const svg = document.getElementById("pr-svg");
+    const sux = document.getElementById("pr-ux");
+    const suy = document.getElementById("pr-uy");
+    const opts = { xMin: -3, xMax: 9, yMin: -3, yMax: 9, xStep: 1, yStep: 1, width: 340, height: 340, pad: 30 };
+    const v = [4, 1];
+    function arrow(svg, px, py, x1, y1, x2, y2, color, width) {
+      width = width || 2.5;
+      const X1 = px(x1), Y1 = py(y1), X2 = px(x2), Y2 = py(y2);
+      svg.appendChild(MCPlot.el("line", { x1: X1, y1: Y1, x2: X2, y2: Y2, style: "stroke:" + color + "; stroke-width:" + width }));
+      const ang = Math.atan2(Y2 - Y1, X2 - X1), len = 8 + width, spread = 0.42;
+      const ax = X2 - len * Math.cos(ang - spread), ay = Y2 - len * Math.sin(ang - spread);
+      const bx = X2 - len * Math.cos(ang + spread), by = Y2 - len * Math.sin(ang + spread);
+      svg.appendChild(MCPlot.el("polygon", { points: X2 + "," + Y2 + " " + ax + "," + ay + " " + bx + "," + by, style: "fill:" + color }));
+    }
+    function update() {
+      const ux = parseFloat(sux.value), uy = parseFloat(suy.value);
+      const { px, py } = MCPlot.drawAxes(svg, opts);
+      MCPlot.dashedLine(svg, -1.2 * v[0], -1.2 * v[1], 2.2 * v[0], 2.2 * v[1], opts, "plot-dashed");
+      const dot = ux * v[0] + uy * v[1];
+      const vLenSq = v[0] * v[0] + v[1] * v[1];
+      const vLen = Math.sqrt(vLenSq);
+      const t = dot / vLenSq;
+      const px_ = t * v[0], py_ = t * v[1];
+      const comp = dot / vLen;
+      MCPlot.dashedLine(svg, ux, uy, px_, py_, opts, "");
+      svg.lastChild.setAttribute("style", "stroke:var(--mis-border); stroke-width:1.5; stroke-dasharray:4 3");
+      arrow(svg, px, py, 0, 0, v[0], v[1], "var(--accent)");
+      arrow(svg, px, py, 0, 0, ux, uy, "var(--ex-border)");
+      arrow(svg, px, py, 0, 0, px_, py_, "var(--thm-border)", 3);
+      document.getElementById("pr-readout").textContent =
+        "u = ⟨" + ux + "," + uy + "⟩, v = ⟨" + v[0] + "," + v[1] + "⟩ → comp_v(u) = " + comp.toFixed(2) + ", proj_v(u) = ⟨" + px_.toFixed(2) + "," + py_.toFixed(2) + "⟩";
+    }
+    sux.addEventListener("input", update);
+    suy.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — an axis-aligned case, then a general one</div>
+    <p>Project \(\langle3,4\rangle\) onto \(\langle1,0\rangle\). Then project \(\langle2,3\rangle\) onto \(\langle1,1\rangle\).</p>
+    <details class="step" open><summary>Step 1 — the axis-aligned case: project ⟨3,4⟩ onto ⟨1,0⟩</summary>
+      <div class="step-body"><p>\(\vec u\cdot\vec v = 3(1)+4(0)=3\), \(|\vec v|^2=1\). \(\operatorname{proj}_{\vec v}(\vec u) = \left(\dfrac{3}{1}\right)\langle1,0\rangle = \langle3,0\rangle\) — exactly \(\vec u\)'s x-component, and nothing else. That's a good sanity check: projecting onto a coordinate axis should just isolate that coordinate, and it does.</p></div></details>
+    <details class="step"><summary>Step 2 — a non-axis-aligned case: project ⟨2,3⟩ onto ⟨1,1⟩</summary>
+      <div class="step-body"><p>\(\vec u\cdot\vec v = 2(1)+3(1)=5\), \(|\vec v|^2 = 1^2+1^2=2\). \(\operatorname{proj}_{\vec v}(\vec u) = \left(\dfrac{5}{2}\right)\langle1,1\rangle = \langle2.5,\ 2.5\rangle\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\operatorname{proj}_{\langle1,0\rangle}\langle3,4\rangle = \langle3,0\rangle\), and \(\operatorname{proj}_{\langle1,1\rangle}\langle2,3\rangle = \langle2.5,2.5\rangle\). Same formula both times — the axis-aligned case just makes it easy to check by eye first.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Dividing by \(|\vec v|\) once instead of \(|\vec v|^2\) in equation 9.6.1 — an easy formula to misremember. Here's why it needs the square: one factor of \(1/|\vec v|\) turns \(\vec v\) into a unit direction (\(\hat v\)); the second factor of \(1/|\vec v|\) scales that direction by the correct signed length, \(\operatorname{comp}_{\vec v}(\vec u)\). Drop one factor and you get a vector pointing the right way but the wrong length — off by a factor of \(|\vec v|\), silently, unless you check by eye against a simple case (like the axis-aligned example above).</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2.121|2.1213|3/sqrt(2)|3/sqrt2|1.5sqrt(2)|1.5sqrt2" data-tolerance="0.01">
+    <div class="label">Try it yourself</div>
+    <p>Find the scalar projection of \(\langle3,0\rangle\) onto \(\langle1,1\rangle\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 2.121 or 3/sqrt(2)" aria-label="scalar projection">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the scalar projection of \(\langle5,0\rangle\) onto \(\langle0,3\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=0\), so \(\operatorname{comp}=0\) — perpendicular vectors cast no shadow at all.</div></details></li>
+    <li>Find the vector projection of \(\langle2,5\rangle\) onto \(\langle1,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=2\), \(|v|^2=1\): \(\operatorname{proj}=\langle2,0\rangle\) — again, just the x-component.</div></details></li>
+    <li>Find the vector projection of \(\langle1,2\rangle\) onto \(\langle3,4\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=3+8=11\), \(|v|^2=25\): \(\operatorname{proj}=\dfrac{11}{25}\langle3,4\rangle=\langle1.32,1.76\rangle\).</div></details></li>
+    <li>Find the scalar projection of \(\langle-2,3\rangle\) onto \(\langle4,0\rangle\). What does the sign tell you?
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=-8\), \(|v|=4\): \(\operatorname{comp}=-2\). Negative means \(\langle-2,3\rangle\) leans <em>away</em> from \(\langle4,0\rangle\)'s direction, not toward it.</div></details></li>
+    <li>Find the scalar projection of \(\langle6,8\rangle\) onto \(\langle0,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=8\), \(|v|=1\): \(\operatorname{comp}=8\) — the y-component, isolated.</div></details></li>
+    <li>A wall runs in direction \(\langle1,1\rangle\). An incoming velocity is \(\langle2,-2\rangle\), heading straight at the wall perpendicular to it. Find the vector projection of the velocity onto the wall direction, and explain what a result of \(\langle0,0\rangle\) means physically.
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=2(1)+(-2)(1)=0\), so \(\operatorname{proj}=\langle0,0\rangle\). Physically: none of this velocity runs along the wall — it's moving straight into it, so a wall-sliding collision response would leave zero along-wall motion.</div></details></li>
+    <li class="tag">bonus — Explain, in your own words, why the vector projection formula divides by \(|\vec v|^2\) rather than \(|\vec v|\).
+      <details class="answer"><summary></summary><div class="ans-body">One factor of \(1/|\vec v|\) turns \(\vec v\) into the unit direction \(\hat v\); the other scales that direction by the correct signed length \(\operatorname{comp}_{\vec v}(\vec u)\). Together: \(\left(\dfrac{\vec u\cdot\vec v}{|\vec v|}\right)\cdot\dfrac{\vec v}{|\vec v|}=\left(\dfrac{\vec u\cdot\vec v}{|\vec v|^2}\right)\vec v\).</div></details></li>
+    <li class="tag">bonus — Show that \(\operatorname{proj}_{\vec v}(\vec u) = \operatorname{comp}_{\vec v}(\vec u)\cdot\hat v\), and explain why that's exactly "a length times a direction."
+      <details class="answer"><summary></summary><div class="ans-body">\(\operatorname{comp}_{\vec v}(\vec u)\hat v = \dfrac{\vec u\cdot\vec v}{|\vec v|}\cdot\dfrac{\vec v}{|\vec v|} = \dfrac{\vec u\cdot\vec v}{|\vec v|^2}\vec v = \operatorname{proj}_{\vec v}(\vec u)\). Any vector decomposes as (its length) \(\times\) (its unit direction) — this is that decomposition applied to the projection.</div></details></li>
+    <li class="tag">bonus — Can a scalar projection ever come out negative? What does that mean geometrically?
+      <details class="answer"><summary></summary><div class="ans-body">Yes, whenever the angle between \(\vec u\) and \(\vec v\) exceeds \(90°\) (so \(\vec u\cdot\vec v<0\)). Geometrically, \(\vec u\)'s shadow falls on the opposite ray from \(\vec v\), not on \(\vec v\)'s own side of the origin.</div></details></li>
+    <li class="tag">bonus — Project \(\langle5,5\rangle\) onto itself. What do you get, and why does that make sense?
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=50\), \(|v|^2=50\): \(\operatorname{proj}=\langle5,5\rangle\) — itself, unchanged. A vector's shadow onto its own line is the whole vector; there's nothing of it pointing off that line.</div></details></li>
+    <li class="tag">challenge — Let \(\vec u=\langle3,4\rangle\), \(\vec v=\langle1,0\rangle\). Compute \(\vec u - \operatorname{proj}_{\vec v}(\vec u)\), then verify with a dot product that this "leftover" vector is perpendicular to \(\vec v\). Why does this always work, for any \(\vec u,\vec v\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(\operatorname{proj}_{\vec v}(\vec u)=\langle3,0\rangle\) (Worked example, Step 1). \(\vec u - \operatorname{proj}_{\vec v}(\vec u) = \langle3,4\rangle-\langle3,0\rangle=\langle0,4\rangle\). Check: \(\langle0,4\rangle\cdot\langle1,0\rangle=0\) — perpendicular. This always works because the projection is built to capture <em>exactly</em> the part of \(\vec u\) that lies along \(\vec v\); whatever's left over, by construction, has zero component in that direction — which is precisely what a dot product of 0 with \(\vec v\) means (Chapter 5).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-dot-product-and-angles.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-the-cross-product.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 6 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:6", "content/m09-vectors/ch06-vector-projections.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

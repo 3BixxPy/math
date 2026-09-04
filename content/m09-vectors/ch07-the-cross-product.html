@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — The Cross Product | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 7 of 12</div>
+  <div class="eyebrow">Chapter 7 · concept:cross-product-definition</div>
+  <h1>The Cross Product</h1>
+  <p class="subtitle">The dot product took two vectors and gave back a number. This one takes two 3D vectors and gives back a third <em>vector</em> — one with a genuinely useful geometric job: pointing straight out of whatever plane the first two vectors lie in.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p><code>Vector3.Cross(edge1, edge2)</code> is how a surface normal actually gets computed in practice — take two edge vectors of a triangle or polygon, cross them, and the result points perpendicular to the whole surface. Every lighting calculation in Chapter 5 needed a normal vector from somewhere; this is where it usually comes from. Unlike the dot product, this one is defined only in 3D (there's no meaningful "cross product" of two arrows confined to a flat 2D plane — perpendicular-to-a-plane only means something once there's a third dimension to point into).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — the cross product (3D only)</div>
+    <div class="eqn"><div class="eq-body">\[ \vec u \times \vec v \;=\; \big\langle\, u_2v_3-u_3v_2,\ \ u_3v_1-u_1v_3,\ \ u_1v_2-u_2v_1 \,\big\rangle \]</div><div class="eq-num" id="eq-9-7-1">(9.7.1)</div></div>
+    <p>Three components, each built from the two components you <em>skip</em> — the first output component ignores subscript 1, the second ignores subscript 2, the third ignores subscript 3, cross-multiplied and subtracted. Nobody memorizes this by staring at the subscripts, though; in practice it's computed with a mnemonic that looks like a determinant, with the standard basis vectors \(\mathbf i,\mathbf j,\mathbf k\) (i.e. \(\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\)) sitting across the top row:</p>
+    <p style="text-align:center;">\[ \vec u \times \vec v \;=\; \begin{vmatrix} \mathbf i & \mathbf j & \mathbf k \\ u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3 \end{vmatrix} \;=\; (u_2v_3-u_3v_2)\mathbf i \;-\; (u_1v_3-u_3v_1)\mathbf j \;+\; (u_1v_2-u_2v_1)\mathbf k \]</p>
+    <p>Expand that and it's exactly equation 9.7.1 — the middle term picks up a minus sign that flips \(u_1v_3-u_3v_1\) into \(u_3v_1-u_1v_3\), matching the second component above. This determinant layout is worth learning by pattern, not by re-deriving the subscripts every time — it's genuinely how it gets computed by hand.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — the right-hand rule</div>
+    <p>The direction of \(\vec u\times\vec v\) follows the <strong>right-hand rule</strong>: point your right hand's fingers along \(\vec u\), curl them toward \(\vec v\) (through the smaller angle between them), and your thumb points along \(\vec u\times\vec v\). This is the same convention behind why a standard right-handed 3D coordinate system has \(\mathbf i\times\mathbf j=\mathbf k\) — curling from \(+x\) toward \(+y\) points the thumb along \(+z\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — crossing two basis vectors</div>
+    <p>Compute \(\langle1,0,0\rangle \times \langle0,1,0\rangle\).</p>
+    <details class="step" open><summary>Step 1 — label components: u = ⟨1,0,0⟩, v = ⟨0,1,0⟩</summary>
+      <div class="step-body"><p>\(u_1=1,u_2=0,u_3=0\); \(v_1=0,v_2=1,v_3=0\).</p></div></details>
+    <details class="step"><summary>Step 2 — apply equation 9.7.1, one component at a time</summary>
+      <div class="step-body"><p>First: \(u_2v_3-u_3v_2 = 0(0)-0(1)=0\). Second: \(u_3v_1-u_1v_3 = 0(0)-1(0)=0\). Third: \(u_1v_2-u_2v_1 = 1(1)-0(0)=1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\langle1,0,0\rangle \times \langle0,1,0\rangle = \langle0,0,1\rangle\) — that is, \(\mathbf i\times\mathbf j=\mathbf k\), exactly what the right-hand rule predicts: fingers along \(+x\), curl toward \(+y\), thumb points along \(+z\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming \(\vec u\times\vec v = \vec v\times\vec u\), the way the dot product doesn't care about order (Chapter 4's challenge problem). The cross product is <strong>anticommutative</strong>: \(\vec u\times\vec v = -(\vec v\times\vec u)\), never simply equal. Swap the order in the worked example above and the sign flips: \(\langle0,1,0\rangle\times\langle1,0,0\rangle = \langle0,0,-1\rangle = \mathbf j\times\mathbf i\), the exact negative of \(\mathbf i\times\mathbf j=\langle0,0,1\rangle\). Order matters here in a way it never did for the dot product — get the order backward and every downstream normal or right-hand-rule direction comes out flipped.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="<0,0,1>|(0,0,1)|⟨0,0,1⟩">
+    <div class="label">Try it yourself</div>
+    <p>Compute \(\langle1,0,0\rangle \times \langle0,1,0\rangle\).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. <0,0,1>" aria-label="cross product of basis vectors">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Compute \(\langle0,1,0\rangle \times \langle0,0,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle1,0,0\rangle\) — this is \(\mathbf j\times\mathbf k=\mathbf i\).</div></details></li>
+    <li>Compute \(\langle0,0,1\rangle \times \langle1,0,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle0,1,0\rangle\) — this is \(\mathbf k\times\mathbf i=\mathbf j\).</div></details></li>
+    <li>Compute \(\langle1,2,3\rangle \times \langle4,5,6\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle 2(6)-3(5),\ 3(4)-1(6),\ 1(5)-2(4)\rangle = \langle-3,6,-3\rangle\)</div></details></li>
+    <li>Compute \(\langle2,0,0\rangle \times \langle0,3,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle0,0,6\rangle\)</div></details></li>
+    <li>Compute \(\langle1,1,0\rangle \times \langle1,0,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle 1(1)-0(0),\ 0(1)-1(1),\ 1(0)-1(1)\rangle = \langle1,-1,-1\rangle\)</div></details></li>
+    <li>Compute both \(\langle1,0,0\rangle \times \langle0,0,1\rangle\) and \(\langle0,0,1\rangle \times \langle1,0,0\rangle\), and confirm they're negatives of each other.
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle1,0,0\rangle\times\langle0,0,1\rangle=\langle0,-1,0\rangle\); \(\langle0,0,1\rangle\times\langle1,0,0\rangle=\langle0,1,0\rangle\) — exact negatives, as anticommutativity requires.</div></details></li>
+    <li class="tag">bonus — What is \(\vec u\times\vec u\) for any vector \(\vec u\)? Verify with \(\vec u=\langle2,-1,3\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Always the zero vector \(\langle0,0,0\rangle\). Check: \(\langle2,-1,3\rangle\times\langle2,-1,3\rangle = \langle(-1)(3)-3(-1),\ 3(2)-2(3),\ 2(-1)-(-1)2\rangle=\langle0,0,0\rangle\).</div></details></li>
+    <li class="tag">bonus — The cross product is only defined in 3D. What would you have to do first to "cross" the 2D vectors \(\langle2,3\rangle\) and \(\langle1,4\rangle\)?
+      <details class="answer"><summary></summary><div class="ans-body">Extend each with a third component of 0 — treat them as \(\langle2,3,0\rangle\) and \(\langle1,4,0\rangle\) lying flat in the xy-plane — then apply equation 9.7.1 normally.</div></details></li>
+    <li class="tag">bonus — Using only the right-hand rule (not the formula), predict the direction of \(\langle1,0,0\rangle\times\langle0,-1,0\rangle\). Then compute it to check.
+      <details class="answer"><summary></summary><div class="ans-body">Fingers along \(+x\), curling toward \(-y\), puts the thumb along \(-z\). Computing: \(\langle1,0,0\rangle\times\langle0,-1,0\rangle=\langle0,0,-1\rangle\) — matches the prediction.</div></details></li>
+    <li class="tag">bonus — A 2D "cross product" convention some engines use computes just \(u_1v_2-u_2v_1\), a single number. Compute this for \(u=\langle3,1\rangle,\ v=\langle2,4\rangle\), and explain how it relates to the true 3D cross product of \(\langle3,1,0\rangle\times\langle2,4,0\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(3(4)-1(2)=10\). It's exactly the \(\mathbf k\)-component of the full 3D cross product — when both vectors lie in the xy-plane (\(z=0\)), the first two components of \(\vec u\times\vec v\) automatically vanish, leaving only this one number. (Chapter 8 returns to this distinction.)</div></details></li>
+    <li class="tag">challenge — Compute \(\langle1,2,3\rangle \times \langle2,4,6\rangle\) (notice the second vector is exactly twice the first). Explain, algebraically, why crossing any vector \(\vec u\) with any scalar multiple \(k\vec u\) of itself must always give the zero vector.
+      <details class="answer"><summary></summary><div class="ans-body">Computing directly gives \(\langle0,0,0\rangle\). In general, each component of \(\vec u\times(k\vec u)\) has the form \(u_i(ku_j)-u_j(ku_i)=k(u_iu_j-u_ju_i)=k(0)=0\) — the subtraction always cancels exactly, because both terms are the same product \(u_iu_j\) scaled by the same \(k\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-vector-projections.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-cross-product-geometry.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 7 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:7", "content/m09-vectors/ch07-the-cross-product.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

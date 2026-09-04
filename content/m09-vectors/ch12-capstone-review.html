@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — Module 9 Capstone | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=8">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 9 · Linear Algebra — Vectors</a> → Chapter 12 of 12</div>
+  <div class="eyebrow">Chapter 12 · Module 9 capstone</div>
+  <h1>Module 9 Capstone — Mixed Review &amp; Diagnostic Retake</h1>
+  <p class="subtitle">Eleven chapters, shuffled together, plus a look back at the vector intuition this whole module started from — now with formal notation, and two named products attached to skills that were already there.</p>
+
+  <div class="block intuition">
+    <div class="label">Why mixed, not grouped by chapter</div>
+    <p>Same reasoning as every capstone since Module 0: a problem that doesn't announce its own chapter is the real test of whether an idea moved into durable memory, not just short-term pattern matching against a chapter title. This module built three threads in sequence — the vector itself (Chapters 1–3: notation, arithmetic, length), the two products it supports (Chapters 4–8: dot for alignment and angles, cross for area and normals), and then both threads put to work describing actual geometric objects (Chapters 9–11: lines, planes, work, distance). Shuffling the review is one more chance to notice how naturally those three threads lean on each other now.</p>
+  </div>
+
+  <h2>Mixed review (all of Module 9)</h2>
+  <ol class="problems">
+    <li>Find the vector from point \((2,5)\) to point \((7,1)\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle5,-4\rangle\) (Chapter 1).</div></details></li>
+    <li>Compute \(\langle4,-1\rangle + 3\langle1,2\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle4,-1\rangle+\langle3,6\rangle=\langle7,5\rangle\) (Chapter 2).</div></details></li>
+    <li>Normalize \(\langle0,-7\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Magnitude \(7\), so \(\hat v=\langle0,-1\rangle\) (Chapter 3).</div></details></li>
+    <li>Compute \(\langle2,-3,1\rangle \cdot \langle1,1,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(2-3+1=0\) (Chapter 4).</div></details></li>
+    <li>Are \(\langle3,-1\rangle\) and \(\langle1,3\rangle\) perpendicular?
+      <details class="answer"><summary></summary><div class="ans-body">\(3(1)+(-1)(3)=0\) — yes (Chapter 5).</div></details></li>
+    <li>Find the angle between \(\langle2,0\rangle\) and \(\langle1,\sqrt3\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=2\), \(|u|=2\), \(|v|=2\). \(\cos\theta=2/4=0.5 \Rightarrow \theta=60°\) (Chapter 5).</div></details></li>
+    <li>Find the scalar projection of \(\langle4,3\rangle\) onto \(\langle0,1\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Dot \(=3\), \(|v|=1\): \(\operatorname{comp}=3\) (Chapter 6).</div></details></li>
+    <li>Compute \(\langle2,1,0\rangle \times \langle0,1,2\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle 1(2)-0(1),\ 0(0)-2(2),\ 2(1)-1(0)\rangle = \langle2,-4,2\rangle\) (Chapter 7).</div></details></li>
+    <li>Find the area of the parallelogram spanned by \(\langle3,0,0\rangle\) and \(\langle0,0,5\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">Cross product \(=\langle0,-15,0\rangle\), magnitude \(15\) (Chapter 8).</div></details></li>
+    <li>For \(\vec r(t)=(2,1,0)+t\langle0,1,3\rangle\), find the point at \(t=3\).
+      <details class="answer"><summary></summary><div class="ans-body">\((2,\ 1+3,\ 0+9) = (2,4,9)\) (Chapter 9).</div></details></li>
+    <li>Find the normal vector to the plane \(5x-2y+z=8\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\langle5,-2,1\rangle\) (Chapter 10).</div></details></li>
+    <li>Compute the work done by force \(\langle7,0\rangle\) over displacement \(\langle0,7\rangle\).
+      <details class="answer"><summary></summary><div class="ans-body">\(7(0)+0(7)=0\) — perpendicular force and motion (Chapter 11).</div></details></li>
+  </ol>
+
+  <hr class="div">
+
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">Two problems that each need multiple chapters' tools working together, not just one technique per problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 1 — vector between points</span><span>Ch. 7 — cross product</span><span>Ch. 10 — plane equation</span></div>
+    <p>Find the equation of the plane through \(A=(1,2,3)\), \(B=(4,0,3)\), and \(C=(1,5,0)\), start to finish.</p>
+    <details class="step" open><summary>Step 1 — find two edge vectors from A (Ch. 1)</summary>
+      <div class="step-body"><p>\(\overrightarrow{AB}=B-A=\langle3,-2,0\rangle\), \(\overrightarrow{AC}=C-A=\langle0,3,-3\rangle\)</p></div></details>
+    <details class="step"><summary>Step 2 — cross them to get a normal (Ch. 7)</summary>
+      <div class="step-body"><p>\(\vec n = \overrightarrow{AB}\times\overrightarrow{AC} = \big\langle (-2)(-3)-0(3),\ \ 0(0)-3(-3),\ \ 3(3)-(-2)(0)\big\rangle = \langle6,9,9\rangle\), or simplified, \(\langle2,3,3\rangle\).</p></div></details>
+    <details class="step"><summary>Step 3 — plug into the plane equation (Ch. 10)</summary>
+      <div class="step-body"><p>Using \(A=(1,2,3)\): \(2(x-1)+3(y-2)+3(z-3)=0 \Rightarrow 2x+3y+3z=17\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(2x+3y+3z=17\). Check: \(B=(4,0,3)\Rightarrow8+0+9=17\) ✓, \(C=(1,5,0)\Rightarrow2+15+0=17\) ✓. Three separate chapters — finding a displacement, crossing it with another, plugging the result into a dot-product plane equation — chained into one routine calculation.</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 4/5 — dot product &amp; angle</span><span>Ch. 6 — projection</span></div>
+    <p>For \(\vec u=\langle3,4\rangle\) and \(\vec v=\langle4,3\rangle\): find the angle between them, then find the scalar and vector projection of \(\vec u\) onto \(\vec v\).</p>
+    <details class="step" open><summary>Step 1 — one dot product and both magnitudes, needed for everything that follows</summary>
+      <div class="step-body"><p>\(\vec u\cdot\vec v = 3(4)+4(3)=24\). \(|\vec u|=\sqrt{9+16}=5\), \(|\vec v|=\sqrt{16+9}=5\).</p></div></details>
+    <details class="step"><summary>Step 2 — the angle (Ch. 5)</summary>
+      <div class="step-body"><p>\(\cos\theta = \dfrac{24}{5(5)} = \dfrac{24}{25} = 0.96 \ \Rightarrow\ \theta = \cos^{-1}(0.96) \approx 16.26°\)</p></div></details>
+    <details class="step"><summary>Step 3 — the projections (Ch. 6), reusing the same dot product</summary>
+      <div class="step-body"><p>\(\operatorname{comp}_{\vec v}(\vec u) = \dfrac{24}{5} = 4.8\). \(\operatorname{proj}_{\vec v}(\vec u) = \dfrac{24}{25}\langle4,3\rangle = \langle3.84,\ 2.88\rangle\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The angle is about \(16.26°\); the scalar projection is \(4.8\); the vector projection is \(\langle3.84,2.88\rangle\). Notice the exact same dot product, \(24\), fed both formulas — Chapters 5 and 6 aren't two unrelated tricks, they're two different follow-up questions asked of the same underlying computation.</p></div></details>
+  </div>
+
+  <h2>Diagnostic retake</h2>
+  <p class="subtitle">The original diagnostic flagged real vector intuition from years of 3D game-dev coding and physics — magnitude and direction, normalizing, and both products, all already used correctly, just called through a library function instead of derived. These three ask you to do, by hand, exactly what that library function was doing underneath.</p>
+
+  <div class="card">
+    <p><strong>1.</strong> A call to <code>Vector3.Dot(a, b)</code> returns \(0.5\), and both \(a\) and \(b\) happen to be unit vectors. What angle does that correspond to?</p>
+    <p class="subtitle">Originally: this exact computation has been running in your code for years — the diagnostic found the intuition, just not the formal machinery behind it.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(\cos\theta=0.5 \Rightarrow \theta=60°\). See Chapters 4–5.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>2.</strong> Two edge vectors of a mesh triangle are \(\langle1,0,0\rangle\) and \(\langle0,0,-1\rangle\). Compute their cross product and state what it represents.</p>
+    <p class="subtitle">Originally: <code>Vector3.Cross</code> called constantly for exactly this purpose, with no need (until now) to know how it worked.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(\langle1,0,0\rangle\times\langle0,0,-1\rangle=\langle0,1,0\rangle\) — a normal vector pointing straight up (\(+y\)), perpendicular to the triangle spanned by those two edges. See Chapters 7–8.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>3.</strong> A raw direction vector \(\langle6,8,0\rangle\) needs to drive a movement-direction-only calculation (speed handled separately). What single operation has to happen first, and what's the result?</p>
+    <p class="subtitle">Originally: <code>.normalized</code>, called reflexively, whenever only direction mattered.</p>
+    <details class="answer"><summary></summary><div class="ans-body">Normalize it: \(|\langle6,8,0\rangle|=10\), so \(\hat v = \langle0.6,0.8,0\rangle\). See Chapter 3.</div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Module 9 complete</div>
+    <p>From "a vector is a magnitude and a direction, exactly like a <code>Vector2</code> or <code>Vector3</code>" to a full toolkit built on top of that: component form and the vector/point distinction, addition/subtraction/scalar multiplication, magnitude and normalizing, the dot product both algebraically and geometrically (with the orthogonality test it gives for free), projections, the cross product both algebraically and geometrically (with the normal-vector and area readings it gives for free), and using all of it to write down lines and planes and to solve work and distance problems by name. Twelve chapters that took existing, correct intuition and gave it formal notation, proof, and a few genuinely new tools (the cross product chief among them) built directly on top of it. Module 10 (Linear Algebra — Systems &amp; Matrices) is next — start with <a href="../m10-matrices/ch01-systems-of-equations-review.html">its first chapter</a> whenever you're ready.</p>
+  </div>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch11-vector-applications.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="../../roadmap.html">View full roadmap</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 9 · Linear Algebra — Vectors</span>
+  <span>Chapter 12 / 12 — Module complete</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=8"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m09:12", "content/m09-vectors/ch12-capstone-review.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
