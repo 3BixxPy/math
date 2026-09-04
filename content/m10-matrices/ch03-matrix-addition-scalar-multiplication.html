@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Matrix Addition &amp; Scalar Multiplication | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 10 · Linear Algebra — Systems &amp; Matrices</a> → Chapter 3 of 12</div>
+  <div class="eyebrow">Chapter 3 · concept:matrix-addition-scalar-multiplication</div>
+  <h1>Matrix Addition &amp; Scalar Multiplication</h1>
+  <p class="subtitle">Chapter 2 pointed out that a vector is just a one-row or one-column matrix. Fittingly, the two simplest matrix operations are the exact same two operations Module 9 Chapter 2 taught for vectors — just applied to a bigger grid.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>These two operations are deliberately unglamorous: add matching entries, or multiply every entry by the same number. There's no new idea here beyond what vector addition and scalar multiplication already taught — the payoff is that this structural echo keeps repeating throughout linear algebra: matrices generalize vectors, and most "new" matrix operations turn out to be the vector version applied row by row or column by column.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Matrix addition</div>
+    <div class="eqn"><div class="eq-body">\[ (A+B)_{ij} = a_{ij} + b_{ij} \]</div><div class="eq-num" id="eq-10-3-1">(10.3.1)</div></div>
+    <p>Add entry-by-entry, in the same position. This is only defined when \(A\) and \(B\) have the <em>exact same dimensions</em> — you cannot add a \(2\times3\) matrix to a \(3\times2\) matrix, or even to a \(2\times2\) matrix, no matter how the numbers might line up. Subtraction works the same way, entry-by-entry, with the same dimension requirement.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Scalar multiplication</div>
+    <div class="eqn"><div class="eq-body">\[ (kA)_{ij} = k \cdot a_{ij} \]</div><div class="eq-num" id="eq-10-3-2">(10.3.2)</div></div>
+    <p>Multiply <em>every single entry</em> by the scalar \(k\). Unlike addition, scalar multiplication is always defined — there's no dimension requirement to check, since it only involves one matrix.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\), \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\). Find \(A+B\) and \(-1 \cdot A\).</p>
+    <details class="step" open><summary>Step 1 — add matching entries for A+B</summary>
+      <div class="step-body"><p>\(\begin{bmatrix} 1+5 & 2+6 \\ 3+7 & 4+8 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Step 2 — scalar multiply every entry of A by −1</summary>
+      <div class="step-body"><p>\(-1\cdot A = \begin{bmatrix} -1 & -2 \\ -3 & -4 \end{bmatrix}\) — every sign flips, since every entry got multiplied by \(-1\). This is also how matrix subtraction is defined under the hood: \(A-B = A + (-1)B\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Trying to add matrices of different dimensions — for example attempting \(\begin{bmatrix}1&2\\3&4\end{bmatrix} + \begin{bmatrix}5&6&7\\8&9&10\end{bmatrix}\) (\(2\times2\) plus \(2\times3\)). This is simply <strong>undefined</strong>, not "a matrix with some entries missing" — there is no matching entry in the first matrix for the third column of the second. Contrast this with scalar multiplication, which never has a dimension requirement at all: \(kA\) is always defined for any matrix \(A\) and any number \(k\). Before adding two matrices, always check dimensions match first — it takes one second and prevents a nonsense answer.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="12">
+    <div class="label">Try it yourself</div>
+    <p>Compute \(\begin{bmatrix}1&2\\3&4\end{bmatrix} + \begin{bmatrix}5&6\\7&8\end{bmatrix}\). What is the entry in row 2, column 2, of the sum?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 12" aria-label="Row 2, column 2 entry">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Compute \(\begin{bmatrix}2&-1\\0&3\end{bmatrix} + \begin{bmatrix}4&5\\-2&1\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}6&4\\-2&4\end{bmatrix}\)</div></details></li>
+    <li>Compute \(\begin{bmatrix}1&2\\3&4\end{bmatrix} - \begin{bmatrix}1&1\\1&1\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}0&1\\2&3\end{bmatrix}\)</div></details></li>
+    <li>Compute \(3\begin{bmatrix}1&-2\\0&5\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}3&-6\\0&15\end{bmatrix}\)</div></details></li>
+    <li>Compute \(-2\begin{bmatrix}4&0\\-1&3\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}-8&0\\2&-6\end{bmatrix}\)</div></details></li>
+    <li>Is \(\begin{bmatrix}1&2&3\end{bmatrix} + \begin{bmatrix}4\\5\\6\end{bmatrix}\) defined? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">No — the first is \(1\times3\) (row vector), the second is \(3\times1\) (column vector); different dimensions, so addition is undefined even though both have three numbers.</div></details></li>
+    <li>Compute \(2\begin{bmatrix}1&0\\0&1\end{bmatrix} + \begin{bmatrix}3&1\\-1&2\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}2&0\\0&2\end{bmatrix}+\begin{bmatrix}3&1\\-1&2\end{bmatrix}=\begin{bmatrix}5&1\\-1&4\end{bmatrix}\)</div></details></li>
+    <li class="tag">bonus — Compute \(\begin{bmatrix}0&1&2\end{bmatrix}+\begin{bmatrix}5&-1&3\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}5&0&5\end{bmatrix}\)</div></details></li>
+    <li class="tag">bonus — Compute \(\frac{1}{2}\begin{bmatrix}4&6\\-8&2\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}2&3\\-4&1\end{bmatrix}\)</div></details></li>
+    <li class="tag">bonus — Is \(\begin{bmatrix}1&2\\3&4\end{bmatrix}+\begin{bmatrix}1&2\\3&4\\5&6\end{bmatrix}\) defined? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">No — \(2\times2\) vs \(3\times2\); different number of rows.</div></details></li>
+    <li class="tag">bonus — Compute \(\begin{bmatrix}2&-3\\1&0\end{bmatrix} - 2\begin{bmatrix}1&1\\1&1\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}2&-3\\1&0\end{bmatrix}-\begin{bmatrix}2&2\\2&2\end{bmatrix}=\begin{bmatrix}0&-5\\-1&-2\end{bmatrix}\)</div></details></li>
+    <li class="tag">challenge — If \(A+B\) is defined and \(A\) is \(3\times5\), what must be true of \(B\)'s dimensions? If additionally \(2A-B\) must also be defined, does that add any further requirement?
+      <details class="answer"><summary></summary><div class="ans-body">\(B\) must also be \(3\times5\) — addition requires identical dimensions. \(2A\) is automatically \(3\times5\) too (scalar multiplication never changes dimensions), so \(2A-B\) needs no further requirement beyond the one already stated.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-matrices-intro.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-matrix-multiplication.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 10 · Linear Algebra — Systems &amp; Matrices</span>
+  <span>Chapter 3 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:3", "content/m10-matrices/ch03-matrix-addition-scalar-multiplication.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Matrices: Notation &amp; Types | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 10 · Linear Algebra — Systems &amp; Matrices</a> → Chapter 2 of 12</div>
+  <div class="eyebrow">Chapter 2 · concept:matrix-notation-types</div>
+  <h1>Matrices — Notation &amp; Types</h1>
+  <p class="subtitle">Chapter 1 ended by promising a systematic object to hold a whole system's numbers in one place. Here it is: the matrix, plus the handful of special shapes that show up constantly from here on.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A matrix is nothing exotic — it's just a grid of numbers with a fixed size and a fixed reading order (row, then column). What makes it powerful isn't the object itself, it's that once a system of equations is stored as a matrix (Chapter 5), the *same* small set of grid operations solves it regardless of whether it has 2 unknowns or 200. Before any of that, you need to be fluent with the vocabulary: how a matrix's size is stated, how to point at one specific number inside it, and the special shapes (row vectors, column vectors, square matrices, the identity matrix) that keep reappearing.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Matrix</div>
+    <div class="eqn"><div class="eq-body">\[ A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{bmatrix} \]</div><div class="eq-num" id="eq-10-2-1">(10.2.1)</div></div>
+    <p>A matrix is a rectangular array of numbers arranged in rows and columns. An \(m \times n\) matrix (read "\(m\) by \(n\)") has \(m\) rows and \(n\) columns — rows always come first in the notation. The entry in row \(i\), column \(j\) is written \(a_{ij}\) (first subscript = row, second = column). So \(a_{23}\) means "the entry in row 2, column 3," not row 3 column 2.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Special shapes</div>
+    <p><strong>Row vector:</strong> a matrix with exactly 1 row (a \(1 \times n\) matrix), e.g. \([\,3\ \ {-1}\ \ 5\,]\). <strong>Column vector:</strong> a matrix with exactly 1 column (an \(m \times 1\) matrix). These are exactly the vectors from Module 9 — a vector was never a separate kind of object from a matrix, it's just a matrix that happens to be one row or one column wide. Every vector-addition and dot-product idea from Module 9 carries forward unchanged; this module just widens the picture to grids with more than one row <em>and</em> more than one column. <strong>Square matrix:</strong> an \(n \times n\) matrix — same number of rows as columns. Only square matrices can have an inverse (previewed in Chapter 10). <strong>Identity matrix \(I\):</strong> a square matrix with 1's down the main diagonal and 0's everywhere else, e.g. the \(3\times3\) identity:</p>
+    <div class="eqn"><div class="eq-body">\[ I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} \]</div><div class="eq-num" id="eq-10-2-2">(10.2.2)</div></div>
+    <p>The identity matrix behaves like the number 1 does in ordinary multiplication — full details in Chapter 10.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>For \(A = \begin{bmatrix} 4 & -1 & 0 \\ 2 & 7 & 5 \end{bmatrix}\), state the dimensions of \(A\), and find \(a_{12}\) and \(a_{23}\).</p>
+    <details class="step" open><summary>Step 1 — count rows, then columns</summary>
+      <div class="step-body"><p>\(A\) has 2 rows and 3 columns, so \(A\) is \(2 \times 3\). Rows first, always — a \(2\times3\) matrix is not the same shape as a \(3\times2\) matrix, even though both have six entries.</p></div></details>
+    <details class="step"><summary>Step 2 — locate a₁₂: row 1, column 2</summary>
+      <div class="step-body"><p>Row 1 is \([4\ \ {-1}\ \ 0]\); its 2nd entry is \(-1\). So \(a_{12} = -1\).</p></div></details>
+    <details class="step"><summary>Step 3 — locate a₂₃: row 2, column 3</summary>
+      <div class="step-body"><p>Row 2 is \([2\ \ 7\ \ 5]\); its 3rd entry is \(5\). So \(a_{23} = 5\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Flipping rows and columns when stating a matrix's dimensions — calling a matrix with 3 rows and 2 columns "\(2\times3\)" instead of "\(3\times2\)." The convention is genuinely arbitrary (someone had to pick an order), which is exactly why it's easy to get backward under time pressure. Anchor it with a fixed phrase: "rows, then columns" — or picture "RC" like the initials of a name. The same swap shows up again in Chapter 4's compatibility rule for multiplying matrices, so it's worth fixing the habit now rather than later.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="3x2,3×2">
+    <div class="label">Try it yourself</div>
+    <p>A matrix has 3 rows and 2 columns. State its dimensions (format: <code>3x2</code>).</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 3x2" aria-label="Matrix dimensions">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>State the dimensions of \(\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(2\times3\)</div></details></li>
+    <li>State the dimensions of \(\begin{bmatrix} 7 \\ -2 \\ 0 \end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(3\times1\) — a column vector</div></details></li>
+    <li>For \(B = \begin{bmatrix} 1 & 0 & 5 \\ -3 & 2 & 8 \\ 6 & 1 & -4 \end{bmatrix}\), find \(b_{31}\).
+      <details class="answer"><summary></summary><div class="ans-body">Row 3, column 1: \(b_{31}=6\)</div></details></li>
+    <li>For the same \(B\), find \(b_{22}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(b_{22}=2\)</div></details></li>
+    <li>Is \(\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) a square matrix? Could it possibly have an inverse?
+      <details class="answer"><summary></summary><div class="ans-body">Yes, it's \(2\times2\) (square) — so it's at least a <em>candidate</em> for an inverse (not every square matrix has one; see Chapter 10).</div></details></li>
+    <li>Write the \(2\times2\) identity matrix \(I_2\).
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}\)</div></details></li>
+    <li class="tag">bonus — Is \([\,2\ \ {-5}\ \ 1\ \ 0\,]\) a row vector or column vector? State its dimensions.
+      <details class="answer"><summary></summary><div class="ans-body">Row vector, \(1\times4\)</div></details></li>
+    <li class="tag">bonus — A matrix has dimensions \(5\times1\). Is it a row vector, a column vector, or neither?
+      <details class="answer"><summary></summary><div class="ans-body">Column vector (exactly 1 column)</div></details></li>
+    <li class="tag">bonus — For \(C = \begin{bmatrix} 0 & -1 \\ 4 & 9 \end{bmatrix}\), find \(c_{12}\) and \(c_{21}\), and note they are not equal.
+      <details class="answer"><summary></summary><div class="ans-body">\(c_{12}=-1\), \(c_{21}=4\) — swapping the subscripts generally gives a different entry.</div></details></li>
+    <li class="tag">bonus — True or false: every square matrix is also both a row vector and a column vector.
+      <details class="answer"><summary></summary><div class="ans-body">False, unless it's \(1\times1\). A square matrix has equal rows and columns, but "row vector" and "column vector" specifically mean exactly 1 row or exactly 1 column — a \(3\times3\) square matrix is neither.</div></details></li>
+    <li class="tag">challenge — A matrix \(D\) has 4 rows and 6 columns. How many total entries does it have, and what are the valid ranges for the subscripts \(i\) and \(j\) in \(d_{ij}\)?
+      <details class="answer"><summary></summary><div class="ans-body">\(4\times6=24\) entries; \(i\) ranges 1–4 (rows), \(j\) ranges 1–6 (columns).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-systems-of-equations-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-matrix-addition-scalar-multiplication.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 10 · Linear Algebra — Systems &amp; Matrices</span>
+  <span>Chapter 2 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:2", "content/m10-matrices/ch02-matrices-intro.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

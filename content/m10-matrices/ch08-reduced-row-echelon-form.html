@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Reduced Row Echelon Form &amp; Gauss-Jordan | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 10 · Linear Algebra — Systems &amp; Matrices</a> → Chapter 8 of 12</div>
+  <div class="eyebrow">Chapter 8 · concept:reduced-row-echelon-form</div>
+  <h1>Reduced Row Echelon Form &amp; Gauss-Jordan Elimination</h1>
+  <p class="subtitle">Chapter 7 stopped at row echelon form and needed a back-substitution pass to finish. This chapter pushes the same row operations a little further so that step becomes unnecessary — the answer ends up sitting directly in the matrix.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Row echelon form (Chapter 6) only guarantees a staircase shape — it says nothing about what's <em>above</em> each leading entry. Gauss-Jordan elimination keeps applying the same three legal row operations (Chapter 6) past that point, clearing out entries above the staircase too and scaling every leading entry to exactly \(1\). The reward: no back-substitution arithmetic at all, the solution is just read off the constants column.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Reduced row echelon form (RREF)</div>
+    <p>A matrix is in RREF when it satisfies row echelon form's two conditions (Chapter 6) <em>plus</em> two more: (3) every leading entry equals exactly \(1\), and (4) each leading \(1\) is the <em>only</em> nonzero entry in its entire column (above and below it, not just below). Row echelon form only fixes the staircase shape; RREF fixes the staircase <em>and</em> clears every other entry sharing a pivot's column.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — continuing Chapter 7's system to RREF</div>
+    <p>Chapter 7 reduced <code>x+y+z=6, 2x+y−z=1, x−y+2z=5</code> to row echelon form: \(\left[\begin{array}{ccc|c}1&1&1&6\\0&-1&-3&-11\\0&0&7&21\end{array}\right]\). Continue to RREF.</p>
+    <details class="step" open><summary>Step 1 — scale every row so its leading entry becomes 1</summary>
+      <div class="step-body"><p>\(R_2 \to -R_2\): \([0,1,3\ |\ 11]\). \(R_3 \to \tfrac17 R_3\): \([0,0,1\ |\ 3]\). Matrix: \(\left[\begin{array}{ccc|c}1&1&1&6\\0&1&3&11\\0&0&1&3\end{array}\right]\)</p></div></details>
+    <details class="step"><summary>Step 2 — clear above the column-3 pivot: R1 → R1 − R3, R2 → R2 − 3R3</summary>
+      <div class="step-body"><p>\(R_1-R_3=[1,1,0\ |\ 3]\). \(R_2-3R_3=[0,1,0\ |\ 2]\). Matrix: \(\left[\begin{array}{ccc|c}1&1&0&3\\0&1&0&2\\0&0&1&3\end{array}\right]\)</p></div></details>
+    <details class="step"><summary>Step 3 — clear above the column-2 pivot: R1 → R1 − R2</summary>
+      <div class="step-body"><p>\(R_1-R_2=[1,0,0\ |\ 1]\).</p></div></details>
+    <details class="step"><summary>Result — RREF</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ \left[\begin{array}{ccc|c}1&0&0&1\\0&1&0&2\\0&0&1&3\end{array}\right] \]</div><div class="eq-num" id="eq-10-8-1">(10.8.1)</div></div>
+      <p>Read directly: \(x=1,\ y=2,\ z=3\) — no back-substitution needed, the same answer Chapters 1 and 7 already found, now sitting in plain sight in the constants column.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Stopping at row echelon form and calling it RREF — checking only for the staircase shape (conditions 1–2) and missing that RREF also demands each leading entry be exactly \(1\) (condition 3) <em>and</em> be the only nonzero entry in its column, above included (condition 4). The matrix \(\left[\begin{array}{ccc|c}1&1&1&6\\0&-1&-3&-11\\0&0&7&21\end{array}\right]\) from Chapter 7 is a perfectly valid row echelon form — but it is <em>not</em> RREF: its leading entries are \(1,-1,7\) (not all \(1\)), and column 2's pivot (\(-1\), row 2) shares its column with the \(1\) sitting above it in row 1 (condition 4 forbids that stray entry). Both conditions have to be checked, column by column — the staircase shape alone only guarantees row echelon form, nothing more.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1">
+    <div class="label">Try it yourself</div>
+    <p>In reduced row echelon form, what value must every leading (pivot) entry equal?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 1" aria-label="Required pivot value">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is \(\left[\begin{array}{cc|c}1&0&3\\0&1&5\end{array}\right]\) in RREF?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — both leading entries are 1, and each is the only nonzero entry in its column.</div></details></li>
+    <li>Is \(\left[\begin{array}{cc|c}1&2&3\\0&1&5\end{array}\right]\) in RREF? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">No — it's in row echelon form, but the \(2\) above the column-2 pivot violates condition 4 (the pivot must be the <em>only</em> nonzero entry in its column).</div></details></li>
+    <li>Continue \(\left[\begin{array}{cc|c}1&2&5\\0&1&3\end{array}\right]\) to RREF.
+      <details class="answer"><summary></summary><div class="ans-body">\(R_1\to R_1-2R_2 = [1,0\ |\ -1]\). Result: \(\left[\begin{array}{cc|c}1&0&-1\\0&1&3\end{array}\right]\), reading \(x=-1, y=3\).</div></details></li>
+    <li>Continue \(\left[\begin{array}{ccc|c}1&0&2&4\\0&2&4&8\\0&0&1&3\end{array}\right]\) to RREF.
+      <details class="answer"><summary></summary><div class="ans-body">Scale \(R_2\to\tfrac12 R_2=[0,1,2|4]\). Clear column 3: \(R_1\to R_1-2R_3=[1,0,0|-2]\); \(R_2\to R_2-2R_3=[0,1,0|-2]\). Result: \(\left[\begin{array}{ccc|c}1&0&0&-2\\0&1&0&-2\\0&0&1&3\end{array}\right]\), reading \(x=-2,y=-2,z=3\).</div></details></li>
+    <li>Is \(\left[\begin{array}{cc|c}2&0&6\\0&1&4\end{array}\right]\) in RREF? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">No — row 1's leading entry is \(2\), not \(1\) (violates condition 3), even though its column is otherwise clear.</div></details></li>
+    <li>Fix the matrix from the previous problem so it is in RREF.
+      <details class="answer"><summary></summary><div class="ans-body">\(R_1\to \tfrac12 R_1 = [1,0|3]\). Result: \(\left[\begin{array}{cc|c}1&0&3\\0&1&4\end{array}\right]\), now valid RREF.</div></details></li>
+    <li class="tag">bonus — Is \(\left[\begin{array}{ccc|c}1&0&0&2\\0&0&1&5\\0&1&0&-1\end{array}\right]\) in RREF? (Careful — check the staircase condition too.)
+      <details class="answer"><summary></summary><div class="ans-body">No — even though every leading entry is 1 and each is alone in its column, row 2's leading entry (column 3) is not strictly left of row 3's leading entry (column 2); RREF still requires the staircase (row echelon) shape first, which is violated by the row order here.</div></details></li>
+    <li class="tag">bonus — Continue \(\left[\begin{array}{cc|c}1&3&7\\0&1&2\end{array}\right]\) to RREF.
+      <details class="answer"><summary></summary><div class="ans-body">\(R_1\to R_1-3R_2=[1,0|1]\). Result: \(\left[\begin{array}{cc|c}1&0&1\\0&1&2\end{array}\right]\), reading \(x=1,y=2\).</div></details></li>
+    <li class="tag">bonus — Is \(\left[\begin{array}{ccc|c}1&0&0&5\\0&1&0&0\\0&0&1&-3\end{array}\right]\) in RREF?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — this is the identity matrix augmented with constants; it satisfies all four RREF conditions, and reads directly as \(x=5,y=0,z=-3\).</div></details></li>
+    <li class="tag">bonus — Explain why RREF is unique for a given system (there's only one RREF a matrix can reduce to) while row echelon form is not (a system can reduce to several different-looking valid REF matrices).
+      <details class="answer"><summary></summary><div class="ans-body">REF only fixes the staircase shape, and different valid sequences of row operations (e.g. different scaling choices) can leave different numbers above the staircase — many REF matrices represent the same system. RREF's extra conditions (leading 1's, cleared columns) pin every entry down completely, leaving no room for variation — however you get there, the fully reduced matrix comes out identical.</div></details></li>
+    <li class="tag">challenge — Take the row echelon form \(\left[\begin{array}{ccc|c}1&-1&2&3\\0&2&-2&4\\0&0&4&8\end{array}\right]\) all the way to RREF, showing each row operation.
+      <details class="answer"><summary></summary><div class="ans-body">Scale: \(R_2\to\tfrac12 R_2=[0,1,-1|2]\); \(R_3\to\tfrac14R_3=[0,0,1|2]\). Clear column 3: \(R_1\to R_1-2R_3=[1,-1,0|-1]\); \(R_2\to R_2+R_3=[0,1,0|4]\). Clear column 2: \(R_1\to R_1+R_2=[1,0,0|3]\). Result: \(\left[\begin{array}{ccc|c}1&0&0&3\\0&1&0&4\\0&0&1&2\end{array}\right]\), reading \(x=3,y=4,z=2\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-gaussian-elimination.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-types-of-solutions.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 10 · Linear Algebra — Systems &amp; Matrices</span>
+  <span>Chapter 8 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:8", "content/m10-matrices/ch08-reduced-row-echelon-form.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

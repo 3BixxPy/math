@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Systems of Equations: Why We Need a Better Method | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 10 · Linear Algebra — Systems &amp; Matrices</a> → Chapter 1 of 12</div>
+  <div class="eyebrow">Chapter 1 · concept:linear-systems-review</div>
+  <h1>Systems of Equations — Why We Need a Better Method</h1>
+  <p class="subtitle">Module 0 Chapter 14 solved two-variable systems by substitution and elimination — fast, clean, no real bookkeeping required. This chapter pushes past two variables and shows exactly where that same by-hand approach starts to break down, which is the entire reason this module exists.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Elimination and substitution are not wrong for three, four, or ten variables — they're still logically valid. The problem is <em>practical</em>: with two equations you eliminate one variable and you're done. With three equations you might need to eliminate the same variable from two different pairs, then eliminate again to finish — and every extra variable multiplies how many combinations of equations you have to track. By the time you reach five or six unknowns (completely ordinary in real applications: circuits, chemical balancing, computer graphics, economic models), ad hoc elimination stops being "harder" and starts being genuinely error-prone, even for someone who understands every step perfectly. This module builds a systematic procedure — matrices and row reduction — that scales to any number of variables and equations using the exact same mechanical steps every time, with no cleverness required. Nothing about <em>what</em> a solution means changes from here on; what changes is <em>how reliably</em> you find it.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Linear system in n variables</div>
+    <div class="eqn"><div class="eq-body">\[ \begin{cases} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\ a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\ \quad\vdots \\ a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m \end{cases} \]</div><div class="eq-num" id="eq-10-1-1">(10.1.1)</div></div>
+    <p>Same idea as Module 0's two-variable case, just with \(n\) unknowns and \(m\) equations instead of two and two. A solution is a full list of values \((x_1, x_2, \ldots, x_n)\) that makes <em>every</em> equation true at once — geometrically, two planes meeting along a line rather than two lines meeting at a point (three variables), or higher-dimensional analogues you can't literally picture but can still solve for.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — solving three variables the old way</div>
+    <p>Solve by ad hoc substitution/elimination: <code>x + y + z = 6</code>, <code>2x + y − z = 1</code>, <code>x − y + 2z = 5</code></p>
+    <details class="step" open><summary>Step 1 — pick a variable to eliminate first (z), using equations 1 and 2</summary>
+      <div class="step-body"><p>Adding eq. 1 and eq. 2 cancels \(z\) (it appears as \(+z\) and \(-z\)): \((x+y+z)+(2x+y-z) = 6+1 \Rightarrow 3x+2y=7\). Call this new equation (4).</p></div></details>
+    <details class="step"><summary>Step 2 — eliminate z again, this time using equations 1 and 3</summary>
+      <div class="step-body"><p>Equation 1 has \(+z\), equation 3 has \(+2z\), so scale eq. 1 by 2 first: \(2x+2y+2z=12\). Subtracting eq. 3 (\(x-y+2z=5\)) cancels \(z\): \((2x-x)+(2y-(-y))+(2z-2z)=12-5 \Rightarrow x+3y=7\). Call this equation (5). Notice equation 1 just got reused for a <em>second</em> elimination — this is the bookkeeping this chapter is warning you about.</p></div></details>
+    <details class="step"><summary>Step 3 — solve the resulting two-variable system, (4) and (5)</summary>
+      <div class="step-body"><p>\(3x+2y=7\) and \(x+3y=7\). From (5): \(x=7-3y\). Substitute into (4): \(3(7-3y)+2y=7 \Rightarrow 21-9y+2y=7 \Rightarrow -7y=-14 \Rightarrow y=2\).</p></div></details>
+    <details class="step"><summary>Step 4 — back-substitute to find x, then z</summary>
+      <div class="step-body"><p>\(x=7-3(2)=1\). Then from the original equation 1: \(1+2+z=6 \Rightarrow z=3\).</p></div></details>
+    <details class="step"><summary>Result — and the real lesson</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ x=1,\ y=2,\ z=3 \]</div><div class="eq-num" id="eq-10-1-2">(10.1.2)</div></div>
+      <p>Check: \(1+2+3=6\) ✓, \(2(1)+2-3=1\) ✓, \(1-2+2(3)=5\) ✓. The answer is correct, but count the decisions you had to make along the way: which variable to eliminate, which pair of equations to combine, which equation to reuse and by what scale factor — twice. With three variables that's manageable if you're careful. This exact system reappears in Chapters 5, 7, and 8, solved by an increasingly mechanical procedure that needs none of that improvisation — same answer, far less room to lose track of yourself.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Losing track of which equation you've already used to eliminate which variable. In the worked example above, equation 1 got combined with equation 2 <em>and</em> equation 3 — it's easy, especially working quickly, to instead accidentally recombine equations 2 and 3 with each other for a "new" elimination, not realizing you're about to eliminate a variable you've already handled, or to reuse an equation you already scaled without re-deriving it from the original. The result is either a redundant equation that tells you nothing new, or a genuine arithmetic mismatch that looks like the system has no solution when it actually does. With two variables there's only one pair of equations, so this can't happen — it first becomes a real risk at three variables and gets worse from there. That is exactly the gap this module's systematic notation (Chapter 5 onward) closes: a matrix keeps every equation in a fixed row, so "have I used this one yet" is never in doubt.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="3,x=3">
+    <div class="label">Try it yourself</div>
+    <p>Warm-up, straight from Module 0: solve <code>x + y = 5</code>, <code>x − y = 1</code>. What is \(x\)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 3" aria-label="Value of x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Solve by elimination: <code>x + y = 7</code>, <code>x − y = 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x=5, y=2\)</div></details></li>
+    <li>Solve by substitution: <code>y = 2x + 1</code>, <code>3x + y = 16</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(3x+2x+1=16 \Rightarrow x=3, y=7\)</div></details></li>
+    <li>Solve by elimination: <code>2x + y = 9</code>, <code>x − y = 0</code>
+      <details class="answer"><summary></summary><div class="ans-body">Add: \(3x=9 \Rightarrow x=3, y=3\)</div></details></li>
+    <li>Solve by ad hoc elimination: <code>x + y + z = 9</code>, <code>x − y + z = 3</code>, <code>x + y − z = 1</code>
+      <details class="answer"><summary></summary><div class="ans-body">Eq1−Eq2: \(2y=6 \Rightarrow y=3\). Eq1−Eq3: \(2z=8 \Rightarrow z=4\). Then \(x=9-3-4=2\). \((x,y,z)=(2,3,4)\)</div></details></li>
+    <li>Solve by ad hoc elimination: <code>2x + y + z = 5</code>, <code>x + 2y + z = 4</code>, <code>x + y + 2z = 6</code>
+      <details class="answer"><summary></summary><div class="ans-body">Subtracting pairs: Eq1−Eq2 gives \(x-y=1\); Eq2−Eq3 gives \(y-z=-2\). So \(x=y+1\) and \(y=z-2\). Substituting both into Eq3: \((z-1)+(z-2)+2z=6 \Rightarrow 4z-3=6 \Rightarrow z=2.25\), then \(y=0.25\), \(x=1.25\). \((x,y,z)=(1.25,\ 0.25,\ 2.25)\) — check in Eq1: \(2(1.25)+0.25+2.25=5\) ✓. Deliberately non-integer: a problem "looking" symmetric doesn't make the bookkeeping any lighter.</div></details></li>
+    <li>Solve by substitution: <code>x = 2y − 3</code>, <code>2x + y = 4</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2(2y-3)+y=4 \Rightarrow 5y=10 \Rightarrow y=2, x=1\)</div></details></li>
+    <li class="tag">bonus — Solve by elimination: <code>3x − 2y = 4</code>, <code>x + 2y = 8</code>
+      <details class="answer"><summary></summary><div class="ans-body">Add: \(4x=12 \Rightarrow x=3, y=2.5\)</div></details></li>
+    <li class="tag">bonus — Solve by substitution: <code>y = x − 1</code>, <code>4x − 3y = 11</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(4x-3(x-1)=11 \Rightarrow x+3=11 \Rightarrow x=8, y=7\)</div></details></li>
+    <li class="tag">bonus — Solve by ad hoc elimination: <code>x + y + z = 12</code>, <code>2x − y + z = 5</code>, <code>x + y − z = 2</code>
+      <details class="answer"><summary></summary><div class="ans-body">Eq1+Eq3-style: from Eq1 and Eq3, \(2z=10 \Rightarrow z=5\). Then \(x+y=7\) (from Eq1) and \(2x-y=0\) (from Eq2 with \(z=5\): \(2x-y+5=5\Rightarrow 2x-y=0\)). Adding: \(3x=7 \Rightarrow x=7/3, y=14/3\). \((x,y,z)=(7/3,14/3,5)\)</div></details></li>
+    <li class="tag">bonus — Solve by elimination, scaling one equation: <code>3x + y = 13</code>, <code>x + 2y = 11</code>
+      <details class="answer"><summary></summary><div class="ans-body">Scale first ×2: \(6x+2y=26\); subtract second: \(5x=15 \Rightarrow x=3, y=4\)</div></details></li>
+    <li class="tag">challenge — Solve by ad hoc elimination, and as you go, explicitly note in words which equation you use for each elimination step (this is the bookkeeping habit the rest of the module replaces with structure): <code>x + 2y + z = 8</code>, <code>2x + y − z = 1</code>, <code>x − y + 2z = 7</code>
+      <details class="answer"><summary></summary><div class="ans-body">Eq1+Eq2 eliminates z: \(3x+3y=9 \Rightarrow x+y=3\) (used Eq1, Eq2). Eq2×2+Eq3 eliminates z again: \(4x+2y-2z + x-y+2z = 2+7 \Rightarrow 5x+y=9\) (used Eq2 again, and Eq3). Subtracting: \((5x+y)-(x+y)=9-3 \Rightarrow 4x=6 \Rightarrow x=1.5\), then \(y=1.5\), then from Eq1: \(1.5+3+z=8\Rightarrow z=3.5\). \((x,y,z)=(1.5,1.5,3.5)\) — notice Eq2 had to be tracked as "already used, and used differently scaled" for the second elimination; this is precisely the mistake called out above.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m09-vectors/ch12-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-matrices-intro.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 10 · Linear Algebra — Systems &amp; Matrices</span>
+  <span>Chapter 1 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:1", "content/m10-matrices/ch01-systems-of-equations-review.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

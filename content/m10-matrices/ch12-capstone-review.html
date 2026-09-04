@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — Module 10 Capstone | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 10 · Linear Algebra — Systems &amp; Matrices</a> → Chapter 12 of 12</div>
+  <div class="eyebrow">Chapter 12 · Module 10 capstone</div>
+  <h1>Module 10 Capstone — Mixed Review &amp; Diagnostic Retake</h1>
+  <p class="subtitle">Eleven chapters, shuffled together, plus a retake of Module 0's two-variable systems — the same problem type, now solvable at any scale by the exact machinery this module built.</p>
+
+  <div class="block intuition">
+    <div class="label">Why mixed, not grouped by chapter</div>
+    <p>Same reasoning as every capstone since Module 0: a problem that doesn't announce its own chapter is the real test of whether the idea moved into durable memory, not just short-term pattern matching against a chapter title. This module makes that test especially pointed — nearly every chapter here reused the same running example system (Chapters 1, 5, 7, 8) and the same pair of matrices (Chapters 4, 10, 11), so shuffling forces you to recognize which <em>tool</em> a problem needs, not just which numbers looked familiar.</p>
+  </div>
+
+  <h2>Mixed review (all of Module 10)</h2>
+  <ol class="problems">
+    <li>Solve by ad hoc elimination or substitution: <code>x + y = 8</code>, <code>x − y = 2</code>
+      <details class="answer"><summary></summary><div class="ans-body">Add: \(2x=10\Rightarrow x=5, y=3\) (Chapter 1)</div></details></li>
+    <li>State the dimensions of \(\begin{bmatrix}1&2&3\\4&5&6\end{bmatrix}\), and identify entry \(a_{21}\).
+      <details class="answer"><summary></summary><div class="ans-body">\(2\times3\); \(a_{21}=4\) (Chapter 2)</div></details></li>
+    <li>Compute \(\begin{bmatrix}1&-2\\3&0\end{bmatrix}+2\begin{bmatrix}0&1\\-1&4\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}1&-2\\3&0\end{bmatrix}+\begin{bmatrix}0&2\\-2&8\end{bmatrix}=\begin{bmatrix}1&0\\1&8\end{bmatrix}\) (Chapter 3)</div></details></li>
+    <li>Multiply \(\begin{bmatrix}1&2\\0&1\end{bmatrix}\begin{bmatrix}3&1\\2&4\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}1(3)+2(2)&1(1)+2(4)\\0(3)+1(2)&0(1)+1(4)\end{bmatrix}=\begin{bmatrix}7&9\\2&4\end{bmatrix}\) (Chapter 4)</div></details></li>
+    <li>Write the augmented matrix for <code>x + 2y = 5</code>, <code>3x − y = 1</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\left[\begin{array}{cc|c}1&2&5\\3&-1&1\end{array}\right]\) (Chapter 5)</div></details></li>
+    <li>Which row operation turns \(\begin{bmatrix}1&3\\2&4\end{bmatrix}\) into \(\begin{bmatrix}1&3\\0&-2\end{bmatrix}\) in the second row?
+      <details class="answer"><summary></summary><div class="ans-body">\(R_2\to R_2-2R_1\) (Chapter 6)</div></details></li>
+    <li>Solve via Gaussian elimination: <code>x + y = 6</code>, <code>2x − y = 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\left[\begin{array}{cc|c}1&1&6\\2&-1&3\end{array}\right]\), \(R_2-2R_1=[0,-3|-9]\Rightarrow y=3\); back-sub \(x=3\). \((x,y)=(3,3)\) (Chapter 7)</div></details></li>
+    <li>Continue \(\left[\begin{array}{cc|c}1&2&7\\0&1&3\end{array}\right]\) to RREF and read the solution.
+      <details class="answer"><summary></summary><div class="ans-body">\(R_1\to R_1-2R_2=[1,0|1]\). RREF: \(\left[\begin{array}{cc|c}1&0&1\\0&1&3\end{array}\right]\); \(x=1,y=3\) (Chapter 8)</div></details></li>
+    <li>Classify: \(\left[\begin{array}{cc|c}1&0&4\\0&0&6\end{array}\right]\)
+      <details class="answer"><summary></summary><div class="ans-body">No solution — bottom row reads \(0=6\), a contradiction (Chapter 9)</div></details></li>
+    <li>Does \(AI=IA=A\) hold for every matrix \(A\) (with \(I\) of compatible size)?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — that's the defining property of the identity matrix (Chapter 10)</div></details></li>
+    <li>Find \(\det\begin{bmatrix}4&1\\3&1\end{bmatrix}\), and state whether the matrix is invertible.
+      <details class="answer"><summary></summary><div class="ans-body">\(4(1)-1(3)=1\), nonzero, so invertible (Chapter 11)</div></details></li>
+    <li>Solve via Gaussian elimination: <code>2x + y = 7</code>, <code>x − y = -1</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\left[\begin{array}{cc|c}2&1&7\\1&-1&-1\end{array}\right]\); swap for convenience: \(\left[\begin{array}{cc|c}1&-1&-1\\2&1&7\end{array}\right]\), \(R_2-2R_1=[0,3|9]\Rightarrow y=3\); back-sub \(x=-1+3=2\). \((x,y)=(2,3)\) (Chapter 7, second pass)</div></details></li>
+  </ol>
+
+  <hr class="div">
+
+  <h2>Synthesis — concepts combining, not just shuffled</h2>
+  <p class="subtitle">Two problems that each need multiple chapters' tools working together, not just one technique per problem.</p>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 1</div>
+    <div class="concept-tags"><span>Ch. 7 — Gaussian elimination</span><span>Ch. 9 — solution types</span></div>
+    <p>Solve, and classify the solution type of: <code>x + y + z = 2</code>, <code>2x + y + z = 3</code>, <code>x + 2y + 2z = 4</code></p>
+    <details class="step" open><summary>Step 1 — set up the augmented matrix and clear column 1 (Ch. 7's forward elimination)</summary>
+      <div class="step-body"><p>\(\left[\begin{array}{ccc|c}1&1&1&2\\2&1&1&3\\1&2&2&4\end{array}\right]\). \(R_2-2R_1=[0,-1,-1|-1]\). \(R_3-R_1=[0,1,1|2]\). Matrix: \(\left[\begin{array}{ccc|c}1&1&1&2\\0&-1&-1&-1\\0&1&1&2\end{array}\right]\)</p></div></details>
+    <details class="step"><summary>Step 2 — clear column 2 using row 2</summary>
+      <div class="step-body"><p>\(R_3+R_2 = [0,1-1,1-1\ |\ 2-1]=[0,0,0\ |\ 1]\). Matrix: \(\left[\begin{array}{ccc|c}1&1&1&2\\0&-1&-1&-1\\0&0&0&1\end{array}\right]\)</p></div></details>
+    <details class="step"><summary>Step 3 — classify using Chapter 9's test</summary>
+      <div class="step-body"><p>The bottom row reads \(0=1\) — a genuine contradiction, not a redundant \(0=0\) row.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p><strong>No solution.</strong> Gaussian elimination (Chapter 7) doesn't just produce answers — running it to completion and reading the bottom row is exactly how Chapter 9's classification gets applied in practice; the two chapters are really one workflow, not two separate skills.</p></div></details>
+  </div>
+
+  <div class="block synthesis">
+    <div class="label">Synthesis 2</div>
+    <div class="concept-tags"><span>Ch. 4 — matrix multiplication</span><span>Ch. 10/11 — inverses</span></div>
+    <p>Find the inverse of \(A=\begin{bmatrix}1&4\\1&3\end{bmatrix}\) using the Chapter 11 shortcut, then verify it fully by computing <em>both</em> \(AA^{-1}\) and \(A^{-1}A\) using Chapter 4's row-by-column rule.</p>
+    <details class="step" open><summary>Step 1 — compute the determinant (Ch. 11)</summary>
+      <div class="step-body"><p>\(\det(A) = 1(3)-4(1) = -1\). Nonzero, so \(A\) is invertible.</p></div></details>
+    <details class="step"><summary>Step 2 — apply the 2×2 inverse formula</summary>
+      <div class="step-body"><p>Swap \(a,d\); negate \(b,c\): \(A^{-1} = \frac{1}{-1}\begin{bmatrix}3&-4\\-1&1\end{bmatrix} = \begin{bmatrix}-3&4\\1&-1\end{bmatrix}\)</p></div></details>
+    <details class="step"><summary>Step 3 — verify AA⁻¹ using row-by-column multiplication (Ch. 4)</summary>
+      <div class="step-body"><p>\(\begin{bmatrix}1&4\\1&3\end{bmatrix}\begin{bmatrix}-3&4\\1&-1\end{bmatrix}=\begin{bmatrix}1(-3)+4(1)&1(4)+4(-1)\\1(-3)+3(1)&1(4)+3(-1)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}\) ✓</p></div></details>
+    <details class="step"><summary>Step 4 — verify A⁻¹A the other order</summary>
+      <div class="step-body"><p>\(\begin{bmatrix}-3&4\\1&-1\end{bmatrix}\begin{bmatrix}1&4\\1&3\end{bmatrix}=\begin{bmatrix}-3(1)+4(1)&-3(4)+4(3)\\1(1)+(-1)(1)&1(4)+(-1)(3)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}\) ✓</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(A^{-1}=\begin{bmatrix}-3&4\\1&-1\end{bmatrix}\), confirmed both ways — the determinant test (Ch. 11) says an inverse exists, the shortcut formula (Ch. 11) produces it, and Chapter 4's multiplication rule is what actually certifies it's correct. Three chapters, one clean workflow.</p></div></details>
+  </div>
+
+  <h2>Diagnostic retake</h2>
+  <p class="subtitle">Module 0's two-variable systems (Chapter 14) were solvable by hand with no real bookkeeping. The retake below deliberately stays small enough to solve either way — the point isn't that the answer changed, it's that the same systematic procedure now scales to problems Module 0 never could have handled.</p>
+
+  <div class="card">
+    <p><strong>1.</strong> Write the augmented matrix for <code>2x + y = 7</code>, <code>x − 3y = -7</code>, and classify (without fully solving) whether you'd expect a unique solution.</p>
+    <p class="subtitle">Originally (Module 0, Ch. 14): solved by hand with elimination — no matrix representation available yet.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(\left[\begin{array}{cc|c}2&1&7\\1&-3&-7\end{array}\right]\). Two independent equations in two unknowns, no obvious row-proportionality between the coefficient rows, so a unique solution is expected (confirmed by row-reducing: \(x=2, y=3\)). See Chapters 5 and 9.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>2.</strong> This RREF matrix came from a 3-variable system: \(\left[\begin{array}{ccc|c}1&0&2&5\\0&1&-1&3\\0&0&0&0\end{array}\right]\). Classify the solution type and, if applicable, write the parametrized solution.</p>
+    <p class="subtitle">Originally (Module 0, Ch. 14): only two-variable systems existed — a free-variable, infinite-solutions system had no equivalent yet.</p>
+    <details class="answer"><summary></summary><div class="ans-body">Infinitely many solutions — column 3 has no pivot, so \(z\) is free. Let \(z=t\): \(x=5-2t\), \(y=3+t\). Solution: \((x,y,z)=(5-2t,\ 3+t,\ t)\). See Chapters 8 and 9.</div></details>
+  </div>
+
+  <div class="card">
+    <p><strong>3.</strong> Find the inverse of \(\begin{bmatrix}5&2\\3&1\end{bmatrix}\).</p>
+    <p class="subtitle">Originally (Module 0, Ch. 14): solving by substitution/elimination was the only tool — the idea of solving a system by multiplying by an inverse matrix didn't exist yet.</p>
+    <details class="answer"><summary></summary><div class="ans-body">\(\det=5(1)-2(3)=-1\). \(A^{-1}=\frac{1}{-1}\begin{bmatrix}1&-2\\-3&5\end{bmatrix}=\begin{bmatrix}-1&2\\3&-5\end{bmatrix}\). Check: \(\begin{bmatrix}5&2\\3&1\end{bmatrix}\begin{bmatrix}-1&2\\3&-5\end{bmatrix}=\begin{bmatrix}-5+6&10-10\\-3+3&6-5\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}\) ✓. See Chapter 11.</div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Module 10 complete</div>
+    <p>Zero to a working command of systems and matrices in twelve chapters — starting from the exact same two-variable systems Module 0 introduced, through matrix notation and arithmetic, augmented matrices, row operations, Gaussian elimination, reduced row echelon form, the three types of solutions, and matrix inverses via the determinant. Module 9's vectors turned out to be one-row or one-column matrices all along, and this module's matrices are themselves the objects Module 12 (Eigenvalues &amp; Transformations) will act on — nothing here is a dead end. Module 11 (Vector Spaces) is next on the <a href="../../roadmap.html">roadmap</a>, generalizing the vector idea beyond arrows and columns of numbers: <a href="../m11-vector-spaces/ch01-vector-space-axioms.html">start Module 11, Chapter 1</a>. Ask your AI session to continue whenever you're ready.</p>
+  </div>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch11-finding-inverses-and-determinants.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="../../roadmap.html">View full roadmap</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 10 · Linear Algebra — Systems &amp; Matrices</span>
+  <span>Chapter 12 / 12 — Module complete</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:12", "content/m10-matrices/ch12-capstone-review.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

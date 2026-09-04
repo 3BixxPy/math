@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — The Identity Matrix &amp; Matrix Inverses | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 10 · Linear Algebra — Systems &amp; Matrices</a> → Chapter 10 of 12</div>
+  <div class="eyebrow">Chapter 10 · concept:identity-matrix-and-inverses</div>
+  <h1>The Identity Matrix &amp; Matrix Inverses</h1>
+  <p class="subtitle">Chapters 1–9 solved systems by transforming the augmented matrix itself. This chapter introduces a different tool for the same job — a matrix that "undoes" another matrix, the way division undoes multiplication for ordinary numbers.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>For ordinary numbers, the equation \(3x=12\) is solved by multiplying both sides by \(1/3\), the reciprocal of \(3\). There's no direct "divide by a matrix," but there is a matrix equivalent of a reciprocal — the inverse — and it plays exactly the identity matrix's role in getting a matrix equation back to "nothing times \(x\)." Chapter 2 already introduced \(I\) by definition; this chapter shows what makes it special (it's genuinely a multiplicative identity, for any compatible matrix) and defines what it means for a matrix to have an inverse at all.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The identity matrix behaves like 1</div>
+    <div class="eqn"><div class="eq-body">\[ AI = IA = A \]</div><div class="eq-num" id="eq-10-10-1">(10.10.1)</div></div>
+    <p>For any matrix \(A\) (with \(I\) the identity matrix of compatible size), multiplying by \(I\) leaves \(A\) completely unchanged — on either side. Recall from Chapter 4 that matrix multiplication generally isn't commutative (\(AB\neq BA\)); the identity matrix is a genuine exception where order doesn't matter, precisely because it's built to change nothing at all.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Matrix inverse</div>
+    <div class="eqn"><div class="eq-body">\[ AA^{-1} = A^{-1}A = I \]</div><div class="eq-num" id="eq-10-10-2">(10.10.2)</div></div>
+    <p>\(A^{-1}\) ("A inverse") is a matrix that, multiplied by \(A\) in either order, gives the identity — the matrix equivalent of a reciprocal. Only <em>square</em> matrices can have an inverse (a non-square matrix can't even satisfy \(AA^{-1}=A^{-1}A\), since the two products would need incompatible dimensions). But being square is necessary, not sufficient — not every square matrix actually has one. A square matrix without an inverse is called <strong>singular</strong>; Chapter 11 gives the exact test (via the determinant) for which square matrices are singular and which aren't.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — verifying a pair of inverses</div>
+    <p>Verify that \(A=\begin{bmatrix}2&1\\1&1\end{bmatrix}\) and \(B=\begin{bmatrix}1&-1\\-1&2\end{bmatrix}\) are inverses of each other.</p>
+    <details class="step" open><summary>Step 1 — compute AB (row-by-column, Chapter 4)</summary>
+      <div class="step-body"><p>\(AB=\begin{bmatrix}2(1)+1(-1)&2(-1)+1(2)\\1(1)+1(-1)&1(-1)+1(2)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}=I\)</p></div></details>
+    <details class="step"><summary>Step 2 — compute BA</summary>
+      <div class="step-body"><p>\(BA=\begin{bmatrix}1(2)+(-1)(1)&1(1)+(-1)(1)\\(-1)(2)+2(1)&(-1)(1)+2(1)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}=I\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Both orders give \(I\), so \(B=A^{-1}\) (and equally, \(A=B^{-1}\)) — confirmed by the definition. Chapter 11 will derive this exact \(B\) from \(A\) directly, rather than being handed it to check.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming every square matrix has an inverse. It's tempting to think "square" is the whole requirement, since square is what's necessary just to attempt \(AA^{-1}=I\) — but plenty of square matrices are singular. For example, \(\begin{bmatrix}2&4\\1&2\end{bmatrix}\) is square, yet no matrix \(X\) satisfies \(\begin{bmatrix}2&4\\1&2\end{bmatrix}X=I\) (row 2 is exactly half of row 1, so the rows collapse together under row reduction instead of reaching two independent pivots — a preview of Chapter 11's determinant test). Being square makes a matrix an inverse <em>candidate</em>; it doesn't guarantee an inverse exists.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="yes,y">
+    <div class="label">Try it yourself</div>
+    <p>Does \(AI=A\) hold for <em>any</em> matrix \(A\) (with \(I\) of compatible dimensions)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="Does AI=A always hold?">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Compute \(\begin{bmatrix}3&5\\-1&2\end{bmatrix}\begin{bmatrix}1&0\\0&1\end{bmatrix}\)
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}3&5\\-1&2\end{bmatrix}\) — unchanged, as (10.10.1) guarantees.</div></details></li>
+    <li>Verify that \(\begin{bmatrix}1&2\\0&1\end{bmatrix}\) and \(\begin{bmatrix}1&-2\\0&1\end{bmatrix}\) are inverses of each other.
+      <details class="answer"><summary></summary><div class="ans-body">Product either order: \(\begin{bmatrix}1(1)+2(0)&1(-2)+2(1)\\0(1)+1(0)&0(-2)+1(1)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}=I\). Confirmed.</div></details></li>
+    <li>Can a \(2\times3\) matrix have an inverse? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">No — only square matrices can. A \(2\times3\) matrix times a \(3\times2\) matrix could give a \(2\times2\) result, but the other order (\(3\times2\) times \(2\times3\)) gives a \(3\times3\) result — the two products can't both equal the same identity matrix.</div></details></li>
+    <li>Verify that \(\begin{bmatrix}3&0\\0&2\end{bmatrix}\) and \(\begin{bmatrix}\tfrac13&0\\0&\tfrac12\end{bmatrix}\) are inverses of each other.
+      <details class="answer"><summary></summary><div class="ans-body">Product: \(\begin{bmatrix}3(\tfrac13)+0&0+0\\0+0&0+2(\tfrac12)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}=I\). Confirmed (and note: for a diagonal matrix, the inverse is just the reciprocal of each diagonal entry).</div></details></li>
+    <li>Is \(\begin{bmatrix}0&0\\0&0\end{bmatrix}\) invertible? Explain in one sentence why not.
+      <details class="answer"><summary></summary><div class="ans-body">No — multiplying the zero matrix by anything gives the zero matrix, which can never equal \(I\) (as long as \(I\) is at least \(1\times1\) with a nonzero entry).</div></details></li>
+    <li>State the defining property of a matrix inverse, in symbols, for a square matrix A.
+      <details class="answer"><summary></summary><div class="ans-body">\(AA^{-1}=A^{-1}A=I\)</div></details></li>
+    <li class="tag">bonus — Verify that \(\begin{bmatrix}0&1\\1&0\end{bmatrix}\) is its own inverse.
+      <details class="answer"><summary></summary><div class="ans-body">\(\begin{bmatrix}0&1\\1&0\end{bmatrix}\begin{bmatrix}0&1\\1&0\end{bmatrix}=\begin{bmatrix}0(0)+1(1)&0(1)+1(0)\\1(0)+0(1)&1(1)+0(0)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}=I\). Yes, it's its own inverse.</div></details></li>
+    <li class="tag">bonus — If \(A\) is invertible, is \(A^{-1}\) also invertible? What would \((A^{-1})^{-1}\) be?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — the same equation \(AA^{-1}=A^{-1}A=I\) that defines \(A^{-1}\) as the inverse of \(A\) equally says \(A\) is the inverse of \(A^{-1}\). So \((A^{-1})^{-1}=A\).</div></details></li>
+    <li class="tag">bonus — Is \(\begin{bmatrix}1&2\\2&4\end{bmatrix}\) singular or invertible? (Look closely at the rows before trying to guess-and-check an inverse.)
+      <details class="answer"><summary></summary><div class="ans-body">Singular — row 2 is exactly \(2\times\) row 1, so under row reduction \(R_2\to R_2-2R_1\) produces an all-zero row, meaning this matrix can never row-reduce to \(I\) and therefore has no inverse (Chapter 11 formalizes this via the determinant, which comes out \(0\) here).</div></details></li>
+    <li class="tag">bonus — True or false: if \(AB=I\) for square matrices \(A\) and \(B\), then necessarily \(BA=I\) too.
+      <details class="answer"><summary></summary><div class="ans-body">True for square matrices specifically (a fact proven in full linear algebra courses beyond this module's scope) — for square matrices, a "one-sided" inverse is automatically a full two-sided inverse. This is part of why the definition can be checked with just one of the two products in practice, even though the formal definition states both.</div></details></li>
+    <li class="tag">challenge — Matrices \(A=\begin{bmatrix}2&5\\1&3\end{bmatrix}\) and \(B=\begin{bmatrix}3&-5\\-1&2\end{bmatrix}\) are claimed to be inverses. Verify this fully (both orders), and then use it to solve the matrix equation \(A\mathbf{x}=\begin{bmatrix}7\\4\end{bmatrix}\) for the column vector \(\mathbf{x}\), by left-multiplying both sides by \(B\).
+      <details class="answer"><summary></summary><div class="ans-body">\(AB=\begin{bmatrix}2(3)+5(-1)&2(-5)+5(2)\\1(3)+3(-1)&1(-5)+3(2)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}\). \(BA=\begin{bmatrix}3(2)+(-5)(1)&3(5)+(-5)(3)\\(-1)(2)+2(1)&(-1)(5)+2(3)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}\). Confirmed, \(B=A^{-1}\). Left-multiplying \(A\mathbf{x}=\begin{bmatrix}7\\4\end{bmatrix}\) by \(B\): \(BA\mathbf{x}=B\begin{bmatrix}7\\4\end{bmatrix}\Rightarrow I\mathbf{x}=\begin{bmatrix}3(7)-5(4)\\-1(7)+2(4)\end{bmatrix}=\begin{bmatrix}1\\1\end{bmatrix}\). So \(\mathbf{x}=\begin{bmatrix}1\\1\end{bmatrix}\) — solving a system by multiplying by an inverse instead of row-reducing, a preview of how Chapter 11's inverses connect straight back to Chapter 1's original problem.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-types-of-solutions.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-finding-inverses-and-determinants.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 10 · Linear Algebra — Systems &amp; Matrices</span>
+  <span>Chapter 10 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:10", "content/m10-matrices/ch10-the-identity-matrix-and-inverses.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — Types of Solutions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 10 · Linear Algebra — Systems &amp; Matrices</a> → Chapter 9 of 12</div>
+  <div class="eyebrow">Chapter 9 · concept:solution-types-linear-systems</div>
+  <h1>Types of Solutions — Unique, None, or Infinitely Many</h1>
+  <p class="subtitle">Every worked example so far in this module had exactly one tidy answer. That was a choice, not a guarantee — RREF (Chapter 8) also reveals when a system has no solution at all, or infinitely many.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Two lines in a plane either cross once, never cross (parallel), or are literally the same line (infinitely many shared points) — there's no fourth option. The exact same three outcomes hold for any linear system, of any size, and RREF makes each one visually unmistakable once you know what to look for. Module 9 Chapter 10 covered the geometric picture in 3-space with planes; this chapter gives you the algebraic test that works regardless of how many dimensions are involved.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Three possible outcomes, read from RREF</div>
+    <p><strong>Unique solution:</strong> every variable is a pivot variable (each column has a leading 1) — the system pins down one specific value for every unknown, exactly like every example in Chapters 7 and 8. <strong>No solution:</strong> some row reduces to a contradiction,</p>
+    <div class="eqn"><div class="eq-body">\[ [\,0\ \ 0\ \ \cdots\ \ 0 \mid c\,], \quad c \neq 0 \]</div><div class="eq-num" id="eq-10-9-1">(10.9.1)</div></div>
+    <p>which says "\(0=c\)" for some nonzero \(c\) — false no matter what the variables equal, so no values of \(x_1,\ldots,x_n\) can satisfy the whole system. <strong>Infinitely many solutions:</strong> at least one variable has no pivot column of its own (a "free" variable) — every other variable's value can be written in terms of it, giving a whole family of solutions rather than one point.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the no-solution case</div>
+    <p>Classify: \(\left[\begin{array}{ccc|c}1&0&2&3\\0&1&-1&4\\0&0&0&5\end{array}\right]\) (already in RREF).</p>
+    <details class="step" open><summary>Step 1 — read the bottom row as an equation</summary>
+      <div class="step-body"><p>\(0x+0y+0z=5\), i.e. \(0=5\) — false for every possible \(x,y,z\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>No solution. It doesn't matter that rows 1 and 2 look perfectly solvable — one contradictory row is enough to make the whole system inconsistent.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the infinitely-many case</div>
+    <p>Classify and solve: \(\left[\begin{array}{ccc|c}1&0&3&5\\0&1&-2&1\\0&0&0&0\end{array}\right]\) (already in RREF).</p>
+    <details class="step" open><summary>Step 1 — read the bottom row</summary>
+      <div class="step-body"><p>\(0=0\) — true no matter what, so this row is <em>redundant</em> (it carries no new information), not a contradiction.</p></div></details>
+    <details class="step"><summary>Step 2 — identify the free variable</summary>
+      <div class="step-body"><p>Columns 1 and 2 have pivots (\(x\) and \(y\)); column 3 (\(z\)) has none — \(z\) is free. Let \(z=t\) for any real number \(t\).</p></div></details>
+    <details class="step"><summary>Step 3 — write the other variables in terms of t</summary>
+      <div class="step-body"><p>Row 1: \(x+3t=5 \Rightarrow x=5-3t\). Row 2: \(y-2t=1 \Rightarrow y=1+2t\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ (x,y,z) = (5-3t,\ 1+2t,\ t), \quad t \in \mathbb{R} \]</div><div class="eq-num" id="eq-10-9-2">(10.9.2)</div></div>
+      <p>Every real value of \(t\) generates a different valid solution — infinitely many points, all lying along a line (geometrically, exactly the kind of shared-line intersection Module 9 Chapter 10 described for planes that don't meet at a single point).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Seeing a row of all zeros — including the constant, \([0\ 0\ \cdots\ 0\ |\ 0]\) — and assuming it means "no solution." It means the opposite: that row says \(0=0\), which is always true and simply <strong>redundant</strong> (one of the original equations turned out to be a combination of the others, adding no new constraint). The no-solution case specifically requires the constant side to be <em>nonzero</em>: \([0\ 0\ \cdots\ 0\ |\ c]\) with \(c\neq0\) says "\(0=c\)," a genuine contradiction. Always check which one you're looking at before declaring a system inconsistent — the difference is a single number.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="no solution,none,no,inconsistent">
+    <div class="label">Try it yourself</div>
+    <p>A row-echelon matrix has the row \([0\ 0\ 0\ |\ 5]\). What does this mean for the system?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. no solution" aria-label="What this row means">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Classify: \(\left[\begin{array}{cc|c}1&0&4\\0&1&-2\end{array}\right]\)
+      <details class="answer"><summary></summary><div class="ans-body">Unique solution: \(x=4, y=-2\) — every variable has a pivot.</div></details></li>
+    <li>Classify: \(\left[\begin{array}{cc|c}1&2&3\\0&0&7\end{array}\right]\)
+      <details class="answer"><summary></summary><div class="ans-body">No solution — bottom row reads \(0=7\), a contradiction.</div></details></li>
+    <li>Classify: \(\left[\begin{array}{cc|c}1&-1&2\\0&0&0\end{array}\right]\), and if infinitely many, write the parametrized solution.
+      <details class="answer"><summary></summary><div class="ans-body">Infinitely many — bottom row is \(0=0\) (redundant), column 2 (\(y\)) is free. Let \(y=t\): row 1 gives \(x-t=2\Rightarrow x=2+t\). Solution: \((x,y)=(2+t,\ t)\).</div></details></li>
+    <li>Classify: \(\left[\begin{array}{ccc|c}1&0&0&2\\0&1&0&-1\\0&0&1&5\end{array}\right]\)
+      <details class="answer"><summary></summary><div class="ans-body">Unique solution: \(x=2, y=-1, z=5\).</div></details></li>
+    <li>Classify: \(\left[\begin{array}{ccc|c}1&2&0&1\\0&0&1&3\\0&0&0&0\end{array}\right]\), and if infinitely many, write the parametrized solution.
+      <details class="answer"><summary></summary><div class="ans-body">Infinitely many — bottom row redundant, column 2 (\(y\)) has no pivot, so \(y\) is free. Let \(y=t\): row 1 gives \(x+2t=1\Rightarrow x=1-2t\); row 2 gives \(z=3\) directly. Solution: \((x,y,z)=(1-2t,\ t,\ 3)\).</div></details></li>
+    <li>Classify: \(\left[\begin{array}{ccc|c}1&0&2&3\\0&1&-1&1\\0&0&0&4\end{array}\right]\)
+      <details class="answer"><summary></summary><div class="ans-body">No solution — bottom row reads \(0=4\), a contradiction, regardless of the first two rows looking otherwise solvable.</div></details></li>
+    <li class="tag">bonus — Geometrically, three planes in 3-space produce a unique solution, no solution, or infinitely many solutions. Describe the geometric picture for each case.
+      <details class="answer"><summary></summary><div class="ans-body">Unique: all three planes meet at exactly one point. No solution: the planes have no point in common (e.g. two are parallel, or they form a "triangular prism" with no shared point). Infinitely many: the planes share a whole line (or, if all three coincide, a whole plane) of common points.</div></details></li>
+    <li class="tag">bonus — Classify: \(\left[\begin{array}{cc|c}1&3&-2\\0&1&0\end{array}\right]\)
+      <details class="answer"><summary></summary><div class="ans-body">Unique solution — every column has a pivot: \(y=0\), and row 1 gives \(x+3(0)=-2\Rightarrow x=-2\).</div></details></li>
+    <li class="tag">bonus — Classify: \(\left[\begin{array}{ccc|c}1&-1&1&0\\0&1&2&0\\0&0&0&0\end{array}\right]\), and write the parametrized solution.
+      <details class="answer"><summary></summary><div class="ans-body">Infinitely many — column 3 (\(z\)) is free. Let \(z=t\): row 2 gives \(y+2t=0\Rightarrow y=-2t\); row 1 gives \(x-(-2t)+t=0\Rightarrow x+3t=0\Rightarrow x=-3t\). Solution: \((x,y,z)=(-3t,\ -2t,\ t)\).</div></details></li>
+    <li class="tag">bonus — True or false: a system with more equations than unknowns can never have infinitely many solutions.
+      <details class="answer"><summary></summary><div class="ans-body">False — extra equations often just turn out redundant (reduce to \(0=0\) rows) once you row-reduce; what actually determines the solution type is whether every variable ends up with a pivot, not how many equations you started with.</div></details></li>
+    <li class="tag">challenge — A \(3\times4\) augmented matrix (3 equations, 3 variables) reduces to RREF with pivots in columns 1 and 2 only, and its bottom row is entirely zero, constant included. Without seeing the actual numbers, state the solution type and explain what you can and can't conclude about the specific solution.
+      <details class="answer"><summary></summary><div class="ans-body">Infinitely many solutions — column 3 has no pivot, so that variable is free, and the all-zero bottom row is redundant (not a contradiction). You can conclude the <em>shape</em> of the answer (one free parameter, the other two variables expressed in terms of it) without knowing the actual numbers; the specific formulas for \(x\) and \(y\) in terms of the free variable \(z=t\) depend on the entries in rows 1 and 2, which aren't given here.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch08-reduced-row-echelon-form.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch10-the-identity-matrix-and-inverses.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 10 · Linear Algebra — Systems &amp; Matrices</span>
+  <span>Chapter 9 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m10:9", "content/m10-matrices/ch09-types-of-solutions.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
