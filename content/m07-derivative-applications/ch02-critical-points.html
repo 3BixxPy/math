@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Critical Points | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 2 of 12</div>
+  <div class="eyebrow">Chapter 2 · concept:critical-points</div>
+  <h1>Critical Points</h1>
+  <p class="subtitle">Chapter 1 pointed the derivative at rates changing over time. This chapter points it at the graph itself: the derivative's job now is to flag the handful of x-values where something interesting — a peak, a valley, a sharp corner — could be happening.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A function can have infinitely many x-values, but only a small, finite set of them are ever candidates for a local max or min. Critical points are exactly that shortlist — every local extremum has to be one, which turns "find the highest/lowest point" from a search over infinitely many x-values into checking a handful of specific candidates.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Critical point</div>
+    <div class="eqn"><div class="eq-body">\[ x=c \text{ is a critical point of } f \iff c\in\operatorname{dom}(f) \ \text{and}\ \begin{cases} f'(c)=0 \\ \text{or } f'(c)\text{ is undefined} \end{cases} \]</div><div class="eq-num" id="eq-7-2-1">(7.2.1)</div></div>
+    <p>Two genuinely different cases, both worth checking: a <strong>horizontal tangent</strong> (\(f'(c)=0\) — the smooth, familiar case) and a point where the derivative simply doesn't exist (\(f'(c)\) undefined) even though \(f(c)\) itself is perfectly defined — typically a sharp corner or a vertical tangent line. Both are "critical" in the sense that the function's behavior could plausibly change there.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the f′(c)=0 case</div>
+    <p>Find all critical points of <code>f(x) = x³ − 3x²</code>.</p>
+    <details class="step" open><summary>Step 1 — differentiate (power rule, Module 6)</summary>
+      <div class="step-body"><p>\(f'(x)=3x^2-6x\)</p></div></details>
+    <details class="step"><summary>Step 2 — set f′(x)=0 and solve</summary>
+      <div class="step-body"><p>\(3x^2-6x=3x(x-2)=0 \Rightarrow x=0 \text{ or } x=2\)</p></div></details>
+    <details class="step"><summary>Step 3 — check the domain condition</summary>
+      <div class="step-body"><p>\(f\) is a polynomial, defined for all real \(x\), so both values qualify.</p></div></details>
+    <details class="step"><summary>Step 4 — check for any f′(x) undefined case</summary>
+      <div class="step-body"><p>\(f'(x)=3x^2-6x\) is itself a polynomial — defined everywhere, no exceptions to check. (This is generally true for any polynomial: its derivative is always another polynomial, so the "undefined" case in (7.2.1) never applies.)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Critical points at \(x=0\) and \(x=2\).</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the f′(c) undefined case</div>
+    <p>Find the critical points of <code>f(x) = x^{1/3}</code>.</p>
+    <details class="step" open><summary>Step 1 — differentiate (power rule with a fractional exponent)</summary>
+      <div class="step-body"><p>\(f'(x) = \dfrac{1}{3}x^{-2/3} = \dfrac{1}{3x^{2/3}}\)</p></div></details>
+    <details class="step"><summary>Step 2 — check x=0 specifically</summary>
+      <div class="step-body"><p>At \(x=0\), the denominator \(3x^{2/3}=0\), so \(f'(0)\) is undefined — division by zero.</p></div></details>
+    <details class="step"><summary>Step 3 — check whether f itself is defined at x=0</summary>
+      <div class="step-body"><p>\(f(0)=0^{1/3}=0\), perfectly defined, so \(x=0\) is in \(f\)'s domain.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(x=0\) is a critical point — not because the derivative is zero, but because it's undefined at a point the function itself is defined. Graphically, this is a vertical tangent line (a cusp-like flattening of the S-curve at the origin), not a horizontal one.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Only solving <code>f'(x)=0</code> and stopping there — forgetting the second half of (7.2.1) entirely. For example, <code>f(x)=x^{2/3}</code> has <code>f'(x)=\tfrac{2}{3}x^{-1/3}</code>, which is <em>never</em> zero for any real \(x\) — so a search for "where is <code>f'</code> zero" comes back empty, and it's tempting to conclude there are no critical points at all. But \(f'(0)\) is undefined (division by zero again) while \(f(0)=0\) is defined — \(x=0\) <em>is</em> a critical point, just of the second kind (this one's a genuine cusp, not just a vertical tangent). Whenever a function involves a root, a fractional exponent, or an absolute value, always check explicitly for x-values where the derivative breaks down, not just where it's zero.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2,x=2">
+    <div class="label">Try it yourself</div>
+    <p>Find the critical point(s) of <code>f(x) = x² − 4x</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 2" aria-label="critical point of x squared minus 4x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the critical point(s) of <code>f(x) = x² − 6x + 5</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=2x-6=0 \Rightarrow x=3\)</div></details></li>
+    <li>Find the critical point(s) of <code>f(x) = x³ − 12x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=3x^2-12=0 \Rightarrow x=\pm2\)</div></details></li>
+    <li>Find the critical point(s) of <code>f(x) = x⁴ − 4x³</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=4x^3-12x^2=4x^2(x-3)=0 \Rightarrow x=0,3\)</div></details></li>
+    <li>Find the critical point(s) of <code>f(x) = 1/x</code>. (Careful with the domain.)
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=-1/x^2\) is never \(0\), and while it's undefined at \(x=0\), \(f\) itself isn't defined there either — so \(x=0\) fails the domain condition in (7.2.1) and doesn't count. No critical points.</div></details></li>
+    <li>Find the critical point(s) of <code>f(x) = x^{2/3}</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x=0\) — \(f'\) is undefined there but \(f(0)=0\) is defined (see the Common Mistake box).</div></details></li>
+    <li>Find the critical point(s) of <code>f(x) = x² − 2x + 1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=2x-2=0 \Rightarrow x=1\)</div></details></li>
+    <li class="tag">bonus — Find the critical point(s) of <code>f(x) = x³ − 3x + 1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=3x^2-3=0 \Rightarrow x=\pm1\)</div></details></li>
+    <li class="tag">bonus — Find the critical point(s) of <code>f(x) = \sqrt{x}</code> on its domain <code>x≥0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=1/(2\sqrt{x})\) is undefined at \(x=0\), but \(x=0\) is in the domain (it's the domain's endpoint) and \(f(0)=0\) is defined — so \(x=0\) is a critical point.</div></details></li>
+    <li class="tag">bonus — Find the critical point(s) of <code>f(x) = x⁴</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=4x^3=0 \Rightarrow x=0\) only</div></details></li>
+    <li class="tag">bonus — Find the critical point(s) of <code>f(x) = (x-2)^{2/3}</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x=2\) — same structure as \(x^{2/3}\), just shifted: \(f'\) is undefined there, \(f(2)=0\) is defined.</div></details></li>
+    <li class="tag">challenge — Find all critical points of <code>f(x) = x³ − 3x² − 9x + 5</code>, and explicitly justify why there's no "f′ undefined" case to check for this function.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=3x^2-6x-9=3(x^2-2x-3)=3(x-3)(x+1)=0 \Rightarrow x=3,-1\). No undefined case applies: \(f\) is a polynomial, so \(f'\) is also a polynomial, and polynomials are defined for every real number — the second case in (7.2.1) is only ever relevant for functions involving roots, fractional powers, rational expressions, or absolute values.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-related-rates.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-first-derivative-test.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 2 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:2", "content/m07-derivative-applications/ch02-critical-points.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

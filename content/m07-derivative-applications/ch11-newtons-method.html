@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — Newton's Method | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 11 of 12</div>
+  <div class="eyebrow">Chapter 11 · concept:newtons-method</div>
+  <h1>Newton's Method</h1>
+  <p class="subtitle">Chapter 9 used the tangent line to estimate a curve's value near a point. This chapter uses the same tangent line for a different job entirely: walking toward a root of an equation that can't be solved by any algebra trick at all.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>The quadratic formula solves <code>ax²+bx+c=0</code> exactly. Most equations have no such formula — <code>cos(x)=x</code>, for instance, can't be solved algebraically at all. Newton's method sidesteps that entirely: start with a guess, follow the tangent line down to where it crosses the x-axis, treat that as a better guess, and repeat. Each step reuses exactly one piece of Module 6's toolkit (the derivative) and Chapter 9's idea (the tangent line as a local stand-in), and it converges shockingly fast.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — Newton's iteration formula</div>
+    <div class="eqn"><div class="eq-body">\[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \]</div><div class="eq-num" id="eq-7-11-1">(7.11.1)</div></div>
+    <p>Starting from a guess \(x_0\), this formula produces \(x_1\), then \(x_2\), and so on — each one the x-intercept of the tangent line to \(f\) at the previous guess (Chapter 9's linear approximation, solved for where \(L(x)=0\) instead of estimated at a nearby point). Repeated enough times, \(x_n\) converges toward an actual root of \(f\).</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — approximating √2</div>
+    <p>Approximate <code>√2</code> by finding a root of <code>f(x) = x² − 2</code>, starting from <code>x₀ = 1.5</code>.</p>
+    <details class="step" open><summary>Step 1 — set up f and f′</summary>
+      <div class="step-body"><p>\(f(x)=x^2-2\), \(f'(x)=2x\). A root of \(f\) is exactly \(\sqrt2\), since \(f(x)=0 \iff x^2=2\).</p></div></details>
+    <details class="step"><summary>Step 2 — first iteration</summary>
+      <div class="step-body"><p>\(f(1.5)=2.25-2=0.25\), \(f'(1.5)=3\). \(x_1 = 1.5 - \dfrac{0.25}{3} = 1.5-0.0833 = 1.4167\)</p></div></details>
+    <details class="step"><summary>Step 3 — second iteration</summary>
+      <div class="step-body"><p>\(f(1.4167)=1.4167^2-2\approx0.00695\), \(f'(1.4167)\approx2.8333\). \(x_2 = 1.4167 - \dfrac{0.00695}{2.8333} \approx 1.41422\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The true value \(\sqrt2\approx1.41421\) — already correct to four decimal places after just two iterations. This rapid closing-in is typical of Newton's method: the number of correct digits roughly doubles with each step.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Picking a starting guess far from the actual root, or at a point where <code>f′(x)=0</code> — the formula (7.11.1) divides by \(f'(x_n)\), so a zero derivative breaks the method instantly (no next iterate is defined). For <code>f(x)=x²-2</code>, starting at <code>x₀=0</code> gives \(f'(0)=0\) — the method can't even take its first step. A poor starting guess (far from the root, or near a flat spot in the curve) can also converge slowly, jump to a different root than intended, or fail to converge at all — always sanity-check that the starting guess is reasonably close to the root you're actually after.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1.5">
+    <div class="label">Try it yourself</div>
+    <p>Do one iteration of Newton's method for <code>f(x) = x² − 2</code>, starting at <code>x₀ = 2</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="your answer" aria-label="one Newton's method iteration for x squared minus 2 starting at 2">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>One iteration for <code>f(x) = x² − 5</code>, <code>x₀ = 2</code>. Find <code>x₁</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(2)=-1\), \(f'(2)=4\). \(x_1=2-(-1)/4=2.25\)</div></details></li>
+    <li>One iteration for <code>f(x) = x² − 10</code>, <code>x₀ = 3</code>. Find <code>x₁</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(3)=-1\), \(f'(3)=6\). \(x_1=3-(-1)/6\approx3.1667\)</div></details></li>
+    <li>One iteration for <code>f(x) = x³ − 2</code> (finding <code>∛2</code>), <code>x₀ = 1.5</code>. Find <code>x₁</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(1.5)=1.375\), \(f'(1.5)=6.75\). \(x_1=1.5-1.375/6.75\approx1.2963\)</div></details></li>
+    <li>What happens if you start Newton's method for <code>f(x) = x² − 4</code> at <code>x₀ = 0</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(0)=0\) — division by zero, the method breaks immediately with no next iterate defined (see the Common Mistake box).</div></details></li>
+    <li>One iteration for <code>f(x) = x² − 2x − 3</code>, <code>x₀ = 4</code>. Find <code>x₁</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(4)=5\), \(f'(4)=6\). \(x_1=4-5/6\approx3.1667\) (heading toward the actual root at \(x=3\))</div></details></li>
+    <li>One iteration for <code>f(x) = \cos x - x</code>, <code>x₀ = 0.5</code> (radians). Find <code>x₁</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(0.5)=\cos(0.5)-0.5\approx0.3776\), \(f'(x)=-\sin x - 1\), \(f'(0.5)\approx-1.4794\). \(x_1\approx0.5-0.3776/(-1.4794)\approx0.7552\)</div></details></li>
+    <li class="tag">bonus — Do two iterations for <code>f(x) = x² − 3</code> (approximating <code>√3</code>), <code>x₀ = 2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x_1=2-1/4=1.75\). \(x_2=1.75-0.0625/3.5\approx1.7321\) — matches \(\sqrt3\approx1.7321\)</div></details></li>
+    <li class="tag">bonus — One iteration for <code>f(x) = x² − 2</code>, <code>x₀ = -1.5</code>. What root does this converge toward?
+      <details class="answer"><summary></summary><div class="ans-body">\(f(-1.5)=0.25\), \(f'(-1.5)=-3\). \(x_1=-1.5-0.25/(-3)\approx-1.4167\) — converging toward \(-\sqrt2\) instead, since the starting guess was negative</div></details></li>
+    <li class="tag">bonus — Explain geometrically what <code>x_{n+1}</code> represents, relative to <code>x_n</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x_{n+1}\) is the x-intercept of the tangent line to \(f\) at \(x_n\) — each step follows that tangent line down (or up) to where it crosses the x-axis, and uses that crossing point as the next guess.</div></details></li>
+    <li class="tag">bonus — One iteration for <code>f(x) = x³ − x − 2</code>, <code>x₀ = 1.5</code>. Find <code>x₁</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(1.5)=-0.125\), \(f'(1.5)=5.75\). \(x_1=1.5-(-0.125)/5.75\approx1.5217\)</div></details></li>
+    <li class="tag">challenge — Use two iterations of Newton's method to approximate the root of <code>f(x) = x³ − x − 1</code>, starting from <code>x₀ = 1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(1)=-1\), \(f'(1)=2\). \(x_1=1-(-1)/2=1.5\). \(f(1.5)=0.875\), \(f'(1.5)=5.75\). \(x_2=1.5-0.875/5.75\approx1.3478\) — closing in on the true root, \(\approx1.3247\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch10-lhopitals-rule.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch12-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 11 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:11", "content/m07-derivative-applications/ch11-newtons-method.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

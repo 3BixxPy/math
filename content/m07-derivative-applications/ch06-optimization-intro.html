@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Optimization, Setting Up the Problem | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 6 of 12</div>
+  <div class="eyebrow">Chapter 6 · concept:optimization-setup</div>
+  <h1>Optimization — Setting Up the Problem</h1>
+  <p class="subtitle">Everything so far — critical points, the two classification tests — has been aimed at functions someone already handed you. This chapter is where you build the function yourself, out of a word problem, and then let Chapters 2–4 do the rest.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>"What's the best value of x" only makes sense once there's a single function of x to ask it about. Real problems rarely arrive that way — they arrive as a sentence with two related quantities and a constraint tying them together. The actual calculus (finding and classifying a critical point) is the easy, mechanical part by this point in Module 7; translating the word problem into one clean function of one variable is the genuinely new skill.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — the optimization strategy</div>
+    <ol>
+      <li>Identify the <strong>objective</strong> — the single quantity to maximize or minimize.</li>
+      <li>Identify the <strong>constraint</strong> — the fixed relationship between the variables (often given directly, like a fixed perimeter).</li>
+      <li>Use the constraint to write the objective as a function of <strong>one</strong> variable (substitution — Module 0).</li>
+      <li>Find the critical point(s) of that one-variable function (Chapter 2).</li>
+      <li>Classify each as an actual max or min (Chapter 3 or 4).</li>
+      <li>Check that the answer actually falls within the problem's <strong>physically valid domain</strong> — a negative length or an over-large angle is nonsense, even if it's a critical point of the unrestricted function.</li>
+    </ol>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the fixed-perimeter rectangle</div>
+    <p>A rectangle has a perimeter of <code>20</code>. What dimensions maximize its area?</p>
+    <details class="step" open><summary>Step 1 — identify the objective and the constraint</summary>
+      <div class="step-body"><p>Objective: maximize area \(A=xy\). Constraint: perimeter is fixed, \(2x+2y=20\), i.e. \(x+y=10\).</p></div></details>
+    <details class="step"><summary>Step 2 — substitute to reduce to one variable</summary>
+      <div class="step-body"><p>From the constraint, \(y=10-x\). Substitute:</p>
+      <div class="eqn"><div class="eq-body">\[ A(x) = x(10-x) = 10x - x^2 \]</div><div class="eq-num" id="eq-7-6-1">(7.6.1)</div></div></div></details>
+    <details class="step"><summary>Step 3 — find the critical point</summary>
+      <div class="step-body"><p>\(A'(x)=10-2x=0 \Rightarrow x=5\).</p></div></details>
+    <details class="step"><summary>Step 4 — classify it</summary>
+      <div class="step-body"><p>\(A''(x)=-2<0\) → local max, by the Second Derivative Test (Ch. 4).</p></div></details>
+    <details class="step"><summary>Step 5 — check the domain</summary>
+      <div class="step-body"><p>Valid side lengths need \(0<x<10\) (both \(x\) and \(y=10-x\) positive). \(x=5\) is comfortably inside that range.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(x=5\), \(y=10-5=5\) — a \(5\times5\) square, with maximum area \(A(5)=25\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting Step 6 — never checking whether the critical point actually falls inside the problem's physically valid domain. The unrestricted function <code>A(x)=10x-x²</code> is a downward parabola defined for <em>every</em> real <code>x</code>, including negative ones, but a rectangle can't have a negative side length. In this example the critical point happened to land safely inside \((0,10)\), but that's not guaranteed in general — always state the valid domain from the constraint and confirm the critical point is inside it before declaring it the final answer.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>A rectangle has perimeter <code>20</code>. What side length maximizes its area?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="your answer" aria-label="side length maximizing area for perimeter 20">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>A rectangle has perimeter <code>40</code>. What dimensions maximize its area?
+      <details class="answer"><summary></summary><div class="ans-body">\(A(x)=x(20-x)\), \(A'=20-2x=0\Rightarrow x=10\), a \(10\times10\) square, area \(100\)</div></details></li>
+    <li>A rectangle has a fixed area of <code>100</code>. What dimensions minimize its perimeter?
+      <details class="answer"><summary></summary><div class="ans-body">\(P(x)=2x+2(100/x)=2x+200/x\), \(P'(x)=2-200/x^2=0\Rightarrow x^2=100\Rightarrow x=10\). Again a \(10\times10\) square, perimeter \(40\) — the dual of a maximum-area problem is a minimum-perimeter one.</div></details></li>
+    <li>Two positive numbers sum to <code>20</code>. What values maximize their product?
+      <details class="answer"><summary></summary><div class="ans-body">\(P(x)=x(20-x)\), \(P'=20-2x=0\Rightarrow x=10\), so both numbers are \(10\), product \(100\)</div></details></li>
+    <li>Two positive numbers sum to <code>16</code>. What values minimize the sum of their squares?
+      <details class="answer"><summary></summary><div class="ans-body">\(S(x)=x^2+(16-x)^2\), \(S'=2x-2(16-x)=4x-32=0\Rightarrow x=8\), so both numbers are \(8\), minimum sum of squares \(128\)</div></details></li>
+    <li>A rectangular field needs fencing on three sides only (the fourth runs along a river), with <code>100 ft</code> of fence total. Maximize the enclosed area.
+      <details class="answer"><summary></summary><div class="ans-body">Let \(x\) = each of the two sides perpendicular to the river, \(y\) = the side parallel to it: \(2x+y=100\Rightarrow y=100-2x\). \(A(x)=x(100-2x)=100x-2x^2\), \(A'=100-4x=0\Rightarrow x=25\), \(y=50\). Max area \(1250\) sq ft.</div></details></li>
+    <li>A rectangle has perimeter <code>24</code>. What dimensions maximize its area?
+      <details class="answer"><summary></summary><div class="ans-body">\(x=6\), a \(6\times6\) square, area \(36\)</div></details></li>
+    <li class="tag">bonus — Two positive numbers sum to <code>30</code>. What values minimize the sum of their squares?
+      <details class="answer"><summary></summary><div class="ans-body">Both equal \(15\), by the same setup as problem 4</div></details></li>
+    <li class="tag">bonus — A pen against a barn wall (no fence needed on that side) uses <code>80 ft</code> of fence for the other three sides. Maximize the enclosed area.
+      <details class="answer"><summary></summary><div class="ans-body">\(2x+y=80\Rightarrow y=80-2x\). \(A(x)=x(80-2x)=80x-2x^2\), \(A'=80-4x=0\Rightarrow x=20\), \(y=40\). Max area \(800\) sq ft.</div></details></li>
+    <li class="tag">bonus — Two positive numbers have a product of <code>100</code>. What values minimize their sum?
+      <details class="answer"><summary></summary><div class="ans-body">\(S(x)=x+100/x\), \(S'=1-100/x^2=0\Rightarrow x=10\), so both numbers are \(10\), minimum sum \(20\)</div></details></li>
+    <li class="tag">bonus — The objective function <code>A(x) = 30x − x²</code> has already been set up, with valid domain <code>0<x<30</code>. Find the x that maximizes it.
+      <details class="answer"><summary></summary><div class="ans-body">\(A'(x)=30-2x=0\Rightarrow x=15\), safely inside the domain</div></details></li>
+    <li class="tag">challenge — For a rectangle with a general fixed perimeter <code>P</code> (a symbolic constant, not a specific number), show that a square always maximizes the area.
+      <details class="answer"><summary></summary><div class="ans-body">\(x+y=P/2 \Rightarrow y=P/2-x\). \(A(x)=x(P/2-x)=\tfrac{P}{2}x-x^2\). \(A'(x)=\tfrac{P}{2}-2x=0\Rightarrow x=P/4\), and then \(y=P/2-P/4=P/4=x\) — always equal, regardless of the value of \(P\). The numeric pattern from every problem above (5&5, 10&10, 20&20...) wasn't a coincidence; it's this general result.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-curve-sketching.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-optimization-practice.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 6 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:6", "content/m07-derivative-applications/ch06-optimization-intro.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

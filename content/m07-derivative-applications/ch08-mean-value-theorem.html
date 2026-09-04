@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — The Mean Value Theorem | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 8 of 12</div>
+  <div class="eyebrow">Chapter 8 · concept:mean-value-theorem</div>
+  <h1>The Mean Value Theorem</h1>
+  <p class="subtitle">Chapters 1–7 all used the derivative to compute something. This chapter is a genuine change of pace: a theorem that guarantees a derivative equals a specific value somewhere, without ever computing where.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Module 6 (Ch. 1) defined average rate of change as the slope of the secant line between two points. The Mean Value Theorem is the guarantee that, for any smooth enough curve, some point along it has an <em>instantaneous</em> rate of change exactly matching that average — the tangent line is parallel to the secant somewhere in between. It's the theoretical bridge between "average speed over a trip" and "there was a moment going exactly that fast."</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The Mean Value Theorem (MVT)</div>
+    <p>If \(f\) is continuous on \([a,b]\) and differentiable on \((a,b)\), then there exists at least one \(c\) in \((a,b)\) such that:</p>
+    <div class="eqn"><div class="eq-body">\[ f'(c) = \frac{f(b)-f(a)}{b-a} \]</div><div class="eq-num" id="eq-7-8-1">(7.8.1)</div></div>
+    <p>Geometrically: somewhere strictly between \(a\) and \(b\), the tangent line is parallel to the secant line connecting \((a,f(a))\) and \((b,f(b))\). A special case worth naming — <strong>Rolle's Theorem</strong> — is when \(f(a)=f(b)\): the right side of (7.8.1) becomes \(0\), so the guaranteed tangent is exactly horizontal.</p>
+    <div class="eqn"><div class="eq-body">\[ f(a)=f(b) \;\Rightarrow\; \exists\, c\in(a,b): f'(c)=0 \]</div><div class="eq-num" id="eq-7-8-2">(7.8.2)</div></div>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — verifying the MVT for f(x)=x² on [0,2]</div>
+    <details class="step" open><summary>Step 1 — confirm the hypotheses hold</summary>
+      <div class="step-body"><p>\(f(x)=x^2\) is a polynomial — continuous everywhere and differentiable everywhere, so both conditions hold automatically on \([0,2]\).</p></div></details>
+    <details class="step"><summary>Step 2 — compute the average rate of change (the right side of 7.8.1)</summary>
+      <div class="step-body"><p>\(\dfrac{f(2)-f(0)}{2-0} = \dfrac{4-0}{2}=2\)</p></div></details>
+    <details class="step"><summary>Step 3 — solve f′(c) = that value</summary>
+      <div class="step-body"><p>\(f'(x)=2x\), so \(2c=2 \Rightarrow c=1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(c=1\) is inside \((0,2)\), confirming the theorem: the tangent line at \(x=1\) has slope \(2\), exactly matching the secant slope between the endpoints.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating the MVT as if it told you exactly <em>where</em> <code>c</code> is, or that <code>c</code> is unique — it only guarantees <em>existence</em>, and there can be more than one valid <code>c</code>. Take <code>f(x)=x³-3x</code> on <code>[-√3, √3]</code>: \(f(-\sqrt3)=-3\sqrt3+3\sqrt3=0\) and \(f(\sqrt3)=3\sqrt3-3\sqrt3=0\), so \(f(a)=f(b)\) — Rolle's Theorem (7.8.2) applies. Solving \(f'(x)=3x^2-3=0\) gives \(x=\pm1\), and <em>both</em> are inside \((-\sqrt3,\sqrt3)\) — two different valid values of \(c\), not one. The theorem promises "at least one," never "exactly one," and never hands you a formula for finding it without solving \(f'(c)=\)(average rate) yourself.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2,c=2">
+    <div class="label">Try it yourself</div>
+    <p>For <code>f(x) = x²</code> on <code>[0, 4]</code>, find the MVT-guaranteed value of <code>c</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="your answer" aria-label="MVT guaranteed c for x squared on 0 to 4">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Verify the MVT for <code>f(x) = x²</code> on <code>[1, 3]</code>: find <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Avg rate \(=(9-1)/2=4=2c \Rightarrow c=2\), inside \((1,3)\) ✓</div></details></li>
+    <li>Verify the MVT for <code>f(x) = x³</code> on <code>[0, 2]</code>: find <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Avg rate \(=(8-0)/2=4=3c^2 \Rightarrow c^2=4/3 \Rightarrow c=2/\sqrt3\approx1.155\), inside \((0,2)\) ✓</div></details></li>
+    <li>Does Rolle's Theorem apply to <code>f(x) = x² − 4</code> on <code>[−2, 2]</code>? If so, find <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(-2)=0=f(2)\), so yes. \(f'(x)=2x=0 \Rightarrow c=0\), inside \((-2,2)\) ✓</div></details></li>
+    <li>Can the MVT be applied to <code>f(x) = 1/x</code> on <code>[−1, 1]</code>? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">No — \(f\) is undefined (and discontinuous) at \(x=0\), which lies inside \([-1,1]\), so the continuity hypothesis fails before differentiability is even relevant.</div></details></li>
+    <li>Verify the MVT for <code>f(x) = \sqrt{x}</code> on <code>[0, 4]</code>: find <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Avg rate \(=(2-0)/4=0.5\). \(f'(x)=1/(2\sqrt x)=0.5 \Rightarrow \sqrt c=1 \Rightarrow c=1\), inside \((0,4)\) ✓ (continuity at the endpoint \(x=0\) is fine; only differentiability is required on the open interval)</div></details></li>
+    <li>For <code>f(x) = x² − 2x</code> on <code>[0, 3]</code>, find the MVT-guaranteed <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Avg rate \(=(3-0)/3=1=2c-2 \Rightarrow c=1.5\), inside \((0,3)\) ✓</div></details></li>
+    <li class="tag">bonus — Does Rolle's Theorem apply to <code>f(x) = \sin x</code> on <code>[0, π]</code>? If so, find <code>c</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f(0)=f(\pi)=0\), yes. \(f'(x)=\cos x=0 \Rightarrow c=\pi/2\), inside \((0,\pi)\) ✓</div></details></li>
+    <li class="tag">bonus — Explain why <code>f(x) = |x|</code> on <code>[−1, 1]</code> does NOT satisfy the MVT's hypotheses, even though it's continuous everywhere.
+      <details class="answer"><summary></summary><div class="ans-body">It fails differentiability at \(x=0\) (a sharp corner), which is inside the open interval \((-1,1)\) — continuity alone isn't enough.</div></details></li>
+    <li class="tag">bonus — For <code>f(x) = x³ − 3x</code> on <code>[−√3, √3]</code>, find <em>both</em> values of <code>c</code> guaranteed by Rolle's Theorem.
+      <details class="answer"><summary></summary><div class="ans-body">\(c=\pm1\) — see the Common Mistake box for the full derivation. Both are valid; the theorem doesn't promise uniqueness.</div></details></li>
+    <li class="tag">bonus — A car travels <code>120</code> miles in <code>2</code> hours. Using the MVT, explain why it must have been traveling at exactly <code>60</code> mph at some instant, no matter how its speed varied.
+      <details class="answer"><summary></summary><div class="ans-body">Let \(f(t)\) be position (continuous and differentiable for any physically reasonable motion). Average velocity \(=120/2=60\) mph \(=\) average rate of change of \(f\) over \([0,2]\). The MVT guarantees some instant \(c\) where \(f'(c)\), the instantaneous velocity, equals that average exactly — \(60\) mph, at least once.</div></details></li>
+    <li class="tag">challenge — Show that <code>f(x) = x³ + x − 1</code> has exactly one real root, using Rolle's Theorem.
+      <details class="answer"><summary></summary><div class="ans-body">Suppose it had two roots \(a<b\), so \(f(a)=f(b)=0\). Rolle's Theorem would then guarantee some \(c\in(a,b)\) with \(f'(c)=0\). But \(f'(x)=3x^2+1\geq1\) for every real \(x\) — never zero. That contradiction means \(f\) can't have two roots; since it's a continuous odd-degree polynomial (so it does cross zero at least once, by the Intermediate Value Theorem), it has <em>exactly</em> one real root.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-optimization-practice.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-linear-approximation.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 8 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:8", "content/m07-derivative-applications/ch08-mean-value-theorem.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

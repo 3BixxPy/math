@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Concavity & the Second Derivative Test | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 4 of 12</div>
+  <div class="eyebrow">Chapter 4 · concept:second-derivative-test, concept:concavity-inflection-points</div>
+  <h1>Concavity & the Second Derivative Test</h1>
+  <p class="subtitle">Chapter 3 classified critical points by checking f′'s sign on either side — a two-sided investigation. This chapter gets the same answer from a single number, most of the time, by differentiating one more time.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p><code>f'</code> describes whether the graph is going up or down. <code>f''</code> — the derivative of the derivative — describes whether that rate of change is itself increasing or decreasing, which is exactly what "curving up like a bowl" versus "curving down like a dome" means. It's a second layer of the same idea Module 6 already handed you: just differentiate again.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Concavity and inflection points</div>
+    <div class="eqn"><div class="eq-body">\[ f \text{ is concave up on } I \iff f''(x)>0 \text{ on } I; \qquad f \text{ is concave down on } I \iff f''(x)<0 \text{ on } I \]</div><div class="eq-num" id="eq-7-4-1">(7.4.1)</div></div>
+    <p>Concave up looks like a bowl (∪-shaped locally); concave down looks like a dome (∩-shaped locally). An <strong>inflection point</strong> is a point where concavity actually switches — from up to down or down to up — which typically happens where \(f''(x)=0\) or is undefined, <em>and</em> the sign genuinely changes there (just like a critical point needed an actual sign change in \(f'\) to be an extremum).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The Second Derivative Test</div>
+    <div class="eqn"><div class="eq-body">\[ \text{if } f'(c)=0: \begin{cases} f''(c)>0 & \Rightarrow \text{local min} \\ f''(c)<0 & \Rightarrow \text{local max} \\ f''(c)=0 & \Rightarrow \text{inconclusive — fall back to (7.3.1)} \end{cases} \]</div><div class="eq-num" id="eq-7-4-2">(7.4.2)</div></div>
+    <p>Faster than Chapter 3's test when it applies — one number, no sign chart — but it only applies at a critical point where \(f'(c)=0\) (not the "undefined derivative" kind from Chapter 2), and it says nothing at all when \(f''(c)=0\). That case isn't a special exception to memorize; it's a genuine dead end that needs the First Derivative Test instead.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — reclassifying f(x)=x³−3x², and its inflection point</div>
+    <p>Confirm Chapter 3's classification of <code>f(x) = x³ − 3x²</code>'s critical points using the Second Derivative Test, then find its inflection point.</p>
+    <details class="step" open><summary>Step 1 — find f′ and f″</summary>
+      <div class="step-body"><p>\(f'(x)=3x^2-6x\), \(f''(x)=6x-6\).</p></div></details>
+    <details class="step"><summary>Step 2 — evaluate f″ at each critical point (x=0, x=2, from Ch. 2)</summary>
+      <div class="step-body"><p>\(f''(0)=-6<0 \Rightarrow\) local max at \(x=0\). \(f''(2)=6>0 \Rightarrow\) local min at \(x=2\). Both match Chapter 3's sign-chart answer, exactly as they must.</p></div></details>
+    <details class="step"><summary>Step 3 — find the inflection point by solving f″(x)=0</summary>
+      <div class="step-body"><p>\(6x-6=0 \Rightarrow x=1\).</p></div></details>
+    <details class="step"><summary>Step 4 — confirm the sign of f″ actually changes there</summary>
+      <div class="step-body"><p>\(f''<0\) for \(x<1\) (concave down), \(f''>0\) for \(x>1\) (concave up) — a genuine switch.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Inflection point at \(x=1\), \(f(1)=1-3=-2\): the point \((1,-2)\) — exactly where the curve stops caving downward and starts curving upward, right between the local max and the local min.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Applying the Second Derivative Test when <code>f''(c)=0</code> and forcing out a conclusion anyway. Take <code>f(x)=x⁴</code> at <code>x=0</code>: \(f'(x)=4x^3\), so \(f'(0)=0\) — a critical point. \(f''(x)=12x^2\), so \(f''(0)=0\) too — genuinely inconclusive by (7.4.2), not "probably neither" or "probably a saddle." Falling back to the First Derivative Test settles it: \(f'\) is negative for \(x<0\) and positive for \(x>0\), a clean \(-\to+\) sign change, so \(x=0\) actually <strong>is</strong> a local min — despite \(f''(0)=0\) giving no direct signal either way. When (7.4.2) hands back "inconclusive," that's the whole answer for that test; it isn't a hint toward any particular classification.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="up,concave up,concaveup">
+    <div class="label">Try it yourself</div>
+    <p>What is the concavity of <code>f(x) = x²</code> (at any x)?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="up or down" aria-label="concavity of x squared">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find f″ for <code>f(x) = x² − 6x</code> and state its concavity everywhere.
+      <details class="answer"><summary></summary><div class="ans-body">\(f''=2\), concave up everywhere</div></details></li>
+    <li>Find f″ for <code>f(x) = -2x² + 3x</code> and state its concavity everywhere.
+      <details class="answer"><summary></summary><div class="ans-body">\(f''=-4\), concave down everywhere</div></details></li>
+    <li>Find the inflection point of <code>f(x) = x³ − 6x² + 9x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f''=6x-12=0 \Rightarrow x=2\); \(f(2)=8-24+18=2\) → \((2,2)\)</div></details></li>
+    <li>Classify the critical points of <code>f(x) = x³ − 3x</code> using the Second Derivative Test.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=3x^2-3=0 \Rightarrow x=\pm1\). \(f''=6x\). \(f''(1)=6>0\) → local min. \(f''(-1)=-6<0\) → local max.</div></details></li>
+    <li>Find the inflection point(s) of <code>f(x) = x⁴ − 8x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f''=12x^2-16=0 \Rightarrow x^2=4/3 \Rightarrow x=\pm2/\sqrt3\) (both are genuine sign changes, by symmetry)</div></details></li>
+    <li>Classify the critical point of <code>f(x) = x² + 4x + 1</code> using the Second Derivative Test.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=2x+4=0 \Rightarrow x=-2\); \(f''=2>0\) → local min</div></details></li>
+    <li class="tag">bonus — For <code>f(x) = x⁴</code>, show the Second Derivative Test is inconclusive at <code>x=0</code>, then classify it using the First Derivative Test instead.
+      <details class="answer"><summary></summary><div class="ans-body">\(f''(0)=0\) → inconclusive. \(f'(x)=4x^3\) is \(-\) for \(x<0\), \(+\) for \(x>0\) → local min (see the Common Mistake box).</div></details></li>
+    <li class="tag">bonus — Is <code>x=0</code> an inflection point of <code>f(x) = x³</code>? Justify using f″.
+      <details class="answer"><summary></summary><div class="ans-body">Yes: \(f''=6x\), negative for \(x<0\), positive for \(x>0\) — a genuine sign change at \((0,0)\). (Also a critical point with no extremum there, from Ch. 3 — both facts hold at once.)</div></details></li>
+    <li class="tag">bonus — Does <code>f(x) = x² − 4</code> have any inflection points? Explain.
+      <details class="answer"><summary></summary><div class="ans-body">No — \(f''=2>0\) for every \(x\), so it's concave up everywhere and concavity never switches.</div></details></li>
+    <li class="tag">bonus — Given <code>f''(x) = (x-1)(x-3)</code> directly, find all inflection points and describe the concavity on each interval.
+      <details class="answer"><summary></summary><div class="ans-body">Zeros at \(x=1,3\). Sign: \(+\) on \((-\infty,1)\) (concave up), \(-\) on \((1,3)\) (concave down), \(+\) on \((3,\infty)\) (concave up). Both \(x=1\) and \(x=3\) are inflection points.</div></details></li>
+    <li class="tag">challenge — For <code>f(x) = x⁴ − 4x³ + 6</code>, find all critical points (classifying each — noting where the Second Derivative Test is inconclusive) and all inflection points.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=4x^3-12x^2=4x^2(x-3)\), critical at \(x=0,3\). \(f''=12x^2-24x=12x(x-2)\). \(f''(0)=0\) → inconclusive; First Derivative Test: \(f'(x)=4x^2(x-3)\) is negative on both sides of \(0\) (the \(x^2\) never flips sign) → neither max nor min at \(x=0\). \(f''(3)=36>0\) → local min at \(x=3\). Inflection points: \(f''=0\) at \(x=0,2\); sign of \(f''=12x(x-2)\) is \(+\) before \(0\), \(-\) between \(0\) and \(2\), \(+\) after \(2\) — both are genuine switches, so \(x=0\) and \(x=2\) are both inflection points (notice \(x=0\) is simultaneously a non-extreme critical point <em>and</em> an inflection point).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-first-derivative-test.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-curve-sketching.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 4 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:4", "content/m07-derivative-applications/ch04-second-derivative-test.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — Optimization, More Problems | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 7 of 12</div>
+  <div class="eyebrow">Chapter 7 · concept:optimization-practice</div>
+  <h1>Optimization — More Problems</h1>
+  <p class="subtitle">No new theorem this chapter — Chapter 6's six-step strategy is the whole toolkit. This is where it gets fluent, on two classic setups, plus one genuinely useful technique for keeping the algebra clean.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>The strategy from Chapter 6 doesn't get harder with more practice — the word problems just get more varied in how they hide the constraint. An open-top box and a distance-minimization problem look nothing alike on the surface, but both collapse to the exact same six steps once the objective and constraint are identified.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the open-top box</div>
+    <p>An open-top box is made by cutting equal squares of side <code>x</code> from each corner of a <code>12×12</code> sheet of cardboard and folding up the sides. What value of <code>x</code> maximizes the box's volume?</p>
+    <details class="step" open><summary>Step 1 — set up the volume as a function of x</summary>
+      <div class="step-body"><p>After folding, the base is \((12-2x)\) by \((12-2x)\), and the height is \(x\): \(V(x) = x(12-2x)^2\).</p></div></details>
+    <details class="step"><summary>Step 2 — state the valid domain</summary>
+      <div class="step-body"><p>Both the cut size and the resulting base need to stay positive: \(0<x<6\).</p></div></details>
+    <details class="step"><summary>Step 3 — differentiate (product + chain rule, Module 6) and find critical points</summary>
+      <div class="step-body"><p>\(V'(x) = (12-2x)^2 + x\cdot2(12-2x)(-2) = (12-2x)\big[(12-2x)-4x\big] = (12-2x)(12-6x)\). Zero at \(x=6\) (excluded — it's the domain's edge, giving zero volume) or \(x=2\).</p></div></details>
+    <details class="step"><summary>Step 4 — classify and check the domain</summary>
+      <div class="step-body"><p>\(x=2\) is comfortably inside \((0,6)\), and \(V\) rises then falls around it (or check \(V''<0\) there) — a local max.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(x=2\) maximizes volume, giving \(V(2)=2(8)^2=128\).</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — minimum distance to a curve</div>
+    <p>Find the point on <code>y = x²</code> closest to <code>(0, 3)</code>.</p>
+    <details class="step" open><summary>Step 1 — write the distance, but minimize its square instead</summary>
+      <div class="step-body"><p>\(D=\sqrt{x^2+(y-3)^2}\) with \(y=x^2\), so \(D=\sqrt{x^2+(x^2-3)^2}\) — a square root with a fourth-degree polynomial underneath, unpleasant to differentiate. Minimize \(D^2\) instead:</p>
+      <div class="step-body"><p>\(D^2(x) = x^2+(x^2-3)^2 = x^4-5x^2+9\)</p></div></div></details>
+    <details class="step"><summary>Step 2 — differentiate the clean polynomial and find critical points</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[D^2] = 4x^3-10x = 2x(2x^2-5) = 0 \Rightarrow x=0 \text{ or } x^2=2.5\)</p></div></details>
+    <details class="step"><summary>Step 3 — compare the candidates</summary>
+      <div class="step-body"><p>At \(x=0\): \(D^2=9\). At \(x=\pm\sqrt{2.5}\): \(D^2=(2.5)^2-5(2.5)+9=2.75\) — smaller.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Minimum distance occurs at \(x=\pm\sqrt{2.5}\approx\pm1.58\), giving \(D=\sqrt{2.75}\approx1.66\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake — and the technique that avoids it</div>
+    <p>Optimizing the wrong quantity: minimizing <code>D</code> directly instead of <code>D²</code>. Differentiating <code>D(x)=\sqrt{x^4-5x^2+9}</code> requires the chain rule wrapped around a messy inner polynomial — technically doable, but error-prone and slow. Minimizing <code>D²</code> instead gives the exact same critical x-values, because squaring is a strictly increasing operation for non-negative numbers: whatever \(x\) makes \(D^2\) smallest also makes \(D=\sqrt{D^2}\) smallest, since the square root preserves order. This isn't a shortcut that risks the wrong answer — it's a deliberate, standard technique. Always minimize the squared distance when the objective is a distance.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1,x=1">
+    <div class="label">Try it yourself</div>
+    <p>An open-top box is folded from a <code>6×6</code> sheet, cutting squares of side <code>x</code> from each corner. What value of <code>x</code> maximizes the volume?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="your answer" aria-label="x maximizing volume for a 6 by 6 sheet">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Open-top box from a <code>10×10</code> sheet: find the <code>x</code> that maximizes volume.
+      <details class="answer"><summary></summary><div class="ans-body">\(V(x)=x(10-2x)^2\), \(V'=(10-2x)(10-6x)=0\Rightarrow x=5/3\) (the other root, \(x=5\), gives zero volume)</div></details></li>
+    <li>Open-top box from a <code>16×16</code> sheet: find the <code>x</code> that maximizes volume.
+      <details class="answer"><summary></summary><div class="ans-body">\(V(x)=x(16-2x)^2\), \(V'=(16-2x)(16-6x)=0\Rightarrow x=8/3\)</div></details></li>
+    <li>Find the point on <code>y = \sqrt{x}</code> closest to <code>(3, 0)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(D^2(x)=(x-3)^2+x=x^2-5x+9\) (using \(y^2=x\) to avoid the root entirely). \(\tfrac{d}{dx}D^2=2x-5=0\Rightarrow x=2.5\), \(y=\sqrt{2.5}\)</div></details></li>
+    <li>Find the point on the line <code>y = x + 4</code> closest to the origin.
+      <details class="answer"><summary></summary><div class="ans-body">\(D^2(x)=x^2+(x+4)^2=2x^2+8x+16\), \(\tfrac{d}{dx}D^2=4x+8=0\Rightarrow x=-2, y=2\). Minimum distance \(=\sqrt{8}=2\sqrt2\).</div></details></li>
+    <li>A closed box with a square base has fixed volume <code>32</code>. Minimize its surface area.
+      <details class="answer"><summary></summary><div class="ans-body">\(V=x^2h=32\Rightarrow h=32/x^2\). \(S=x^2+4xh=x^2+128/x\). \(S'=2x-128/x^2=0\Rightarrow x^3=64\Rightarrow x=4\), \(h=2\)</div></details></li>
+    <li>Find the point on <code>y = x²</code> closest to <code>(0, 5)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(D^2(x)=x^2+(x^2-5)^2=x^4-9x^2+25\), \(\tfrac{d}{dx}D^2=4x^3-18x=2x(2x^2-9)=0\). Comparing \(x=0\) (\(D^2=25\)) to \(x=\pm\sqrt{4.5}\) (\(D^2=4.75\)), the minimum is at \(x=\pm\sqrt{4.5}\).</div></details></li>
+    <li class="tag">bonus — Open-top box from a <code>20×20</code> sheet: find the <code>x</code> that maximizes volume.
+      <details class="answer"><summary></summary><div class="ans-body">\(V'=(20-2x)(20-6x)=0\Rightarrow x=10/3\)</div></details></li>
+    <li class="tag">bonus — Find the point on <code>y = \sqrt{x}</code> closest to <code>(6, 0)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(D^2(x)=(x-6)^2+x=x^2-11x+36\), \(\tfrac{d}{dx}D^2=2x-11=0\Rightarrow x=5.5\)</div></details></li>
+    <li class="tag">bonus — A closed box with a square base has fixed volume <code>8</code>. Minimize its surface area.
+      <details class="answer"><summary></summary><div class="ans-body">\(S=2x^2+32/x\), \(S'=4x-32/x^2=0\Rightarrow x^3=8\Rightarrow x=2\), \(h=8/4=2\) — a cube</div></details></li>
+    <li class="tag">bonus — In one sentence, explain why minimizing <code>D²</code> instead of <code>D</code> gives the same critical x-value.
+      <details class="answer"><summary></summary><div class="ans-body">Squaring a non-negative quantity is order-preserving, so whatever \(x\) minimizes \(D^2\) automatically minimizes \(D=\sqrt{D^2}\) as well — same critical point, far cleaner algebra.</div></details></li>
+    <li class="tag">challenge — An open-top box is folded from a <code>8×15</code> rectangular sheet by cutting equal squares of side <code>x</code> from each corner. Set up <code>V(x)</code>, state its valid domain, and find the <code>x</code> that maximizes volume.
+      <details class="answer"><summary></summary><div class="ans-body">\(V(x)=x(15-2x)(8-2x)=4x^3-46x^2+120x\), domain \(0<x<4\). \(V'(x)=12x^2-92x+120\); dividing by 4: \(3x^2-23x+30=0\), discriminant \(=529-360=169=13^2\) (Module 0's quadratic formula), so \(x=\tfrac{23\pm13}{6}=6\) or \(\tfrac{5}{3}\). Only \(x=5/3\) is in the valid domain.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-optimization-intro.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-mean-value-theorem.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 7 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:7", "content/m07-derivative-applications/ch07-optimization-practice.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

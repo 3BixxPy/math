@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Related Rates | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 1 of 12</div>
+  <div class="eyebrow">Chapter 1 · concept:related-rates</div>
+  <h1>Related Rates</h1>
+  <p class="subtitle">Module 6 spent sixteen chapters building a machine for computing derivatives of anything — polynomials, products, quotients, compositions, even relations you can't solve for y (implicit differentiation, Ch. 12). This chapter is the first time that machine gets pointed at a genuinely new kind of question: not "what's the slope," but "how fast is this actually changing, right now, in the real world."</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A huge number of real quantities are tangled together — a circle's radius and its area, a ladder's height and its distance from a wall, a balloon's radius and its volume. When one of those quantities changes with time, so does everything related to it, and usually at a different rate. Related rates is just implicit differentiation (Module 6, Ch. 12) with time <code>t</code> installed as the hidden variable everything else secretly depends on. Nothing new to learn mechanically — only a new way to read the problem.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Related rates</div>
+    <p>Suppose two quantities, say \(x\) and \(y\), are linked by an equation that holds at every instant, and both are themselves functions of time \(t\) (even though \(t\) rarely appears explicitly in the equation). Differentiating <strong>both sides</strong> of that equation with respect to \(t\) — treating \(x\) and \(y\) as \(x(t)\) and \(y(t)\), and applying the chain rule to each — produces a new equation relating their rates, \(\dfrac{dx}{dt}\) and \(\dfrac{dy}{dt}\). That's the entire method: differentiate the relationship, not the numbers.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Differentiating a relationship with respect to time</div>
+    <p>For a sliding ladder of fixed length \(L\), with base distance \(x\) and height on the wall \(y\), the Pythagorean relationship \(x^2+y^2=L^2\) (Module 0's Pythagorean theorem, now doing calculus work) holds at every instant. Differentiating both sides with respect to \(t\):</p>
+    <div class="eqn"><div class="eq-body">\[ 2x\frac{dx}{dt} + 2y\frac{dy}{dt} = 0 \]</div><div class="eq-num" id="eq-7-1-1">(7.1.1)</div></div>
+    <p>Each term used the chain rule exactly as Module 6 taught it: \(\dfrac{d}{dt}[x^2] = 2x\cdot\dfrac{dx}{dt}\), because \(x\) is secretly \(x(t)\). The right side is \(0\) because \(L\) is fixed — the ladder doesn't stretch, so its derivative with respect to time is genuinely zero.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the sliding ladder</div>
+    <p>A 10-ft ladder leans against a wall. The base slides away from the wall at <code>1 ft/s</code>. How fast is the top sliding down when the base is <code>6 ft</code> from the wall?</p>
+    <details class="step" open><summary>Step 1 — set up variables and the constant relationship</summary>
+      <div class="step-body"><p>Let \(x\) = base's distance from the wall, \(y\) = height of the top on the wall. The ladder length is fixed: \(x^2+y^2=10^2=100\).</p></div></details>
+    <details class="step"><summary>Step 2 — differentiate the relationship with respect to t (before plugging in any numbers)</summary>
+      <div class="step-body"><p>By (7.1.1)'s template: \(2x\dfrac{dx}{dt}+2y\dfrac{dy}{dt}=0\). This holds at every instant — it has to be set up while \(x\) and \(y\) are still symbolic.</p></div></details>
+    <details class="step"><summary>Step 3 — now find the specific numbers at this instant</summary>
+      <div class="step-body"><p>Known: \(\dfrac{dx}{dt}=1\) ft/s, \(x=6\). Find \(y\) from the original (undifferentiated) relation: \(6^2+y^2=100 \Rightarrow y=8\).</p></div></details>
+    <details class="step"><summary>Step 4 — substitute into the differentiated equation and solve for dy/dt</summary>
+      <div class="step-body"><p>\(2(6)(1) + 2(8)\dfrac{dy}{dt} = 0 \;\Rightarrow\; 12 + 16\dfrac{dy}{dt}=0 \;\Rightarrow\; \dfrac{dy}{dt} = -\dfrac{12}{16} = -\dfrac{3}{4}\) ft/s.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The top is sliding down at \(\tfrac{3}{4}\) ft/s at that instant — negative because \(y\) is decreasing. Note that this rate is <em>not</em> constant; it depends on \(x\) and \(y\) at each moment, which is exactly why the differentiated relationship, not a single formula, has to do the work.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a circle's growing area</div>
+    <p>A circle's radius grows at <code>3 cm/s</code>. How fast is its area growing when <code>r = 5</code> cm?</p>
+    <details class="step" open><summary>Step 1 — write the relationship and differentiate with respect to t</summary>
+      <div class="step-body"><p>\(A=\pi r^2\). Differentiating both sides with respect to \(t\) (chain rule: \(r\) is \(r(t)\)):</p>
+      <div class="eqn"><div class="eq-body">\[ \frac{dA}{dt} = 2\pi r\,\frac{dr}{dt} \]</div><div class="eq-num" id="eq-7-1-2">(7.1.2)</div></div></div></details>
+    <details class="step"><summary>Step 2 — substitute the given instant's values</summary>
+      <div class="step-body"><p>\(\dfrac{dr}{dt}=3\), \(r=5\): \(\dfrac{dA}{dt} = 2\pi(5)(3) = 30\pi\) cm²/s.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Plugging in the specific numeric values <em>before</em> differentiating. In the ladder example, it's tempting to substitute \(x=6\) into \(x^2+y^2=100\) right away, getting \(y^2=64\), \(y=8\) — a fixed, static equation between two numbers. Differentiating <code>36 + 64 = 100</code> gives <code>0 = 0</code>, which is true but useless: once \(x\) has been replaced by the specific number \(6\), the equation no longer remembers that \(x\) was ever changing, so its derivative destroys exactly the information you need. Differentiate first, while everything is still symbolic and depends on \(t\) — only substitute actual numbers into the <em>differentiated</em> equation, as (7.1.1) was used above.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="20pi,20π,62.83,62.8,62.9">
+    <div class="label">Try it yourself</div>
+    <p>A circle's radius grows at <code>2 cm/s</code>. How fast is the area growing when <code>r = 5</code>? (type e.g. <code>20pi</code>)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 20pi" aria-label="dA/dt when r=5, dr/dt=2">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>A circle's radius grows at <code>4 cm/s</code>. Find <code>dA/dt</code> when <code>r = 3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(dA/dt = 2\pi r\,dr/dt = 2\pi(3)(4)=24\pi\) cm²/s</div></details></li>
+    <li>A sphere's radius grows at <code>2 cm/s</code>. Using <code>V=\tfrac{4}{3}\pi r^3</code>, find <code>dV/dt</code> when <code>r = 3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(dV/dt = 4\pi r^2\,dr/dt = 4\pi(9)(2)=72\pi\) cm³/s</div></details></li>
+    <li>A 13-ft ladder's base slides away from the wall at <code>2 ft/s</code>. Find how fast the top is sliding down when the base is <code>5 ft</code> from the wall.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=12\) (from \(5^2+y^2=169\)). \(2(5)(2)+2(12)\,dy/dt=0 \Rightarrow dy/dt=-20/24=-5/6\) ft/s</div></details></li>
+    <li>A cube's side grows at <code>0.5 cm/s</code>. Using <code>V=s^3</code>, find <code>dV/dt</code> when <code>s = 4</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(dV/dt=3s^2\,ds/dt=3(16)(0.5)=24\) cm³/s</div></details></li>
+    <li>Two positive quantities satisfy <code>xy = 100</code>. If <code>dx/dt = 5</code> at the instant <code>x = 20</code>, find <code>dy/dt</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Product rule on both sides: \(x\,dy/dt + y\,dx/dt = 0\). At \(x=20\), \(y=5\): \(20\,dy/dt + 5(5)=0 \Rightarrow dy/dt = -5/4\)</div></details></li>
+    <li>A square's side grows at <code>3 cm/s</code>. Find <code>dA/dt</code> when <code>s = 10</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(A=s^2 \Rightarrow dA/dt = 2s\,ds/dt = 2(10)(3)=60\) cm²/s</div></details></li>
+    <li class="tag">bonus — A balloon's volume grows at a constant <code>100 cm³/s</code>. Find <code>dr/dt</code> when <code>r = 5</code> (using <code>V=\tfrac{4}{3}\pi r^3</code>).
+      <details class="answer"><summary></summary><div class="ans-body">\(dV/dt = 4\pi r^2\,dr/dt \Rightarrow 100 = 4\pi(25)\,dr/dt \Rightarrow dr/dt = 1/\pi\) cm/s</div></details></li>
+    <li class="tag">bonus — Car A drives north from an intersection at <code>60 mph</code>; car B drives west from the same intersection at <code>80 mph</code>. Find how fast the distance between them is changing 1 hour later.
+      <details class="answer"><summary></summary><div class="ans-body">At \(t=1\): \(x=60\), \(y=80\), \(z=\sqrt{x^2+y^2}=100\). Differentiate \(x^2+y^2=z^2\): \(2x\,dx/dt+2y\,dy/dt=2z\,dz/dt\). \(2(60)(60)+2(80)(80)=2(100)\,dz/dt \Rightarrow 7200+12800=200\,dz/dt \Rightarrow dz/dt=100\) mph</div></details></li>
+    <li class="tag">bonus — A rectangle's length grows at <code>2 cm/s</code> while its width shrinks at <code>1 cm/s</code>. Find <code>dA/dt</code> when <code>l=10, w=6</code> (product rule + related rates).
+      <details class="answer"><summary></summary><div class="ans-body">\(A=lw \Rightarrow dA/dt = l'w + lw' = (2)(6)+(10)(-1)=12-10=2\) cm²/s</div></details></li>
+    <li class="tag">bonus — A cone with fixed radius <code>3</code> is draining so its height shrinks at <code>2 cm/s</code>. Using <code>V=\tfrac{1}{3}\pi r^2 h</code>, find <code>dV/dt</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(r\) is fixed, so \(dV/dt = \tfrac{1}{3}\pi r^2\,dh/dt = \tfrac{1}{3}\pi(9)(-2) = -6\pi\) cm³/s</div></details></li>
+    <li class="tag">challenge — For the 10-ft sliding ladder (base sliding away at <code>1 ft/s</code>), find the rate of change of the angle <code>θ</code> between the ladder and the ground when the base is <code>6 ft</code> out. (Use <code>cos θ = x/10</code>.)
+      <details class="answer"><summary></summary><div class="ans-body">Differentiate: \(-\sin\theta\,d\theta/dt = \tfrac{1}{10}\,dx/dt\). At \(x=6\), \(y=8\), so \(\sin\theta = y/10 = 0.8\). \(-0.8\,d\theta/dt = 0.1(1) \Rightarrow d\theta/dt = -0.125\) rad/s — the angle is shrinking as the ladder slides down, as expected.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m06-derivatives/ch16-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-critical-points.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 1 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:1", "content/m07-derivative-applications/ch01-related-rates.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

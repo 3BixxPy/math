@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — Curve Sketching | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 5 of 12</div>
+  <div class="eyebrow">Chapter 5 · concept:curve-sketching</div>
+  <h1>Curve Sketching — Putting It All Together</h1>
+  <p class="subtitle">Chapters 2 through 4 built three separate tools: where the interesting x-values are, whether each is a peak or valley, and how the curve bends between them. This chapter doesn't add a new tool — it's the payoff of combining the three you already have into an actually trustworthy sketch.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Plotting a handful of points and connecting the dots is guesswork disguised as a graph — it can easily miss a local max/min sitting between two sampled x-values, or get the concavity backwards. A sketch built from derivative-driven features instead is exact, everywhere, because it's built from what the function is actually doing, not from what a few lucky (or unlucky) sample points happened to show.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — the curve-sketching checklist</div>
+    <ol>
+      <li><strong>Domain</strong> (Module 1) — where is <code>f</code> even defined?</li>
+      <li><strong>Intercepts</strong> — the y-intercept <code>f(0)</code>, and x-intercepts where <code>f(x)=0</code></li>
+      <li><strong>Asymptotes / end behavior</strong> (Module 1, Ch. 13–14) — what happens as <code>x→±∞</code>, and any vertical asymptotes</li>
+      <li><strong>Increasing / decreasing intervals</strong> — the sign of <code>f′</code> (Chapter 3)</li>
+      <li><strong>Concavity and inflection points</strong> — the sign of <code>f″</code> (Chapter 4)</li>
+      <li><strong>Assemble</strong> — plot the key points (intercepts, critical points, inflection points) and connect them consistently with steps 4–5</li>
+    </ol>
+    <p>No new formula here — this chapter is entirely about running the checklist in order and trusting it over intuition.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — sketching f(x)=x³−3x² feature by feature</div>
+    <p>This is the same function Chapters 2–4 have been building up analysis of — now assembled into one full picture.</p>
+    <details class="step" open><summary>Step 1 — domain</summary>
+      <div class="step-body"><p>A polynomial: defined for all real \(x\).</p></div></details>
+    <details class="step"><summary>Step 2 — intercepts</summary>
+      <div class="step-body"><p>y-intercept: \(f(0)=0\). x-intercepts: \(x^3-3x^2=x^2(x-3)=0 \Rightarrow x=0,3\). So \((0,0)\) and \((3,0)\).</p></div></details>
+    <details class="step"><summary>Step 3 — end behavior</summary>
+      <div class="step-body"><p>Odd degree, positive leading coefficient (Module 1, Ch. 13): as \(x\to-\infty\), \(f\to-\infty\); as \(x\to+\infty\), \(f\to+\infty\). No asymptotes — it's a polynomial.</p></div></details>
+    <details class="step"><summary>Step 4 — increasing / decreasing (from Chapter 3)</summary>
+      <div class="step-body"><p>\(f'(x)=3x^2-6x\): increasing on \((-\infty,0)\), decreasing on \((0,2)\), increasing on \((2,\infty)\). Local max at \((0,0)\), local min at \((2,-4)\).</p></div></details>
+    <details class="step"><summary>Step 5 — concavity (from Chapter 4)</summary>
+      <div class="step-body"><p>\(f''(x)=6x-6\): concave down on \((-\infty,1)\), concave up on \((1,\infty)\). Inflection point at \((1,-2)\).</p></div></details>
+    <details class="step"><summary>Result — assembling the sketch</summary>
+      <div class="step-body"><p>Starting from the far left (down and to the left), the curve rises, caving downward, up through \((0,0)\) — a local max where it turns around. It falls, still caving downward until \((1,-2)\), where it switches to caving upward, continuing to fall to the local min at \((2,-4)\). From there it rises again, now caving upward, crossing \((3,0)\) and continuing up and to the right forever. Every feature is accounted for — nothing was guessed.</p></div></details>
+  </div>
+
+  <div class="plot-wrap"><svg id="cs-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <div class="plot-legend">
+    <span><span class="swatch" style="background:var(--accent)"></span>local max / min</span>
+    <span><span class="swatch" style="background:var(--ex-border)"></span>inflection point</span>
+  </div>
+  <script>
+  (function () {
+    const opts = { xMin: -2, xMax: 4, yMin: -6, yMax: 4, width: 320, height: 320, pad: 26, xStep: 1, yStep: 2, samples: 400 };
+    const svg = document.getElementById("cs-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => x * x * x - 3 * x * x, opts, "plot-curve");
+    MCPlot.plotPoints(svg, [[0, 0], [2, -4]], opts, "plot-point");
+    MCPlot.plotPoints(svg, [[1, -2]], opts, "plot-point-alt");
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Check your own hand-sketch of f(x)=x³−3x² against this — every marked point came from Chapters 3–4, not from plugging in random x-values.</p>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Sketching from a handful of plugged-in points instead of from the derivative-driven features. For <code>f(x)=x³−3x²</code>, the true local max, local min, and inflection point sit at <code>x=0, 2,</code> and <code>1</code> — but in general those special x-values can just as easily land on a fraction or an irrational number, nowhere near the "nice" integers a naive sketch would sample. Connecting a few evenly-spaced plotted points can easily miss a hidden bump between two of them, or draw the wrong concavity across a stretch where it actually switches. The checklist is slower point-for-point, but it's exact everywhere — a few plugged-in points are just a guess that happens to look plausible.</p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Run the checklist on <code>f(x) = x² − 4x + 3</code>: intercepts, critical point, concavity.
+      <details class="answer"><summary></summary><div class="ans-body">Intercepts \((1,0),(3,0),(0,3)\). \(f'=2x-4=0\Rightarrow x=2\) (min, \(y=-1\)). \(f''=2>0\): concave up everywhere, no inflection. Standard upward parabola.</div></details></li>
+    <li>Run the checklist on <code>f(x) = -x³ + 3x</code>: critical points, concavity, inflection point.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=-3x^2+3=0\Rightarrow x=\pm1\). \(f''=-6x\): \(f''(1)=-6<0\) (local max, \(y=2\)); \(f''(-1)=6>0\) (local min, \(y=-2\)). Inflection at \(x=0\) (sign of \(f''\) switches there), \(f(0)=0\).</div></details></li>
+    <li>Run the checklist on <code>f(x) = x⁴ − 2x²</code>: critical points and inflection points.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=4x^3-4x=4x(x-1)(x+1)=0\Rightarrow x=0,\pm1\). Local max at \(x=0\), local min at \(x=\pm1\) (even function, symmetric). \(f''=12x^2-4=0\Rightarrow x=\pm1/\sqrt3\): both inflection points.</div></details></li>
+    <li>Run the checklist on <code>f(x) = 1/(x-1)</code>: asymptotes, increasing/decreasing, concavity.
+      <details class="answer"><summary></summary><div class="ans-body">Vertical asymptote \(x=1\), horizontal asymptote \(y=0\) (Module 1, Ch. 14). \(f'=-1/(x-1)^2<0\) always → decreasing on both branches. \(f''=2/(x-1)^3\): negative for \(x<1\) (concave down), positive for \(x>1\) (concave up) — but not an inflection point, since \(f\) isn't even defined at \(x=1\).</div></details></li>
+    <li>Run the checklist on <code>f(x) = x³ − 3x² − 9x</code>: critical points and inflection point.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=3x^2-6x-9=3(x-3)(x+1)=0\Rightarrow x=-1,3\). \(f(-1)=5\) (local max), \(f(3)=-27\) (local min). \(f''=6x-6=0\Rightarrow x=1\), \(f(1)=-11\): inflection point.</div></details></li>
+    <li>Run the checklist on <code>f(x) = x^{1/3}</code>: domain, critical points, monotonicity.
+      <details class="answer"><summary></summary><div class="ans-body">Domain: all reals. Critical point at \(x=0\) (derivative undefined there, Ch. 2), but no sign change in \(f'\) (Ch. 3) — the function is increasing everywhere, just with a vertical tangent at the origin.</div></details></li>
+    <li class="tag">bonus — Run the checklist on <code>f(x) = x⁴ − 4x² + 3</code>: critical points, classification, inflection points.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=4x^3-8x=4x(x^2-2)=0\Rightarrow x=0,\pm\sqrt2\). \(f''=12x^2-8\): \(f''(0)=-8<0\) (local max); \(f''(\pm\sqrt2)=16>0\) (local min, both). Inflection at \(x=\pm\sqrt{2/3}\).</div></details></li>
+    <li class="tag">bonus — Run the checklist on <code>f(x) = x/(x²+1)</code>: critical points, asymptotes.
+      <details class="answer"><summary></summary><div class="ans-body">Quotient rule: \(f'=(1-x^2)/(x^2+1)^2=0\Rightarrow x=\pm1\). \(f(1)=1/2\) (local max), \(f(-1)=-1/2\) (local min). Horizontal asymptote \(y=0\); no vertical asymptote (denominator never \(0\)).</div></details></li>
+    <li class="tag">bonus — Given only that <code>f'</code> is negative on <code>(−∞,−2)</code>, positive on <code>(−2,1)</code>, negative on <code>(1,∞)</code>, and <code>f''</code> is positive on <code>(−∞,−0.5)</code>, negative on <code>(−0.5,∞)</code> — describe the shape: critical points, classification, and inflection point.
+      <details class="answer"><summary></summary><div class="ans-body">\(x=-2\): local min (\(-\to+\)). \(x=1\): local max (\(+\to-\)). Inflection point at \(x=-0.5\) (concavity switches up to down). No formula needed — the checklist reads straight off the sign information.</div></details></li>
+    <li class="tag">bonus — Run the checklist on <code>f(x) = 3x⁵ − 5x³</code>: find and classify the critical points.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=15x^4-15x^2=15x^2(x^2-1)=0\Rightarrow x=0,\pm1\). Sign of \(f'\) (matches sign of \((x^2-1)\) except at \(x=0\)): \(+\) on \((-\infty,-1)\), \(-\) on \((-1,1)\) (including across \(x=0\), no sign change there), \(+\) on \((1,\infty)\). \(x=-1\): local max. \(x=0\): neither. \(x=1\): local min.</div></details></li>
+    <li class="tag">challenge — Fully sketch <code>f(x) = x⁴ − 4x³ + 4x² = x²(x-2)²</code> using the complete checklist. (This is the same function from Chapter 3's challenge problem — connect your answer there to the full picture.)
+      <details class="answer"><summary></summary><div class="ans-body">Domain: all reals. Intercepts: \((0,0)\) and \((2,0)\) (double roots, so the curve touches but doesn't cross at each). From Ch. 3: critical points at \(x=0,1,2\), classified as local min, local max, local min respectively. \(f''=12x^2-24x+8\): solving \(f''=0\) gives \(x=1\pm1/\sqrt3\), both genuine inflection points flanking the local max at \(x=1\). End behavior: even degree, positive leading coefficient — both ends go up. The full curve is a "W" shape sitting on the x-axis at its two roots.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-second-derivative-test.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-optimization-intro.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 5 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:5", "content/m07-derivative-applications/ch05-curve-sketching.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

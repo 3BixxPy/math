@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — L'Hôpital's Rule | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 10 of 12</div>
+  <div class="eyebrow">Chapter 10 · concept:lhopitals-rule</div>
+  <h1>L'Hôpital's Rule</h1>
+  <p class="subtitle">Module 5's entire indeterminate-forms unit had exactly one general tool: factor-and-cancel (Ch. 5), plus the squeeze theorem for the trig limits it couldn't touch (Ch. 10–11). Now that derivatives exist, there's a second, far more powerful tool — and it's satisfying precisely because you already know what answer to expect.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Factoring only works when the indeterminate expression happens to factor nicely — plenty of 0/0 and ∞/∞ limits don't. L'Hôpital's Rule handles the indeterminate form directly, using derivatives instead of algebraic tricks, and it works on limits factoring can't touch at all (like ones involving <code>eˣ</code>, <code>ln x</code>, or trig functions tangled together).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — L'Hôpital's Rule</div>
+    <p>If <code>lim f(x)/g(x)</code> as <code>x→a</code> (or <code>x→±∞</code>) is an indeterminate form <strong>0/0</strong> or <strong>∞/∞</strong>, and <code>lim f′(x)/g′(x)</code> exists, then:</p>
+    <div class="eqn"><div class="eq-body">\[ \lim \frac{f(x)}{g(x)} = \lim \frac{f'(x)}{g'(x)} \]</div><div class="eq-num" id="eq-7-10-1">(7.10.1)</div></div>
+    <p>Differentiate the numerator and denominator <em>separately</em> — this is not the quotient rule, and the result is a brand-new fraction, not a derivative of the original one. If that new limit is still indeterminate, the rule can be applied again, as many times as needed.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — sin(x)/x, two different ways</div>
+    <p>Evaluate <code>lim<sub>x→0</sub> sin(x)/x</code> using L'Hôpital's Rule, and compare to Module 5's squeeze-theorem answer.</p>
+    <details class="step" open><summary>Step 1 — confirm the indeterminate form</summary>
+      <div class="step-body"><p>Direct substitution: \(\sin(0)/0 = 0/0\) — indeterminate, (7.10.1) applies.</p></div></details>
+    <details class="step"><summary>Step 2 — differentiate numerator and denominator separately</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[\sin x] = \cos x\), \(\dfrac{d}{dx}[x]=1\).</p></div></details>
+    <details class="step"><summary>Step 3 — evaluate the new limit</summary>
+      <div class="step-body"><p>\(\lim_{x\to0}\dfrac{\cos x}{1} = \cos(0) = 1\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Same answer as Module 5, Chapter 11's squeeze-theorem argument: \(1\) — confirmed by a completely different method.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — an ∞/∞ form</div>
+    <p>Evaluate <code>lim<sub>x→∞</sub> ln(x)/x</code>.</p>
+    <details class="step" open><summary>Step 1 — confirm the indeterminate form</summary>
+      <div class="step-body"><p>As \(x\to\infty\), both \(\ln x\to\infty\) and \(x\to\infty\): an ∞/∞ form.</p></div></details>
+    <details class="step"><summary>Step 2 — differentiate top and bottom</summary>
+      <div class="step-body"><p>\(\dfrac{d}{dx}[\ln x]=\dfrac1x\), \(\dfrac{d}{dx}[x]=1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\lim_{x\to\infty}\dfrac{1/x}{1} = \lim_{x\to\infty}\dfrac1x = 0\) — logarithms lose to any positive power of \(x\), no matter how slowly \(x\) grows.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Applying L'Hôpital's Rule to a limit that <strong>isn't</strong> actually an indeterminate 0/0 or ∞/∞ form. For <code>lim<sub>x→2</sub> (x+3)/(x-1)</code>, direct substitution gives <code>5/1 = 5</code> — a perfectly good, non-indeterminate answer. Applying L'Hôpital's Rule anyway (differentiating to get <code>1/1 = 1</code>) gives a <strong>wrong</strong> answer, \(1\neq5\). The rule is only valid on a genuine indeterminate form; checking the form with direct substitution first isn't an optional formality, it's the condition that makes the whole theorem apply at all.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>lim<sub>x→0</sub> (eˣ − 1)/x</code> using L'Hôpital's Rule.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="your answer" aria-label="limit of e to the x minus 1 over x as x approaches 0">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>lim<sub>x→0</sub> (1 − cos x)/x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">0/0 form. \(\lim \sin(x)/1 = 0\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→∞</sub> (5x − 2)/(3x + 7)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">∞/∞ form. \(\lim 5/3 = 5/3\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→1</sub> (x² − 1)/(x − 1)</code> using L'Hôpital's Rule.
+      <details class="answer"><summary></summary><div class="ans-body">0/0 form. \(\lim 2x/1 = 2\) (matches Module 5, Ch. 5's factor-and-cancel answer)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> (e^{2x} − 1)/(3x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">0/0 form. \(\lim 2e^{2x}/3 = 2/3\)</div></details></li>
+    <li>Is <code>lim<sub>x→3</sub> (x² − 9)/(x + 3)</code> an indeterminate form? Evaluate it.
+      <details class="answer"><summary></summary><div class="ans-body">No — direct substitution gives \(0/6=0\), which is a perfectly valid, non-indeterminate answer. L'Hôpital's Rule isn't needed (or valid) here.</div></details></li>
+    <li>Evaluate <code>lim<sub>x→∞</sub> x/eˣ</code>.
+      <details class="answer"><summary></summary><div class="ans-body">∞/∞ form. \(\lim 1/e^x = 0\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→0</sub> tan(x)/x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">0/0 form. \(\lim \sec^2(x)/1 = \sec^2(0)=1\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→∞</sub> (x² + 1)/(2x² − x)</code> using L'Hôpital's Rule (applied twice if needed).
+      <details class="answer"><summary></summary><div class="ans-body">∞/∞ form. First application: \(2x/(4x-1)\), still ∞/∞. Second: \(2/4=1/2\) (matches Module 5, Ch. 6's equal-degree rule)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→0</sub> (x − sin x)/x³</code> (0/0, apply L'Hôpital's Rule three times).
+      <details class="answer"><summary></summary><div class="ans-body">\((1-\cos x)/(3x^2)\) [0/0] \(\to \sin(x)/(6x)\) [0/0] \(\to \cos(x)/6 \to 1/6\)</div></details></li>
+    <li class="tag">bonus — Explain in words why <code>lim<sub>x→0</sub> x·cos(1/x)</code> is NOT something L'Hôpital's Rule could help with.
+      <details class="answer"><summary></summary><div class="ans-body">It's a product, not a quotient in 0/0 or ∞/∞ form — L'Hôpital's Rule doesn't apply to products at all. (It's also unnecessary here: \(\cos(1/x)\) is bounded between \(-1\) and \(1\), and \(x\to0\), so the squeeze theorem from Module 5, Ch. 10 settles it directly — the limit is \(0\).)</div></details></li>
+    <li class="tag">challenge — Evaluate <code>lim<sub>x→0</sub> (eˣ − 1 − x)/x²</code> (0/0, apply L'Hôpital's Rule twice).
+      <details class="answer"><summary></summary><div class="ans-body">First application: \((e^x-1)/(2x)\), still 0/0. Second application: \(e^x/2 \to 1/2\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-linear-approximation.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-newtons-method.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 10 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:10", "content/m07-derivative-applications/ch10-lhopitals-rule.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

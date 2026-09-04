@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — The First Derivative Test | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 7 · Calculus I — Applications of Derivatives</a> → Chapter 3 of 12</div>
+  <div class="eyebrow">Chapter 3 · concept:first-derivative-test</div>
+  <h1>The First Derivative Test</h1>
+  <p class="subtitle">Chapter 2 built the shortlist of candidate x-values. This chapter finally answers the question those candidates raise: at each one, is it a peak, a valley, or neither?</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Module 1 (Ch. 12) taught increasing/decreasing intervals by eye, off a graph. Now there's a computable version of exactly the same idea: <code>f'>0</code> means <code>f</code> is increasing there, <code>f'<0</code> means decreasing — no picture required. This chapter's whole contribution is using Chapter 2's critical points as the boundary markers between those intervals, turning "increasing/decreasing" into a mechanical procedure that classifies every critical point in one pass.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The First Derivative Test</div>
+    <div class="eqn"><div class="eq-body">\[ \text{at a critical point } c: \begin{cases} f' \text{ goes } {+}\to{-} & \Rightarrow \text{local max} \\ f' \text{ goes } {-}\to{+} & \Rightarrow \text{local min} \\ \text{no sign change} & \Rightarrow \text{neither} \end{cases} \]</div><div class="eq-num" id="eq-7-3-1">(7.3.1)</div></div>
+    <p>"Goes + to −" means: pick a test point just to the left of \(c\) and one just to the right, and check the sign of \(f'\) at each. If \(f\) is increasing right up to \(c\) and decreasing right after, \(c\) has to be a peak — a local max. Same logic, mirrored, for a local min.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — classifying x=0 and x=2 for f(x)=x³−3x²</div>
+    <p>Chapter 2 found this function's critical points at <code>x=0</code> and <code>x=2</code> (from <code>f'(x)=3x²−6x=3x(x−2)</code>). Classify each.</p>
+    <details class="step" open><summary>Step 1 — build a sign chart with test points in each interval</summary>
+      <div class="step-body"><p>Intervals: \((-\infty,0)\), \((0,2)\), \((2,\infty)\). Test points: \(x=-1\), \(x=1\), \(x=3\).</p></div></details>
+    <details class="step"><summary>Step 2 — evaluate the sign of f′ at each test point</summary>
+      <div class="step-body"><p>\(f'(-1)=3(-1)(-3)=9>0\). \(f'(1)=3(1)(-1)=-3<0\). \(f'(3)=3(3)(1)=9>0\).</p></div></details>
+    <details class="step"><summary>Step 3 — apply (7.3.1) at each critical point</summary>
+      <div class="step-body"><p>At \(x=0\): sign goes \(+\to-\) → local max. At \(x=2\): sign goes \(-\to+\) → local min.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(f(0)=0\): local max at \((0,0)\). \(f(2)=8-12=-4\): local min at \((2,-4)\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Checking the sign of <code>f'</code> <em>at the critical point itself</em> instead of on either side of it. At a critical point where <code>f'(c)=0</code>, that's exactly what you already knew — zero tells you nothing about which direction the sign is changing. The test lives entirely in the two neighboring intervals, not at the point. Always pick a test value strictly between critical points, never one of the critical points themselves.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="max,local max,maximum">
+    <div class="label">Try it yourself</div>
+    <p>Is <code>x = 0</code> a local max or local min for <code>f(x) = -x²</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="max or min" aria-label="local max or min of negative x squared at 0">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Classify the critical point of <code>f(x) = x² − 4x + 3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=2x-4\): critical at \(x=2\); \(-\) before, \(+\) after → local min</div></details></li>
+    <li>Classify the critical point of <code>f(x) = -x² + 6x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=-2x+6\): critical at \(x=3\); \(+\) before, \(-\) after → local max</div></details></li>
+    <li>Classify both critical points of <code>f(x) = x³ − 3x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=3x^2-3=3(x-1)(x+1)\), critical at \(x=\pm1\). Sign: \(+\) on \((-\infty,-1)\), \(-\) on \((-1,1)\), \(+\) on \((1,\infty)\). \(x=-1\): local max. \(x=1\): local min.</div></details></li>
+    <li>Classify the critical point of <code>f(x) = x³</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=3x^2 \geq 0\) everywhere — no sign change at \(x=0\) → neither a max nor a min</div></details></li>
+    <li>Classify all critical points of <code>f(x) = x⁴ − 2x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=4x^3-4x=4x(x-1)(x+1)\), critical at \(x=0,\pm1\). Sign: \(-\) on \((-\infty,-1)\), \(+\) on \((-1,0)\), \(-\) on \((0,1)\), \(+\) on \((1,\infty)\). \(x=-1\): local min. \(x=0\): local max. \(x=1\): local min.</div></details></li>
+    <li>Classify the critical point of <code>f(x) = (x-1)²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=2(x-1)\): critical at \(x=1\); \(-\) before, \(+\) after → local min</div></details></li>
+    <li class="tag">bonus — Classify both critical points of <code>f(x) = x³ − 6x² + 9x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=3x^2-12x+9=3(x-1)(x-3)\), critical at \(x=1,3\). Sign: \(+\), then \(-\) on \((1,3)\), then \(+\). \(x=1\): local max. \(x=3\): local min.</div></details></li>
+    <li class="tag">bonus — Suppose <code>f'</code> is negative on <code>(−∞,2)</code>, positive on <code>(2,5)</code>, and negative on <code>(5,∞)</code>. Classify <code>x=2</code> and <code>x=5</code> without knowing <code>f</code>'s formula.
+      <details class="answer"><summary></summary><div class="ans-body">\(x=2\): \(-\to+\) → local min. \(x=5\): \(+\to-\) → local max. (The theorem only needs the sign chart, not the formula.)</div></details></li>
+    <li class="tag">bonus — Classify the critical point of <code>f(x) = x^{1/3}</code> at <code>x=0</code> using the sign of f′.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=1/(3x^{2/3})\) is positive on both sides of \(0\) (the denominator is a square, always positive for \(x\neq0\)) — no sign change → neither a max nor a min, just a vertical-tangent point on an otherwise increasing curve.</div></details></li>
+    <li class="tag">bonus — For the constant function <code>f(x) = 5</code>, what does the First Derivative Test say about its (infinitely many) critical points?
+      <details class="answer"><summary></summary><div class="ans-body">\(f'(x)=0\) everywhere, so technically every point is critical — but the sign never changes anywhere (it's always exactly \(0\), never \(+\) or \(-\)), so none of them are local extrema. The function is just flat.</div></details></li>
+    <li class="tag">challenge — Fully classify all three critical points of <code>f(x) = x⁴ − 4x³ + 4x² = x²(x-2)²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(f'=4x^3-12x^2+8x=4x(x-1)(x-2)\), critical at \(x=0,1,2\). Sign: \(-\) on \((-\infty,0)\), \(+\) on \((0,1)\), \(-\) on \((1,2)\), \(+\) on \((2,\infty)\). \(x=0\): local min. \(x=1\): local max. \(x=2\): local min.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-critical-points.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-second-derivative-test.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 7 · Calculus I — Applications of Derivatives</span>
+  <span>Chapter 3 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m07:3", "content/m07-derivative-applications/ch03-first-derivative-test.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
