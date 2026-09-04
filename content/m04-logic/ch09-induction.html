@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — Mathematical Induction | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 9 of 10</div>
+  <div class="eyebrow">Chapter 9 · concept:mathematical-induction</div>
+  <h1>Mathematical Induction</h1>
+  <p class="subtitle">One last proof technique, and it's the one built for statements about <em>every</em> positive integer at once — infinitely many cases, proved with exactly two finite steps.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>This is how hardware engineers actually verify a sequential circuit is correct forever, without simulating infinite clock cycles. Two things get checked: the circuit is correct in its <strong>reset state</strong> (cycle 0), and the state-transition logic <strong>preserves</strong> correctness — if the state going into a clock edge was correct, the state coming out is correct too. Those two finite facts together guarantee correctness at cycle 1, which (by the same transition fact) guarantees cycle 2, then 3, forever — an infinite chain from two checks. Mathematical induction is that exact argument, generalized past circuits: prove a base case, prove the "one step forward preserves truth" fact, and conclude the statement holds for every one of infinitely many n.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The principle of mathematical induction</div>
+    <p>To prove a statement <code>P(n)</code> holds for all integers <code>n ≥ 1</code>:</p>
+    <p><strong>1. Base case:</strong> prove <code>P(1)</code> directly (the "reset state").</p>
+    <p><strong>2. Inductive step:</strong> assume <code>P(k)</code> is true for an arbitrary integer <code>k ≥ 1</code> (the <strong>inductive hypothesis</strong>), and use that assumption to prove <code>P(k+1)</code> (the "transition preserves correctness").</p>
+    <div class="eqn"><div class="eq-body">\[ \Big[P(1) \wedge \forall k{\ge}1\big(P(k)\Rightarrow P(k{+}1)\big)\Big] \Rightarrow \forall n{\ge}1,\ P(n) \]</div><div class="eq-num" id="eq-4-9-1">(4.9.1)</div></div>
+    <p>Both parts are required. The base case anchors the chain; the inductive step is the link that makes the chain propagate. Neither one alone proves anything about all n.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — sum of the first n integers</div>
+    <p>Prove: <code>1 + 2 + ... + n = n(n+1)/2</code> for all n ≥ 1.</p>
+    <details class="step" open><summary>Step 1 — base case, n = 1</summary>
+      <div class="step-body"><p>Left side: just \(1\). Right side: \(1(1+1)/2 = 1\). Equal ✓.</p></div></details>
+    <details class="step"><summary>Step 2 — inductive hypothesis</summary>
+      <div class="step-body"><p>Assume, for some \(k\ge1\): \(1+2+\cdots+k = \dfrac{k(k+1)}{2}\).</p></div></details>
+    <details class="step"><summary>Step 3 — inductive step: show P(k+1) using P(k)</summary>
+      <div class="step-body"><p>\[ 1+2+\cdots+k+(k+1) = \underbrace{\left(1+2+\cdots+k\right)}_{\text{substitute the IH here}} + (k+1) = \frac{k(k+1)}{2} + (k+1) \]
+      Factor out \((k+1)\) — Module 0 algebra doing the real work now: \[ = (k+1)\left(\frac{k}{2}+1\right) = \frac{(k+1)(k+2)}{2} \]</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\dfrac{(k+1)(k+2)}{2}\) is exactly the formula \(\dfrac{n(n+1)}{2}\) with \(n=k+1\) substituted in. P(k+1) holds. By induction, the formula holds for all n ≥ 1.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — an inequality: 2ⁿ &gt; n</div>
+    <p>Prove: <code>2ⁿ &gt; n</code> for all n ≥ 1.</p>
+    <details class="step" open><summary>Step 1 — base case, n = 1</summary>
+      <div class="step-body"><p>\(2^1 = 2 > 1\) ✓.</p></div></details>
+    <details class="step"><summary>Step 2 — inductive hypothesis</summary>
+      <div class="step-body"><p>Assume, for some \(k\ge1\): \(2^k > k\).</p></div></details>
+    <details class="step"><summary>Step 3 — inductive step</summary>
+      <div class="step-body"><p>\(2^{k+1} = 2\cdot2^k\). Using the IH (\(2^k>k\)) and doubling both sides: \(2\cdot2^k > 2k\). Now: since \(k\ge1\), \(2k = k+k \ge k+1\). Chaining: \(2^{k+1} > 2k \ge k+1\), so \(2^{k+1}>k+1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>P(k+1) holds. By induction, \(2^n>n\) for all n ≥ 1. Notice the IH was used in an essential way — the "\(2\cdot2^k>2k\)" step is impossible without it.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Two distinct ways an induction proof breaks, both common: <strong>(1) skipping the base case</strong> — the inductive step alone, however careful, never establishes a starting point; without it you've only shown "if it's ever true, it stays true," never that it's true anywhere at all. <strong>(2) writing an inductive step that never actually uses P(k)</strong> — for example, "proving" P(k+1) for the sum formula by writing "\(1+2+\cdots+(k+1) = (k+1)(k+2)/2\), which is true by the pattern" without ever substituting in the assumed value of \(1+2+\cdots+k\) from the IH. That's not a proof — it's restating the k+1 case and asserting it, which is exactly what needed proving in the first place. If your inductive-step algebra never touches the assumption "P(k) is true," you haven't built the chain link; you've skipped it and hoped no one checks.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="inductive,inductive step,induction step">
+    <div class="label">Try it yourself</div>
+    <p>In induction, the step that assumes P(k) is true and shows P(k+1) follows is called the ___ step.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. inductive" aria-label="name the step">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>State the two parts required in a proof by induction, in your own words.
+      <details class="answer"><summary></summary><div class="ans-body">A base case (verify P(1) directly) and an inductive step (assume P(k), prove P(k+1) follows from it).</div></details></li>
+    <li>Prove by induction: <code>2 + 4 + 6 + ... + 2n = n(n+1)</code> for all n ≥ 1.
+      <details class="answer"><summary></summary><div class="ans-body">Base n=1: 2=1·2 ✓. IH: 2+4+...+2k=k(k+1). Step: 2+4+...+2k+2(k+1) = k(k+1)+2(k+1) = (k+1)(k+2), matching the formula at n=k+1.</div></details></li>
+    <li>Prove by induction: <code>3</code> divides <code>n³ − n</code> for all n ≥ 1.
+      <details class="answer"><summary></summary><div class="ans-body">Base n=1: 0 = 1³−1, and 3|0 ✓. IH: 3|(k³−k). Step: (k+1)³−(k+1) = k³+3k²+3k+1−k−1 = (k³−k)+3(k²+k). First term divisible by 3 (IH), second is 3×integer — sum divisible by 3.</div></details></li>
+    <li>Verify <strong>only the base case</strong> (skip the inductive step) for the claim "n! &gt; 2ⁿ for all n ≥ 4."
+      <details class="answer"><summary></summary><div class="ans-body">n=4: 4! = 24, 2⁴ = 16. 24 &gt; 16 ✓ — base case (at n=4, not n=1) holds.</div></details></li>
+    <li>In the 2ⁿ &gt; n inductive step, why isn't "\(2^{k+1}=2\cdot2^k>2k\)" alone enough — what extra inequality closes the gap to k+1?
+      <details class="answer"><summary></summary><div class="ans-body">You still need \(2k \ge k+1\) (true since \(k\ge1\)) to chain \(2^{k+1}>2k\ge k+1\) into \(2^{k+1}>k+1\); "> 2k" by itself doesn't directly say "> k+1" without that extra link.</div></details></li>
+    <li>Prove by induction: <code>1 + 3 + 5 + ... + (2n−1) = n²</code> for all n ≥ 1.
+      <details class="answer"><summary></summary><div class="ans-body">Base n=1: 1=1² ✓. IH: sum of first k odds = k². Step: k² + (2(k+1)−1) = k²+2k+1 = (k+1)², matching the formula at n=k+1.</div></details></li>
+    <li class="tag">bonus — The classic flawed "proof": Claim — in any group of n horses, all horses are the same color. Base case n=1: trivially true. Inductive step: given k+1 horses, remove one to get a group of k (same color, by IH), remove a different one to get another group of k (same color, by IH); since these groups overlap, all k+1 horses share a color. Find the flaw.
+      <details class="answer"><summary></summary><div class="ans-body">The "the two groups overlap" claim silently requires the two size-k subgroups to share at least one horse. That's true for k≥2, but fails exactly at k=1 (going from 1 horse to 2): removing one horse from each side of a 2-horse group leaves two single-horse groups with no overlap at all — nothing forces them to match. The chain breaks precisely at the step from n=1 to n=2, which was never actually verified.</div></details></li>
+    <li class="tag">bonus — Prove by induction: <code>n³ + 2n</code> is divisible by 3, for all n ≥ 1.
+      <details class="answer"><summary></summary><div class="ans-body">Base n=1: 1+2=3 ✓. IH: 3|(k³+2k). Step: (k+1)³+2(k+1) = k³+3k²+3k+1+2k+2 = (k³+2k)+3(k²+k+1) — first term divisible by 3 (IH), second obviously so.</div></details></li>
+    <li class="tag">bonus — Prove by induction: <code>1 + 2 + 4 + ... + 2^(n−1) = 2ⁿ − 1</code> for all n ≥ 1 (the sum of the first n powers of 2 — familiar from binary).
+      <details class="answer"><summary></summary><div class="ans-body">Base n=1: 1 = 2¹−1 ✓. IH: sum up to 2^(k−1) equals 2^k−1. Step: add 2^k: (2^k−1)+2^k = 2·2^k−1 = 2^(k+1)−1, matching the formula at n=k+1.</div></details></li>
+    <li class="tag">bonus — Why must the inductive hypothesis P(k) actually appear inside the derivation of P(k+1)? What's logically missing if a "proof" derives P(k+1) without ever using P(k)?
+      <details class="answer"><summary></summary><div class="ans-body">Without using P(k), nothing links case k+1 back to case k — you've at best shown P(k+1) as an isolated fact (which you'd then have to prove independently for every n anyway), not that truth propagates forward one step at a time. The chain P(1)→P(2)→P(3)→... only exists because each link genuinely depends on the one before it.</div></details></li>
+    <li class="tag">challenge — Prove by induction: <code>n² ≥ 2n + 1</code> for all n ≥ 3 (note the base case is not n=1 — find where the claim actually starts being true, and start there).
+      <details class="answer"><summary></summary><div class="ans-body">Base n=3: 9 ≥ 7 ✓ (check n=1: 1≥3 false; n=2: 4≥5 false — the claim genuinely starts at n=3). IH: k²≥2k+1 for some k≥3. Step: (k+1)²=k²+2k+1 ≥ (2k+1)+2k+1 = 4k+2 (using IH). Need 4k+2 ≥ 2(k+1)+1 = 2k+3, i.e. 2k≥1, true since k≥3. So (k+1)² ≥ 2(k+1)+1.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch08-contrapositive-contradiction.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch10-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 9 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:9", "content/m04-logic/ch09-induction.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

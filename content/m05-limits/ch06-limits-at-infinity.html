@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Limits at Infinity — Horizontal Asymptotes | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 6 of 12</div>
+  <div class="eyebrow">Chapter 6 · concept:limits-at-infinity</div>
+  <h1>Limits at Infinity — Horizontal Asymptotes</h1>
+  <p class="subtitle">Module 1, Chapter 14 handed you the horizontal-asymptote rule as a pattern to compare and memorize: check the degrees. This chapter derives it. The rule was a limit the whole time — you just didn't have limit notation yet to see it.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>So far every limit has asked what happens as <code>x</code> approaches a specific finite number. This chapter asks a different but closely related question: what happens as <code>x</code> grows without bound? The technique is almost embarrassingly simple once you see it: as <code>x</code> gets huge, the highest power of <code>x</code> in an expression completely dominates every lower power — so dividing everything by that highest power turns the lower-order terms into things that visibly vanish, leaving only what actually matters.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Limits at infinity of rational functions</div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x\to\infty}\frac{a_nx^n+\cdots}{b_nx^n+\cdots} = \frac{a_n}{b_n} \quad\text{(equal degrees } n\text{)} \]</div><div class="eq-num" id="eq-5-6-1">(5.6.1)</div></div>
+    <p>The full picture, comparing the degree of the numerator to the degree of the denominator:</p>
+    <ul>
+      <li>degree of numerator <strong>&lt;</strong> degree of denominator → <code>lim<sub>x→∞</sub> f(x) = 0</code></li>
+      <li>degree of numerator <strong>=</strong> degree of denominator → the limit is the ratio of leading coefficients, (5.6.1)</li>
+      <li>degree of numerator <strong>&gt;</strong> degree of denominator → unbounded; there is no horizontal asymptote (Chapter 7 makes "unbounded" itself precise)</li>
+    </ul>
+    <p>This is exactly Module 1, Chapter 14's rule, word for word — it was always a statement about a limit at infinity.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — equal degrees</div>
+    <p>Evaluate <code>lim<sub>x→∞</sub> (3x²+1)/(x²−5)</code>.</p>
+    <details class="step" open><summary>Step 1 — divide numerator and denominator by the highest power present, x²</summary>
+      <div class="step-body"><p>\(\dfrac{3x^2+1}{x^2-5} = \dfrac{3+1/x^2}{1-5/x^2}\)</p></div></details>
+    <details class="step"><summary>Step 2 — let x→∞</summary>
+      <div class="step-body"><p>\(1/x^2\to0\) and \(5/x^2\to0\) as \(x\) grows without bound — any constant divided by a growing power of \(x\) shrinks to nothing.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\dfrac{3+0}{1-0} = 3\) — matching (5.6.1) directly, since both degrees are 2 and the leading coefficients are 3 and 1.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — numerator degree lower</div>
+    <p>Evaluate <code>lim<sub>x→∞</sub> (2x+1)/(x²+1)</code>.</p>
+    <details class="step" open><summary>Step 1 — divide by the highest power present overall, x²</summary>
+      <div class="step-body"><p>\(\dfrac{2x+1}{x^2+1} = \dfrac{2/x+1/x^2}{1+1/x^2}\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Every term in the numerator now has an \(x\) in the denominator, so the whole numerator \(\to0\), while the denominator \(\to1\): \(\dfrac{0}{1}=0\) — matching (5.6.1)'s first case (numerator degree 1 &lt; denominator degree 2).</p></div></details>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>x-range: ±<input type="range" id="hi-zoom" min="5" max="60" step="5" value="10"></label>
+  </div>
+  <div class="plot-wrap"><svg id="hi-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="hi-readout">x ∈ [−10, 10]</span></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;"><code>f(x) = (2x²+1)/(x²+3)</code> — its asymptote is <code>y=2</code>, and the curve never actually equals 2 anywhere. Drag right to zoom out and watch it flatten.</p>
+  <script>
+  (function () {
+    const zoomInput = document.getElementById("hi-zoom");
+    const svg = document.getElementById("hi-svg");
+    const f = (x) => (2 * x * x + 1) / (x * x + 3);
+    function update() {
+      const z = parseInt(zoomInput.value, 10);
+      const step = Math.max(1, Math.round(z / 5));
+      const opts = { xMin: -z, xMax: z, yMin: -1, yMax: 5, width: 320, height: 320, pad: 26, xStep: step, yStep: 1 };
+      MCPlot.drawAxes(svg, opts);
+      MCPlot.plotFunction(svg, f, opts);
+      MCPlot.dashedLine(svg, -z, 2, z, 2, opts);
+      document.getElementById("hi-readout").textContent =
+        "x ∈ [−" + z + ", " + z + "] — f(" + z + ") ≈ " + f(z).toFixed(4) + ", approaching the asymptote y = 2";
+    }
+    zoomInput.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming a limit at infinity is always <code>0</code>, or always <code>∞</code>, regardless of the specific function. It depends entirely on comparing the degrees, per the rule above — a limit at infinity of a rational function can land on <code>0</code>, a nonzero finite number, or be unbounded, and only checking the actual degrees tells you which.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>lim<sub>x→∞</sub> 5x/(x+1)</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="limit as x approaches infinity of 5x over x plus 1">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>lim<sub>x→∞</sub> (4x²−1)/(2x²+3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Equal degrees: \(4/2=2\).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→∞</sub> (x+7)/(x²−1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Numerator degree lower: \(0\).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→∞</sub> (6x³+x)/(2x³−5)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Equal degrees: \(6/2=3\).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→∞</sub> (x²+1)/(x+1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Numerator degree higher: unbounded (\(+\infty\)) — no horizontal asymptote.</div></details></li>
+    <li>Evaluate <code>lim<sub>x→−∞</sub> (3x+2)/(x−4)</code>. (Same technique works for <code>x→−∞</code>.)
+      <details class="answer"><summary></summary><div class="ans-body">Equal degrees: \(3/1=3\).</div></details></li>
+    <li>Without fully computing, state which case <code>lim<sub>x→∞</sub> (5x⁴−x)/(x⁴+x²+1)</code> falls into, then compute it.
+      <details class="answer"><summary></summary><div class="ans-body">Equal degrees case; value \(5/1=5\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→∞</sub> 7/(x+2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Numerator degree \(0\) is lower than denominator degree \(1\): limit \(0\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→∞</sub> (x²−4)/(2x²+3x−1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Equal degrees: \(1/2\).</div></details></li>
+    <li class="tag">bonus — Using Module 1, Chapter 14's rule, state the horizontal asymptote of <code>f(x)=(x−1)/(3x+2)</code> without recomputing — then confirm it with this chapter's technique.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=1/3\) by the degree-comparison rule. Confirming: divide by \(x\): \(\frac{1-1/x}{3+2/x}\to\frac{1}{3}\) as \(x\to\infty\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→∞</sub> (x³−2x)/(5x²+1)</code>, and explain in words what "no horizontal asymptote" means for the graph's long-run behavior.
+      <details class="answer"><summary></summary><div class="ans-body">Numerator degree higher: unbounded (\(+\infty\)). Graphically, the function keeps climbing forever rather than leveling off toward any fixed height as \(x\) grows.</div></details></li>
+    <li class="tag">challenge — For <code>f(x) = (ax²+bx+c)/(dx²+ex+g)</code> (with <code>d≠0</code>), explain in general why <code>lim<sub>x→∞</sub> f(x)</code> always equals <code>a/d</code>, no matter what <code>b, c, e, g</code> are. Connect your explanation to the "divide by the highest power" technique.
+      <details class="answer"><summary></summary><div class="ans-body">Dividing every term by \(x^2\) gives \(\frac{a+b/x+c/x^2}{d+e/x+g/x^2}\). Every term except \(a\) and \(d\) has an \(x\) in its own denominator, so every one of them \(\to0\) as \(x\to\infty\) — regardless of what \(b,c,e,g\) actually are — leaving exactly \(a/d\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-evaluating-by-factoring.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-infinite-limits.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 6 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:6", "content/m05-limits/ch06-limits-at-infinity.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

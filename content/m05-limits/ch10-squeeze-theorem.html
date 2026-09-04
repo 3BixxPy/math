@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — The Squeeze Theorem | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 10 of 12</div>
+  <div class="eyebrow">Chapter 10 · concept:squeeze-theorem</div>
+  <h1>The Squeeze Theorem</h1>
+  <p class="subtitle">Every technique so far needed to actually manipulate f — factor it, rationalize it, divide it by a power of x. This one proves a limit exists, and pins down its exact value, without ever directly simplifying f at all, by trapping it between two functions you already know how to handle.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>If a quantity is always sandwiched between two other quantities that both converge to the same place, it has no room to go anywhere else — it's forced to converge there too, whether or not you can say anything else about it directly. This is a genuinely new kind of argument in this module: an indirect one. Chapter 11's two essential trig limits — which become the literal foundation of every derivative involving sine and cosine in Module 6 — exist specifically because <code>sin(x)/x</code> can't be factored or rationalized into anything simpler, and this theorem is the only tool in this module that can still pin it down.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The Squeeze Theorem</div>
+    <div class="eqn"><div class="eq-body">\[ \text{If } g(x)\le f(x)\le h(x) \text{ near } a \text{ (except possibly at } a\text{ itself), and } \lim_{x\to a}g(x)=\lim_{x\to a}h(x)=L,\ \text{then}\ \lim_{x\to a}f(x)=L. \]</div><div class="eq-num" id="eq-5-10-1">(5.10.1)</div></div>
+    <p>Both bounding functions have to converge to the exact same value <code>L</code> — that's what leaves <code>f</code> nowhere else to go.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the classic squeeze</div>
+    <p>Evaluate <code>lim<sub>x→0</sub> x²sin(1/x)</code>. (Direct substitution and factoring are both useless here — <code>sin(1/x)</code> doesn't even have a limit at <code>x=0</code>, Chapter 3.)</p>
+    <details class="step" open><summary>Step 1 — bound sin(1/x)</summary>
+      <div class="step-body"><p>For every \(x\neq0\), \(-1\le\sin(1/x)\le1\) — sine is always between \(-1\) and \(1\), no matter what's inside it.</p></div></details>
+    <details class="step"><summary>Step 2 — multiply through by x² (safe, since x²≥0 never flips an inequality)</summary>
+      <div class="step-body"><p>\(-x^2 \le x^2\sin(1/x) \le x^2\)</p></div></details>
+    <details class="step"><summary>Step 3 — evaluate the two bounding limits</summary>
+      <div class="step-body"><p>\(\lim_{x\to0}(-x^2)=0\) and \(\lim_{x\to0}x^2=0\) — both are ordinary polynomial limits, direct substitution (Chapter 4).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Both bounds squeeze to \(0\), so by (5.10.1), \(\lim_{x\to0}x^2\sin(1/x)=0\) — even though \(\sin(1/x)\) itself oscillates infinitely and never settles anywhere as \(x\to0\). The \(x^2\) factor shrinks the oscillation's amplitude down to nothing, and the squeeze theorem is precisely the tool that turns that intuition into a proof.</p></div></details>
+  </div>
+
+  <div class="plot-wrap"><svg id="sq-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <div class="plot-legend">
+    <span><span class="swatch" style="background:var(--accent)"></span>x²sin(1/x)</span>
+    <span><span class="swatch" style="background:var(--ex-border)"></span>±x² (the squeeze)</span>
+  </div>
+  <script>
+  (function () {
+    const opts = { xMin: -1, xMax: 1, yMin: -1, yMax: 1, width: 320, height: 320, pad: 26, xStep: 0.5, yStep: 0.5, samples: 900 };
+    const svg = document.getElementById("sq-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => x * x, opts, "plot-curve-alt");
+    MCPlot.plotFunction(svg, (x) => -x * x, opts, "plot-curve-alt");
+    MCPlot.plotFunction(svg, (x) => (x === 0 ? 0 : x * x * Math.sin(1 / x)), opts, "plot-curve");
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">The wild oscillation is squeezed flatter and flatter as it nears x=0, trapped between the two smooth bounds — with nowhere left to go but 0.</p>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Trying to apply the theorem with bounding functions that don't actually converge to the same limit at the point in question. For example, bounding some <code>f(x)</code> between <code>0</code> and <code>x+1</code> near <code>x=0</code> gives bounds converging to <code>0</code> and <code>1</code> respectively — different values — so (5.10.1) simply doesn't apply, and no conclusion about <code>f</code>'s limit can be drawn from it. Both bounds converging to the <em>same</em> <code>L</code> isn't a technicality; it's the entire mechanism that traps <code>f</code>.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="0">
+    <div class="label">Try it yourself</div>
+    <p>If <code>−x⁴ ≤ f(x) ≤ x⁴</code> for all <code>x</code> near <code>0</code>, what is <code>lim<sub>x→0</sub> f(x)</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="limit as x approaches 0 of f">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>If <code>2−x² ≤ f(x) ≤ 2+x²</code> near <code>x=0</code>, find <code>lim<sub>x→0</sub> f(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Both bounds \(\to2\), so the limit is \(2\).</div></details></li>
+    <li>If <code>−|x| ≤ g(x) ≤ |x|</code> near <code>x=0</code>, find <code>lim<sub>x→0</sub> g(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Both bounds \(\to0\), so the limit is \(0\).</div></details></li>
+    <li>Given <code>−1≤cos(x)≤1</code> for all <code>x</code>, state a squeeze bound for <code>x²cos(x)</code> and use it to find <code>lim<sub>x→0</sub> x²cos(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Bounds: \(-x^2\le x^2\cos(x)\le x^2\); both \(\to0\), so the limit is \(0\).</div></details></li>
+    <li>Explain why <code>lim<sub>x→0</sub> sin(1/x)</code> (without the <code>x²</code> factor) can <strong>not</strong> be evaluated with the squeeze theorem using bounds <code>−1</code> and <code>1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Because \(-1\) and \(1\) are constants that "converge" to two <em>different</em> values (\(-1\) and \(1\)) as \(x\to0\), not the same \(L\) — the squeeze theorem's hypothesis requires both bounds to converge to one common value, which fails here.</div></details></li>
+    <li>If <code>5x−1 ≤ h(x) ≤ 5x+1</code> near <code>x=3</code>, find <code>lim<sub>x→3</sub> h(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Both bounds \(\to14\), so the limit is \(14\).</div></details></li>
+    <li>True or false: the squeeze theorem can prove a limit exists even when you can't directly evaluate or simplify the function in the middle.
+      <details class="answer"><summary></summary><div class="ans-body">True — that's exactly its purpose, as in the \(x^2\sin(1/x)\) worked example.</div></details></li>
+    <li class="tag">bonus — If <code>−x² ≤ k(x)−3 ≤ x²</code> near <code>x=0</code>, find <code>lim<sub>x→0</sub> k(x)</code>. (Add 3 through the whole inequality first.)
+      <details class="answer"><summary></summary><div class="ans-body">\(3-x^2\le k(x)\le3+x^2\); both bounds \(\to3\), so the limit is \(3\).</div></details></li>
+    <li class="tag">bonus — Find <code>lim<sub>x→0</sub> x⁴sin(1/x²)</code> using the same squeeze idea as the worked example (state your bounding functions).
+      <details class="answer"><summary></summary><div class="ans-body">Bounds \(-x^4\le x^4\sin(1/x^2)\le x^4\); both \(\to0\), so the limit is \(0\).</div></details></li>
+    <li class="tag">bonus — Why must the inequality <code>g(x)≤f(x)≤h(x)</code> only hold "near <code>a</code>," not necessarily everywhere?
+      <details class="answer"><summary></summary><div class="ans-body">A limit is only ever about behavior near \(a\) (Chapter 1) — whatever happens far away from \(a\) is irrelevant to whether the limit at \(a\) is squeezed correctly.</div></details></li>
+    <li class="tag">bonus — If you only know <code>g(x)≤f(x)</code> near <code>a</code> and <code>lim<sub>x→a</sub> g(x)=5</code>, with no upper bound at all, can you conclude <code>lim<sub>x→a</sub> f(x)=5</code>?
+      <details class="answer"><summary></summary><div class="ans-body">No — a lower bound alone only tells you that the limit, if it exists, is at least \(5\); you need both a matching lower <em>and</em> upper bound converging to the same value to pin the limit down exactly.</div></details></li>
+    <li class="tag">challenge — Prove informally that <code>lim<sub>x→0</sub> x·sin(1/x) = 0</code> by constructing a squeeze with different bounding functions than the <code>x²</code> example, and explain why an extra power of <code>x</code> wasn't actually necessary here.
+      <details class="answer"><summary></summary><div class="ans-body">Since \(|\sin(1/x)|\le1\), multiplying by \(|x|\) gives \(-|x|\le x\sin(1/x)\le|x|\); both bounds \(\to0\) as \(x\to0\), so by the squeeze theorem the limit is \(0\). Only one factor of \(x\) is needed here because \(x\sin(1/x)\) already has just one factor of \(x\) multiplying a bounded quantity — the \(x^2\) in the earlier example was needed there because that problem had two factors of \(x\) built in, not because squeezing inherently requires a squared bound.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-discontinuity-types.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-trig-limits.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 10 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:10", "content/m05-limits/ch10-squeeze-theorem.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

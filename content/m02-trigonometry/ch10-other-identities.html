@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 10 — Identities Derived from the Pythagorean Identity | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 10 of 15</div>
+  <div class="eyebrow">Chapter 10 · concept:pythagorean-identity-variants</div>
+  <h1>Identities Derived from the Pythagorean Identity</h1>
+  <p class="subtitle">Two more identities that feel like separate facts but are really one algebra move — dividing Chapter 9's identity through by cos²θ or sin²θ — applied twice.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>These two variants show up constantly when simplifying expressions involving tangent/secant or cotangent/cosecant. The point of walking through the derivation (not just handing you the result) is that you should be able to regenerate either one from equation 2.9.1 any time you forget it — that's far more reliable than memorizing three separate identities.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — dividing by cos²θ</div>
+    <p>Derive the identity relating tangent and secant.</p>
+    <details class="step" open><summary>Step 1 — start from the Pythagorean identity</summary>
+      <div class="step-body"><p>\(\sin^2\theta + \cos^2\theta = 1\) (equation 2.9.1)</p></div></details>
+    <details class="step"><summary>Step 2 — divide every term by cos²θ</summary>
+      <div class="step-body"><p>\(\dfrac{\sin^2\theta}{\cos^2\theta} + \dfrac{\cos^2\theta}{\cos^2\theta} = \dfrac{1}{\cos^2\theta}\)</p></div></details>
+    <details class="step"><summary>Step 3 — recognize each piece using Chapter 4's definitions</summary>
+      <div class="step-body"><p>\(\dfrac{\sin\theta}{\cos\theta}=\tan\theta\), so the first term is \(\tan^2\theta\). The middle term is 1. The right side, \(1/\cos^2\theta\), is \(\sec^2\theta\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ 1 + \tan^2\theta = \sec^2\theta \]</div><div class="eq-num" id="eq-2-10-1">(2.10.1)</div></div></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — dividing by sin²θ</div>
+    <p>Derive the identity relating cotangent and cosecant, the same way.</p>
+    <details class="step" open><summary>Step 1 — same starting point</summary>
+      <div class="step-body"><p>\(\sin^2\theta + \cos^2\theta = 1\)</p></div></details>
+    <details class="step"><summary>Step 2 — divide every term by sin²θ this time</summary>
+      <div class="step-body"><p>\(\dfrac{\sin^2\theta}{\sin^2\theta} + \dfrac{\cos^2\theta}{\sin^2\theta} = \dfrac{1}{\sin^2\theta}\)</p></div></details>
+    <details class="step"><summary>Step 3 — recognize each piece</summary>
+      <div class="step-body"><p>First term is 1. \(\cos\theta/\sin\theta=\cot\theta\), so the middle term is \(\cot^2\theta\). Right side \(1/\sin^2\theta = \csc^2\theta\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><div class="eqn"><div class="eq-body">\[ 1 + \cot^2\theta = \csc^2\theta \]</div><div class="eq-num" id="eq-2-10-2">(2.10.2)</div></div></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — using a variant to simplify</div>
+    <p>Simplify <code>sec²x − tan²x</code>.</p>
+    <details class="step" open><summary>Step 1 — rearrange equation 2.10.1</summary>
+      <div class="step-body"><p>\(1+\tan^2x=\sec^2x \Rightarrow \sec^2x - \tan^2x = 1\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\sec^2x-\tan^2x = 1\) — no further simplification possible or needed; it's already a constant.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>"Verifying" an identity by plugging in one convenient angle (say \(\theta=45°\)), getting a true numeric statement, and treating that as a proof. It isn't — a single matching value shows the identity <em>isn't obviously false</em>, nothing more. This is exactly the same logical gap as checking one row of a truth table and calling a boolean expression a tautology: one satisfying case never proves a universal claim. Spot-checking a specific angle is a reasonable sanity check after a real algebraic derivation (like the ones above) — but it is never a substitute for one.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="tan^2(x),tan^2x,tan²(x),tan²x">
+    <div class="label">Try it yourself</div>
+    <p>Simplify <code>sec²(x) − 1</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. tan^2x" aria-label="simplify sec squared x minus 1">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Simplify <code>csc²x − cot²x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\) (rearranged equation 2.10.2)</div></details></li>
+    <li>If <code>sec θ = 13/5</code>, find <code>tan θ</code> (assume θ in QI, tan positive).
+      <details class="answer"><summary></summary><div class="ans-body">\(\tan^2\theta=\sec^2\theta-1=169/25-1=144/25\); \(\tan\theta=12/5\)</div></details></li>
+    <li>Simplify <code>csc²x − 1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\cot^2x\)</div></details></li>
+    <li>If <code>tan θ = 3/4</code>, find <code>sec θ</code> (assume θ in QI).
+      <details class="answer"><summary></summary><div class="ans-body">\(\sec^2\theta=1+9/16=25/16\); \(\sec\theta=5/4\)</div></details></li>
+    <li>Derive, in your own words (one or two steps), what dividing the Pythagorean identity by <code>sin²θ</code> gives you — without looking back at the worked example.
+      <details class="answer"><summary></summary><div class="ans-body">\(1+\cot^2\theta=\csc^2\theta\) — divide every term of \(\sin^2\theta+\cos^2\theta=1\) by \(\sin^2\theta\).</div></details></li>
+    <li>Simplify <code>(1 + tan²x) − sec²x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0\) — that's exactly equation 2.10.1 rearranged to equal zero.</div></details></li>
+    <li class="tag">bonus — If <code>cot θ = 2</code>, find <code>csc θ</code> (assume θ in QI).
+      <details class="answer"><summary></summary><div class="ans-body">\(\csc^2\theta=1+4=5\); \(\csc\theta=\sqrt5\)</div></details></li>
+    <li class="tag">bonus — Show that <code>sec²x · cos²x</code> simplifies to a constant, and find it.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sec^2x=1/\cos^2x\) (Chapter 4), so \(\sec^2x\cdot\cos^2x = 1\) directly — doesn't even need 2.10.1.</div></details></li>
+    <li class="tag">bonus — A classmate claims <code>1 − sin²x = cos²x</code> is "the same identity" as equation 2.9.1. Are they right? Show the one-line rearrangement that proves it.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — subtract sin²x from both sides of \(\sin^2\theta+\cos^2\theta=1\) to get \(\cos^2\theta=1-\sin^2\theta\). Same identity, rearranged.</div></details></li>
+    <li class="tag">bonus — Explain why dividing the Pythagorean identity by <code>tan²θ</code> would not directly produce a "named" identity the way dividing by sin²θ or cos²θ does.
+      <details class="answer"><summary></summary><div class="ans-body">tan²θ isn't one of the two terms already in the identity (sin²θ, cos²θ, or the constant 1) — dividing by it mixes sin and cos together in an unfamiliar ratio rather than cleanly turning each term into another named function's square, the way dividing by sin²θ or cos²θ does.</div></details></li>
+    <li class="tag">challenge — A classmate "verifies" that <code>sec²x − tan²x = 1</code> by plugging in <code>x = 0</code> (getting <code>1 − 0 = 1</code>, true) and calls the identity proven. Explain specifically what's missing from their argument, and what a complete proof requires.
+      <details class="answer"><summary></summary><div class="ans-body">One numeric match only shows the identity holds at x=0 — it says nothing about any other angle. A complete proof needs the general algebraic derivation (dividing the Pythagorean identity by cos²x for every θ where cos θ ≠ 0, as done above), which holds for the entire domain at once rather than one sampled point.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch09-pythagorean-identity.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch11-solving-trig-equations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 10 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:10", "content/m02-trigonometry/ch10-other-identities.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

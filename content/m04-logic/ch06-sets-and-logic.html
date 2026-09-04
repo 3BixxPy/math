@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Sets and Logic | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 6 of 10</div>
+  <div class="eyebrow">Chapter 6 · concept:sets-logic-correspondence</div>
+  <h1>Sets and Logic — The Same Structure</h1>
+  <p class="subtitle">This is the reductionist payoff of the module so far. Chapter 1 gave you circuits ↔ ∧/∨/¬. Chapter 5 gave you sets ↔ ∪/∩/complement. This chapter proves those aren't two things — they're one structure, described three ways.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>You already carry three separate-looking vocabularies: gate logic (AND/OR/NOT), formal propositional logic (∧/∨/¬), and now set operations (∪/∩/complement). They're not three things to remember — they're one idea with three skins. Union is OR, intersection is AND, complement is NOT, and a bitmask <em>is</em> a subset, literally. Once this clicks, "prove a set identity" and "prove a logical equivalence" become the same task wearing different clothes, and you can freely translate between whichever notation makes a given problem easiest.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — set membership is logic</div>
+    <div class="eqn"><div class="eq-body">\[ x \in (A \cup B) \iff (x\in A) \vee (x \in B) \]</div><div class="eq-num" id="eq-4-6-1">(4.6.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ x \in (A \cap B) \iff (x\in A) \wedge (x \in B) \]</div><div class="eq-num" id="eq-4-6-2">(4.6.2)</div></div>
+    <div class="eqn"><div class="eq-body">\[ x \in A^c \iff \neg(x \in A) \]</div><div class="eq-num" id="eq-4-6-3">(4.6.3)</div></div>
+    <p>These aren't new facts to memorize — they're literally Chapter 5's definitions of ∪, ∩, and complement, just written with the ∨/∧/¬ symbols instead of the words "or"/"and"/"not" that were already sitting inside them. "x is in A or B" was always a disjunction. Now it's official.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — proving the "set De Morgan's law"</div>
+    <p>Prove: <code>(A ∩ B)ᶜ = Aᶜ ∪ Bᶜ</code>. Strategy: translate to logic (4.6.1–4.6.3), apply Chapter 3's De Morgan's law, translate back — never just assert set equalities by pattern-matching the name.</p>
+    <details class="step" open><summary>Step 1 — start from membership in the left side</summary>
+      <div class="step-body"><p>\(x \in (A\cap B)^c \iff \neg\big(x \in (A\cap B)\big)\) — by 4.6.3, complement is negation.</p></div></details>
+    <details class="step"><summary>Step 2 — unpack the intersection using 4.6.2</summary>
+      <div class="step-body"><p>\(\iff \neg\big((x\in A) \wedge (x\in B)\big)\)</p></div></details>
+    <details class="step"><summary>Step 3 — apply De Morgan's law (Chapter 3, equation 4.3.1) — this is the actual logical content</summary>
+      <div class="step-body"><p>\(\iff \neg(x\in A) \vee \neg(x\in B)\)</p></div></details>
+    <details class="step"><summary>Step 4 — translate each negated membership back into a complement, using 4.6.3</summary>
+      <div class="step-body"><p>\(\iff (x \in A^c) \vee (x\in B^c)\)</p></div></details>
+    <details class="step"><summary>Step 5 — translate the disjunction back into a union, using 4.6.1</summary>
+      <div class="step-body"><p>\(\iff x \in (A^c \cup B^c)\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(x \in (A\cap B)^c \iff x \in (A^c\cup B^c)\) for an arbitrary x — meaning the two sets contain exactly the same elements, so \((A\cap B)^c = A^c \cup B^c\). Nothing here was assumed; every step cited either a Chapter 5 definition or Chapter 3's proven theorem.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Seeing "(A∩B)ᶜ = Aᶜ∪Bᶜ" called "De Morgan's law for sets" and accepting it as obviously true purely because the name sounds familiar, without actually checking it. The name is a hint about <em>why</em> it's true, not a substitute for showing it. The worked example above is the actual proof — translate to membership statements, invoke the logical De Morgan's law you already proved in Chapter 3, translate back. Skipping straight to "yeah, that's De Morgan's, must be right" is exactly the habit Chapter 7 (Direct Proof) is about training out of.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="and,∧">
+    <div class="label">Try it yourself</div>
+    <p>Fill in the connective: <code>x ∈ (A ∩ B) ⟺ (x∈A) ___ (x∈B)</code></p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="and / or / not" aria-label="fill in connective for intersection">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Translate to a logical statement: <code>x ∈ Aᶜ</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg(x\in A)\)</div></details></li>
+    <li>Translate to a set statement: <code>(x∈A) ∨ (x∈B)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(x \in (A\cup B)\)</div></details></li>
+    <li>With <code>A = {1,2,3}</code>, <code>B = {2,3,4}</code>: verify directly that <code>2 ∈ A∩B</code> matches <code>(2∈A)∧(2∈B)</code> being true.
+      <details class="answer"><summary></summary><div class="ans-body">2∈A is true, 2∈B is true, so (2∈A)∧(2∈B)=True, matching 2∈{2,3}=A∩B. ✓</div></details></li>
+    <li>State the set-theory identity that corresponds to the logical equivalence <code>p ∨ p ≡ p</code> (idempotence), for a single set A.
+      <details class="answer"><summary></summary><div class="ans-body">\(A \cup A = A\)</div></details></li>
+    <li>State the set-theory identity that corresponds to <code>p ∧ ¬p ≡ F</code> (a proposition can't be both true and false).
+      <details class="answer"><summary></summary><div class="ans-body">\(A \cap A^c = \emptyset\)</div></details></li>
+    <li>What logical equivalence corresponds to the set identity <code>A ∪ ∅ = A</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(p \vee F \equiv p\)</div></details></li>
+    <li class="tag">bonus — Using the same three-step translation method as the worked example, prove <code>(A ∪ B)ᶜ = Aᶜ ∩ Bᶜ</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(x\in(A\cup B)^c \iff \neg(x\in A\cup B) \iff \neg((x\in A)\vee(x\in B)) \iff \neg(x\in A)\wedge\neg(x\in B)\) (De Morgan, 4.3.2) \(\iff (x\in A^c)\wedge(x\in B^c) \iff x\in(A^c\cap B^c)\).</div></details></li>
+    <li class="tag">bonus — What logical connective does "AND-reduce over a bitmask" correspond to, and which set operation does it correspond to, if the bitmask represents "which of these n conditions hold"?
+      <details class="answer"><summary></summary><div class="ans-body">∧ (conjunction) — and, viewed as sets of "which conditions hold across which cases," it's the generalized intersection of the corresponding truth-sets.</div></details></li>
+    <li class="tag">bonus — Is <code>A ⊆ B</code> the same claim as <code>∀x, (x∈A) ⇒ (x∈B)</code>? Explain in one sentence why, using Chapter 5's definition of ⊆.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — "every element of A is also in B" (the definition of ⊆) is exactly "for all x, being in A forces being in B," which is the conditional, quantified.</div></details></li>
+    <li class="tag">bonus — Translate <code>A ∩ B = ∅</code> ("A and B are disjoint") into a statement using ∀ and ¬, quantified over x.
+      <details class="answer"><summary></summary><div class="ans-body">\(\forall x,\ \neg\big((x\in A)\wedge(x\in B)\big)\) — no x is in both.</div></details></li>
+    <li class="tag">challenge — Using the membership-translation method, prove <code>A ∩ (B ∪ C) = (A∩B) ∪ (A∩C)</code> (distributivity) by expanding both sides into a logical statement about x and comparing.
+      <details class="answer"><summary></summary><div class="ans-body">\(x\in A\cap(B\cup C) \iff (x\in A)\wedge\big((x\in B)\vee(x\in C)\big)\). Logical distributivity gives \(\iff \big((x\in A)\wedge(x\in B)\big)\vee\big((x\in A)\wedge(x\in C)\big) \iff x\in(A\cap B) \vee x \in (A \cap C) \iff x \in (A\cap B)\cup(A\cap C)\). Same elements both sides ⟹ equal sets.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-set-notation.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-direct-proof.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 6 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:6", "content/m04-logic/ch06-sets-and-logic.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — Log Laws II: Power Rule &amp; Change of Base | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 3 · Exponentials &amp; Logarithms</a> → Chapter 7 of 10</div>
+  <div class="eyebrow">Chapter 7 · concept:log-power-rule, concept:change-of-base</div>
+  <h1>Log Laws II — Power Rule &amp; Change of Base</h1>
+  <p class="subtitle">One more exponent rule to translate (Module 0's power-of-a-power rule), plus a genuinely new, purely practical tool: a way to evaluate <em>any</em> base's logarithm using only the <code>ln</code> button on a calculator.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>The power rule finishes the translation Chapter 6 started — every exponent law from Module 0 now has a log-law counterpart. The change-of-base formula is different in kind: it's not a translated exponent rule, it's a practical bridge. Calculators and computers only ever implement <code>log</code> and <code>ln</code> directly; change of base is how you evaluate <code>log_7(50)</code> or any other base without needing a "base 7" button that doesn't exist.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Power rule (derived)</div>
+    <div class="eqn"><div class="eq-body">\[ \log_b(M^k) = k\cdot\log_b M \]</div><div class="eq-num" id="eq-3-7-1">(3.7.1)</div></div>
+    <p><strong>Why:</strong> let \(x=\log_b M\), so \(b^x=M\). Then \(M^k = (b^x)^k = b^{xk}\) (Module 0's power-of-a-power rule: multiply the exponents). Converting back: \(\log_b(M^k) = xk = k\cdot\log_b M\) — the exponent \(k\) moves out front as a multiplier.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Change of base</div>
+    <div class="eqn"><div class="eq-body">\[ \log_b(x) = \frac{\ln(x)}{\ln(b)} \]</div><div class="eq-num" id="eq-3-7-2">(3.7.2)</div></div>
+    <p>Any base's logarithm can be rewritten as a ratio of two natural logs (or two common logs — <code>log(x)/log(b)</code> works identically). This is how you compute a logarithm in a base your calculator doesn't have a direct button for.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Simplify <code>log(x³)</code>, then evaluate <code>log_2(10)</code> using change of base.</p>
+    <details class="step" open><summary>Step 1 — apply the power rule to log(x³)</summary>
+      <div class="step-body"><p>\(\log(x^3) = 3\log(x)\) — the exponent 3 comes straight out front.</p></div></details>
+    <details class="step"><summary>Step 2 — set up log₂(10) with change of base</summary>
+      <div class="step-body"><p>\(\log_2(10) = \dfrac{\ln(10)}{\ln(2)}\)</p></div></details>
+    <details class="step"><summary>Step 3 — evaluate numerically</summary>
+      <div class="step-body"><p>\(\ln(10)\approx2.3026\), \(\ln(2)\approx0.6931\), so \(\log_2(10)\approx\dfrac{2.3026}{0.6931}\approx3.3219\). Sanity check: \(2^3=8\) and \(2^4=16\), and 10 sits between them — 3.32 is right where it should be.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Confusing <code>log(Mᵏ)</code> with <code>(log M)ᵏ</code> — these are two completely different expressions. The power rule (equation 3.7.1) only applies to the <em>first</em> one: the exponent is inside the log's argument. Once a whole log expression is itself raised to a power on the <em>outside</em>, like <code>(log M)²</code>, there's no rule to pull that exponent anywhere — it just stays an exponent on the log's output. Check with numbers: <code>log(10²) = log(100) = 2</code>, while <code>(log 10)² = 1² = 1</code> — genuinely different values, not two forms of the same thing.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5lnx,5ln(x)">
+    <div class="label">Try it yourself</div>
+    <p>Expand <code>ln(x⁵)</code> using the power rule:</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 5lnx" aria-label="expand ln of x to the 5th">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Simplify: <code>log(x⁴)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(4\log x\)</div></details></li>
+    <li>Simplify: <code>ln(x²)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2\ln x\)</div></details></li>
+    <li>Rewrite as a single log with exponent 1: <code>3·log₂(x)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\log_2(x^3)\) — the power rule run in reverse</div></details></li>
+    <li>Use change of base to write <code>log_5(x)</code> in terms of natural logs.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{\ln x}{\ln 5}\)</div></details></li>
+    <li>Evaluate <code>log_3(20)</code> using change of base (round to 3 decimals).
+      <details class="answer"><summary></summary><div class="ans-body">\(\ln(20)/\ln(3)\approx2.9957/1.0986\approx2.727\)</div></details></li>
+    <li>Is <code>log(x²)</code> the same as <code>(log x)²</code>? Justify with a number.
+      <details class="answer"><summary></summary><div class="ans-body">No. E.g. \(x=10\): \(\log(10^2)=\log(100)=2\), but \((\log10)^2=1^2=1\).</div></details></li>
+    <li class="tag">bonus — Simplify: <code>log(√x)</code> (hint: rewrite the root as a rational exponent first — Module 0, Chapter 5)
+      <details class="answer"><summary></summary><div class="ans-body">\(\sqrt x=x^{1/2}\), so \(\log(x^{1/2})=\tfrac12\log x\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>log_7(100)</code> using change of base (round to 3 decimals).
+      <details class="answer"><summary></summary><div class="ans-body">\(\ln(100)/\ln(7)\approx4.6052/1.9459\approx2.366\)</div></details></li>
+    <li class="tag">bonus — Simplify fully: <code>2·ln(x) + ln(x)</code> into a single log with one exponent.
+      <details class="answer"><summary></summary><div class="ans-body">\(\ln(x^2)+\ln(x)=\ln(x^3)\) (power rule to combine the first term, then product rule from Chapter 6)</div></details></li>
+    <li class="tag">bonus — Explain why change of base works using only the cancellation identities from Chapter 4 (don't just cite the formula).
+      <details class="answer"><summary></summary><div class="ans-body">Let \(y=\log_b x\), so \(b^y=x\). Take \(\ln\) of both sides: \(\ln(b^y)=\ln x\), and the power rule gives \(y\ln b=\ln x\), so \(y=\dfrac{\ln x}{\ln b}\) — exactly the formula, derived rather than memorized.</div></details></li>
+    <li class="tag">challenge — Simplify <code>log_2(8ˣ)</code> two different ways — first using the power rule directly, then by rewriting <code>8</code> as <code>2³</code> first — and confirm both give the same answer.
+      <details class="answer"><summary></summary><div class="ans-body">Power rule directly: \(\log_2(8^x)=x\log_2(8)=x\cdot3=3x\) (since \(\log_2 8=3\)). Rewriting first: \(8^x=(2^3)^x=2^{3x}\), so \(\log_2(2^{3x})=3x\) by the cancellation identity (equation 3.4.2). Both give \(3x\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-log-laws-1.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-solving-exponential-equations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 3 · Exponentials &amp; Logarithms</span>
+  <span>Chapter 7 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m03:7", "content/m03-exp-log/ch07-log-laws-2-change-of-base.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

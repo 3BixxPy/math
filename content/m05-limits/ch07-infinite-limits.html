@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — Infinite Limits — Vertical Asymptotes | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 7 of 12</div>
+  <div class="eyebrow">Chapter 7 · concept:infinite-limits</div>
+  <h1>Infinite Limits — Vertical Asymptotes</h1>
+  <p class="subtitle">Chapter 3 flagged that writing "the limit is infinity" isn't quite an ordinary limit statement. This chapter makes that notation precise, and connects it directly to Module 1's vertical asymptotes.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Unbounded growth toward a specific <code>x</code>-value is extremely common, and it's worth having a compact, standard way to describe it — even though, strictly, the ordinary limit still doesn't exist in this situation (Chapter 3). This chapter gives that description a precise meaning and a precise method (sign analysis) for working it out, rather than leaving it as a vague "it blows up."</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Infinite limit</div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x\to a} f(x) = \infty \]</div><div class="eq-num" id="eq-5-7-1">(5.7.1)</div></div>
+    <p>This notation means: for every bound you could name, <code>f(x)</code> eventually exceeds it as <code>x</code> gets close enough to <code>a</code> — <code>f(x)</code> grows without bound. It is <strong>not</strong> a claim that some number called <code>∞</code> is actually being approached, because <code>∞</code> isn't a real number at all. Written this way, it's a precise description of unbounded growth, not a genuine numeric limit value; <code>lim<sub>x→a</sub> f(x) = −∞</code> means the same thing in the negative direction.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — sign analysis at a vertical asymptote</div>
+    <p>Evaluate the one-sided infinite limits of <code>f(x) = 1/(x−2)</code> at <code>x=2</code>.</p>
+    <details class="step" open><summary>Step 1 — approach from the right (x→2⁺)</summary>
+      <div class="step-body"><p>As \(x\to2^+\), \(x-2\) is a small <em>positive</em> number (like \(0.01\)). \(1\) divided by a small positive number is a large positive number, growing without bound: \(\lim_{x\to2^+}\dfrac{1}{x-2}=+\infty\).</p></div></details>
+    <details class="step"><summary>Step 2 — approach from the left (x→2⁻)</summary>
+      <div class="step-body"><p>As \(x\to2^-\), \(x-2\) is a small <em>negative</em> number (like \(-0.01\)). \(1\) divided by a small negative number is a large negative number: \(\lim_{x\to2^-}\dfrac{1}{x-2}=-\infty\).</p></div></details>
+    <details class="step"><summary>Step 3 — combine</summary>
+      <div class="step-body"><p>The one-sided behaviors don't even agree in sign, so \(\lim_{x\to2}\dfrac{1}{x-2}\) does not exist — this is exactly Chapter 3's "unbounded behavior" failure mode, now written precisely with signed one-sided notation.</p></div></details>
+    <details class="step"><summary>Connecting to Module 1</summary>
+      <div class="step-body"><p>\(x=2\) is exactly the vertical asymptote Module 1, Chapter 14 would find for this function (numerator \(1\) never cancels with the denominator). An infinite one-sided limit like this <em>is</em> the rigorous definition of a vertical asymptote — Module 1 spotted the pattern; this chapter is what was actually happening underneath it.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Writing <code>lim<sub>x→a</sub> f(x) = ∞</code> and then treating <code>∞</code> as if it were an ordinary number in further algebra — plugging it into Chapter 4's limit laws, for instance, which strictly require every piece's limit to exist as a genuine real number. It doesn't. <code>∞</code> here is a description of behavior, not a value that can be added, multiplied, or substituted like <code>4</code> or <code>−2</code> can.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="positive,pos">
+    <div class="label">Try it yourself</div>
+    <p>What is the sign of <code>1/(x−2)</code> as <code>x→2⁺</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="positive or negative" aria-label="sign as x approaches 2 from the right">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>lim<sub>x→3⁺</sub> 1/(x−3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(+\infty\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→3⁻</sub> 1/(x−3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-\infty\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0⁺</sub> 1/x²</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(+\infty\) (squaring keeps it positive from either side)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> 1/x²</code> (two-sided). Do both one-sided limits agree here?
+      <details class="answer"><summary></summary><div class="ans-body">\(+\infty\) — unusually, both one-sided limits agree (both \(+\infty\)), so we conventionally write the two-sided limit the same way, still meaning unbounded growth, not a real number.</div></details></li>
+    <li>For <code>f(x)=1/(x+5)</code>, find the vertical asymptote and describe the sign of <code>f(x)</code> just to the left and just to the right of it.
+      <details class="answer"><summary></summary><div class="ans-body">Asymptote at \(x=-5\). Just left of \(-5\): \(x+5\) is a small negative number, so \(f\) is negative (\(\to-\infty\)). Just right: \(x+5\) is a small positive number, so \(f\) is positive (\(\to+\infty\)).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→1</sub> 1/(x−1)²</code>, and state whether this two-sided limit "exists" in the strict sense despite the fact that we can write <code>=+∞</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(=+\infty\) as written, but strictly the limit does not exist — there is no real number it approaches; the notation only records which unbounded behavior occurs.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→4⁻</sub> 1/(4−x)</code>. (Watch the sign inside carefully.)
+      <details class="answer"><summary></summary><div class="ans-body">As \(x\to4^-\), \(4-x\) is a small positive number, so the limit is \(+\infty\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→−2⁺</sub> 1/(x+2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(+\infty\) — \(x+2\) is small and positive just to the right of \(-2\).</div></details></li>
+    <li class="tag">bonus — True or false: "<code>lim<sub>x→a</sub> f(x) = ∞</code>" means <code>f</code> is continuous at <code>a</code>.
+      <details class="answer"><summary></summary><div class="ans-body">False — \(f\) isn't even defined at \(a\) in this situation; it's about as far from continuous as a function can be (Chapter 8 makes this precise).</div></details></li>
+    <li class="tag">bonus — For <code>g(x) = 3/(x−6)²</code>, does <code>g</code> have a two-sided infinite limit at <code>x=6</code>? Use sign analysis to justify.
+      <details class="answer"><summary></summary><div class="ans-body">Yes, \(+\infty\) on both sides — \((x-6)^2\) is positive on both sides near \(6\), and multiplying by the positive constant \(3\) doesn't change the sign.</div></details></li>
+    <li class="tag">challenge — Construct a rational function with vertical asymptotes at both <code>x=1</code> and <code>x=−1</code>, where the one-sided limits at <code>x=1</code> agree (both <code>+∞</code>) but the one-sided limits at <code>x=−1</code> disagree (<code>+∞</code> and <code>−∞</code>). Explain the difference using even vs. odd multiplicity of the surviving factor.
+      <details class="answer"><summary></summary><div class="ans-body">E.g. \(f(x)=\dfrac{1}{(x-1)^2(x+1)}\). At \(x=1\): \((x-1)^2\) is an <em>even</em> power, so it stays positive on both sides — the one-sided limits agree (\(+\infty\), \(+\infty\)). At \(x=-1\): \((x+1)\) is an <em>odd</em> power (multiplicity 1), so its sign flips across the point — the one-sided limits disagree (\(+\infty\) on one side, \(-\infty\) on the other). General rule: even multiplicity in the surviving factor ⇒ agreeing one-sided signs; odd multiplicity ⇒ a sign flip.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-limits-at-infinity.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-continuity.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 7 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:7", "content/m05-limits/ch07-infinite-limits.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

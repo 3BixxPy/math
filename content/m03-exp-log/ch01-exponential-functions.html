@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Exponential Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 3 · Exponentials &amp; Logarithms</a> → Chapter 1 of 10</div>
+  <div class="eyebrow">Chapter 1 · concept:exponential-function-definition, concept:exponential-growth-decay</div>
+  <h1>Exponential Functions — f(x) = a·bˣ</h1>
+  <p class="subtitle">The original diagnostic never touched logarithms at all — "untested/unknown." Exponentials are the half of that gap that comes first: put the variable in the exponent instead of the base, and Module 0's exponent laws stop being arithmetic tricks and start being a whole new shape of graph.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every polynomial you graphed in Module 1 has the variable in the <em>base</em>: <code>x²</code>, <code>x³</code>. An exponential function flips that — the variable moves into the <em>exponent</em>: <code>2ˣ</code>. That single swap changes everything about how the function behaves: instead of growing at a steady, describable rate, it grows (or shrinks) by repeated multiplication, which is exactly how populations, interest, radioactive decay, and — eventually — every continuous rate of change in calculus actually behave. Nothing else in this course grows this fast, or this predictably.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Exponential function</div>
+    <p>An <strong>exponential function</strong> has the form <code>f(x) = a·bˣ</code>, where <code>b</code> is the <strong>base</strong> (a fixed positive number, <code>b ≠ 1</code>) and <code>a</code> is a nonzero constant multiplier. The variable <code>x</code> lives in the exponent — that's the entire definition. <code>b &gt; 0</code> so that <code>bˣ</code> is always defined and positive for every real <code>x</code> (a negative base would make <code>bˣ</code> undefined for exponents like <code>1/2</code>, since you'd be taking an even root of a negative number); <code>b ≠ 1</code> because <code>1ˣ</code> is just the constant <code>1</code> — flat, not exponential.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Growth vs. decay</div>
+    <div class="eqn"><div class="eq-body">\[ f(x) = a\cdot b^{x}, \qquad b>0,\ b\neq1 \]</div><div class="eq-num" id="eq-3-1-1">(3.1.1)</div></div>
+    <p>For <code>a &gt; 0</code>: if <code>b &gt; 1</code>, the function is <strong>exponential growth</strong> — it climbs, faster and faster, as <code>x</code> increases. If <code>0 &lt; b &lt; 1</code>, it's <strong>exponential decay</strong> — it shrinks toward zero as <code>x</code> increases. The base alone decides which shape you get; nothing else about the formula needs to change.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Horizontal asymptote</div>
+    <div class="eqn"><div class="eq-body">\[ y = 0 \]</div><div class="eq-num" id="eq-3-1-2">(3.1.2)</div></div>
+    <p>Every basic exponential <code>f(x) = a·bˣ</code> (with <code>a &gt; 0</code>) has horizontal asymptote <code>y = 0</code> — the x-axis. The graph gets arbitrarily close to it but never touches or crosses it, because a positive base raised to <em>any</em> real power is always strictly positive: <code>bˣ</code> can shrink toward 0, but never reach or pass it.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>b: <input type="range" id="exp-b" min="0.2" max="3" step="0.1" value="2"></label>
+  </div>
+  <div class="plot-wrap"><svg id="exp-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="exp-readout">y = 2.0ˣ — growth (b &gt; 1)</span></div>
+  <script>
+  (function () {
+    const bInput = document.getElementById("exp-b");
+    const opts = { xMin: -3, xMax: 3, yMin: -1, yMax: 9, width: 320, height: 320, pad: 26, xStep: 1, yStep: 2 };
+    const svg = document.getElementById("exp-svg");
+    function update() {
+      const b = parseFloat(bInput.value);
+      MCPlot.drawAxes(svg, opts);
+      MCPlot.plotFunction(svg, (x) => Math.pow(b, x), opts, b >= 1 ? "plot-curve" : "plot-curve-alt");
+      let label;
+      if (Math.abs(b - 1) < 1e-9) label = "b = 1.0 — not exponential (flat line, excluded by definition)";
+      else if (b > 1) label = "y = " + b.toFixed(1) + "ˣ — growth (b &gt; 1)";
+      else label = "y = " + b.toFixed(1) + "ˣ — decay (0 &lt; b &lt; 1)";
+      document.getElementById("exp-readout").innerHTML = label;
+    }
+    bInput.addEventListener("input", update);
+    update();
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Watch the curve flip its whole shape as <code>b</code> crosses 1 — everything left of the y-axis and everything right of it trade places between growth and decay.</p>
+
+  <div class="block example">
+    <div class="label">Worked example — evaluating, then comparing growth vs. decay</div>
+    <p>Evaluate <code>f(x) = 2·3ˣ</code> at <code>x = 0, 1, 2</code>, then compare a growth curve (<code>b=2</code>) against a decay curve (<code>b=0.5</code>).</p>
+    <details class="step" open><summary>Step 1 — f(0)</summary>
+      <div class="step-body"><p>\(f(0) = 2\cdot3^0 = 2\cdot1 = 2\)</p></div></details>
+    <details class="step"><summary>Step 2 — f(1)</summary>
+      <div class="step-body"><p>\(f(1) = 2\cdot3^1 = 2\cdot3 = 6\)</p></div></details>
+    <details class="step"><summary>Step 3 — f(2)</summary>
+      <div class="step-body"><p>\(f(2) = 2\cdot3^2 = 2\cdot9 = 18\)</p></div></details>
+    <details class="step"><summary>Contrast — growth vs. decay side by side</summary>
+      <div class="step-body"><p>For <code>y = 2ˣ</code> (growth): \(x=0\to1,\ x=1\to2,\ x=2\to4\) — each step to the right <em>doubles</em> the output. For <code>y = 0.5ˣ</code> (decay): \(x=0\to1,\ x=1\to0.5,\ x=2\to0.25\) — each step <em>halves</em> it. Same mechanism (repeated multiplication by the base), opposite direction, purely because \(2>1\) and \(0.5<1\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Expecting exponential growth to behave like polynomial growth — treating <code>2ˣ</code> like <code>x²</code> because "they both get bigger." They don't stay close for long. Compare them directly: at <code>x=1</code>, \(2^1=2\) vs \(1^2=1\); at \(x=3\), \(2^3=8\) vs \(3^2=9\) — still close. But at <code>x=10</code>, \(2^{10}=1024\) vs \(10^2=100\) — the exponential has pulled miles ahead, and it never stops widening the gap. Worse, the two behave <em>oppositely</em> for negative <code>x</code>: \((-3)^2=9\) grows as <code>x</code> gets more negative, but \(2^{-3}=1/8=0.125\) shrinks toward 0. A polynomial's exponent is a fixed number applied to a changing base; an exponential's base is fixed and the exponent is what changes — that's a structurally different kind of growth, not just a "steeper" version of the same one.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="8">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>f(x) = 2ˣ</code> at <code>x = 3</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="your answer" aria-label="2 to the 3">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>f(x) = 3ˣ</code> at <code>x = 2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3^2=9\)</div></details></li>
+    <li>Evaluate <code>f(x) = 5·2ˣ</code> at <code>x = 0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(5\cdot2^0=5\cdot1=5\)</div></details></li>
+    <li>Is <code>y = (1/4)ˣ</code> growth or decay?
+      <details class="answer"><summary></summary><div class="ans-body">Decay — \(0 &lt; 1/4 &lt; 1\)</div></details></li>
+    <li>Is <code>y = 6ˣ</code> growth or decay?
+      <details class="answer"><summary></summary><div class="ans-body">Growth — \(6 &gt; 1\)</div></details></li>
+    <li>What is the horizontal asymptote of <code>y = 4ˣ</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(y=0\)</div></details></li>
+    <li>Evaluate <code>f(x) = 10·(0.5)ˣ</code> at <code>x = 3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(10\cdot0.5^3=10\cdot0.125=1.25\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>f(x) = 2ˣ</code> at <code>x = -2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2^{-2}=1/4\)</div></details></li>
+    <li class="tag">bonus — Which is bigger, <code>2⁵</code> or <code>5²</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(2^5=32\) is bigger than \(5^2=25\)</div></details></li>
+    <li class="tag">bonus — For <code>y = bˣ</code>, what happens to the graph's shape as <code>b</code> gets closer and closer to <code>1</code> (without equaling it)?
+      <details class="answer"><summary></summary><div class="ans-body">It flattens — the curve approaches the horizontal line \(y=1\), since \(1^x=1\) for every x.</div></details></li>
+    <li class="tag">bonus — Describe the relationship between the graphs of <code>y = 2ˣ</code> and <code>y = (1/2)ˣ</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Mirror images of each other across the y-axis: \((1/2)^x = 2^{-x}\), so one is the other with x negated.</div></details></li>
+    <li class="tag">challenge — For which of <code>x = 1, 2, 3, 4, 5</code> is <code>2ˣ &gt; x²</code> true? What does that tell you about assuming one always beats the other for small x?
+      <details class="answer"><summary></summary><div class="ans-body">\(x=1\): \(2&gt;1\) true. \(x=2\): \(4=4\) equal. \(x=3\): \(8&lt;9\) false. \(x=4\): \(16=16\) equal. \(x=5\): \(32&gt;25\) true again — and true for every integer \(x\geq5\) after that. So the comparison actually flips more than once for small x before the exponential wins for good; "exponential eventually beats every polynomial" is true, but "eventually" can take a few tries to kick in, which is exactly why testing a couple of small values isn't enough to trust a pattern.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m02-trigonometry/ch15-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-natural-exponentials-e.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 3 · Exponentials &amp; Logarithms</span>
+  <span>Chapter 1 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m03:1", "content/m03-exp-log/ch01-exponential-functions.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

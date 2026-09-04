@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Continuity | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 8 of 12</div>
+  <div class="eyebrow">Chapter 8 · concept:continuity-definition</div>
+  <h1>Continuity</h1>
+  <p class="subtitle">Every chapter so far studied what f does <em>near</em> a point without necessarily caring what f does <em>at</em> that point — Chapter 1 built the whole module around keeping those two questions separate. Continuity is exactly the special case where "near" and "at" finally agree, made precise.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Informally, a continuous function is one you could trace with a pencil without ever lifting it off the page — no jumps, no holes, no places it shoots off to infinity. That picture is useful, but it isn't a definition you can check on a function you can't see graphed. This chapter turns it into a precise, three-part test built entirely out of tools you already have: evaluation (Module 1), and limits (Chapters 1–7). Nothing new has to be invented — continuity is what happens when those existing pieces line up.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Continuity at a point</div>
+    <div class="eqn"><div class="eq-body">\[ f \text{ is continuous at } x=a \iff \begin{cases} \text{(1)}\ \ f(a)\text{ is defined} \\ \text{(2)}\ \ \lim_{x\to a}f(x)\text{ exists} \\ \text{(3)}\ \ \lim_{x\to a}f(x) = f(a) \end{cases} \]</div><div class="eq-num" id="eq-5-8-1">(5.8.1)</div></div>
+    <p>All three conditions must hold together. (1) is a domain question (Module 1) — is the function even defined there. (2) is the existence question from Chapters 2–3 — the limit has to exist in the ordinary sense, not just "sort of" via one side, and not via an infinite or oscillating blow-up. (3) is the genuinely new part: the number the function is heading toward has to be the exact number it actually lands on. A function is <strong>continuous on an interval</strong> if it's continuous at every single point in that interval. As a direct consequence of Chapter 4's limit laws, every polynomial is continuous everywhere — direct substitution always satisfies all three conditions at once.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — checking all three conditions</div>
+    <p>Is <code>f(x) = {x+1 if x&lt;2; 3 if x≥2}</code> continuous at <code>x=2</code>?</p>
+    <details class="step" open><summary>Step 1 — condition (1): is f(2) defined?</summary>
+      <div class="step-body"><p>Yes — the \(x\geq2\) piece owns \(x=2\) (Module 1, Chapter 9), so \(f(2)=3\).</p></div></details>
+    <details class="step"><summary>Step 2 — condition (2): does lim x→2 f(x) exist?</summary>
+      <div class="step-body"><p>Left-hand: as \(x\to2^-\), \(x+1\to3\). Right-hand: as \(x\to2^+\), the constant piece gives \(3\). Both sides agree at \(3\), so by (5.2.1) the limit exists and equals \(3\).</p></div></details>
+    <details class="step"><summary>Step 3 — condition (3): does the limit equal f(2)?</summary>
+      <div class="step-body"><p>Limit is \(3\); \(f(2)\) is \(3\). They match.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>All three conditions hold, so \(f\) <strong>is continuous</strong> at \(x=2\) — despite being piecewise. Piecewise doesn't automatically mean discontinuous; it just means all three conditions need to be checked explicitly rather than assumed.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Checking only one or two of the three conditions and stopping there. It's entirely possible for a function to satisfy conditions (1) and (2) — <code>f(a)</code> is defined, and the limit exists — while still failing (3) because the two numbers simply don't match. For example, <code>g(x) = x²</code> for <code>x≠3</code>, with <code>g(3)</code> separately defined as <code>10</code>: <code>g(3)=10</code> (condition 1 ✓), <code>lim<sub>x→3</sub> g(x)=9</code> (condition 2 ✓, it exists), but <code>9≠10</code> — condition (3) fails, so <code>g</code> is <strong>not</strong> continuous at <code>x=3</code>, despite passing two of the three checks. All three, every time.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="no,not continuous,discontinuous">
+    <div class="label">Try it yourself</div>
+    <p>Is <code>f(x) = 1/x</code> continuous at <code>x=0</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="is 1 over x continuous at 0">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>For <code>f(x)=x²−3x+2</code>, is <code>f</code> continuous at <code>x=5</code>? Why?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — it's a polynomial, and polynomials are continuous everywhere.</div></details></li>
+    <li>For <code>g(x)=1/(x−4)</code>, is <code>g</code> continuous at <code>x=4</code>? Which condition fails?
+      <details class="answer"><summary></summary><div class="ans-body">No — condition (1) fails, since \(g(4)\) is undefined.</div></details></li>
+    <li>For <code>h(x) = {2x if x&lt;1; 2 if x≥1}</code>, check continuity at <code>x=1</code> using all three conditions.
+      <details class="answer"><summary></summary><div class="ans-body">(1) \(h(1)=2\), defined. (2) Left-hand \(\to2\), right-hand \(=2\), so the limit exists and equals \(2\). (3) Limit \(2\) = \(h(1)\) \(2\). All hold — continuous.</div></details></li>
+    <li>For <code>k(x) = x²</code> everywhere except <code>k(3)=10</code>, check continuity at <code>x=3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">(1) \(k(3)=10\), defined. (2) \(\lim_{x\to3}k(x)=9\), exists. (3) \(9\neq10\) — fails. Not continuous at \(x=3\).</div></details></li>
+    <li>Is every polynomial continuous at every real number? Justify briefly using Chapter 4.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — Chapter 4's limit laws guarantee direct substitution always works for a polynomial, which automatically satisfies all three conditions at every point.</div></details></li>
+    <li>For <code>m(x) = {x+2 if x≤0; x²+2 if x&gt;0}</code>, check continuity at <code>x=0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">(1) \(m(0)=2\) (first piece owns \(x=0\)). (2) Left-hand \(=2\), right-hand \(\to0^2+2=2\); limit exists, equals \(2\). (3) Matches \(m(0)=2\). Continuous.</div></details></li>
+    <li class="tag">bonus — For <code>n(x) = √x</code>, is <code>n</code> continuous at <code>x=−1</code>? Explain using condition (1).
+      <details class="answer"><summary></summary><div class="ans-body">No — \(n(-1)\) isn't defined at all (negative under a square root), so condition (1) fails immediately; nothing else needs checking.</div></details></li>
+    <li class="tag">bonus — For <code>p(x) = {3x−1 if x&lt;2; 5 if x=2; x+3 if x&gt;2}</code>, check all three conditions at <code>x=2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">(1) \(p(2)=5\), defined. (2) Left-hand \(\to5\), right-hand \(\to5\); limit exists, equals \(5\). (3) Matches. Continuous at \(x=2\).</div></details></li>
+    <li class="tag">bonus — True or false: if <code>lim<sub>x→a</sub> f(x)</code> exists, then <code>f</code> must be continuous at <code>a</code>.
+      <details class="answer"><summary></summary><div class="ans-body">False — \(f(a)\) might be undefined, or defined but unequal to the limit. Existence of the limit is only one of the three required conditions.</div></details></li>
+    <li class="tag">bonus — Explain briefly why every rational function <code>P(x)/Q(x)</code> is continuous at every point in its domain (every point where <code>Q(a)≠0</code>).
+      <details class="answer"><summary></summary><div class="ans-body">Where \(Q(a)\neq0\), Chapter 4's quotient law guarantees direct substitution works, satisfying all three conditions at once — same reasoning as polynomials, extended by the quotient law.</div></details></li>
+    <li class="tag">challenge — Construct one function that satisfies conditions (1) and (2) but fails (3), and a separate function that satisfies (2) but fails (1) (so (3) can't even be evaluated). Explain why each is discontinuous despite partially passing the test.
+      <details class="answer"><summary></summary><div class="ans-body">(1)&amp;(2) but not (3): \(f(x)=x\) for \(x\neq0\), with \(f(0)=5\) — defined (1 ✓), limit exists and equals \(0\) (2 ✓), but \(0\neq5\) (3 fails). Not continuous. (2) but not (1): \(g(x)=(x^2-1)/(x-1)\) at \(x=1\) — literally \(0/0\), so \(g(1)\) is undefined (1 fails) even though \(\lim_{x\to1}g(x)=2\) exists (2 ✓). With (1) failing, there's no \(g(1)\) value for (3) to compare against, so (3) can't hold either — one failed condition is already enough to rule out continuity, which is exactly why all three have to be checked rather than stopping early.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-infinite-limits.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-discontinuity-types.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 8 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:8", "content/m05-limits/ch08-continuity.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

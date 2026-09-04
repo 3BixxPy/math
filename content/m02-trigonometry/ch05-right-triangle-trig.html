@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — Right-Triangle Trigonometry (SOH-CAH-TOA) | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 5 of 15</div>
+  <div class="eyebrow">Chapter 5 · concept:right-triangle-trig, concept:angle-of-elevation-depression</div>
+  <h1>Right-Triangle Trigonometry (SOH-CAH-TOA)</h1>
+  <p class="subtitle">This is where trigonometry started historically — solving triangles — and it's still the most common practical use. It turns out to be exactly the unit-circle definition from Chapter 2 in disguise.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Surveying, navigation, physics vectors, any "given an angle and one side, find the rest" problem — right-triangle trig is the tool. The mnemonic SOH-CAH-TOA has probably crossed your radar before even without concrete equations behind it; this chapter gives it the equations, and shows it's not a separate system from Chapter 2's unit circle at all.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — SOH-CAH-TOA</div>
+    <p>For an acute angle \(\theta\) in a right triangle, label the side across from \(\theta\) the <strong>opposite</strong> side, the side next to \(\theta\) that isn't the hypotenuse the <strong>adjacent</strong> side, and the side across from the right angle the <strong>hypotenuse</strong>:</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 260 200" width="260" role="img" aria-label="Right triangle with the right angle marked at the bottom-left corner and angle theta at the bottom-right corner; the vertical left side is opposite theta, the horizontal bottom side is adjacent to theta, and the diagonal is the hypotenuse">
+        <polygon points="60,170 230,170 60,40" style="fill:var(--def-bg); stroke:var(--def-border); stroke-width:2"/>
+        <rect x="60" y="155" width="15" height="15" style="fill:none; stroke:var(--text-dim); stroke-width:1.5"/>
+        <path d="M 210 170 A 20 20 0 0 0 214 158" style="fill:none; stroke:var(--accent); stroke-width:2"/>
+        <text x="193" y="164" style="font-size:13px; fill:var(--accent); font-family:sans-serif; font-weight:600">θ</text>
+        <text x="145" y="188" text-anchor="middle" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">adjacent</text>
+        <text x="22" y="108" text-anchor="middle" transform="rotate(-90 22 108)" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">opposite</text>
+        <text x="152" y="97" text-anchor="middle" transform="rotate(-33 152 97)" style="font-size:12px; fill:var(--text-dim); font-family:sans-serif">hypotenuse</text>
+      </svg>
+    </div>
+    <div class="eqn"><div class="eq-body">\[ \sin\theta = \frac{\text{opp}}{\text{hyp}}, \qquad \cos\theta = \frac{\text{adj}}{\text{hyp}}, \qquad \tan\theta = \frac{\text{opp}}{\text{adj}} \]</div><div class="eq-num" id="eq-2-5-1">(2.5.1)</div></div>
+    <p><strong>SOH-CAH-TOA</strong>: Sine = Opposite/Hypotenuse, Cosine = Adjacent/Hypotenuse, Tangent = Opposite/Adjacent.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — This agrees with the unit circle</div>
+    <p>Put the right triangle's angle \(\theta\) at the origin in standard position with hypotenuse length 1. Then <code>hyp = 1</code>, so \(\sin\theta = \text{opp}/1 = \text{opp}\) and \(\cos\theta=\text{adj}/1=\text{adj}\) — and the opposite/adjacent legs are exactly the y- and x-coordinates of the point where the hypotenuse meets the unit circle. Right-triangle trig isn't a second definition of sine and cosine; it's Chapter 2's definition viewed through a triangle instead of a bare angle. Any hypotenuse length works the same way, because scaling a triangle up or down doesn't change its angle's ratios — only the absolute side lengths.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Angle of elevation / depression</div>
+    <p>The <strong>angle of elevation</strong> is the angle above the horizontal you look up at something higher than you. The <strong>angle of depression</strong> is the angle below the horizontal you look down at something lower. Because the horizontal lines at the two viewpoints are parallel, the angle of elevation from the ground up to a point equals the angle of depression from that point back down — alternate interior angles.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>A right triangle has an acute angle of <code>30°</code> and hypotenuse <code>10</code>. Find both legs.</p>
+    <details class="step" open><summary>Step 1 — opposite leg, using sine</summary>
+      <div class="step-body"><p>\(\sin30° = \dfrac{\text{opp}}{10} \Rightarrow \text{opp} = 10\sin30° = 10\cdot\dfrac12 = 5\)</p></div></details>
+    <details class="step"><summary>Step 2 — adjacent leg, using cosine</summary>
+      <div class="step-body"><p>\(\cos30° = \dfrac{\text{adj}}{10} \Rightarrow \text{adj} = 10\cos30° = 10\cdot\dfrac{\sqrt3}{2} = 5\sqrt3\)</p></div></details>
+    <details class="step"><summary>Check</summary>
+      <div class="step-body"><p>Pythagorean theorem (Module 0): \(5^2+(5\sqrt3)^2 = 25+75=100=10^2\) ✓</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — angle of elevation word problem</div>
+    <p>A 12-foot ladder leans against a wall. The angle of elevation from the ground to the top of the ladder is <code>60°</code>. How high up the wall does the ladder reach?</p>
+    <details class="step" open><summary>Step 1 — identify the triangle</summary>
+      <div class="step-body"><p>The ladder is the hypotenuse (12 ft). The height up the wall is <em>opposite</em> the 60° angle at the ground. Adjacent would be the distance from the wall along the ground — not asked here.</p></div></details>
+    <details class="step"><summary>Step 2 — set up sine (opposite over hypotenuse)</summary>
+      <div class="step-body"><p>\(\sin60° = \dfrac{\text{height}}{12}\)</p></div></details>
+    <details class="step"><summary>Step 3 — solve</summary>
+      <div class="step-body"><p>\(\text{height} = 12\sin60° = 12\cdot\dfrac{\sqrt3}{2} = 6\sqrt3 \approx 10.39\text{ ft}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Swapping which leg is "opposite" and which is "adjacent." Both labels are relative to <em>which angle you're using</em> — the same physical side can be the opposite leg for one acute angle and the adjacent leg for the other acute angle in the same triangle. Before writing any ratio, explicitly re-identify: which side is across from the angle I care about (opposite), and which side touches the angle but isn't the hypotenuse (adjacent)? Don't rely on "the vertical one" or "the horizontal one" — that only works if the triangle happens to be drawn a particular way.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>A right triangle has an acute angle of <code>30°</code> and hypotenuse <code>10</code>. Find the length of the opposite side.</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="e.g. 5" aria-label="opposite side length">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>A right triangle has an acute angle of <code>45°</code> and hypotenuse <code>8</code>. Find both legs.
+      <details class="answer"><summary></summary><div class="ans-body">Both legs equal \(8\cdot\sqrt2/2 = 4\sqrt2\)</div></details></li>
+    <li>A right triangle has an acute angle of <code>60°</code> and adjacent side <code>4</code>. Find the hypotenuse.
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos60°=4/\text{hyp} \Rightarrow \text{hyp}=4/(1/2)=8\)</div></details></li>
+    <li>A right triangle has opposite side <code>3</code> and adjacent side <code>4</code> (relative to angle θ). Find <code>tan θ</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\tan\theta=3/4\)</div></details></li>
+    <li>The angle of elevation to the top of a 50 ft tower, from a point on the ground, is <code>30°</code>. How far is the observer from the base of the tower?
+      <details class="answer"><summary></summary><div class="ans-body">Height is opposite, distance is adjacent: \(\tan30°=50/\text{dist} \Rightarrow \text{dist}=50/\tan30°=50\sqrt3\approx86.6\) ft</div></details></li>
+    <li>A right triangle has hypotenuse <code>2</code> and one acute angle <code>60°</code>. Find the side opposite that angle.
+      <details class="answer"><summary></summary><div class="ans-body">\(2\sin60°=2\cdot\sqrt3/2=\sqrt3\)</div></details></li>
+    <li>Explain in one sentence why right-triangle trig gives the same values as the unit circle, even though there's no "circle" drawn.
+      <details class="answer"><summary></summary><div class="ans-body">Scaling the hypotenuse to length 1 turns the triangle's legs directly into the unit circle's (cos θ, sin θ) coordinates — it's the same definition, just usually drawn with a longer hypotenuse.</div></details></li>
+    <li class="tag">bonus — A right triangle has legs <code>5</code> and <code>12</code> (hypotenuse 13). Find <code>sin θ</code> and <code>cos θ</code> for the angle opposite the leg of length 5.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sin\theta=5/13\), \(\cos\theta=12/13\)</div></details></li>
+    <li class="tag">bonus — From a lighthouse 40 m tall, the angle of depression to a boat is <code>20°</code>. What angle would someone on the boat measure looking up at the lighthouse's top?
+      <details class="answer"><summary></summary><div class="ans-body">20° — angle of elevation equals angle of depression (alternate interior angles).</div></details></li>
+    <li class="tag">bonus — A right triangle has an acute angle of <code>45°</code> and one leg of length <code>6</code>. Find the hypotenuse.
+      <details class="answer"><summary></summary><div class="ans-body">Both legs are equal in a 45-45-90 triangle: \(\sin45°=6/\text{hyp}\Rightarrow\text{hyp}=6/(\sqrt2/2)=6\sqrt2\)</div></details></li>
+    <li class="tag">bonus — Two right triangles both have a <code>40°</code> acute angle, but different hypotenuse lengths. Is <code>sin(40°)</code> different in the two triangles?
+      <details class="answer"><summary></summary><div class="ans-body">No — sin θ is a <em>ratio</em>, and both triangles are similar (same angles), so opposite/hypotenuse stays the same regardless of overall size.</div></details></li>
+    <li class="tag">challenge — A 20 ft flagpole casts a shadow. The angle of elevation from the tip of the shadow to the top of the pole is <code>35°</code>. Set up (but don't necessarily simplify by calculator) the equation for the shadow's length, and identify which side is opposite vs. adjacent to the 35° angle.
+      <details class="answer"><summary></summary><div class="ans-body">The pole (20 ft) is opposite the 35° angle; the shadow is adjacent. \(\tan35° = 20/\text{shadow} \Rightarrow \text{shadow} = 20/\tan35°\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-tan-cot-sec-csc.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-graphing-sine-cosine.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 5 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:5", "content/m02-trigonometry/ch05-right-triangle-trig.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

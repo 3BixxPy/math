@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — The Natural Base e | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 3 · Exponentials &amp; Logarithms</a> → Chapter 2 of 10</div>
+  <div class="eyebrow">Chapter 2 · concept:natural-base-e</div>
+  <h1>The Natural Base e</h1>
+  <p class="subtitle">Chapter 1 let <code>b</code> be almost any positive number. This chapter singles out one particular base — not a "nice" round number at all — that shows up so often in nature and later in calculus that it gets its own letter.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Imagine a bank paying 100% annual interest, compounded once a year: $1 becomes $2. Compound it twice a year (50% each time) and it becomes \((1.5)^2 = \$2.25\). Compound monthly, daily, every second — keep splitting the year into more and more pieces — and the final amount keeps <em>rising</em>, but not without bound. It settles down, closing in on a specific number just past 2.718. That number is <code>e</code>, the natural base. It's the base that appears whenever something grows continuously — every instant compounding a little more, forever — which is exactly the situation Calculus I spends an entire unit on. Meeting <code>e</code> now, as a constant you can compute with, means it's not a strange new symbol when calculus needs it.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Definition — e (not proven here — full justification is a calculus topic)</div>
+    <div class="eqn"><div class="eq-body">\[ e = \lim_{n\to\infty}\left(1+\frac1n\right)^{n} \approx 2.71828\ldots \]</div><div class="eq-num" id="eq-3-2-1">(3.2.1)</div></div>
+    <p><code>e</code> is defined as the number that \((1+1/n)^n\) gets closer and closer to as <code>n</code> grows without bound. It's irrational (like <code>π</code>) — its decimal expansion never repeats or terminates — so "2.71828" is always an approximation, never the exact value. For now, treat <code>e</code> the same way you already treat <code>π</code>: a specific fixed constant with its own symbol, not a variable and not something you round off mid-calculation.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — watching the limit converge</div>
+    <p>Evaluate <code>e⁰</code>, note the value of <code>e¹</code>, then compute <code>(1 + 1/n)ⁿ</code> for <code>n = 1, 12, 365</code> to see the convergence toward <code>e</code> directly.</p>
+    <details class="step" open><summary>Step 1 — the easy values first</summary>
+      <div class="step-body"><p>\(e^0 = 1\) (any nonzero base to the 0 power is 1 — Module 0's zero-exponent rule still applies). \(e^1 = e \approx 2.71828\).</p></div></details>
+    <details class="step"><summary>Step 2 — n = 1 (compounding once a year)</summary>
+      <div class="step-body"><p>\(\left(1+\dfrac11\right)^1 = 2^1 = 2\)</p></div></details>
+    <details class="step"><summary>Step 3 — n = 12 (monthly)</summary>
+      <div class="step-body"><p>\(\left(1+\dfrac1{12}\right)^{12} \approx (1.0833)^{12} \approx 2.613\)</p></div></details>
+    <details class="step"><summary>Step 4 — n = 365 (daily)</summary>
+      <div class="step-body"><p>\(\left(1+\dfrac1{365}\right)^{365} \approx (1.00274)^{365} \approx 2.7146\)</p></div></details>
+    <details class="step"><summary>Result — the pattern</summary>
+      <div class="step-body"><p>2, then 2.613, then 2.7146 — each step gets closer to \(e \approx 2.71828\) without ever quite reaching it for any finite <code>n</code>. Compounding more often always helps, but with rapidly diminishing returns; the "infinitely often" limit is <code>e</code> itself.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating <code>e</code> as something you can freely round mid-problem, or worse, as if it were a variable you could solve for. It's neither — <code>e</code> is one fixed, exact irrational number, exactly like <code>π</code>. Carry it symbolically (write <code>e</code>, <code>e²</code>, <code>3e</code>, etc.) through every intermediate step of a calculation, and only convert to a decimal approximation at the very last step, if a numeric answer is actually asked for. Rounding early — using 2.7 in one step and 2.72 in the next — introduces error that compounds (no pun intended) through the rest of the problem.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2.718,2.72,2.7183,2.71828">
+    <div class="label">Try it yourself</div>
+    <p><code>e ≈ ?</code> (three or four decimal places is fine):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 2.718" aria-label="approximate value of e">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>e⁰</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\)</div></details></li>
+    <li>Is <code>e</code> closer to <code>2.7</code> or <code>3</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(2.7\) (\(e\approx2.71828\))</div></details></li>
+    <li>Compute <code>(1 + 1/1)¹</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2^1=2\)</div></details></li>
+    <li>Compute <code>(1 + 1/4)⁴</code>, rounded to 3 decimal places.
+      <details class="answer"><summary></summary><div class="ans-body">\((1.25)^4\approx2.441\)</div></details></li>
+    <li>True or false: <code>e</code> is a rational number (expressible as a fraction of integers).
+      <details class="answer"><summary></summary><div class="ans-body">False — like \(\pi\), \(e\) is irrational.</div></details></li>
+    <li>Write <code>e</code> to 5 decimal places, from memory.
+      <details class="answer"><summary></summary><div class="ans-body">\(2.71828\)</div></details></li>
+    <li class="tag">bonus — As <code>n → ∞</code>, what does <code>(1 + 1/n)ⁿ</code> approach?
+      <details class="answer"><summary></summary><div class="ans-body">\(e\), by definition (equation 3.2.1)</div></details></li>
+    <li class="tag">bonus — Using <code>e ≈ 2.718</code>, which is larger: <code>e²</code> or <code>2ᵉ</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(e^2\approx7.389\) vs \(2^e\approx2^{2.718}\approx6.58\) — \(e^2\) is larger.</div></details></li>
+    <li class="tag">bonus — A bank compounds interest continuously at a 100% annual rate on $1. After one year, how much money is there, in terms of <code>e</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(\$e\) (\(\approx\$2.72\)) — continuous compounding at rate 1 for time 1 is exactly \(e^1\).</div></details></li>
+    <li class="tag">bonus — Why can't you round <code>e</code> to <code>2.7</code> partway through a multi-step calculation and still expect an exact final answer?
+      <details class="answer"><summary></summary><div class="ans-body">Rounding early throws away precision that later steps (especially multiplication or exponentiation) can amplify — the error compounds. Keep \(e\) symbolic until the last step.</div></details></li>
+    <li class="tag">challenge — Compute <code>(1 + 1/100)¹⁰⁰</code> to 4 decimal places by hand-reasoning (you may use a calculator for the arithmetic, not an "e" button), and explain why it should land close to, but strictly less than, <code>e</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\((1.01)^{100}\approx2.7048\) — less than \(e\approx2.71828\) because the sequence \((1+1/n)^n\) increases toward \(e\) from below; \(n=100\) is large but still finite, so it hasn't fully closed the gap yet.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-exponential-functions.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-exponential-transformations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 3 · Exponentials &amp; Logarithms</span>
+  <span>Chapter 2 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m03:2", "content/m03-exp-log/ch02-natural-exponentials-e.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

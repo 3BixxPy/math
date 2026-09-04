@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 8 — Proof by Contrapositive &amp; Contradiction | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 8 of 10</div>
+  <div class="eyebrow">Chapter 8 · concept:proof-by-contrapositive, concept:proof-by-contradiction</div>
+  <h1>Proof by Contrapositive &amp; Contradiction</h1>
+  <p class="subtitle">Chapter 7's direct proofs go forward: hypothesis to conclusion, no detours. Some claims resist that route. This chapter gives you two indirect ones — and both are built entirely from Chapters 2–4's negation machinery, put to real use.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Debugging a circuit rarely means simulating forward from every input. More often you reason backward from a bad output pin: "the output is wrong, so trace back — which input must have been at fault?" That's <strong>contrapositive</strong> reasoning: instead of showing p forces q, you show ¬q forces ¬p, which (Chapter 2, equation 4.2.2) proves the exact same thing. <strong>Contradiction</strong> is the other classic debugging move: assume a wiring is correct, follow the logic, and discover it would force some wire to be simultaneously 0 and 1 — an impossible short. Since that's impossible, the assumption must have been wrong. Both techniques are things you've done at a keyboard; this chapter just names them.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Proof by contrapositive</div>
+    <p>To prove <code>p ⇒ q</code>, it is enough to prove <code>¬q ⇒ ¬p</code> instead. This is valid precisely because Chapter 2 (equation 4.2.2) established <code>(p⇒q) ≡ (¬q⇒¬p)</code> — proving one automatically proves the other, since they're the same statement. Use it whenever the forward direction is awkward but reasoning from "q failed" backward to "p must have failed" is cleaner.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Proof by contradiction</div>
+    <p>To prove a statement <code>S</code> (any statement, not just a conditional) by contradiction: assume <code>¬S</code>, then reason validly from that assumption until you reach something impossible — a statement of the form <code>r ∧ ¬r</code>, or anything already known false. Since valid reasoning can only produce an impossible conclusion if it started from a false premise, the assumption <code>¬S</code> must be false — so <code>S</code> is true.</p>
+    <p>When S itself is a conditional <code>p ⇒ q</code>, the assumption to start from is <code>¬(p⇒q)</code>, and — using Chapter 3's De Morgan's law on Chapter 3's exercise result <code>p⇒q ≡ ¬p∨q</code> — that negation works out to <code>p ∧ ¬q</code>. In plain terms: assume the hypothesis is true <em>and</em> the conclusion is false, both at once, then hunt for the impossible consequence. This is a genuinely different move from taking the contrapositive: contrapositive keeps the statement's truth value the same (it's an equivalent restatement); contradiction assumes the <em>opposite</em> truth value on purpose, planning to blow it up.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — contrapositive, reusing Chapter 7 directly</div>
+    <p>Prove: if <code>n²</code> is even, then <code>n</code> is even.</p>
+    <details class="step" open><summary>Step 1 — try the direct route and notice it's awkward</summary>
+      <div class="step-body"><p>Starting from "n² = 2k" and trying to algebraically extract "n = 2j" requires taking a square root mid-proof and arguing it's an integer — solvable, but clunky. Try the contrapositive instead.</p></div></details>
+    <details class="step"><summary>Step 2 — state the contrapositive</summary>
+      <div class="step-body"><p>Original: (n² even) ⇒ (n even). Contrapositive: (n not even) ⇒ (n² not even), i.e. <strong>if n is odd, then n² is odd</strong>.</p></div></details>
+    <details class="step"><summary>Step 3 — recognize this exact claim</summary>
+      <div class="step-body"><p>This is word-for-word Chapter 7's second worked example, already proved: n=2k+1 ⟹ n²=2(2k²+2k)+1, odd.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>The contrapositive is proved, and by the theorem above, that <em>is</em> a proof of "if n² is even, then n is even" — no new algebra needed, just the equivalence and a chapter of reuse.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — √2 is irrational, by contradiction</div>
+    <p>Prove: <code>√2</code> is irrational (not expressible as a ratio of integers).</p>
+    <details class="step" open><summary>Step 1 — assume the negation</summary>
+      <div class="step-body"><p>Assume, for contradiction, that √2 <em>is</em> rational. Then \(\sqrt2 = a/b\) for integers a, b with no common factor (the fraction is fully reduced), b≠0.</p></div></details>
+    <details class="step"><summary>Step 2 — clear the square root</summary>
+      <div class="step-body"><p>\(2 = a^2/b^2 \implies a^2 = 2b^2\). So a² is even.</p></div></details>
+    <details class="step"><summary>Step 3 — use this chapter's own first result</summary>
+      <div class="step-body"><p>By the contrapositive result just proved above, a² even ⟹ a is even. So \(a = 2k\) for some integer k.</p></div></details>
+    <details class="step"><summary>Step 4 — substitute back and find the same fact about b</summary>
+      <div class="step-body"><p>\(a^2 = 2b^2 \implies (2k)^2 = 2b^2 \implies 4k^2 = 2b^2 \implies b^2 = 2k^2\). So b² is even too, hence (same result again) b is even.</p></div></details>
+    <details class="step"><summary>Result — the contradiction</summary>
+      <div class="step-body"><p>a and b are <em>both</em> even, so they share a common factor of 2 — directly contradicting the assumption that a/b was fully reduced. The assumption "√2 is rational" must be false. Therefore <strong>√2 is irrational</strong>. Notice this single proof reused Chapter 7's definitions, this chapter's own contrapositive result, and the contradiction technique together — exactly the kind of multi-chapter synthesis the rest of this course keeps demanding.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Negating the target statement incorrectly when setting up a contrapositive or contradiction proof. Two specific ways this goes wrong, both real: (1) confusing the <strong>contrapositive</strong> (¬q⇒¬p, equivalent to the original — swap and negate <em>both</em> sides of the conditional) with the <strong>inverse</strong> (¬p⇒¬q, generally <em>not</em> equivalent — Chapter 2's mistake, resurfacing); (2) when setting up a contradiction proof of <code>p⇒q</code>, negating only the hypothesis or only the conclusion instead of the whole conditional. The correct start is always <code>p ∧ ¬q</code> — hypothesis stays <strong>true</strong>, only the conclusion flips — never "¬p and ¬q" and never "¬p ⇒ ¬q." Get the setup wrong and every step after it is proving the wrong claim.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="true,t">
+    <div class="label">Try it yourself</div>
+    <p>True or False: to prove "if n is even, then n² is even" by contradiction, the correct assumption to start from is "n is even and n² is odd."</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="True or False" aria-label="check contradiction setup">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Write the correct starting assumption to prove "if x &gt; 0, then x² &gt; 0" by contradiction.
+      <details class="answer"><summary></summary><div class="ans-body">Assume x &gt; 0 and x² ≤ 0 (p ∧ ¬q — hypothesis kept true, conclusion negated).</div></details></li>
+    <li>Write the contrapositive of "if n is divisible by 6, then n is divisible by 3."
+      <details class="answer"><summary></summary><div class="ans-body">"If n is not divisible by 3, then n is not divisible by 6."</div></details></li>
+    <li>Prove by contrapositive: if <code>3n</code> is even, then <code>n</code> is even.
+      <details class="answer"><summary></summary><div class="ans-body">Contrapositive: if n is odd, then 3n is odd. n=2k+1 ⟹ 3n=6k+3=2(3k+1)+1, odd (form 4.7.2). Contrapositive proved ⟹ original proved.</div></details></li>
+    <li>True or False: to prove "if n is even, then n² is even" by contradiction, assume n is even and n² is odd. (Restated from the checker — justify your answer this time.)
+      <details class="answer"><summary></summary><div class="ans-body">True — that's exactly p ∧ ¬q for this conditional: keep the hypothesis, negate the conclusion.</div></details></li>
+    <li>Prove by contradiction: there is no largest even integer.
+      <details class="answer"><summary></summary><div class="ans-body">Assume, for contradiction, there is a largest even integer N. Then N=2k, and N+2=2(k+1) is also even, with N+2 &gt; N — contradicting N being largest. So no largest even integer exists.</div></details></li>
+    <li>Write both the contrapositive and the negation of "if a triangle is equilateral, then it is isosceles," and state in one sentence how they differ.
+      <details class="answer"><summary></summary><div class="ans-body">Contrapositive: "if a triangle is not isosceles, it is not equilateral" (equivalent to the original — true). Negation: "a triangle is equilateral and it is not isosceles" (the opposite claim — false, since it's actually impossible). Contrapositive restates; negation opposes.</div></details></li>
+    <li class="tag">bonus — Prove by contradiction: if <code>n²</code> is odd, then <code>n</code> is odd.
+      <details class="answer"><summary></summary><div class="ans-body">Assume n² is odd and n is even. Then n=2k, so n²=4k²=2(2k²), even — contradicting the assumption that n² is odd. So the assumption is false; n must be odd.</div></details></li>
+    <li class="tag">bonus — Prove <code>√3</code> is irrational, mirroring the √2 worked example. (You may use, without reproving, that <code>a² divisible by 3 ⟹ a divisible by 3</code>.)
+      <details class="answer"><summary></summary><div class="ans-body">Assume √3=a/b in lowest terms. Then 3=a²/b² ⟹ a²=3b², so a² is divisible by 3, hence a is divisible by 3: a=3k. Then 9k²=3b² ⟹ b²=3k², so b is also divisible by 3. a and b share a factor of 3, contradicting "lowest terms." So √3 is irrational.</div></details></li>
+    <li class="tag">bonus — Write the contrapositive of "if a and b are both odd, then a+b is even." (The hypothesis is itself a conjunction — use De Morgan, Chapter 3, when you negate it.)
+      <details class="answer"><summary></summary><div class="ans-body">"If a+b is odd, then a is even or b is even" — negating "a odd ∧ b odd" via De Morgan gives "a not odd ∨ b not odd," i.e. "a even ∨ b even."</div></details></li>
+    <li class="tag">bonus — A student proving "if n is prime and n &gt; 2, then n is odd" by contradiction starts: "Assume n is not prime or n ≤ 2." What's wrong with this setup, and what should they have written?
+      <details class="answer"><summary></summary><div class="ans-body">They negated only the hypothesis (via De Morgan) instead of assuming p∧¬q. Correct setup: "assume n is prime and n &gt; 2 (hypothesis true), and n is even (conclusion false)," then derive a contradiction from that.</div></details></li>
+    <li class="tag">challenge — Prove by contradiction: there is no smallest positive real number.
+      <details class="answer"><summary></summary><div class="ans-body">Assume, for contradiction, there is a smallest positive real number x. Then x/2 is also a positive real number, and x/2 &lt; x — contradicting x being smallest. So no smallest positive real number exists. (Notice this proof needed nothing about even/odd — contradiction works over any domain.)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch07-direct-proof.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch09-induction.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 8 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:8", "content/m04-logic/ch08-contrapositive-contradiction.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

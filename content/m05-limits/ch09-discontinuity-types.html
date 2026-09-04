@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 9 — Types of Discontinuity | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 9 of 12</div>
+  <div class="eyebrow">Chapter 9 · concept:discontinuity-classification</div>
+  <h1>Types of Discontinuity</h1>
+  <p class="subtitle">Chapter 8 gave the three-part test for continuity. This chapter names exactly how each way of failing it looks — "discontinuous" alone undersells just how differently a hole, a jump, and a blow-up actually behave.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>This chapter doesn't introduce a single new technique — it's a naming exercise that ties together everything so far: Chapter 3's three limit-failure modes, Chapter 1's "f(a) doesn't have to be defined" idea, and Chapter 8's three-part test, all applied together. Knowing precisely which type of discontinuity you're looking at tells you immediately whether it's fixable (and how) or fundamentally not.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Three types of discontinuity</div>
+    <ul>
+      <li><strong>Removable</strong> (a "hole") — <code>lim<sub>x→a</sub> f(x)</code> exists, but either <code>f(a)</code> is undefined or it doesn't match the limit. Condition (2) of (5.8.1) holds; (1) or (3) fails. Fixable by redefining <code>f</code> at the single point <code>a</code> to equal the limit.</li>
+      <li><strong>Jump</strong> — the one-sided limits both exist but disagree (Chapter 2's/Chapter 3's disagreement case). Condition (2) fails outright — there's no single limit to even compare against <code>f(a)</code>. No redefinition of one point can fix this; the two sides are approaching genuinely different values.</li>
+      <li><strong>Infinite</strong> — unbounded behavior near <code>a</code> (Chapter 3's/Chapter 7's unbounded case). Condition (2) fails the same way — no finite limit exists. Also unfixable by redefining a single point; the whole neighborhood is blowing up.</li>
+    </ul>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — classify each</div>
+    <details class="step" open><summary>(a) f(x) = (x²−1)/(x−1) at x=1</summary>
+      <div class="step-body"><p>Factor: \(\frac{(x-1)(x+1)}{x-1}=x+1\) for \(x\neq1\), so \(\lim_{x\to1}f(x)=2\), but \(f(1)\) is literally \(0/0\), undefined. The limit exists and \(f(a)\) doesn't match (it isn't even defined) — <strong>removable</strong>. Redefining \(f(1)=2\) patches it completely.</p></div></details>
+    <details class="step"><summary>(b) g(x) = {x if x&lt;0; x+2 if x≥0} at x=0</summary>
+      <div class="step-body"><p>Left-hand limit \(\to0\); right-hand limit \(\to2\). They disagree — <strong>jump</strong>. No single value of \(g(0)\) could ever make both sides agree.</p></div></details>
+    <details class="step"><summary>(c) h(x) = 1/(x−3) at x=3</summary>
+      <div class="step-body"><p>One-sided limits are \(-\infty\) and \(+\infty\) (Chapter 7's sign analysis) — unbounded near \(x=3\) — <strong>infinite</strong>. No redefinition of a single point comes close to fixing unbounded growth throughout the whole neighborhood.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Confusing removable and jump discontinuities. The test that separates them: does redefining <code>f</code> at the single point <code>a</code> fix everything (removable), or does the function approach two fundamentally different values from the two sides, so that no single patched value could ever satisfy both directions at once (jump)? If a genuine two-sided limit exists at all (even if <code>f(a)</code> is wrong or missing), it's removable. If the one-sided limits themselves disagree, it's a jump — there's nothing to patch to.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="removable,removable discontinuity,hole">
+    <div class="label">Try it yourself</div>
+    <p>Classify the discontinuity of <code>(x²−1)/(x−1)</code> at <code>x=1</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="removable, jump, or infinite" aria-label="classify the discontinuity">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Classify: <code>f(x)=(x²−4)/(x−2)</code> at <code>x=2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Removable — factors and cancels, limit exists (\(=4\)), \(f(2)\) undefined.</div></details></li>
+    <li>Classify: <code>g(x) = {3x if x≤1; x+1 if x&gt;1}</code> at <code>x=1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Jump — left-hand limit \(3\), right-hand limit \(2\); they disagree.</div></details></li>
+    <li>Classify: <code>h(x)=1/(x+4)</code> at <code>x=−4</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Infinite — unbounded near \(x=-4\) (denominator zero, numerator nonzero, doesn't cancel).</div></details></li>
+    <li>Classify: <code>k(x) = (x²−5x+6)/(x−3)</code> at <code>x=3</code>. (Factor first.)
+      <details class="answer"><summary></summary><div class="ans-body">\(x^2-5x+6=(x-3)(x-2)\), so it simplifies to \(x-2\); limit exists (\(=1\)), \(k(3)\) undefined — removable.</div></details></li>
+    <li>Classify: <code>m(x) = {x² if x&lt;2; x²+5 if x≥2}</code> at <code>x=2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Jump — left-hand limit \(4\), right-hand limit \(9\); they disagree (even though \(m(2)=9\) matches the right side, the two-sided limit still doesn't exist).</div></details></li>
+    <li>Classify: <code>p(x)=1/(x−1)²</code> at <code>x=1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Infinite — unbounded (\(+\infty\)) on both sides.</div></details></li>
+    <li class="tag">bonus — For <code>f(x)=(x²−9)/(x−3)</code> everywhere except <code>f(3)=100</code>, classify the discontinuity at <code>x=3</code> and state exactly how to fix it.
+      <details class="answer"><summary></summary><div class="ans-body">Removable — the limit is \(6\), but \(f(3)=100\) doesn't match. Fix by redefining \(f(3)=6\).</div></details></li>
+    <li class="tag">bonus — Classify: <code>g(x)=2x/(x−5)</code> at <code>x=5</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Infinite — numerator (\(10\)) is nonzero at \(x=5\), denominator is zero, nothing cancels.</div></details></li>
+    <li class="tag">bonus — True or false: every discontinuity of a rational function <code>P(x)/Q(x)</code> at a zero of <code>Q</code> is removable.
+      <details class="answer"><summary></summary><div class="ans-body">False — only removable if the matching factor also appears in \(P\) and cancels; otherwise it's infinite.</div></details></li>
+    <li class="tag">bonus — For <code>h(x) = x+3</code> everywhere except <code>h(2)=0</code>, classify the discontinuity at <code>x=2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Removable — \(\lim_{x\to2}h(x)=5\) exists, but \(h(2)=0\neq5\).</div></details></li>
+    <li class="tag">challenge — Construct a single rational expression (one formula, not separate pieces) with a removable discontinuity at <code>x=1</code> <em>and</em> an infinite discontinuity at <code>x=−1</code>. Explain which factors you needed and why.
+      <details class="answer"><summary></summary><div class="ans-body">E.g. \(f(x)=\dfrac{x-1}{(x-1)(x+1)}\), which simplifies to \(\dfrac{1}{x+1}\) for \(x\neq1\). The \((x-1)\) factor cancels — removable hole at \(x=1\). The \((x+1)\) factor survives in the denominator with nothing to cancel it — true infinite discontinuity (vertical asymptote) at \(x=-1\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch08-continuity.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch10-squeeze-theorem.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 9 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:9", "content/m05-limits/ch09-discontinuity-types.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

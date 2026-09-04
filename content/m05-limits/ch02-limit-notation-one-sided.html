@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Limit Notation &amp; One-Sided Limits | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 2 of 12</div>
+  <div class="eyebrow">Chapter 2 · concept:one-sided-limits</div>
+  <h1>Limit Notation &amp; One-Sided Limits</h1>
+  <p class="subtitle">Chapter 1 built the intuition informally with tables. This chapter adds notation precise enough to talk about approaching from just one side — essential the moment a function behaves differently on the left than on the right, exactly like Module 1's piecewise functions.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>So far "approaching <code>a</code>" meant sweeping in from both directions at once and asking if they agree. Most functions don't care which side you approach from — but some genuinely do, and a limit statement needs a way to say precisely which side is meant. That's all one-sided notation is: a way to ask "what happens just to the left of <code>a</code>?" and "what happens just to the right of <code>a</code>?" as two separate, answerable questions, before ever combining them back into a single two-sided answer.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — One-sided limits</div>
+    <p>The <strong>left-hand limit</strong>, written <code>lim<sub>x→a⁻</sub> f(x)</code>, is the value <code>f(x)</code> approaches as <code>x</code> approaches <code>a</code> using only values <em>less than</em> <code>a</code> (from the left). The <strong>right-hand limit</strong>, written <code>lim<sub>x→a⁺</sub> f(x)</code>, is the value <code>f(x)</code> approaches using only values <em>greater than</em> <code>a</code> (from the right). The small <code>⁻</code> and <code>⁺</code> are not exponents — they're a compact way of saying "from below" and "from above."</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — Existence of the two-sided limit</div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x\to a} f(x) = L \iff \lim_{x\to a^-} f(x) = \lim_{x\to a^+} f(x) = L \]</div><div class="eq-num" id="eq-5-2-1">(5.2.1)</div></div>
+    <p>The ordinary (two-sided) limit exists exactly when both one-sided limits exist <em>and</em> agree. If either one-sided limit fails to exist, or they exist but disagree, the two-sided limit does not exist — full stop, regardless of what either side individually does.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — one-sided limits of a piecewise function</div>
+    <p>For <code>f(x) = {x+1 if x&lt;2; x²−3 if x≥2}</code> (Module 1, Chapter 9's notation), find both one-sided limits at <code>x=2</code> and determine whether <code>lim<sub>x→2</sub> f(x)</code> exists.</p>
+    <details class="step" open><summary>Step 1 — left-hand limit: which piece applies as x→2⁻?</summary>
+      <div class="step-body"><p>Values just below 2 satisfy \(x<2\), so use the first piece: \(x+1\). As \(x\to2^-\), \(x+1\to3\). So \(\lim_{x\to2^-}f(x)=3\).</p></div></details>
+    <details class="step"><summary>Step 2 — right-hand limit: which piece applies as x→2⁺?</summary>
+      <div class="step-body"><p>Values just above 2 satisfy \(x\geq2\), so use the second piece: \(x^2-3\). As \(x\to2^+\), \(x^2-3\to4-3=1\). So \(\lim_{x\to2^+}f(x)=1\).</p></div></details>
+    <details class="step"><summary>Step 3 — compare</summary>
+      <div class="step-body"><p>\(3\neq1\). By (5.2.1), the two one-sided limits disagree, so \(\lim_{x\to2}f(x)\) does not exist.</p></div></details>
+    <details class="step"><summary>A note on f(2) itself</summary>
+      <div class="step-body"><p>By the piecewise rule, \(f(2)=2^2-3=1\) (the \(\geq2\) piece owns the boundary — Module 1, Chapter 9). That value happens to match the right-hand limit here, but notice it was completely irrelevant to answering "does the limit exist?" — the existence question is only ever about the two one-sided <em>limits</em> agreeing with each other, never about the actual defined value at the point.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Computing only one side — say, the left-hand limit — and reporting it as "the limit," without ever checking the other side. <code>lim<sub>x→a⁻</sub> f(x)</code> and <code>lim<sub>x→a</sub> f(x)</code> are different statements with different symbols for a reason. Whenever a function's rule could plausibly change near the point in question (a piecewise breakpoint, an absolute value, anywhere the graph might have a corner or a break), check <em>both</em> sides before ever writing the two-sided limit down.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="no,dne,doesn't exist,does not exist">
+    <div class="label">Try it yourself</div>
+    <p>For <code>h(x) = {x if x&lt;0; x+2 if x≥0}</code>, does <code>lim<sub>x→0</sub> h(x)</code> exist? (yes/no)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="yes or no" aria-label="does the limit exist at x=0">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <p class="subtitle">Using <code>f(x) = {x+1 if x&lt;2; x²−3 if x≥2}</code> from the worked example for problems 1–3:</p>
+  <ol class="problems">
+    <li>Find <code>lim<sub>x→2⁻</sub> f(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3\)</div></details></li>
+    <li>Find <code>lim<sub>x→2⁺</sub> f(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\)</div></details></li>
+    <li>Does <code>lim<sub>x→2</sub> f(x)</code> exist?
+      <details class="answer"><summary></summary><div class="ans-body">No — the one-sided limits disagree (\(3\neq1\)).</div></details></li>
+    <li>For <code>g(x) = {3x if x≤1; x+4 if x&gt;1}</code>, find <code>lim<sub>x→1⁻</sub> g(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3(1)=3\)</div></details></li>
+    <li>For the same <code>g</code>, find <code>lim<sub>x→1⁺</sub> g(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1+4=5\)</div></details></li>
+    <li>For the same <code>g</code>, does <code>lim<sub>x→1</sub> g(x)</code> exist? Why or why not?
+      <details class="answer"><summary></summary><div class="ans-body">No — \(3\neq5\), so the one-sided limits disagree.</div></details></li>
+    <li class="tag">bonus — For <code>k(x) = {x² if x&lt;0; x if x≥0}</code>, find both one-sided limits at <code>x=0</code> and state whether the two-sided limit exists.
+      <details class="answer"><summary></summary><div class="ans-body">Left: \(x^2\to0\). Right: \(x\to0\). Both equal 0, so \(\lim_{x\to0}k(x)=0\) exists.</div></details></li>
+    <li class="tag">bonus — In words, describe what the graph looks like near <code>x=a</code> when the left-hand and right-hand limits disagree.
+      <details class="answer"><summary></summary><div class="ans-body">A jump or break — the graph "teleports" from one height to a different height right at \(x=a\), instead of approaching a single height from both sides.</div></details></li>
+    <li class="tag">bonus — True or false: if <code>lim<sub>x→a⁻</sub> f(x)</code> exists and <code>lim<sub>x→a⁺</sub> f(x)</code> exists, then <code>lim<sub>x→a</sub> f(x)</code> automatically exists too.
+      <details class="answer"><summary></summary><div class="ans-body">False — both existing is necessary but not sufficient; by (5.2.1) they must also be <em>equal</em>.</div></details></li>
+    <li class="tag">bonus — For <code>m(x) = 5</code> everywhere except <code>m(3)=9</code>, find <code>lim<sub>x→3⁻</sub> m(x)</code>, <code>lim<sub>x→3⁺</sub> m(x)</code>, and <code>lim<sub>x→3</sub> m(x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Both one-sided limits are \(5\) (the single point \(x=3\) never gets used while approaching), so the two-sided limit is also \(5\) — \(m(3)=9\) is simply irrelevant, same lesson as Chapter 1.</div></details></li>
+    <li class="tag">challenge — Construct a piecewise function with a breakpoint at <code>x=1</code> where both one-sided limits exist, are unequal, and <code>f(1)</code> itself equals <em>neither</em> of them. Explain why that's possible.
+      <details class="answer"><summary></summary><div class="ans-body">E.g. \(f(x) = \{x \text{ if } x<1;\ x+10 \text{ if } x>1;\ 100 \text{ if } x=1\}\). Left-hand limit \(\to1\), right-hand limit \(\to11\), and \(f(1)=100\) — matching neither. This is possible because the two-sided limit doesn't exist here anyway (\(1\neq11\)), so there's no constraint at all forcing \(f(1)\) to equal a limit that was never going to exist in the first place; \(f(a)\) and the limit are simply independent pieces of information (Chapter 1).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-what-is-a-limit.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-when-limits-dont-exist.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 2 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:2", "content/m05-limits/ch02-limit-notation-one-sided.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

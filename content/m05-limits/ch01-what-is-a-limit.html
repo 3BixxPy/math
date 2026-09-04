@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — What Is a Limit? | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 1 of 12</div>
+  <div class="eyebrow">Chapter 1 · concept:limit-intuitive-definition</div>
+  <h1>What Is a Limit?</h1>
+  <p class="subtitle">The diagnostic found zero calculus exposure — not a gap to patch, because there's nothing here yet to be rusty on. This is the first genuinely new <em>kind</em> of idea in the whole curriculum: every module so far has been new notation on things you basically already understood (counting, algebra, shapes, angles, logic gates). A limit is a different kind of question entirely — not "what is this?" but "what is this <em>heading toward</em>?"</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every function chapter in Module 1 asked one question: given an input, what's the output? That question is <code>f(a)</code> — direct evaluation, plug in and compute. A limit asks something subtly but completely different: as x gets closer and closer to some value <code>a</code>, what value does <code>f(x)</code> get closer and closer to? Those two questions usually have the same answer. They don't have to. And the entire reason calculus needs its own new vocabulary is that some of the most important quantities in mathematics and physics — instantaneous speed, the slope of a curve at a single point, the exact area under a curve — are only expressible as the answer to a "getting arbitrarily close to" question, never as a single plug-in-and-compute one. Everything for the rest of this module, and everything Module 6 builds on top of it, rests on getting comfortable with that distinction starting right now.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Limit (informal)</div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x \to a} f(x) = L \]</div><div class="eq-num" id="eq-5-1-1">(5.1.1)</div></div>
+    <p>Read this as: "the limit of <code>f(x)</code>, as <code>x</code> approaches <code>a</code>, is <code>L</code>." It means <code>f(x)</code> gets arbitrarily close to <code>L</code> as <code>x</code> gets arbitrarily close to <code>a</code>, from either side. Crucially: <strong>f does not need to be defined at <code>a</code> itself</strong> for this statement to be true, or even to make sense. The limit describes behavior <em>near</em> <code>a</code> — it never once looks <em>at</em> <code>a</code>.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — estimating a limit from a table of values</div>
+    <p>Estimate <code>lim<sub>x→2</sub> (x²−4)/(x−2)</code>.</p>
+    <details class="step" open><summary>Step 1 — try direct substitution first</summary>
+      <div class="step-body"><p>Plugging in \(x=2\) gives \(\dfrac{2^2-4}{2-2} = \dfrac{0}{0}\) — undefined. Direct evaluation fails. That does <em>not</em> mean the limit fails; it means we need another approach. (Chapter 5 gives the algebraic shortcut for exactly this situation — for now, we estimate.)</p></div></details>
+    <details class="step"><summary>Step 2 — approach from the left (x &lt; 2)</summary>
+      <div class="step-body">
+        <table style="width:100%; max-width:320px; border-collapse:collapse; margin:.4rem auto; font-size:.92rem;">
+          <thead><tr>
+            <th style="text-align:left; padding:.3rem .6rem; border-bottom:1px solid var(--border); color:var(--text-dim); font-weight:600;">x</th>
+            <th style="text-align:left; padding:.3rem .6rem; border-bottom:1px solid var(--border); color:var(--text-dim); font-weight:600;">f(x)</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:.25rem .6rem; border-bottom:1px solid var(--border);">1.9</td><td style="padding:.25rem .6rem; border-bottom:1px solid var(--border);">3.9</td></tr>
+            <tr><td style="padding:.25rem .6rem; border-bottom:1px solid var(--border);">1.99</td><td style="padding:.25rem .6rem; border-bottom:1px solid var(--border);">3.99</td></tr>
+            <tr><td style="padding:.25rem .6rem;">1.999</td><td style="padding:.25rem .6rem;">3.999</td></tr>
+          </tbody>
+        </table>
+        <p>From the left, <code>f(x)</code> is climbing steadily toward <code>4</code>.</p>
+      </div></details>
+    <details class="step"><summary>Step 3 — approach from the right (x &gt; 2)</summary>
+      <div class="step-body">
+        <table style="width:100%; max-width:320px; border-collapse:collapse; margin:.4rem auto; font-size:.92rem;">
+          <thead><tr>
+            <th style="text-align:left; padding:.3rem .6rem; border-bottom:1px solid var(--border); color:var(--text-dim); font-weight:600;">x</th>
+            <th style="text-align:left; padding:.3rem .6rem; border-bottom:1px solid var(--border); color:var(--text-dim); font-weight:600;">f(x)</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:.25rem .6rem; border-bottom:1px solid var(--border);">2.1</td><td style="padding:.25rem .6rem; border-bottom:1px solid var(--border);">4.1</td></tr>
+            <tr><td style="padding:.25rem .6rem; border-bottom:1px solid var(--border);">2.01</td><td style="padding:.25rem .6rem; border-bottom:1px solid var(--border);">4.01</td></tr>
+            <tr><td style="padding:.25rem .6rem;">2.001</td><td style="padding:.25rem .6rem;">4.001</td></tr>
+          </tbody>
+        </table>
+        <p>From the right, <code>f(x)</code> is descending steadily toward <code>4</code> as well.</p>
+      </div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Both sides converge on the same number: \(\displaystyle\lim_{x\to2}\frac{x^2-4}{x-2} = 4\) — even though \(f(2)\) itself is undefined. The function has no value at \(x=2\) (it's literally \(0/0\) there), but it absolutely has a limit there. That gap between "what f does at 2" and "what f approaches near 2" is not a flaw in the problem — it's the entire point of this chapter.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming a limit requires <code>f(a)</code> to be defined, or that <code>lim<sub>x→a</sub> f(x)</code> must equal <code>f(a)</code> whenever both exist. Neither is true in general. The worked example above is the cleanest possible counterexample to the first assumption: <code>f(2)</code> doesn't exist, and the limit exists anyway and equals 4. The second assumption — that when both <em>do</em> exist they must match — is also false in general (a function can have a limit at a point that differs from its actual value there); the special case where they <em>do</em> always agree gets its own name, <strong>continuity</strong>, and that's the entire subject of Chapter 8. Until then, keep "the value of f at a" and "the limit of f as x approaches a" as two separate questions in your head, even when their answers happen to coincide.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="4">
+    <div class="label">Try it yourself</div>
+    <p>Estimate <code>lim<sub>x→3</sub> (x+1)</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="limit as x approaches 3 of x plus 1">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>lim<sub>x→1</sub> (2x+3)</code> (this function has no gap — direct substitution is fine here).
+      <details class="answer"><summary></summary><div class="ans-body">\(5\)</div></details></li>
+    <li>Does <code>(x-1)/(x-1)</code> have a limit as <code>x→1</code>? What is it? (Think about what the expression equals for any <code>x≠1</code>.)
+      <details class="answer"><summary></summary><div class="ans-body">Yes — for every \(x\neq1\), \(\frac{x-1}{x-1}=1\), so the limit is \(1\), even though the expression itself is undefined (\(0/0\)) exactly at \(x=1\).</div></details></li>
+    <li>True or false: if <code>f(3)</code> is undefined, then <code>lim<sub>x→3</sub> f(x)</code> cannot exist. Justify your answer.
+      <details class="answer"><summary></summary><div class="ans-body">False — the worked example is a direct counterexample. The limit only depends on values <em>near</em> 3, never on the value <em>at</em> 3.</div></details></li>
+    <li>For the constant function <code>f(x) = 5</code>, what is <code>lim<sub>x→10</sub> f(x)</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(5\) — a constant function's output never changes, so it "approaches" the same constant everywhere.</div></details></li>
+    <li>Using the same reasoning as the worked example, evaluate <code>lim<sub>x→4</sub> (x²−16)/(x−4)</code> (simplify the expression for <code>x≠4</code> first, rather than building a full table).
+      <details class="answer"><summary></summary><div class="ans-body">For \(x\neq4\), \(\frac{x^2-16}{x-4}=\frac{(x-4)(x+4)}{x-4}=x+4\), which approaches \(8\) as \(x\to4\). So the limit is \(8\).</div></details></li>
+    <li>In your own words, explain the difference between the questions "<code>f(a) = ?</code>" and "<code>lim<sub>x→a</sub> f(x) = ?</code>."
+      <details class="answer"><summary></summary><div class="ans-body">"\(f(a)\)" asks for the function's actual output when you plug in exactly \(a\) — a single evaluation. "\(\lim_{x\to a}f(x)\)" asks what value \(f(x)\) is trending toward as \(x\) sweeps in from both sides of \(a\), without ever actually reaching or using \(x=a\) itself. They can agree or disagree, and either one can exist without the other.</div></details></li>
+    <li class="tag">bonus — Does <code>lim<sub>x→a</sub> f(x)</code> require that <code>a</code> be in the domain of <code>f</code>?
+      <details class="answer"><summary></summary><div class="ans-body">No — the worked example's \(a=2\) is not in the domain of \(f(x)=(x^2-4)/(x-2)\) at all, and the limit exists there anyway.</div></details></li>
+    <li class="tag">bonus — For <code>g(x) = (x²−1)/(x+1)</code>, what is <code>lim<sub>x→−1</sub> g(x)</code>? (Simplify first, same idea as problem 5.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac{(x-1)(x+1)}{x+1}=x-1\) for \(x\neq-1\), which approaches \(-2\). So the limit is \(-2\).</div></details></li>
+    <li class="tag">bonus — If two functions agree everywhere except at <code>x=a</code>, do they necessarily have the same limit as <code>x→a</code>?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — the limit only depends on values near \(a\), never the value at \(a\) itself, so disagreeing at that single point changes nothing about the limit.</div></details></li>
+    <li class="tag">bonus — Estimate <code>lim<sub>x→5</sub> (x²−25)/(x−5)</code> by listing at least two <code>x</code>-values approaching 5 from each side and the corresponding <code>f(x)</code> values.
+      <details class="answer"><summary></summary><div class="ans-body">E.g. \(x=4.9\to f(x)=9.9\), \(x=4.99\to9.99\) from the left; \(x=5.1\to10.1\), \(x=5.01\to10.01\) from the right. Both sides trend to \(10\), so the limit is \(10\).</div></details></li>
+    <li class="tag">challenge — Construct your own example of a function <code>f</code> and a point <code>a</code> where <code>f(a)</code> is undefined but <code>lim<sub>x→a</sub> f(x)</code> clearly exists. Explain how you know the limit exists without ever evaluating at <code>a</code>.
+      <details class="answer"><summary></summary><div class="ans-body">One example: \(f(x)=\dfrac{x^2-9}{x-3}\) at \(a=3\). \(f(3)\) is \(0/0\), undefined. But for every \(x\neq3\), \(f(x)=x+3\), a plain line with no gap — so as \(x\) sweeps toward 3 from either side, \(f(x)\) sweeps toward \(6\), regardless of the fact that \(x=3\) itself is never actually plugged in.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m04-logic/ch10-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-limit-notation-one-sided.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 1 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:1", "content/m05-limits/ch01-what-is-a-limit.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

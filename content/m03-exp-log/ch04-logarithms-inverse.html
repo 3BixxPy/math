@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Logarithms: The Inverse of Exponentials | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 3 · Exponentials &amp; Logarithms</a> → Chapter 4 of 10</div>
+  <div class="eyebrow">Chapter 4 · concept:logarithm-definition, concept:log-exp-inverse</div>
+  <h1>Logarithms — The Inverse of Exponentials</h1>
+  <p class="subtitle">This is the word the diagnostic came back completely blank on. Here's the whole secret: a logarithm isn't a new kind of math — it's Module 1, Chapter 11's inverse-function idea, applied to the one function family (exponentials) that's guaranteed to actually have one.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p><code>concept:inverse-functions</code> (Module 1, Chapter 11) is "the function that undoes another function" — swap x and y, solve for y. Every step of that procedure still applies here. The only reason exponentials get a whole new name and symbol for their inverse, instead of just writing <code>f⁻¹(x)</code>, is that logarithms come up constantly enough to deserve their own shorthand. Once you see <code>log</code> as nothing but "the inverse of an exponential," every rule in this module (Chapters 5–9) is really just an exponent rule wearing a different name.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Logarithm</div>
+    <p><code>log_b(x) = y</code> means exactly the same thing as <code>bʸ = x</code>. In words: <code>log_b(x)</code> asks "what power do I raise <code>b</code> to, to get <code>x</code>?" The base <code>b</code> plays the same role it did in Chapter 1 (<code>b &gt; 0</code>, <code>b ≠ 1</code>); <code>x</code> must be positive, since a positive base raised to any real power is always positive (Chapter 1's asymptote fact, restated as a domain restriction).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Cancellation identities</div>
+    <div class="eqn"><div class="eq-body">\[ b^{\log_b x} = x \]</div><div class="eq-num" id="eq-3-4-1">(3.4.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ \log_b(b^x) = x \]</div><div class="eq-num" id="eq-3-4-2">(3.4.2)</div></div>
+    <p>These are exactly the inverse-function cancellation property from Module 1, equation 1.11.1 (<code>f(f⁻¹(x))=x</code> and <code>f⁻¹(f(x))=x</code>), rewritten with <code>f(x)=bˣ</code> and <code>f⁻¹(x)=\log_b x</code>. Apply a function and then its inverse (in either order) and you land back where you started — that's the entire content of both lines above.</p>
+  </div>
+
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--accent)"></span>y = 2ˣ</span><span><span class="swatch" style="background:var(--ex-border)"></span>y = log₂(x)</span></div>
+  <div class="plot-wrap"><svg id="log-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">The dashed line is y=x. Just like every inverse pair in Module 1, <code>log₂(x)</code> is the mirror image of <code>2ˣ</code> across it — swap x and y on the exponential, and you get the logarithm.</p>
+  <script>
+  (function () {
+    const opts = { xMin: -4, xMax: 8, yMin: -4, yMax: 8, width: 320, height: 320, pad: 26, xStep: 2, yStep: 2 };
+    const svg = document.getElementById("log-svg");
+    MCPlot.drawAxes(svg, opts);
+    MCPlot.plotFunction(svg, (x) => Math.pow(2, x), opts, "plot-curve");
+    MCPlot.plotFunction(svg, (x) => Math.log(x) / Math.log(2), opts, "plot-curve-alt");
+    MCPlot.plotFunction(svg, (x) => x, opts, "plot-dashed");
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example — converting between the two forms</div>
+    <p>Convert <code>2³ = 8</code> to log form, and <code>log_5(25) = 2</code> to exponential form.</p>
+    <details class="step" open><summary>Step 1 — 2³ = 8: identify base, exponent, result</summary>
+      <div class="step-body"><p>Base \(2\), exponent \(3\), result \(8\). In \(\log_b(x)=y\) form, the base stays the base, the result becomes the log's argument, and the exponent becomes the log's value: \(\log_2(8) = 3\).</p></div></details>
+    <details class="step"><summary>Step 2 — log₅(25) = 2: same three parts, other direction</summary>
+      <div class="step-body"><p>Base \(5\), log's value \(2\), argument \(25\). Converting to \(b^y=x\) form: \(5^2 = 25\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Mixing up which number is the base and which is the argument when converting. Anchor on this: in <code>log_b(x) = y</code>, the little subscript <code>b</code> is <em>always</em> the base — same role it played as the base of the exponential. When you rewrite as <code>bʸ = x</code>, that same subscript number is what gets raised to a power; the number that was inside the log's parentheses (<code>x</code>) is what comes out on its own on the other side. If you can't remember which way it goes, convert a value you already know cold — like <code>log_2(8)=3</code> — back to exponential form first, as a template.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="log10(100)=2,log_10(100)=2,log(100)=2">
+    <div class="label">Try it yourself</div>
+    <p>Convert <code>10² = 100</code> to log form:</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. log10(100)=2" aria-label="log form of 10 squared equals 100">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Convert to log form: <code>3² = 9</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\log_3(9)=2\)</div></details></li>
+    <li>Convert to log form: <code>4³ = 64</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\log_4(64)=3\)</div></details></li>
+    <li>Convert to exponential form: <code>log_2(16) = 4</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(2^4=16\)</div></details></li>
+    <li>Convert to exponential form: <code>log_10(1000) = 3</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(10^3=1000\)</div></details></li>
+    <li>Use the cancellation identity to simplify <code>2^(log₂ 7)</code> without computing anything.
+      <details class="answer"><summary></summary><div class="ans-body">\(7\) (equation 3.4.1)</div></details></li>
+    <li>Use the cancellation identity to simplify <code>log₅(5⁹)</code> without computing anything.
+      <details class="answer"><summary></summary><div class="ans-body">\(9\) (equation 3.4.2)</div></details></li>
+    <li class="tag">bonus — Convert to log form: <code>6⁰ = 1</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\log_6(1)=0\) — true for every valid base, since \(b^0=1\) always</div></details></li>
+    <li class="tag">bonus — Convert to exponential form: <code>log_3(1/9) = -2</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(3^{-2}=1/9\)</div></details></li>
+    <li class="tag">bonus — Why must the argument of a logarithm always be positive? Connect it to Chapter 1's asymptote fact.
+      <details class="answer"><summary></summary><div class="ans-body">Because \(b^y\) (a positive base to any real power) is always positive — it can get arbitrarily close to 0 but never reach or cross it (Chapter 1's asymptote). So there's no real y with \(b^y\leq0\), meaning \(\log_b(x)\) is undefined for \(x\leq0\).</div></details></li>
+    <li class="tag">bonus — Why is <code>b = 1</code> excluded as a logarithm base, the same way it was excluded as an exponential base in Chapter 1?
+      <details class="answer"><summary></summary><div class="ans-body">Because \(1^y=1\) for every y — every input would map to the single output 1, which isn't invertible (fails the horizontal line test from Module 1, Chapter 11), so \(\log_1(x)\) can't be defined as a function.</div></details></li>
+    <li class="tag">challenge — Using only the definition (not a calculator), explain why <code>log_2(0)</code> and <code>log_2(-8)</code> are both undefined, but for two different-sounding reasons that are actually the same reason.
+      <details class="answer"><summary></summary><div class="ans-body">\(\log_2(0)=y\) would need \(2^y=0\) — impossible, since powers of 2 shrink toward 0 but never hit it. \(\log_2(-8)=y\) would need \(2^y=-8\) — also impossible, since powers of 2 are always positive. Both boil down to the same fact: \(2^y>0\) for every real y, so no exponent ever produces a result that's zero or negative — the log's domain is exactly \(x>0\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-exponential-transformations.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-evaluating-logs.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 3 · Exponentials &amp; Logarithms</span>
+  <span>Chapter 4 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m03:4", "content/m03-exp-log/ch04-logarithms-inverse.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

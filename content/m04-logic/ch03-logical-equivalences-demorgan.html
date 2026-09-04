@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Logical Equivalence &amp; De Morgan's Laws | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 3 of 10</div>
+  <div class="eyebrow">Chapter 3 · concept:logical-equivalence, concept:de-morgans-laws</div>
+  <h1>Logical Equivalence &amp; De Morgan's Laws</h1>
+  <p class="subtitle">Chapter 2 promised that <code>p ⇒ q</code> is secretly built out of ∨ and ¬. This chapter delivers the tool that makes that provable instead of asserted — and it's a fact you've almost certainly already used, just wired instead of written.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>You've built a NAND gate. A NAND gate computes <code>¬(p ∧ q)</code> directly. But you've probably also built the <em>same circuit function</em> a second way: invert both inputs, then OR them — <code>¬p ∨ ¬q</code>. Two different-looking circuits, identical output for every input. That equivalence has a name — <strong>De Morgan's law</strong> — and once it has a name, it stops being a wiring trick you happened to notice and becomes a theorem you can invoke by name, on paper, without redrawing a schematic every time.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Logical equivalence (≡)</div>
+    <p>Two compound propositions are <strong>logically equivalent</strong>, written <code>A ≡ B</code>, if they have <em>identical</em> truth tables — the same output for every possible combination of the underlying variables' truth values. This is precisely the circuit-design notion of two circuits being "functionally identical": different gates, different wiring, same truth table, so either one can replace the other anywhere.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — De Morgan's Laws</div>
+    <div class="eqn"><div class="eq-body">\[ \neg(p \wedge q) \equiv \neg p \vee \neg q \]</div><div class="eq-num" id="eq-4-3-1">(4.3.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ \neg(p \vee q) \equiv \neg p \wedge \neg q \]</div><div class="eq-num" id="eq-4-3-2">(4.3.2)</div></div>
+    <p>In words: negating an AND flips it to an OR of negations (4.3.1 — your NAND-equals-inverted-input-OR fact); negating an OR flips it to an AND of negations (4.3.2 — the NOR equivalent). The pattern to remember: <strong>negation distributes, and the connective flips</strong>.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — verifying 4.3.1 by truth table</div>
+    <p>Confirm <code>¬(p ∧ q) ≡ ¬p ∨ ¬q</code> by building both sides' truth tables side by side, for all four p,q rows.</p>
+    <details class="step" open><summary>Step 1 — left side: ¬(p ∧ q)</summary>
+      <div class="step-body"><p>p∧q is T,F,F,F (rows TT,TF,FT,FF). Negating: ¬(p∧q) is F,T,T,T.</p></div></details>
+    <details class="step"><summary>Step 2 — right side: ¬p ∨ ¬q</summary>
+      <div class="step-body"><p>¬p is F,F,T,T. ¬q is F,T,F,T. OR them row by row: F∨F=F, F∨T=T, T∨F=T, T∨T=T → F,T,T,T.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body">
+        <div class="svg-wrap">
+          <table style="border-collapse:collapse; font-size:.95rem;">
+            <thead><tr>
+              <th style="border:1px solid var(--border); padding:.35rem .8rem; background:var(--code-bg);">p</th>
+              <th style="border:1px solid var(--border); padding:.35rem .8rem; background:var(--code-bg);">q</th>
+              <th style="border:1px solid var(--border); padding:.35rem .8rem; background:var(--code-bg);">¬(p∧q)</th>
+              <th style="border:1px solid var(--border); padding:.35rem .8rem; background:var(--code-bg);">¬p∨¬q</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">F</td></tr>
+              <tr><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td></tr>
+              <tr><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td></tr>
+              <tr><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem .8rem; text-align:center;">T</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The last two columns match on every row — that <em>is</em> what "≡" means, confirmed directly from the definition rather than taken on faith.</p>
+      </div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — simplifying with De Morgan's law</div>
+    <p>Simplify <code>¬(¬p ∧ q)</code>.</p>
+    <details class="step" open><summary>Step 1 — apply 4.3.1 with "¬p" playing the role of the law's "p"</summary>
+      <div class="step-body"><p>\(\neg(\neg p \wedge q) \equiv \neg(\neg p) \vee \neg q\)</p></div></details>
+    <details class="step"><summary>Step 2 — double negation cancels</summary>
+      <div class="step-body"><p>\(\neg(\neg p) = p\), so this becomes \(p \vee \neg q\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p><code>¬(¬p ∧ q) ≡ p ∨ ¬q</code> — same trick as simplifying an inverted-NAND-of-an-inverter chain down to fewer gates.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Distributing the negation but forgetting to flip the connective: writing <code>¬(p ∧ q) ≡ ¬p ∧ ¬q</code> (wrong — that keeps the ∧). Check it against row TT: left side is <code>¬(T∧T) = ¬T = F</code>, but the miswritten right side is <code>¬T ∧ ¬T = F ∧ F = F</code> — that row happens to match, which is exactly what makes this mistake sneaky. Check row TF instead: left side <code>¬(T∧F) = ¬F = T</code>, miswritten right side <code>¬T∧¬F = F∧T = F</code> — they disagree. One mismatched row is enough to disprove an equivalence, which is also why "checking one row" is never a valid way to <em>prove</em> one (more on that trap in Chapter 7). The rule to lock in: negating always flips ∧↔∨.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="¬p∧¬q,notpandnotq,not p and not q,~p&~q">
+    <div class="label">Try it yourself</div>
+    <p><code>¬(p ∨ q)</code> is equivalent to ___ (type using ¬, ∧ if you can, or "not p and not q"):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. ¬p∧¬q" aria-label="not (p or q) equivalent">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Simplify using De Morgan's law: <code>¬(p ∨ ¬q)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg p \wedge \neg(\neg q) = \neg p \wedge q\)</div></details></li>
+    <li>Simplify: <code>¬(¬p ∨ ¬q)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg(\neg p)\wedge\neg(\neg q) = p \wedge q\)</div></details></li>
+    <li>Is <code>¬p ∨ q</code> logically equivalent to <code>¬(p ∧ ¬q)</code>? (Apply 4.3.1 to the second form and compare.)
+      <details class="answer"><summary></summary><div class="ans-body">Yes: \(\neg(p\wedge\neg q) \equiv \neg p \vee \neg(\neg q) = \neg p \vee q\) — identical.</div></details></li>
+    <li>A NOR gate computes <code>¬(p ∨ q)</code>. Write an equivalent circuit description using only inverters and an AND gate.
+      <details class="answer"><summary></summary><div class="ans-body">Invert p, invert q, AND the results: \(\neg p \wedge \neg q\) (equation 4.3.2).</div></details></li>
+    <li>Simplify: <code>¬(p ∧ q) ∨ p</code> (apply De Morgan first, then look for a shortcut).
+      <details class="answer"><summary></summary><div class="ans-body">\((\neg p \vee \neg q)\vee p\). Since \(\neg p \vee p\) is always true, the whole thing is always <strong>true</strong> regardless of q.</div></details></li>
+    <li>Check whether row FT makes <code>¬(p∧q)</code> and <code>¬p∧¬q</code> agree or disagree (the miswritten "law" from the mistake box).
+      <details class="answer"><summary></summary><div class="ans-body">Disagree: \(\neg(F\wedge T)=\neg F=T\), but \(\neg F \wedge \neg T = T\wedge F = F\).</div></details></li>
+    <li class="tag">bonus — Simplify: <code>¬(¬p ∧ ¬q)</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(p \vee q\)</div></details></li>
+    <li class="tag">bonus — Is <code>¬p ∨ ¬q</code> the same as <code>¬(p ∨ q)</code>? Settle it with one row, not a full table.
+      <details class="answer"><summary></summary><div class="ans-body">No — row TT: \(\neg p\vee\neg q = F\vee F=F\), but \(\neg(p\vee q)=\neg T=F\)... try row TF instead: \(\neg p\vee\neg q=F\vee T=T\), \(\neg(p\vee q)=\neg T=F\). Disagree — not equivalent.</div></details></li>
+    <li class="tag">bonus — A circuit built from an inverter feeding into a NOR gate (i.e. computing <code>¬(¬p ∨ q)</code>) — simplify its function.
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg(\neg p)\wedge\neg q = p \wedge \neg q\)</div></details></li>
+    <li class="tag">bonus — Using De Morgan's law, rewrite <code>p ⇒ q</code> in a form using only ∨ and ¬. (Hint: use equation 4.2.1's "fault" idea, <code>¬(p ∧ ¬q)</code>, then apply 4.3.1.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg(p\wedge\neg q) \equiv \neg p \vee \neg(\neg q) = \neg p \vee q\). So \(p\Rightarrow q \equiv \neg p \vee q\) — the promised gate-level rewrite of implication.</div></details></li>
+    <li class="tag">challenge — Prove <code>¬(p ∧ q ∧ r) ≡ ¬p ∨ ¬q ∨ ¬r</code> by applying De Morgan's law twice (treat <code>q ∧ r</code> as a single block first).
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg(p\wedge(q\wedge r)) \equiv \neg p \vee \neg(q\wedge r)\) (4.3.1 on the outer ∧) \(\equiv \neg p \vee (\neg q \vee \neg r)\) (4.3.1 again on the inner ∧) \(= \neg p \vee \neg q \vee \neg r\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-conditionals-biconditionals.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-quantifiers.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 3 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:3", "content/m04-logic/ch03-logical-equivalences-demorgan.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

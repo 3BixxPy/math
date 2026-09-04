@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 13 — Inverse Trig Functions | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 13 of 15</div>
+  <div class="eyebrow">Chapter 13 · concept:inverse-trig-functions</div>
+  <h1>Inverse Trig Functions</h1>
+  <p class="subtitle">Chapters 11–12 solved "given a value, find the angle(s)" using exact values you could recognize by eye. Inverse trig functions are what you reach for when you need a name for that "find the angle" operation itself — and Module 1 already told you the one catch that comes with it.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Module 1 defined an inverse function as the "undo" of a function (Chapter 1.11, <a href="../m01-functions/ch11-inverse-functions.html">concept:inverse-functions</a>) — and immediately flagged a catch: a function only has a true inverse where it's one-to-one, checked with the horizontal line test. Sine, cosine, and tangent all fail that test badly over their full domains (they repeat forever), so before they can be inverted, their domains have to be artificially restricted to one "clean" piece. That restriction is the entire content of this chapter.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — arcsin, arccos, arctan</div>
+    <p>Restrict each function to the interval where it's one-to-one (passes the horizontal line test), then invert on that restricted piece:</p>
+    <ul>
+      <li><code>arcsin x</code> (also written <code>sin⁻¹x</code>): inverse of sin, restricted to \([-\pi/2,\ \pi/2]\). Range: \([-\pi/2,\pi/2]\).</li>
+      <li><code>arccos x</code> (<code>cos⁻¹x</code>): inverse of cos, restricted to \([0,\ \pi]\). Range: \([0,\pi]\).</li>
+      <li><code>arctan x</code> (<code>tan⁻¹x</code>): inverse of tan, restricted to \((-\pi/2,\ \pi/2)\). Range: \((-\pi/2,\pi/2)\).</li>
+    </ul>
+    <p>Just like Module 1's \(f^{-1}\), the <code>-1</code> here is notation, not an exponent — \(\sin^{-1}x \ne 1/\sin x\).</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Cancellation identities</div>
+    <div class="eqn"><div class="eq-body">\[ \sin(\arcsin x) = x, \qquad \cos(\arccos x) = x, \qquad \tan(\arctan x) = x \]</div><div class="eq-num" id="eq-2-13-1">(2.13.1)</div></div>
+    <p>These hold for every \(x\) in the corresponding domain, directly from the "undo" definition of an inverse (Module 1, equation 1.11.1). The <em>reverse</em>-order versions — <code>arcsin(sin θ) = θ</code>, etc. — are <strong>not</strong> unconditional the same way; they only return \(\theta\) itself when \(\theta\) already lies inside the restricted range. Otherwise they return the equivalent angle that <em>does</em> lie in range — see the mistake below.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Evaluate <code>arcsin(1/2)</code>, <code>arccos(-√2/2)</code>, and <code>arctan(1)</code>.</p>
+    <details class="step" open><summary>Step 1 — arcsin(1/2): which angle in [-π/2, π/2] has sine 1/2?</summary>
+      <div class="step-body"><p>\(\sin(\pi/6)=1/2\), and \(\pi/6\) is inside \([-\pi/2,\pi/2]\). \(\arcsin(1/2)=\pi/6\).</p></div></details>
+    <details class="step"><summary>Step 2 — arccos(-√2/2): which angle in [0, π] has cosine -√2/2?</summary>
+      <div class="step-body"><p>Reference angle 45° (\(\pi/4\)); cosine is negative in QII, and \(3\pi/4\) is inside \([0,\pi]\). \(\arccos(-\sqrt2/2)=3\pi/4\).</p></div></details>
+    <details class="step"><summary>Step 3 — arctan(1): which angle in (-π/2, π/2) has tangent 1?</summary>
+      <div class="step-body"><p>\(\tan(\pi/4)=1\), and \(\pi/4\) is inside \((-\pi/2,\pi/2)\). \(\arctan(1)=\pi/4\).</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the reverse-order trap, worked correctly</div>
+    <p>Evaluate <code>arcsin(sin(5π/6))</code>. (Careful: this is not automatically <code>5π/6</code>.)</p>
+    <details class="step" open><summary>Step 1 — first find the inner value</summary>
+      <div class="step-body"><p>\(\sin(5\pi/6) = 1/2\) (reference angle \(\pi/6\), QII).</p></div></details>
+    <details class="step"><summary>Step 2 — now apply arcsin to that number</summary>
+      <div class="step-body"><p>\(\arcsin(1/2)\) asks: which angle in \([-\pi/2,\pi/2]\) has sine \(1/2\)? Not \(5\pi/6\) — that's outside the restricted range entirely.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\arcsin(\sin(5\pi/6)) = \pi/6\) — the equivalent angle that <em>is</em> inside arcsin's range, not the original \(5\pi/6\) you started with.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Giving an answer outside the function's restricted range — for instance, saying <code>arcsin(1/2) = 5π/6</code> because \(\sin(5\pi/6)=1/2\) too. That's a true statement about sine, but arcsin is defined to return only the one angle inside its restricted range (\([-\pi/2,\pi/2]\) for arcsin), and \(5\pi/6\) isn't in it — the correct answer is \(\pi/6\). Whenever multiple angles share the same sine/cosine/tangent value, the inverse function's job is to pick the <em>one</em> that lives in the restricted range, never any of the others, no matter how "natural" they look.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="pi/4,π/4">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>arctan(1)</code>.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. pi/4" aria-label="arctan of 1">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>arcsin(√2/2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi/4\)</div></details></li>
+    <li>Evaluate <code>arccos(1/2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi/3\)</div></details></li>
+    <li>Evaluate <code>arctan(√3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi/3\)</div></details></li>
+    <li>Evaluate <code>arcsin(-1/2)</code>. (Careful with the sign and the restricted range.)
+      <details class="answer"><summary></summary><div class="ans-body">\(-\pi/6\) — arcsin's range includes negative angles, unlike arccos's.</div></details></li>
+    <li>Evaluate <code>arccos(0)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi/2\)</div></details></li>
+    <li>State the range of <code>arccos x</code>, and explain why it's different from arcsin's range.
+      <details class="answer"><summary></summary><div class="ans-body">\([0,\pi]\) — different because cosine isn't one-to-one on \([-\pi/2,\pi/2]\) (it repeats values there), so a different restricted interval had to be chosen for cosine specifically.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>arccos(-1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>arctan(0)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>cos(arccos(0.7))</code> without finding the angle numerically.
+      <details class="answer"><summary></summary><div class="ans-body">\(0.7\) directly, by the cancellation identity (equation 2.13.1) — no need to ever find the actual angle.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>arccos(cos(5π/3))</code>. (Same trap as the worked example — don't assume it's 5π/3.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos(5\pi/3)=1/2\); \(\arccos(1/2)=\pi/3\), which is inside \([0,\pi]\) — that's the answer, not \(5\pi/3\).</div></details></li>
+    <li class="tag">bonus — Why is <code>arctan</code>'s domain <em>all real numbers</em>, unlike arcsin and arccos, which are restricted to <code>[-1, 1]</code>?
+      <details class="answer"><summary></summary><div class="ans-body">tan θ is unbounded (Chapter 8) — it takes every real value somewhere in its restricted piece, so its inverse's domain is all of ℝ. sin/cos are bounded to [-1,1] (Chapter 2, equation 2.2.2), so their inverses can only accept inputs in that range.</div></details></li>
+    <li class="tag">challenge — Evaluate <code>sin(arccos(3/5))</code> without ever finding the angle numerically. (Hint: arccos(3/5) is some angle θ in [0, π] with cos θ = 3/5 — use Chapter 9's identity to find sin θ directly.)
+      <details class="answer"><summary></summary><div class="ans-body">Let \(\theta=\arccos(3/5)\), so \(\cos\theta=3/5\) with \(\theta\in[0,\pi]\), meaning \(\sin\theta\ge0\) throughout that range. By the Pythagorean identity, \(\sin^2\theta=1-9/25=16/25\), and since sin θ ≥ 0 here, \(\sin\theta=4/5\). So \(\sin(\arccos(3/5))=4/5\) — found entirely algebraically, no angle needed.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch12-general-solutions.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch14-law-of-sines-cosines.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 13 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:13", "content/m02-trigonometry/ch13-inverse-trig.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

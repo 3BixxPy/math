@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — Conditionals &amp; Biconditionals | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 2 of 10</div>
+  <div class="eyebrow">Chapter 2 · concept:conditional-statements, concept:converse-inverse-contrapositive</div>
+  <h1>Conditionals &amp; Biconditionals</h1>
+  <p class="subtitle">Chapter 1 gave you ∧, ∨, ¬ — the gates. This chapter gives you the connective that <em>almost every theorem in mathematics is built from</em>: "if p then q." It isn't a primitive gate on its own, but by the end of the module (Chapter 3) you'll see it's built entirely out of gates you already have.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Think of a fault-monitor circuit: <code>p</code> = "the smoke detector triggers," <code>q</code> = "the alarm sounds." The circuit has a <em>fault</em> exactly when the detector triggers but the alarm stays silent — fault = <code>p ∧ ¬q</code>. Everything working correctly means "no fault," i.e. <code>¬(p ∧ ¬q)</code>. That expression <em>is</em> the conditional <code>p ⇒ q</code> — "if p then q" just means "the fault condition never occurs." Once you see a conditional as "no fault," the one weird truth-table row (false ⇒ anything is always true) stops being weird: if the detector never triggers, there's no possible way for a "triggered but silent" fault to occur, so the conditional holds automatically — trivially, but genuinely.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Conditional (implication)</div>
+    <p><code>p ⇒ q</code> ("if p, then q" — p is the <strong>hypothesis</strong>, q is the <strong>conclusion</strong>) is false in exactly one case: p true and q false — the "fault" case above. Every other combination is true.</p>
+    <div class="svg-wrap">
+      <table style="border-collapse:collapse; font-size:.95rem;">
+        <thead><tr>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">q</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p ⇒ q</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="eqn"><div class="eq-body">\[ (p \Rightarrow q) = F \iff (p=T) \text{ and } (q=F) \]</div><div class="eq-num" id="eq-4-2-1">(4.2.1)</div></div>
+    <p>The bottom two rows — p false — are the "vacuously true" rows: with no detector trigger, there's no way to fail.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Biconditional</div>
+    <p><code>p ⇔ q</code> ("p if and only if q," read "p iff q") is true exactly when p and q have the <strong>same</strong> truth value. If you've built an XNOR gate, you already know this table — the biconditional <em>is</em> XNOR: output high when both inputs match.</p>
+    <div class="svg-wrap">
+      <table style="border-collapse:collapse; font-size:.95rem;">
+        <thead><tr>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">q</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p ⇔ q</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>You'll see <code>p ⇔ q</code> constantly in definitions ("a number is even iff it's divisible by 2") — a definition is always meant both directions, which is exactly why iff is the connective for stating one.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Converse, inverse, contrapositive</div>
+    <p>Starting from <code>p ⇒ q</code>, three related statements get their own names:</p>
+    <p><strong>Converse:</strong> <code>q ⇒ p</code> (swap the two sides).<br>
+    <strong>Inverse:</strong> <code>¬p ⇒ ¬q</code> (negate both sides, keep the order).<br>
+    <strong>Contrapositive:</strong> <code>¬q ⇒ ¬p</code> (swap <em>and</em> negate both sides).</p>
+    <div class="eqn"><div class="eq-body">\[ (p \Rightarrow q) \equiv (\neg q \Rightarrow \neg p) \]</div><div class="eq-num" id="eq-4-2-2">(4.2.2)</div></div>
+    <p>This one is worth committing to memory right now: the contrapositive is <strong>always</strong> logically equivalent to the original conditional — same truth value in every row, no exceptions. The converse and inverse are <em>not</em> generally equivalent to the original (next section shows why that matters). Chapter 3 gives you the tool (De Morgan's laws) to actually verify equation 4.2.2 yourself instead of taking it on faith; Chapter 8 puts it to work as a proof technique.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — truth table for p ⇒ q, from scratch</div>
+    <p>Confirm equation 4.2.1 by building the table directly from the definition "false only when p=T, q=F."</p>
+    <details class="step" open><summary>Step 1 — list all 4 rows</summary>
+      <div class="step-body"><p>TT, TF, FT, FF — same 4-row structure as any 2-input truth table.</p></div></details>
+    <details class="step"><summary>Step 2 — mark the one false row</summary>
+      <div class="step-body"><p>Only TF is p=T,q=F → that row is F. Every other row is T by definition.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>T, F, T, T for rows TT, TF, FT, FF — matches the table above.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — converse, inverse, contrapositive of a real statement</div>
+    <p>Let <code>p</code> = "it rains" and <code>q</code> = "the ground is wet." Original: "If it rains, the ground is wet."</p>
+    <details class="step" open><summary>Step 1 — converse (q ⇒ p)</summary>
+      <div class="step-body"><p>"If the ground is wet, it rains." Not necessarily true — a sprinkler could wet the ground with no rain.</p></div></details>
+    <details class="step"><summary>Step 2 — inverse (¬p ⇒ ¬q)</summary>
+      <div class="step-body"><p>"If it doesn't rain, the ground isn't wet." Also not necessarily true, same sprinkler counterexample.</p></div></details>
+    <details class="step"><summary>Step 3 — contrapositive (¬q ⇒ ¬p)</summary>
+      <div class="step-body"><p>"If the ground is not wet, it did not rain." This one <em>is</em> guaranteed true whenever the original is — dry ground rules out rain, given the original claim holds.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Converse and inverse can independently be false even when the original is true; the contrapositive can't. That's equation 4.2.2 in action, not just an abstract rule.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake — affirming the consequent</div>
+    <p>Assuming that because <code>p ⇒ q</code> is true, its <strong>converse</strong> <code>q ⇒ p</code> must be true too. It usually isn't — this is one of the most common reasoning errors there is, common enough to have a name. "If it rains, the ground is wet" (true) does <em>not</em> license "the ground is wet, so it rained" — the sprinkler counterexample above breaks it immediately. The fix: only the contrapositive is free; the converse has to be checked (or proved) completely independently, as its own claim.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="true,t">
+    <div class="label">Try it yourself</div>
+    <p>What is the truth value of <code>F ⇒ T</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="True or False" aria-label="F implies T">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate: <code>T ⇒ F</code>
+      <details class="answer"><summary></summary><div class="ans-body">False</div></details></li>
+    <li>Evaluate: <code>F ⇒ F</code>
+      <details class="answer"><summary></summary><div class="ans-body">True (vacuously)</div></details></li>
+    <li>Evaluate: <code>T ⇔ F</code>
+      <details class="answer"><summary></summary><div class="ans-body">False</div></details></li>
+    <li>Write the converse of "if a number is divisible by 4, it is divisible by 2."
+      <details class="answer"><summary></summary><div class="ans-body">"If a number is divisible by 2, it is divisible by 4." (False in general — e.g. 6.)</div></details></li>
+    <li>Write the contrapositive of "if <code>n</code> is prime and <code>n &gt; 2</code>, then <code>n</code> is odd."
+      <details class="answer"><summary></summary><div class="ans-body">"If n is not odd, then n is not prime or n ≤ 2." (Equivalently: if n is even, then n is not prime or n ≤ 2.)</div></details></li>
+    <li>Is "you get a discount if and only if you have a coupon" better modeled as ⇒ or ⇔? Why?
+      <details class="answer"><summary></summary><div class="ans-body">⇔ — the "if and only if" is explicit: coupon guarantees discount, and discount guarantees you had a coupon, both directions.</div></details></li>
+    <li class="tag">bonus — Write the inverse of "if x &gt; 5, then x² &gt; 25." Is the inverse true?
+      <details class="answer"><summary></summary><div class="ans-body">"If x ≤ 5, then x² ≤ 25." False — e.g. x = -10 ≤ 5 but x² = 100 &gt; 25.</div></details></li>
+    <li class="tag">bonus — Give your own real-world example of a true conditional whose converse is false (not the rain example).
+      <details class="answer"><summary></summary><div class="ans-body">Any valid one works, e.g. "if an animal is a dog, it is a mammal" (true) — converse "if an animal is a mammal, it is a dog" (false, e.g. cats).</div></details></li>
+    <li class="tag">bonus — A circuit's fault condition is defined as <code>p ∧ ¬q</code>. Under what p,q row does the corresponding conditional p⇒q fail?
+      <details class="answer"><summary></summary><div class="ans-body">p=T, q=F — the same single row that makes p∧¬q true, by construction.</div></details></li>
+    <li class="tag">bonus — Build the full truth table for <code>(p ⇒ q) ⇔ (¬q ⇒ ¬p)</code> and confirm every row is T (this is exactly equation 4.2.2, verified directly).
+      <details class="answer"><summary></summary><div class="ans-body">All 4 rows give T for the outer ⇔, since p⇒q and ¬q⇒¬p have identical truth tables (T,F,T,T) — confirming they're equivalent.</div></details></li>
+    <li class="tag">challenge — "If you didn't study, you will fail" is claimed true. Someone fails the exam and concludes "so they didn't study." Which of converse/inverse/contrapositive did they implicitly use, and is the conclusion actually forced?
+      <details class="answer"><summary></summary><div class="ans-body">Let p = "didn't study," q = "will fail." The claim is p⇒q. "Failed, so didn't study" is q⇒p — the <strong>converse</strong>, not guaranteed. The conclusion is not forced: they could have studied and still failed for another reason.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-propositional-logic.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-logical-equivalences-demorgan.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 2 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:2", "content/m04-logic/ch02-conditionals-biconditionals.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

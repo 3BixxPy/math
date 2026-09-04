@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 12 — General Solutions — Adding the Period | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 12 of 15</div>
+  <div class="eyebrow">Chapter 12 · concept:general-trig-solutions</div>
+  <h1>General Solutions — Adding the Period</h1>
+  <p class="subtitle">Chapter 11 restricted solutions to one trip around the circle. Remove that restriction — using Chapter 6 and 8's periodicity facts — and every trig equation actually has infinitely many solutions.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>If <code>sin θ = 1/2</code> at \(\theta=\pi/6\), it's also true at \(\theta=\pi/6+2\pi\), and \(\pi/6+4\pi\), and \(\pi/6-2\pi\) — every full trip around the circle lands on the same point (Chapter 6's periodicity). Chapter 11's restricted-interval answers were never the <em>whole</em> answer; they were one representative from each infinite family. This chapter writes down the whole family.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — General solution schema (sin, cos)</div>
+    <div class="eqn"><div class="eq-body">\[ \theta = \theta_0 + 2\pi n, \quad n \in \mathbb{Z} \]</div><div class="eq-num" id="eq-2-12-1">(2.12.1)</div></div>
+    <p>For each particular solution \(\theta_0\) found on <code>[0, 2π)</code> (Chapter 11), add \(2\pi n\) for any integer \(n\) (positive, negative, or zero) to sweep out every coterminal angle — because sine and cosine repeat every \(2\pi\) (equation 2.6.1). If an equation has two particular solutions on one period, it has <em>two</em> separate families, one built from each.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — General solution schema (tan)</div>
+    <div class="eqn"><div class="eq-body">\[ \theta = \theta_0 + \pi n, \quad n \in \mathbb{Z} \]</div><div class="eq-num" id="eq-2-12-2">(2.12.2)</div></div>
+    <p>Tangent's period is \(\pi\), not \(2\pi\) (equation 2.8.1) — so its general solution only needs <strong>one</strong> family per equation, built by adding \(\pi n\). This single family already covers what would otherwise be two separate \(+2\pi n\) families for sin/cos-type equations, because tangent repeats twice as often.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find the general solution of <code>sin θ = 1/2</code>.</p>
+    <details class="step" open><summary>Step 1 — particular solutions on [0, 2π) (Chapter 11)</summary>
+      <div class="step-body"><p>Reference angle \(\pi/6\), sine positive in QI and QII: \(\theta_0=\pi/6\) or \(\theta_0=5\pi/6\).</p></div></details>
+    <details class="step"><summary>Step 2 — add 2πn to each</summary>
+      <div class="step-body"><p>Two separate families, since sin has period \(2\pi\) and there are two particular solutions to build from.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\theta = \dfrac{\pi}{6}+2\pi n\) or \(\theta = \dfrac{5\pi}{6}+2\pi n\), for any integer \(n\).</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — tangent needs only one family</div>
+    <p>Find the general solution of <code>tan θ = 1</code>.</p>
+    <details class="step" open><summary>Step 1 — particular solutions on [0, 2π)</summary>
+      <div class="step-body"><p>From Chapter 11: \(\theta=\pi/4\) or \(\theta=5\pi/4\) — but notice \(5\pi/4 = \pi/4+\pi\), exactly one tangent-period apart.</p></div></details>
+    <details class="step"><summary>Step 2 — one family covers both</summary>
+      <div class="step-body"><p>Since tangent repeats every \(\pi\) (equation 2.12.2), adding \(\pi n\) to \(\pi/4\) already sweeps out \(5\pi/4\) (at \(n=1\)) automatically — no second family needed.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\theta = \dfrac{\pi}{4}+\pi n\), for any integer \(n\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Using \(+2\pi n\) for a tangent equation out of habit, instead of \(+\pi n\). \(\theta=\pi/4+2\pi n\) is a real family of solutions — but it's only <em>half</em> of them, silently skipping \(5\pi/4, 5\pi/4+2\pi,\ldots\) entirely. Because tangent has the shorter period, its general solution is the one case in this module where the "+period" step uses \(\pi\), not \(2\pi\) — mixing this up produces an answer that's correct as far as it goes, but incomplete.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2pik,2πk,2pin,2πn">
+    <div class="label">Try it yourself</div>
+    <p>Find the general solution of <code>cos θ = 1</code>. (Use <code>k</code> or <code>n</code> for the integer, e.g. <code>2pik</code>.)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 2pik" aria-label="general solution of cosine theta equals 1">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find the general solution of <code>sin θ = √3/2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\theta=\pi/3+2\pi n\) or \(2\pi/3+2\pi n\)</div></details></li>
+    <li>Find the general solution of <code>cos θ = −1/2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\theta=2\pi/3+2\pi n\) or \(4\pi/3+2\pi n\)</div></details></li>
+    <li>Find the general solution of <code>tan θ = −1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\theta=3\pi/4+\pi n\)</div></details></li>
+    <li>Find the general solution of <code>sin θ = −1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\theta=3\pi/2+2\pi n\) (only one family — the "single-solution" peak/trough case)</div></details></li>
+    <li>Find the general solution of <code>tan θ = 0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\theta=\pi n\)</div></details></li>
+    <li>List the first three positive solutions in the family <code>θ = π/6 + 2πn</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(n=0: \pi/6\); \(n=1: \pi/6+2\pi=13\pi/6\); \(n=2: \pi/6+4\pi=25\pi/6\)</div></details></li>
+    <li class="tag">bonus — Find the general solution of <code>cos θ = √2/2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\theta=\pi/4+2\pi n\) or \(7\pi/4+2\pi n\) (equivalently \(-\pi/4+2\pi n\))</div></details></li>
+    <li class="tag">bonus — Is <code>θ = π/4 + 3π</code> a member of the family <code>θ = π/4 + πn</code>? Which n?
+      <details class="answer"><summary></summary><div class="ans-body">Yes, n = 3.</div></details></li>
+    <li class="tag">bonus — Find the general solution of <code>sin θ = 0</code>, and explain why it needs only one family even though sine has period 2π (unlike tangent).
+      <details class="answer"><summary></summary><div class="ans-body">\(\theta=\pi n\). Even though sin's period is \(2\pi\), its two particular solutions on one period (0 and π) are already exactly π apart, so a single \(+\pi n\) family happens to sweep out both — a coincidence of this specific equation, not a general rule for sin/cos.</div></details></li>
+    <li class="tag">bonus — Find the general solution of <code>tan θ = √3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\theta=\pi/3+\pi n\)</div></details></li>
+    <li class="tag">challenge — A classmate writes the general solution of <code>sin θ = 1/2</code> as a <em>single</em> family, <code>θ = π/6 + πn</code>, reasoning "π is a period too, from equation 2.6.1's logic applied twice." Plug in <code>n=1</code> and check whether this actually lands on a true solution — then explain the flaw in their reasoning.
+      <details class="answer"><summary></summary><div class="ans-body">n=1 gives θ=π/6+π=7π/6, and sin(7π/6)=-1/2 ≠ 1/2 — not a solution. The flaw: π is <em>not</em> a period of sin θ (only 2π is, per equation 2.6.1 with the "smallest such number" requirement) — sin(θ+π)=-sin(θ), a sign flip, not a repeat. Adding π moves to a different point on the circle where sine has the opposite sign, not the same value.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch11-solving-trig-equations.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch13-inverse-trig.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 12 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:12", "content/m02-trigonometry/ch12-general-solutions.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

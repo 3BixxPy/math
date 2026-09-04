@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 11 — Two Essential Trig Limits | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 11 of 12</div>
+  <div class="eyebrow">Chapter 11 · concept:sinx-over-x-limit</div>
+  <h1>Two Essential Trig Limits</h1>
+  <p class="subtitle">The squeeze theorem (Chapter 10) exists largely because of these two limits — direct substitution gives 0/0 for both, and no algebraic trick from Chapter 5 (factoring, rationalizing) untangles them the way it did for polynomial and radical expressions.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>These two specific limits will become the literal foundation of differentiating <code>sin</code> and <code>cos</code> the moment Module 6 begins — every derivative involving a trig function traces back to one of these two facts. They're worth memorizing cold now, the same way <code>90°=π/2</code> was worth memorizing in Module 2, not just understanding once and moving on.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — The two essential trig limits</div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x\to0}\frac{\sin x}{x} = 1 \]</div><div class="eq-num" id="eq-5-11-1">(5.11.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x\to0}\frac{1-\cos x}{x} = 0 \]</div><div class="eq-num" id="eq-5-11-2">(5.11.2)</div></div>
+    <p>Both follow from the squeeze theorem (Chapter 10), applied to a geometric argument comparing the area of a thin circular sector of angle <code>x</code> against the areas of two triangles that trap it from below and above — as the angle shrinks toward <code>0</code>, those bounding areas squeeze <code>sin(x)/x</code> down to exactly <code>1</code>. The full geometric proof is outside this course's scope; the one-paragraph sketch above is enough to know these aren't arbitrary facts — they're provable, and provable by the exact tool Chapter 10 just built.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a coefficient inside the argument</div>
+    <p>Evaluate <code>lim<sub>x→0</sub> sin(3x)/x</code>.</p>
+    <details class="step" open><summary>Step 1 — this is NOT the same as (5.11.1) — there's a 3 inside the sine</summary>
+      <div class="step-body"><p>\(\sin(3x)/x\) is not automatically \(1\); the "essential limit" only directly applies to \(\sin(\text{something})/\text{that exact same something}\). Multiply and divide by \(3\) to force that exact match: \(\dfrac{\sin(3x)}{x} = 3\cdot\dfrac{\sin(3x)}{3x}\).</p></div></details>
+    <details class="step"><summary>Step 2 — substitute u = 3x</summary>
+      <div class="step-body"><p>As \(x\to0\), \(u=3x\to0\) too, so \(\dfrac{\sin(3x)}{3x} = \dfrac{\sin u}{u} \to 1\) by (5.11.1).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(3\cdot1 = 3\).</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — coefficient in the denominator instead</div>
+    <p>Evaluate <code>lim<sub>x→0</sub> sin(x)/(2x)</code>.</p>
+    <details class="step" open><summary>Step 1 — pull the constant out front</summary>
+      <div class="step-body"><p>\(\dfrac{\sin x}{2x} = \dfrac12\cdot\dfrac{\sin x}{x}\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\dfrac{\sin x}{x}\to1\) by (5.11.1), so the whole limit is \(\dfrac12\cdot1=\dfrac12\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting to account for a coefficient inside the sine's argument. <code>sin(3x)/x</code> is <strong>not</strong> the same limit as <code>sin(x)/x</code> — the argument and the denominator have to match exactly before (5.11.1) applies directly. Whenever they don't, multiply and divide by whatever constant is needed to force the match (the substitution trick above), rather than assuming the coefficient doesn't matter.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>lim<sub>x→0</sub> sin(5x)/x</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="limit as x approaches 0 of sin 5x over x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>lim<sub>x→0</sub> sin(2x)/x</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> sin(x)/(4x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1/4\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> sin(7x)/(2x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(7/2\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> (1−cos x)/(3x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\frac13\cdot\frac{1-\cos x}{x}\to\frac13(0)=0\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> x/sin(x)</code>. (This is the reciprocal of the essential limit.)
+      <details class="answer"><summary></summary><div class="ans-body">Since \(\sin(x)/x\to1\) (a nonzero value), its reciprocal's limit is also \(1\).</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> sin(4x)/sin(2x)</code>. (Hint: multiply and divide by <code>x</code>, then handle each piece separately.)
+      <details class="answer"><summary></summary><div class="ans-body">Rewrite as \(\dfrac{\sin(4x)/x}{\sin(2x)/x} = \dfrac{4\cdot[\sin(4x)/(4x)]}{2\cdot[\sin(2x)/(2x)]}\to\dfrac{4(1)}{2(1)}=2\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→0</sub> sin(x²)/x²</code>. (Treat <code>x²</code> as the "u.")
+      <details class="answer"><summary></summary><div class="ans-body">\(1\) — same substitution idea, \(u=x^2\to0\) as \(x\to0\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→0</sub> tan(x)/x</code>. (Hint: <code>tan x = sin x / cos x</code>.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{\tan x}{x} = \dfrac{\sin x}{x}\cdot\dfrac{1}{\cos x}\to1\cdot\dfrac{1}{\cos0}=1\cdot1=1\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→0</sub> (1−cos(2x))/x</code>. (Mirror the coefficient trick from the sin(kx) example.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{1-\cos(2x)}{x} = 2\cdot\dfrac{1-\cos(2x)}{2x}\to2(0)=0\).</div></details></li>
+    <li class="tag">bonus — Explain in one or two sentences why <code>lim<sub>x→0</sub> sin(x)/x</code> can't be evaluated by Chapter 4's direct-substitution laws or Chapter 5's factoring/rationalizing techniques.
+      <details class="answer"><summary></summary><div class="ans-body">Direct substitution gives \(0/0\), so Chapter 4's laws don't apply as-is; and \(\sin x\) isn't a polynomial or radical expression, so there's nothing to factor or rationalize the way Chapter 5's techniques require — it genuinely needs a different tool, the squeeze theorem (Chapter 10).</div></details></li>
+    <li class="tag">challenge — Evaluate <code>lim<sub>x→0</sub> (sin(5x) − sin(3x))/x</code> by splitting into two separate fractions and evaluating each with the essential limit.
+      <details class="answer"><summary></summary><div class="ans-body">\(\dfrac{\sin(5x)}{x}-\dfrac{\sin(3x)}{x} = 5\cdot\dfrac{\sin(5x)}{5x} - 3\cdot\dfrac{\sin(3x)}{3x} \to 5(1)-3(1)=2\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch10-squeeze-theorem.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch12-capstone-review.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 11 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:11", "content/m05-limits/ch11-trig-limits.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

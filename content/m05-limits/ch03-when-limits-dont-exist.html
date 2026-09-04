@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Three Ways a Limit Can Fail to Exist | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 3 of 12</div>
+  <div class="eyebrow">Chapter 3 · concept:nonexistent-limits</div>
+  <h1>Three Ways a Limit Can Fail to Exist</h1>
+  <p class="subtitle">Chapter 2 showed one way a limit can fail to exist — disagreeing one-sided limits. This chapter finishes the list. There are exactly two more distinct failure modes, so from here on "the limit doesn't exist" always means one specific thing out of exactly three.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>"The limit doesn't exist" sounds like a dead end, but it's actually specific, useful information about <em>how</em> a function is misbehaving near a point — and each of the three ways looks completely different on a graph and calls for a different response later. Being able to name which one you're looking at (a jump, a blow-up, or an oscillation) is exactly the skill Chapter 9 needs to classify discontinuities, and Chapter 7 needs to handle infinite limits precisely instead of just waving at "no."</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The three failure modes</div>
+    <ul>
+      <li><strong>Disagreement</strong> — the left-hand and right-hand limits both exist as ordinary numbers, but aren't equal (a jump). This is exactly Chapter 2's case.</li>
+      <li><strong>Unbounded behavior</strong> — <code>f(x)</code> grows without bound (toward <code>+∞</code> or <code>−∞</code>) as <code>x</code> approaches <code>a</code> from one or both sides, instead of settling near any finite number. Chapter 7 gives this its own careful notation.</li>
+      <li><strong>Oscillation</strong> — <code>f(x)</code> stays bounded (it doesn't blow up) but never settles down at all, swinging between different values infinitely often as <code>x→a</code>. The standard example is <code>sin(1/x)</code> as <code>x→0</code>: as <code>x</code> shrinks toward 0, <code>1/x</code> grows without bound, so <code>sin(1/x)</code> keeps cycling through every value between <code>−1</code> and <code>1</code> over and over, faster and faster, forever — it never approaches any single number.</li>
+    </ul>
+    <p>Every function with <code>lim<sub>x→a</sub> f(x)</code> failing to exist fails for exactly one of these three reasons.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — classify the failure mode</div>
+    <p>For each function, decide which of the three failure modes (if any) applies as <code>x</code> approaches the given point.</p>
+    <details class="step" open><summary>(a) f(x) = 1/(x−1)² as x→1</summary>
+      <div class="step-body"><p>As \(x\to1\) from either side, \((x-1)^2\) is a tiny positive number, so \(1/(x-1)^2\) grows without bound — from both sides. This is <strong>unbounded behavior</strong>.</p></div></details>
+    <details class="step"><summary>(b) g(x) = {x if x&lt;0; x+3 if x≥0} as x→0</summary>
+      <div class="step-body"><p>Left-hand limit \(\to0\); right-hand limit \(\to3\). Both are ordinary finite numbers, but they disagree. This is <strong>disagreement</strong> (a jump) — Chapter 2's case.</p></div></details>
+    <details class="step"><summary>(c) h(x) = sin(1/x) as x→0</summary>
+      <div class="step-body"><p>\(h(x)\) never leaves the range \([-1,1]\) — it doesn't blow up — but as \(x\to0\), \(1/x\) races off toward \(\pm\infty\), so \(\sin(1/x)\) cycles through every value in \([-1,1]\) infinitely many times, with no tendency to settle near any particular one. This is <strong>oscillation</strong>.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Treating "the limit is infinity" as though the limit exists in the ordinary sense, just with an unusual value. It doesn't. When we write something like <code>lim<sub>x→1</sub> 1/(x−1)² = ∞</code>, that's shorthand for "the function grows without bound" — <strong>∞ is not a number the function actually reaches or settles near</strong>, so strictly speaking this limit still doesn't exist; the "=∞" is a convention describing <em>which way</em> it fails, not a genuine numeric answer. Chapter 7 makes this notation precise and explains exactly what it is and isn't allowed to mean.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="unbounded,infinite,blows up,unbounded behavior">
+    <div class="label">Try it yourself</div>
+    <p>Which failure mode applies to <code>f(x) = 1/(x−4)</code> as <code>x→4</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="disagreement, unbounded, or oscillation" aria-label="failure mode at x=4">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Classify: <code>f(x) = 1/(x−2)²</code> as <code>x→2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Unbounded — both sides grow toward \(+\infty\).</div></details></li>
+    <li>Classify: <code>g(x) = {2x if x≤0; x+5 if x&gt;0}</code> as <code>x→0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Disagreement (jump) — left-hand \(\to0\), right-hand \(\to5\).</div></details></li>
+    <li>Classify: <code>h(x) = cos(1/x)</code> as <code>x→0</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Oscillation — same reasoning as \(\sin(1/x)\): stays bounded in \([-1,1]\) but cycles infinitely often with no settling value.</div></details></li>
+    <li>Classify: <code>k(x) = {x² if x&lt;3; x²+1 if x≥3}</code> as <code>x→3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Disagreement (jump) — left-hand \(\to9\), right-hand \(\to10\).</div></details></li>
+    <li>Classify: <code>f(x) = 1/(x+1)</code> as <code>x→−1</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Unbounded — one side \(\to+\infty\), the other \(\to-\infty\).</div></details></li>
+    <li>True or false, with justification: "<code>sin(1/x)</code> as <code>x→0</code> is unbounded, so it fits the 'unbounded' case, not oscillation."
+      <details class="answer"><summary></summary><div class="ans-body">False. \(\sin(1/x)\) never leaves \([-1,1]\) — it never blows up. The failure is that it cycles through that bounded range infinitely often without settling, which is specifically the oscillation case, not the unbounded one.</div></details></li>
+    <li class="tag">bonus — Classify: <code>f(x) = |x|/x</code> as <code>x→0</code>. (Consider what this equals for <code>x&gt;0</code> versus <code>x&lt;0</code> separately.)
+      <details class="answer"><summary></summary><div class="ans-body">Disagreement (jump) — for \(x>0\), \(|x|/x=1\); for \(x<0\), \(|x|/x=-1\). Left-hand limit \(-1\), right-hand limit \(1\); both finite but unequal.</div></details></li>
+    <li class="tag">bonus — Can a function fail to have a limit at a point for two of the three reasons at once? Explain your reasoning.
+      <details class="answer"><summary></summary><div class="ans-body">No, not in a meaningful sense — at a given point, the behavior is either (both one-sided limits finite but unequal), (at least one side unbounded), or (bounded but never settling). These three descriptions of "how it fails" are mutually exclusive ways of characterizing the same single failure, so exactly one applies at any one point.</div></details></li>
+    <li class="tag">bonus — Classify: <code>f(x) = 1/x</code> as <code>x→0</code> (consider both sides).
+      <details class="answer"><summary></summary><div class="ans-body">Unbounded — left-hand \(\to-\infty\), right-hand \(\to+\infty\).</div></details></li>
+    <li class="tag">bonus — A graph has a single missing point (a hole) at <code>x=5</code> but otherwise looks like a smooth, ordinary curve there. Does <code>lim<sub>x→5</sub> f(x)</code> exist? Does any of the three failure modes apply?
+      <details class="answer"><summary></summary><div class="ans-body">The limit <em>does</em> exist, equal to the height where the hole sits — none of the three failure modes applies. A single missing point doesn't stop the nearby values from converging (Chapter 1); this case gets its own name, a "removable" gap, in Chapter 9.</div></details></li>
+    <li class="tag">challenge — For each of the three failure modes, invent your own one-line example function (different from every example already used in this chapter) that demonstrates it, and briefly justify each classification.
+      <details class="answer"><summary></summary><div class="ans-body">Answers vary. E.g. disagreement: \(f(x)=\{x-1 \text{ if } x<2;\ x+1 \text{ if } x\geq2\}\) at \(x=2\) (left\(\to1\), right\(\to3\)). Unbounded: \(f(x)=1/(x-5)^2\) at \(x=5\) (grows to \(+\infty\) both sides). Oscillation: \(f(x)=\cos(1/x)\) at \(x=0\) (bounded in \([-1,1]\), cycles forever without settling).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-limit-notation-one-sided.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-limit-laws.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 3 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:3", "content/m05-limits/ch03-when-limits-dont-exist.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

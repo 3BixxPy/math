@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 1 — Propositions &amp; Logical Connectives | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 1 of 10</div>
+  <div class="eyebrow">Chapter 1 · concept:propositions, concept:logical-connectives</div>
+  <h1>Propositions &amp; Logical Connectives</h1>
+  <p class="subtitle">Every module so far has targeted a gap the diagnostic found — trig, logs, functions, all closer to zero than to fluent. This one is different: the diagnostic flagged a genuinely <strong>strong</strong> transferable skill here, boolean logic and digital-circuit design. Module 4 isn't teaching you to reason — you already can. It's teaching you the symbols mathematicians use for the reasoning you've been doing in gates and truth tables for years.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>You already know this chapter. An <strong>AND gate</strong> is <code>∧</code>. An <strong>OR gate</strong> is <code>∨</code>. A <strong>NOT gate</strong> (inverter) is <code>¬</code>. If you've ever drawn a truth table to check a circuit before wiring it, you've already done everything this chapter asks — the only thing new is that mathematicians write <code>p ∧ q</code> instead of drawing two wires into an AND gate, and call the wires' 0/1 values "false/true" instead of "low/high." Same structure, different notation. The payoff for learning the notation: it's how every proof, every set-theory statement, and every "for all / there exists" claim for the rest of this course (and every math course after it) gets written down.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Proposition</div>
+    <p>A <strong>proposition</strong> is a statement that has a definite truth value — it is either true or false, never both, never neither. "7 is prime" is a proposition (true). "2 + 2 = 5" is a proposition (false). "This pizza is good" is <em>not</em> a proposition — it's an opinion with no fixed truth value. Propositions are usually named with lowercase letters: <code>p</code>, <code>q</code>, <code>r</code>, exactly like you'd name input wires <code>A</code>, <code>B</code>, <code>C</code> on a circuit diagram.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Logical connectives (∧, ∨, ¬)</div>
+    <p>Connectives combine propositions into new ones, and each one is defined by nothing more than its truth table — exactly how you'd verify a gate.</p>
+    <p><strong>Conjunction, <code>p ∧ q</code> ("p and q")</strong> — your AND gate. True only when both inputs are true.</p>
+    <div class="svg-wrap">
+      <table style="border-collapse:collapse; font-size:.95rem;">
+        <thead><tr>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">q</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p ∧ q</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="eqn"><div class="eq-body">\[ p \wedge q = T \iff (p = T) \text{ and } (q = T) \]</div><div class="eq-num" id="eq-4-1-1">(4.1.1)</div></div>
+
+    <p><strong>Disjunction, <code>p ∨ q</code> ("p or q")</strong> — your OR gate. True when at least one input is true (including both).</p>
+    <div class="svg-wrap">
+      <table style="border-collapse:collapse; font-size:.95rem;">
+        <thead><tr>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">q</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p ∨ q</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Negation, <code>¬p</code> ("not p")</strong> — your inverter. Flips the value.</p>
+    <div class="svg-wrap">
+      <table style="border-collapse:collapse; font-size:.95rem;">
+        <thead><tr>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p</th>
+          <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">¬p</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+          <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — order of operations for connectives</div>
+    <p><code>¬</code> binds tightest, then <code>∧</code>, then <code>∨</code> — exactly the order a circuit evaluates: inverters run first on individual wires, then AND gates combine, then OR gates combine those. So <code>p ∧ ¬q</code> means <code>p ∧ (¬q)</code>, never <code>¬(p ∧ q)</code>; use parentheses whenever there's any doubt, same as you would in a schematic.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — full truth table for p ∧ (¬q)</div>
+    <p>Build the complete truth table for the compound proposition <code>p ∧ (¬q)</code>.</p>
+    <details class="step" open><summary>Step 1 — list every combination of p and q</summary>
+      <div class="step-body"><p>Two inputs, two values each → \(2^2=4\) rows, same as any 2-input circuit's full truth table: TT, TF, FT, FF.</p></div></details>
+    <details class="step"><summary>Step 2 — compute ¬q for each row</summary>
+      <div class="step-body"><p>¬q is just q flipped: T,F,T,F → F,T,F,T for the four rows above.</p></div></details>
+    <details class="step"><summary>Step 3 — AND that with p, row by row</summary>
+      <div class="step-body"><p>Row 1: p=T, ¬q=F → T∧F = F. Row 2: p=T, ¬q=T → T∧T = T. Row 3: p=F, ¬q=F → F∧F = F. Row 4: p=F, ¬q=T → F∧T = F.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body">
+        <div class="svg-wrap">
+          <table style="border-collapse:collapse; font-size:.95rem;">
+            <thead><tr>
+              <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p</th>
+              <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">q</th>
+              <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">¬q</th>
+              <th style="border:1px solid var(--border); padding:.35rem 1rem; background:var(--code-bg);">p ∧ (¬q)</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+              <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td></tr>
+              <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+              <tr><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">T</td><td style="border:1px solid var(--border); padding:.35rem 1rem; text-align:center;">F</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Notice this is only true in exactly one row — the same "one-hot" pattern you'd recognize instantly from a circuit that's supposed to fire on a single specific input combination.</p>
+      </div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — evaluating a compound proposition</div>
+    <p>Let <code>p = T</code> and <code>q = F</code>. Evaluate <code>¬(p ∧ q) ∨ q</code>.</p>
+    <details class="step" open><summary>Step 1 — innermost parentheses first: p ∧ q</summary>
+      <div class="step-body"><p>\(p \wedge q = T \wedge F = F\)</p></div></details>
+    <details class="step"><summary>Step 2 — negate that result</summary>
+      <div class="step-body"><p>\(\neg(p \wedge q) = \neg F = T\)</p></div></details>
+    <details class="step"><summary>Step 3 — OR with q</summary>
+      <div class="step-body"><p>\(T \vee q = T \vee F = T\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p><code>¬(p ∧ q) ∨ q</code> evaluates to <strong>True</strong> for p=T, q=F — work it left-to-right through the gate structure, same as tracing a signal through a schematic.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Reading <code>∨</code> as the everyday English "or." "Soup or salad" at a restaurant means pick exactly one — that's <strong>exclusive</strong> or (XOR), false when both are chosen. Logical <code>∨</code> is always <strong>inclusive</strong> — true when at least one side is true, including when both are. If you've built XOR gates before, you already know this distinction cold: <code>∨</code> in math is the OR gate, never the XOR gate, unless a problem says "exclusive or" explicitly.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="false,f">
+    <div class="label">Try it yourself</div>
+    <p>What is the truth value of <code>T ∧ F</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="True or False" aria-label="T and F">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate: <code>T ∨ F</code>
+      <details class="answer"><summary></summary><div class="ans-body">True</div></details></li>
+    <li>Evaluate: <code>¬T</code>
+      <details class="answer"><summary></summary><div class="ans-body">False</div></details></li>
+    <li>Evaluate: <code>F ∧ F</code>
+      <details class="answer"><summary></summary><div class="ans-body">False</div></details></li>
+    <li>Let p=F, q=T. Evaluate <code>p ∨ ¬q</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg q = F\), so \(F \vee F = \) False</div></details></li>
+    <li>Let p=T, q=T. Evaluate <code>¬p ∧ q</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\neg p = F\), so \(F \wedge T = \) False</div></details></li>
+    <li>Build the full truth table for <code>¬p ∨ q</code> (4 rows).
+      <details class="answer"><summary></summary><div class="ans-body">TT→T, TF→F, FT→T, FF→T (only false when p=T and q=F)</div></details></li>
+    <li class="tag">bonus — Let p=F, q=F, r=T. Evaluate <code>(p ∨ q) ∧ r</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(p\vee q = F\), so \(F \wedge T = \) False</div></details></li>
+    <li class="tag">bonus — Is "I'll have coffee or tea" (as usually meant) an inclusive or exclusive or, in everyday use? What about "you can have cake and ice cream"?
+      <details class="answer"><summary></summary><div class="ans-body">"Coffee or tea" is usually exclusive in everyday speech (pick one). "Cake and ice cream" isn't an ∨ at all — it's a ∧ (both).</div></details></li>
+    <li class="tag">bonus — Build the truth table for <code>p ∧ (q ∨ ¬p)</code>. (Hint: it simplifies — compare it row by row to a simpler expression.)
+      <details class="answer"><summary></summary><div class="ans-body">TT→T, TF→F, FT→F, FF→F — identical to the table for <code>p ∧ q</code>. (When p=F, ¬p=T makes the OR true, but the outer ∧ with p=F still forces F.)</div></details></li>
+    <li class="tag">bonus — A 2-input circuit outputs HIGH only when both inputs are HIGH. Write this as a logical expression in p and q.
+      <details class="answer"><summary></summary><div class="ans-body">\(p \wedge q\)</div></details></li>
+    <li class="tag">challenge — How many rows does the full truth table for a compound proposition with 4 distinct propositional variables have? Justify it from the circuit picture (how many rows would a 4-input truth table have on a chip datasheet?).
+      <details class="answer"><summary></summary><div class="ans-body">\(2^4 = 16\) rows — each of the 4 inputs independently takes 2 values, exactly like a 4-input gate's full truth table has 16 rows.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="../m03-exp-log/ch10-capstone-review.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch02-conditionals-biconditionals.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 1 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:1", "content/m04-logic/ch01-propositional-logic.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

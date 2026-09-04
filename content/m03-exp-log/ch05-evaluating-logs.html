@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — Evaluating Logarithms by Hand | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 3 · Exponentials &amp; Logarithms</a> → Chapter 5 of 10</div>
+  <div class="eyebrow">Chapter 5 · concept:common-natural-log, concept:evaluating-logs</div>
+  <h1>Evaluating Logarithms by Hand</h1>
+  <p class="subtitle">Chapter 4 defined what a logarithm means. This chapter is pure fluency — turning that definition into a fast mental habit, plus the two notation shortcuts (<code>log</code> and <code>ln</code>) you'll see everywhere from here on.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every logarithm evaluation reduces to one question: "<code>b</code> to what power gives <code>x</code>?" That's it — no separate technique to learn, just the Chapter 4 definition applied directly, as a question instead of an equation to convert. The two notations below (<code>log</code> and <code>ln</code>) exist purely because base-10 and base-<code>e</code> logs are so common that writing the subscript every time would be tedious — they're shorthand, not new concepts.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Method — Evaluating log_b(x)</div>
+    <p>Ask: "<code>b</code> to what power gives <code>x</code>?" If you can answer that directly, that power is the value of the log. <code>log_2(8)</code>: 2 to what power gives 8? \(2^3=8\), so \(\log_2(8)=3\).</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Notation — Common log</div>
+    <div class="eqn"><div class="eq-body">\[ \log(x) \equiv \log_{10}(x) \]</div><div class="eq-num" id="eq-3-5-1">(3.5.1)</div></div>
+    <p>An unlabeled <code>log</code> (no subscript) means base <strong>10</strong>, by convention, in this course and in most STEM contexts. It's called the <strong>common log</strong> because base-10 came from a decimal world (slide rules, pre-calculator tables) where it was the most useful base to tabulate.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Notation — Natural log</div>
+    <div class="eqn"><div class="eq-body">\[ \ln(x) \equiv \log_e(x) \]</div><div class="eq-num" id="eq-3-5-2">(3.5.2)</div></div>
+    <p><code>ln</code> ("el-en") always means base <strong>e</strong> (Chapter 2), never anything else. It's called the <strong>natural log</strong> because <code>e</code> is the base that shows up naturally in continuous-growth situations — and, starting in Calculus I, <code>ln</code> is by far the most common log you'll see.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — direct evaluation</div>
+    <p>Evaluate <code>log_2(8)</code>, <code>log_3(1/9)</code>, and <code>ln(e⁴)</code>.</p>
+    <details class="step" open><summary>Step 1 — log₂(8): 2 to what power gives 8?</summary>
+      <div class="step-body"><p>\(2^3=8\), so \(\log_2(8)=3\)</p></div></details>
+    <details class="step"><summary>Step 2 — log₃(1/9): 3 to what power gives 1/9?</summary>
+      <div class="step-body"><p>\(3^{-2}=1/9\) (negative exponents give reciprocals — Module 0, Chapter 4), so \(\log_3(1/9)=-2\)</p></div></details>
+    <details class="step"><summary>Step 3 — ln(e⁴): use the cancellation identity directly</summary>
+      <div class="step-body"><p>\(\ln(e^4)=\log_e(e^4)=4\) by equation 3.4.2 — no computation needed at all, just the inverse relationship.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — estimating when there's no exact answer</div>
+    <p>Estimate <code>log_10(50)</code> without a calculator.</p>
+    <details class="step" open><summary>Step 1 — bracket it between two powers of 10 you know exactly</summary>
+      <div class="step-body"><p>\(\log_{10}(10)=1\) and \(\log_{10}(100)=2\). Since \(10 &lt; 50 &lt; 100\), and log is increasing (bigger input → bigger output, same as the exponential it undoes), \(\log_{10}(50)\) is strictly between 1 and 2.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(1 &lt; \log_{10}(50) &lt; 2\) — and since 50 is closer to 100 than to 10 on a multiplicative scale (\(50 = \sqrt{10\cdot250}\)... more simply, 50 is the geometric middle-ish of 10 and 100), a reasonable guess lands near 1.7 — a calculator confirms \(\log_{10}(50)\approx1.699\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Assuming an unlabeled "<code>log</code>" means natural log, because that's the one you'll use most starting in calculus. It doesn't — by the standard convention this course follows (equations 3.5.1–3.5.2), <code>log</code> with no subscript always means base 10, and <code>ln</code> always means base <code>e</code>. If a different base is meant, it's written as an explicit subscript (<code>log_2</code>, <code>log_5</code>, etc.). When in doubt about a source outside this course, check its own stated convention — but within these chapters, the rule above is fixed.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="4">
+    <div class="label">Try it yourself</div>
+    <p><code>log_2(16) = ?</code></p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="your answer" aria-label="log base 2 of 16">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>log_3(9)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2\)</div></details></li>
+    <li>Evaluate <code>log_5(125)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3\)</div></details></li>
+    <li>Evaluate <code>log(1)</code> (common log).
+      <details class="answer"><summary></summary><div class="ans-body">\(0\) (\(10^0=1\))</div></details></li>
+    <li>Evaluate <code>ln(e)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\)</div></details></li>
+    <li>Evaluate <code>log_4(1/16)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-2\) (\(4^{-2}=1/16\))</div></details></li>
+    <li>Between which two consecutive integers does <code>log(600)</code> fall?
+      <details class="answer"><summary></summary><div class="ans-body">Between 2 and 3, since \(\log(100)=2\) and \(\log(1000)=3\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>log_2(1/8)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(-3\)</div></details></li>
+    <li class="tag">bonus — Evaluate <code>ln(e⁰)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0\)</div></details></li>
+    <li class="tag">bonus — True or false: writing "<code>log(1000)</code>" with no subscript means base e in this course.
+      <details class="answer"><summary></summary><div class="ans-body">False — unlabeled \(\log\) always means base 10 here (equation 3.5.1); base e is always written \(\ln\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>log_7(7)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\) (\(b^1=b\) for any valid base)</div></details></li>
+    <li class="tag">challenge — Without a calculator, is <code>log(9000)</code> closer to <code>3</code> or <code>4</code>? Justify with bracketing, the way the worked example did for log(50).
+      <details class="answer"><summary></summary><div class="ans-body">Bracket: \(\log(1000)=3\), \(\log(10000)=4\), so \(\log(9000)\) is between 3 and 4. Since 9000 is far closer to 10000 than to 1000, it should land close to 4 — a calculator gives \(\log(9000)\approx3.954\), confirming the estimate.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-logarithms-inverse.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-log-laws-1.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 3 · Exponentials &amp; Logarithms</span>
+  <span>Chapter 5 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m03:5", "content/m03-exp-log/ch05-evaluating-logs.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

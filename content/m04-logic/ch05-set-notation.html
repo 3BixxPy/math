@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 5 — Set Notation | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 5 of 10</div>
+  <div class="eyebrow">Chapter 5 · concept:set-notation, concept:set-operations</div>
+  <h1>Set Notation</h1>
+  <p class="subtitle">A short detour from propositions into <em>sets</em> — but not really a detour. By the end of Chapter 6 you'll see sets and logic are the same idea wearing different notation, and this chapter's vocabulary (∈, ⊆, ∪, ∩) is what makes that translation possible.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Fix a finite universe of possible elements and any subset of it is exactly a <strong>bitmask</strong> — one bit per element, 1 if it's "in," 0 if it's "out." That's not a metaphor, it's literally how sets get implemented in low-level code and hardware: permission flags, feature masks, register bits. Once you see a set that way, the whole vocabulary below has a bitwise-operation twin: union is bitwise OR of the masks, intersection is bitwise AND, complement is bitwise NOT. Chapter 6 makes that connection exact.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Set, element-of, subset</div>
+    <p>A <strong>set</strong> is an unordered collection of distinct objects, called its <strong>elements</strong> or <strong>members</strong>. Written with curly braces: <code>{1, 2, 3}</code>. Order and repetition don't matter — <code>{1,2,3} = {3,2,1} = {1,1,2,3}</code>, all the same set.</p>
+    <p><code>x ∈ A</code> means "x is an element of A"; <code>x ∉ A</code> means it isn't. This relates an <em>element</em> to a set.</p>
+    <p><code>A ⊆ B</code> ("A is a subset of B") means every element of A is also an element of B. This relates <em>two sets</em> to each other — a different kind of relationship from ∈. <code>A ⊂ B</code> ("proper subset") means A ⊆ B <em>and</em> A ≠ B — B has at least one element A doesn't.</p>
+    <p>The <strong>empty set</strong>, <code>∅</code>, has no elements at all. It is a subset of every set, vacuously — the same "vacuously true" flavor as Chapter 2's false-hypothesis conditionals: every element of ∅ (there are none) trivially satisfies "is in B."</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Set-builder notation</div>
+    <div class="eqn"><div class="eq-body">\[ \{x \mid P(x)\} = \text{"the set of all } x \text{ satisfying } P(x)\text{"} \]</div><div class="eq-num" id="eq-4-5-1">(4.5.1)</div></div>
+    <p>The bar <code>|</code> reads "such that." <code>{x | x is even}</code> is the set of all even numbers — no need to list every element, just the condition that defines membership. This is exactly a predicate from Chapter 4 wearing set clothing: <code>P(x)</code> defines the set the same way it defined a quantified statement.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Union, intersection, complement</div>
+    <div class="eqn"><div class="eq-body">\[ A \cup B = \{x \mid x \in A \text{ or } x \in B\} \]</div><div class="eq-num" id="eq-4-5-2">(4.5.2)</div></div>
+    <div class="eqn"><div class="eq-body">\[ A \cap B = \{x \mid x \in A \text{ and } x \in B\} \]</div><div class="eq-num" id="eq-4-5-3">(4.5.3)</div></div>
+    <div class="eqn"><div class="eq-body">\[ A^c = \{x \in U \mid x \notin A\} \]</div><div class="eq-num" id="eq-4-5-4">(4.5.4)</div></div>
+    <p>Union (4.5.2) collects everything in either set. Intersection (4.5.3) collects only what's in both. Complement (4.5.4) — read relative to some agreed-on <strong>universal set</strong> <code>U</code> (e.g. "all integers") — collects everything in U that <em>isn't</em> in A. Notice each definition is spelled with "or"/"and"/"not" — Chapter 6's whole point, one chapter early.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 300 180" width="300" height="180" role="img" aria-label="Venn diagram of two overlapping sets A and B">
+        <circle cx="115" cy="90" r="70" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="2"/>
+        <circle cx="185" cy="90" r="70" fill="var(--ex-border)" fill-opacity="0.16" stroke="var(--ex-border)" stroke-width="2"/>
+        <text x="70" y="55" font-size="15" font-family="sans-serif" fill="var(--text)" font-weight="700">A</text>
+        <text x="215" y="55" font-size="15" font-family="sans-serif" fill="var(--text)" font-weight="700">B</text>
+        <text x="150" y="94" font-size="12" font-family="sans-serif" fill="var(--text-dim)" text-anchor="middle">A∩B</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — set-builder to listed elements</div>
+    <p>List the elements of <code>{x | x is even, 0 &lt; x &lt; 10}</code>.</p>
+    <details class="step" open><summary>Step 1 — the domain condition restricts x to integers strictly between 0 and 10</summary>
+      <div class="step-body"><p>Candidates: 1, 2, 3, 4, 5, 6, 7, 8, 9</p></div></details>
+    <details class="step"><summary>Step 2 — keep only the even ones</summary>
+      <div class="step-body"><p>2, 4, 6, 8</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\{x \mid x \text{ is even}, 0<x<10\} = \{2,4,6,8\}\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — union and intersection</div>
+    <p>Let <code>A = {1, 2, 3, 4}</code> and <code>B = {3, 4, 5, 6}</code>. Find <code>A ∪ B</code> and <code>A ∩ B</code>.</p>
+    <details class="step" open><summary>Step 1 — union: everything appearing in either set, no duplicates</summary>
+      <div class="step-body"><p>\(A \cup B = \{1,2,3,4,5,6\}\) — 3 and 4 appear in both but are listed once.</p></div></details>
+    <details class="step"><summary>Step 2 — intersection: only what's shared</summary>
+      <div class="step-body"><p>\(A \cap B = \{3,4\}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Confusing <code>∈</code> (element-of) with <code>⊆</code> (subset-of) — they relate different kinds of things. <code>2 ∈ {1,2,3}</code> is correct: 2 is a single element sitting inside the set. But <code>2 ⊆ {1,2,3}</code> is <strong>wrong</strong> — 2 is a number, not a set, so it can't be "a subset of" anything; ⊆ needs a set on both sides. The fix: <code>{2} ⊆ {1,2,3}</code> is correct — wrap the element in braces to turn it into a (singleton) set first, and <em>then</em> the subset relation makes sense.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="false,f,no,n">
+    <div class="label">Try it yourself</div>
+    <p>Is <code>3 ∈ {1, 2, 4}</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="True or False" aria-label="Is 3 an element of the set 1, 2, 4">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Is <code>5 ∈ {2, 4, 6, 8}</code>?
+      <details class="answer"><summary></summary><div class="ans-body">No (False)</div></details></li>
+    <li>Is <code>{1, 2} ⊆ {1, 2, 3}</code>?
+      <details class="answer"><summary></summary><div class="ans-body">Yes — both elements of the left set are in the right set.</div></details></li>
+    <li>List the elements of <code>{x | x is a positive integer less than 6}</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\{1,2,3,4,5\}\)</div></details></li>
+    <li>Let <code>A = {2, 3, 5, 7}</code>, <code>B = {1, 3, 5, 7, 9}</code>. Find <code>A ∩ B</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\{3,5,7\}\)</div></details></li>
+    <li>Let <code>A = {2, 3, 5, 7}</code>, <code>B = {1, 3, 5, 7, 9}</code>. Find <code>A ∪ B</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\{1,2,3,5,7,9\}\)</div></details></li>
+    <li>With universal set <code>U = {1,2,...,10}</code> and <code>A = {2,4,6,8,10}</code>, find <code>Aᶜ</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\{1,3,5,7,9\}\)</div></details></li>
+    <li class="tag">bonus — Is <code>∅ ⊆ {1,2,3}</code>? Justify it using the definition of ⊆.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — vacuously true: ∅ has no elements, so "every element of ∅ is in {1,2,3}" has nothing to check and fails to fail.</div></details></li>
+    <li class="tag">bonus — Is <code>{1,2,3} ⊆ {1,2,3}</code>? Is <code>{1,2,3} ⊂ {1,2,3}</code>?
+      <details class="answer"><summary></summary><div class="ans-body">⊆ yes (every set is a subset of itself). ⊂ no (proper subset requires the sets be unequal).</div></details></li>
+    <li class="tag">bonus — Write <code>{3, 6, 9, 12, ...}</code> (all positive multiples of 3) in set-builder notation.
+      <details class="answer"><summary></summary><div class="ans-body">\(\{x \mid x = 3k \text{ for some positive integer } k\}\) (equivalently \(\{x \mid x \text{ is a positive multiple of } 3\}\))</div></details></li>
+    <li class="tag">bonus — A capability bitmask has bit 0 = "read," bit 1 = "write," bit 2 = "execute." If a process's permission set is <code>{read, execute}</code>, describe the complement relative to <code>U = {read, write, execute}</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\{write\}\) — exactly the permissions not granted, same as flipping the unset bits in the mask.</div></details></li>
+    <li class="tag">challenge — Is it possible for <code>A ∩ B = A</code> without <code>A = B</code>? Give an example or explain why not, using the definition of ∩.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — exactly when \(A \subseteq B\). E.g. \(A=\{1,2\}\), \(B=\{1,2,3\}\): \(A\cap B = \{1,2\} = A\), but \(A \ne B\). \(A\cap B=A\) means every element of A is also in B, which is precisely \(A\subseteq B\) — not full equality.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch04-quantifiers.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch06-sets-and-logic.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 5 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:5", "content/m04-logic/ch05-set-notation.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

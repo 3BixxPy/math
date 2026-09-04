@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Quantifiers | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 4 of 10</div>
+  <div class="eyebrow">Chapter 4 · concept:quantifiers, concept:negating-quantifiers</div>
+  <h1>Quantifiers — ∀ and ∃</h1>
+  <p class="subtitle">So far every proposition has stood on its own — one p, one q. Real math statements talk about <em>every</em> number, or <em>some</em> number, in a whole domain. This chapter gives those two words their own symbols, and shows their negation rule is De Morgan's law again, just scaled up from 2 wires to arbitrarily many.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Picture a wide bus of wires, bits <code>b<sub>1</sub>, b<sub>2</sub>, ..., b<sub>n</sub></code>, and a "reduction" gate tree over them. An <strong>AND-reduce</strong> — output high only if every single bit is high — is exactly <code>∀i, b<sub>i</sub>=1</code> ("for all i"). An <strong>OR-reduce</strong> — output high if at least one bit is high — is exactly <code>∃i, b<sub>i</sub>=1</code> ("there exists i"). You've already reasoned about "is everything set" versus "is anything set" as different gate structures; ∀ and ∃ are just those two ideas freed from needing an actual physical bus — they work over infinite domains (all integers, all real numbers) where you obviously can't build the tree, but the "all of them" vs. "at least one of them" distinction is identical.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — ∀ and ∃</div>
+    <p><code>∀x, P(x)</code> ("for all x, P(x)") is true when the predicate <code>P</code> holds for <strong>every</strong> value of x in the domain under discussion — your AND-reduce over the whole domain.</p>
+    <p><code>∃x, P(x)</code> ("there exists x such that P(x)") is true when <code>P</code> holds for <strong>at least one</strong> value of x in the domain — your OR-reduce.</p>
+    <p>A <strong>predicate</strong> <code>P(x)</code> is just a statement whose truth value depends on x — "x is prime," "x &gt; 5" — not a proposition on its own (no fixed truth value until x is filled in), but it becomes one once a quantifier is attached, or once a specific x is substituted.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — De Morgan's laws for quantifiers</div>
+    <div class="eqn"><div class="eq-body">\[ \neg\big(\forall x\, P(x)\big) \equiv \exists x\, \neg P(x) \]</div><div class="eq-num" id="eq-4-4-1">(4.4.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ \neg\big(\exists x\, P(x)\big) \equiv \forall x\, \neg P(x) \]</div><div class="eq-num" id="eq-4-4-2">(4.4.2)</div></div>
+    <p>This is Chapter 3's De Morgan's law, scaled from 2 inputs to arbitrarily (even infinitely) many: negating an AND-reduce over the whole domain flips it to an OR-reduce of the negated predicate (4.4.1), and vice versa (4.4.2). "Not every bit is set" means "some bit is unset" — never "every bit is unset," and never "some bit is set." <strong>Both</strong> things flip together: the quantifier <em>and</em> the predicate inside it.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — translating into quantifier notation</div>
+    <p>Translate: "every integer has a successor."</p>
+    <details class="step" open><summary>Step 1 — identify the domain and the "for every" part</summary>
+      <div class="step-body"><p>"Every integer" → \(\forall n \in \mathbb{Z}\).</p></div></details>
+    <details class="step"><summary>Step 2 — identify the "has a ___" part — that's an existence claim, nested inside</summary>
+      <div class="step-body"><p>"has a successor" → there exists some integer that is one more than n: \(\exists m \in \mathbb{Z}\) such that \(m = n+1\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\forall n \in \mathbb{Z},\ \exists m \in \mathbb{Z} \text{ such that } m = n+1\). Quantifiers nest exactly like this constantly — a ∀ setting up "for any instance," then an ∃ inside it making an existence claim about that instance.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — negating a quantified statement</div>
+    <p>Negate: "there exists an even prime greater than 2."</p>
+    <details class="step" open><summary>Step 1 — formalize the original</summary>
+      <div class="step-body"><p>\(\exists n\ \big(\text{prime}(n) \wedge \text{even}(n) \wedge n>2\big)\)</p></div></details>
+    <details class="step"><summary>Step 2 — apply 4.4.2: ∃ flips to ∀, negate the inside</summary>
+      <div class="step-body"><p>\(\forall n\ \neg\big(\text{prime}(n) \wedge \text{even}(n) \wedge n>2\big)\)</p></div></details>
+    <details class="step"><summary>Step 3 — De Morgan's law (Chapter 3) on the negated conjunction</summary>
+      <div class="step-body"><p>\(\forall n\ \big(\neg\text{prime}(n) \vee \neg\text{even}(n) \vee n \le 2\big)\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>"For every n: n is not prime, or n is not even, or n ≤ 2." And this negation is actually <strong>true</strong> — 2 is the only even prime, and it fails the "greater than 2" condition, so no n ever satisfies all three original conditions at once.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Flipping the quantifier but leaving the predicate alone (or the reverse). Negating <code>∀x, x &gt; 0</code> as <code>∀x, x ≤ 0</code> is wrong — that flipped the predicate but kept ∀, claiming <em>every</em> x is ≤ 0, which is far stronger (and different) than what the true negation says. Negating it as <code>∃x, x &gt; 0</code> is also wrong — that flipped the quantifier but not the predicate, which isn't even a negation, it's unrelated. The correct negation flips <strong>both</strong>, together: <code>∃x, x ≤ 0</code> — "it's not true that every x is positive" just means "some x fails to be positive," nothing about all of them.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="∃x: x≤0,∃x: x<=0,there exists x such that x≤0,there exists x such that x<=0">
+    <div class="label">Try it yourself</div>
+    <p>Negate: <code>∀x, x &gt; 0</code> (type e.g. <code>∃x: x≤0</code>):</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. ∃x: x≤0" aria-label="negate for all x, x greater than 0">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Translate: "some integer is negative."
+      <details class="answer"><summary></summary><div class="ans-body">\(\exists n \in \mathbb{Z},\ n < 0\)</div></details></li>
+    <li>Translate: "every real number squared is non-negative."
+      <details class="answer"><summary></summary><div class="ans-body">\(\forall x \in \mathbb{R},\ x^2 \ge 0\)</div></details></li>
+    <li>Negate: <code>∃x, x² = -1</code> (over the reals)
+      <details class="answer"><summary></summary><div class="ans-body">\(\forall x \in \mathbb{R},\ x^2 \ne -1\)</div></details></li>
+    <li>Negate: <code>∀n, n is even</code>
+      <details class="answer"><summary></summary><div class="ans-body">\(\exists n,\ n\) is not even (i.e. n is odd)</div></details></li>
+    <li>Is "∀x, ∃y such that y &gt; x" true over the real numbers? What does it mean in plain English?
+      <details class="answer"><summary></summary><div class="ans-body">True — for every real number there's a bigger one; the reals have no maximum.</div></details></li>
+    <li>Translate and then negate: "there exists a prime number that is even." (State both the formal statement and its negation.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\exists n\,(\text{prime}(n)\wedge\text{even}(n))\); negation: \(\forall n\,(\neg\text{prime}(n)\vee\neg\text{even}(n))\).</div></details></li>
+    <li class="tag">bonus — An "all systems ready" indicator is high iff every subsystem's ready-bit is 1. Write this as a quantified statement, and its negation, over subsystems i.
+      <details class="answer"><summary></summary><div class="ans-body">Ready: \(\forall i,\ b_i=1\). Negation (4.4.1): \(\exists i,\ b_i \ne 1\) — "at least one subsystem isn't ready."</div></details></li>
+    <li class="tag">bonus — Negate: <code>∀x ∃y, x+y=0</code> (careful — two quantifiers, apply the rule twice from the outside in).
+      <details class="answer"><summary></summary><div class="ans-body">\(\exists x\ \forall y,\ x+y \ne 0\) — outer ∀ flips to ∃ first, then the inner ∃ (now inside the negation) flips to ∀.</div></details></li>
+    <li class="tag">bonus — Is <code>∀x ∃y, y &gt; x</code> the same statement as <code>∃y ∀x, y &gt; x</code>? (Try to decide true/false for each over the reals, don't just compare symbols.)
+      <details class="answer"><summary></summary><div class="ans-body">No — order matters. The first is true (for any x, pick y=x+1). The second claims one single y bigger than every real number, which is false — no such y exists.</div></details></li>
+    <li class="tag">bonus — Translate: "no integer is both even and odd." Give it directly as a ∀ statement (not a negated ∃).
+      <details class="answer"><summary></summary><div class="ans-body">\(\forall n \in \mathbb{Z},\ \neg(\text{even}(n) \wedge \text{odd}(n))\)</div></details></li>
+    <li class="tag">challenge — Prove "no integer is both even and odd" and "there is no integer that is both even and odd" are the same claim by showing one is the De Morgan negation of <code>∃n\,(\text{even}(n)\wedge\text{odd}(n))\)</code>, matching your answer to the previous problem exactly.
+      <details class="answer"><summary></summary><div class="ans-body">Negating \(\exists n\,(\text{even}(n)\wedge\text{odd}(n))\) via 4.4.2 gives \(\forall n\,\neg(\text{even}(n)\wedge\text{odd}(n))\) — identical to the previous answer, confirming "no n is both" and "not (some n is both)" are the same statement, formally.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-logical-equivalences-demorgan.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-set-notation.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 4 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:4", "content/m04-logic/ch04-quantifiers.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Limit Laws | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 5 · Calculus I — Limits &amp; Continuity</a> → Chapter 4 of 12</div>
+  <div class="eyebrow">Chapter 4 · concept:limit-laws</div>
+  <h1>Limit Laws</h1>
+  <p class="subtitle">Chapters 1–3 built limits by inspection: tables, one-sided reasoning, naming failure modes. This chapter gives algebraic rules so most limits can be evaluated directly, with no table required — and explains precisely why "just plug in" is usually legal, and exactly when it stops being legal.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Limits of well-behaved functions turn out to pass cleanly through ordinary arithmetic: the limit of a sum is the sum of the limits, the limit of a product is the product of the limits, and so on. That's not obvious in advance — it has to be proven (a fully rigorous proof needs the formal <code>ε–δ</code> definition, outside this course's scope, but the statements themselves are exactly what you'd hope for). Once you have these rules, "direct substitution" stops being a guess you hope works and becomes a provable shortcut for an entire family of functions — which is exactly why Chapter 5 needs a different technique the moment this family's assumptions break down.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Sum and difference law</div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x\to a}\left[f(x)\pm g(x)\right] = \lim_{x\to a}f(x) \pm \lim_{x\to a}g(x) \]</div><div class="eq-num" id="eq-5-4-1">(5.4.1)</div></div>
+    <p>Provided both individual limits on the right exist.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Product law</div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x\to a}\left[f(x)\cdot g(x)\right] = \lim_{x\to a}f(x) \cdot \lim_{x\to a}g(x) \]</div><div class="eq-num" id="eq-5-4-2">(5.4.2)</div></div>
+    <p>Same condition — both individual limits must exist. A constant multiple is a special case (<code>g(x)=c</code> everywhere): the limit of <code>c·f(x)</code> is just <code>c</code> times the limit of <code>f(x)</code>.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Quotient law</div>
+    <div class="eqn"><div class="eq-body">\[ \lim_{x\to a}\frac{f(x)}{g(x)} = \frac{\displaystyle\lim_{x\to a}f(x)}{\displaystyle\lim_{x\to a}g(x)}, \quad\text{provided } \lim_{x\to a}g(x) \neq 0 \]</div><div class="eq-num" id="eq-5-4-3">(5.4.3)</div></div>
+    <p>The nonzero-denominator condition is not fine print — it's the exact seam where Chapter 5 picks up. When it fails, this law simply doesn't apply; it says nothing at all about whether the limit exists, only that <em>this particular tool</em> can't answer the question.</p>
+  </div>
+
+  <p>A direct consequence of applying (5.4.1) and (5.4.2) repeatedly: for any polynomial <code>p(x)</code> (built entirely out of sums, differences, and products of <code>x</code> with constants), <code>lim<sub>x→a</sub> p(x) = p(a)</code> — direct substitution always works. More generally this holds for any function that is <em>continuous</em> at <code>a</code>, a term Chapter 8 makes precise; for now, treat "polynomial, or a nice combination like it" as the working definition.</p>
+
+  <div class="block example">
+    <div class="label">Worked example — direct substitution as an application of the laws</div>
+    <p>Evaluate <code>lim<sub>x→2</sub> (3x²−5x+1)</code> by applying the laws piece by piece, rather than just plugging in.</p>
+    <details class="step" open><summary>Step 1 — split the sum via (5.4.1)</summary>
+      <div class="step-body"><p>\(\displaystyle\lim_{x\to2}(3x^2-5x+1) = \lim_{x\to2}3x^2 \;-\; \lim_{x\to2}5x \;+\; \lim_{x\to2}1\)</p></div></details>
+    <details class="step"><summary>Step 2 — evaluate the most basic limit first: lim x→2 x</summary>
+      <div class="step-body"><p>The limit of the identity function \(x\) as \(x\to2\) is trivially \(2\) — as \(x\) approaches 2, \(x\) itself approaches 2.</p></div></details>
+    <details class="step"><summary>Step 3 — build each term with the product law (5.4.2)</summary>
+      <div class="step-body"><p>\(\lim_{x\to2}3x^2 = 3\cdot\lim_{x\to2}x\cdot\lim_{x\to2}x = 3(2)(2)=12\). \(\lim_{x\to2}5x = 5\cdot2=10\). \(\lim_{x\to2}1 = 1\) (a constant's limit is itself).</p></div></details>
+    <details class="step"><summary>Result — combine</summary>
+      <div class="step-body"><p>\(12 - 10 + 1 = 3\). This matches plugging \(x=2\) directly into \(3x^2-5x+1\) — which is exactly the point. "Just plug in" isn't a separate shortcut; it's what these three laws collapse to, every time, for a polynomial.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Applying the quotient law (5.4.3) when the denominator's limit is <code>0</code>. For example, <code>lim<sub>x→2</sub> (x²−4)/(x−2)</code> — the exact expression from Chapter 1's worked example — has denominator limit <code>0</code> at <code>x=2</code>, so (5.4.3) simply does not apply here; writing "the limit is <code>0/0</code>, so it doesn't exist" is <strong>not</strong> a valid conclusion, it's a sign the wrong tool was reached for. Chapter 1 already showed this limit exists and equals <code>4</code> (by table); Chapter 5 gives the algebraic method that gets there directly.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="5">
+    <div class="label">Try it yourself</div>
+    <p>Evaluate <code>lim<sub>x→1</sub> (2x+3)</code>:</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="your answer" aria-label="limit as x approaches 1 of 2x+3">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Evaluate <code>lim<sub>x→3</sub> (4x−1)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(11\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→−2</sub> (x²+3x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(4-6=-2\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→0</sub> (5x³−2x+7)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(7\)</div></details></li>
+    <li>Evaluate <code>lim<sub>x→4</sub> √x</code>. (State briefly why direct substitution is justified here.)
+      <details class="answer"><summary></summary><div class="ans-body">\(2\) — \(\sqrt{x}\) is continuous at \(x=4\) (it's in its domain, with no gaps nearby), so direct substitution applies the same way it does for a polynomial.</div></details></li>
+    <li>Evaluate <code>lim<sub>x→2</sub> (x²+1)/(x+3)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Denominator's limit is \(5\neq0\), so (5.4.3) applies directly: \(5/5=1\).</div></details></li>
+    <li>Explain why <code>lim<sub>x→5</sub> (x−5)/(x−5)</code> can't be evaluated with the quotient law directly, even though the expression obviously simplifies to <code>1</code> for every <code>x≠5</code>.
+      <details class="answer"><summary></summary><div class="ans-body">The quotient law's precondition requires the denominator's limit, \(\lim_{x\to5}(x-5)=0\), to be nonzero — it isn't, so the law simply doesn't apply here. That doesn't mean the limit fails to exist (it does exist, and equals 1) — it means this particular law can't be the tool that shows it.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→−1</sub> (2x+1)(x−4)</code> using the product law explicitly (state the two individual limits before multiplying).
+      <details class="answer"><summary></summary><div class="ans-body">\(\lim(2x+1)=-1\), \(\lim(x-4)=-5\). Product: \((-1)(-5)=5\).</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→0</sub> (x²+2x+1)/(x+5)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1/5\)</div></details></li>
+    <li class="tag">bonus — True or false: every rational function <code>P(x)/Q(x)</code> can always be evaluated at any point <code>a</code> by direct substitution.
+      <details class="answer"><summary></summary><div class="ans-body">False — only where \(Q(a)\neq0\); the quotient law's precondition fails otherwise.</div></details></li>
+    <li class="tag">bonus — Evaluate <code>lim<sub>x→3</sub> 7</code> (the limit of a constant function). Which fact does this rely on?
+      <details class="answer"><summary></summary><div class="ans-body">\(7\) — a constant function's limit anywhere is just that constant; it's the trivial base case these laws build on top of.</div></details></li>
+    <li class="tag">challenge — Using only the sum/difference and product laws (not "just plug in"), show step by step that <code>lim<sub>x→a</sub> xⁿ = aⁿ</code> for a positive integer <code>n</code>, by repeatedly applying the product law.
+      <details class="answer"><summary></summary><div class="ans-body">Base case: \(\lim_{x\to a}x=a\) (trivial). Inductive step: assume \(\lim_{x\to a}x^k=a^k\). Then \(\lim_{x\to a}x^{k+1}=\lim_{x\to a}(x^k\cdot x)=\left(\lim_{x\to a}x^k\right)\left(\lim_{x\to a}x\right)=a^k\cdot a=a^{k+1}\), by the product law. By induction, this holds for every positive integer \(n\).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-when-limits-dont-exist.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-evaluating-by-factoring.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 5 · Calculus I — Limits &amp; Continuity</span>
+  <span>Chapter 4 / 12</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m05:4", "content/m05-limits/ch04-limit-laws.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

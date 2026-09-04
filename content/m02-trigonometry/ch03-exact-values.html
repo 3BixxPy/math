@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Exact Values — the 30-60-90 and 45-45-90 Triangles | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 3 of 15</div>
+  <div class="eyebrow">Chapter 3 · concept:reference-angles, concept:exact-trig-values</div>
+  <h1>Exact Values — the 30-60-90 and 45-45-90 Triangles</h1>
+  <p class="subtitle">The unit circle tells you what cosine and sine <em>mean</em>. This chapter tells you their exact values at the angles that show up constantly — no calculator, no decimals, just clean fractions and radicals you can carry into an identity or an equation.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>A decimal approximation like <code>sin(30°) ≈ 0.5</code> hides the fact that it's <em>exactly</em> \(1/2\) — and "exactly \(1/2\)" is what lets you solve equations, prove identities, and simplify expressions cleanly later in this module. Two right triangles, both provable with the Pythagorean theorem you already know from Module 0, generate every exact value you'll need.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">The two reference triangles</div>
+    <p><strong>45-45-90 triangle</strong> (an isosceles right triangle): legs 1 and 1, hypotenuse \(\sqrt{1^2+1^2}=\sqrt{2}\). Both non-right angles are 45°, and by SOH-CAH-TOA (Chapter 5 formalizes this, but the ratio idea is intuitive now):</p>
+    <div class="eqn"><div class="eq-body">\[ \sin 45^\circ = \cos 45^\circ = \frac{1}{\sqrt2} = \frac{\sqrt2}{2} \]</div><div class="eq-num" id="eq-2-3-1">(2.3.1)</div></div>
+    <p><strong>30-60-90 triangle</strong>: sides 1, \(\sqrt3\), and hypotenuse 2 (drop an altitude in an equilateral triangle of side 2 and this is exactly the half you get — the short leg 1 is half the equilateral's side, and \(\sqrt{2^2-1^2}=\sqrt3\) is the altitude). Reading off the 30° and 60° angles:</p>
+    <div class="eqn"><div class="eq-body">\[ \sin 30^\circ = \frac12,\ \cos 30^\circ = \frac{\sqrt3}{2}, \qquad \sin 60^\circ = \frac{\sqrt3}{2},\ \cos 60^\circ = \frac12 \]</div><div class="eq-num" id="eq-2-3-2">(2.3.2)</div></div>
+    <p>Notice 30° and 60° swap sine and cosine with each other — that's not a coincidence either; they're complementary angles (add to 90°), and a triangle's two non-right angles always share their opposite/adjacent legs in swapped roles.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Reference angle</div>
+    <p>The <strong>reference angle</strong> of \(\theta\) is the acute angle (always between 0° and 90°) formed between \(\theta\)'s terminal side and the x-axis. Every angle, in any quadrant, has a reference angle among \(\{30°, 45°, 60°, 0°, 90°\}\) for the "nice" angles this module uses — and \(\sin\theta\), \(\cos\theta\) always have the <em>same magnitude</em> as the sine/cosine of that reference angle. Only the <strong>sign</strong> can differ, and the sign is decided entirely by which quadrant \(\theta\) lands in.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Quadrant signs ("All Students Take Calculus")</div>
+    <p>Going counterclockwise from quadrant I: <strong>A</strong>ll (QI: sin, cos, tan all positive) → <strong>S</strong>ine (QII: only sin positive) → <strong>T</strong>angent (QIII: only tan positive) → <strong>C</strong>osine (QIV: only cos positive). Since \(\sin\theta\) is a y-coordinate and \(\cos\theta\) an x-coordinate on the unit circle (Chapter 2), this is really just "which coordinates are positive in each quadrant" restated as a mnemonic.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find <code>sin(120°)</code> exactly.</p>
+    <details class="step" open><summary>Step 1 — find the reference angle</summary>
+      <div class="step-body"><p>120° is in quadrant II, \(180°-120°=60°\) from the negative x-axis... more directly: the reference angle is the acute angle to the <em>nearest</em> x-axis, which is \(180°-120°=60°\).</p></div></details>
+    <details class="step"><summary>Step 2 — look up the reference angle's value (magnitude only)</summary>
+      <div class="step-body"><p>\(\sin 60° = \sqrt3/2\) (equation 2.3.2) — so \(\sin 120°\) has magnitude \(\sqrt3/2\).</p></div></details>
+    <details class="step"><summary>Step 3 — fix the sign using the quadrant</summary>
+      <div class="step-body"><p>120° is in QII, where sine is positive ("All <strong>S</strong>tudents"). So the sign stays positive.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\sin 120° = \dfrac{\sqrt3}{2}\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — a quadrant III case</div>
+    <p>Find <code>cos(225°)</code> exactly.</p>
+    <details class="step" open><summary>Step 1 — reference angle</summary>
+      <div class="step-body"><p>225° is in quadrant III; \(225°-180°=45°\) from the negative x-axis, so the reference angle is 45°.</p></div></details>
+    <details class="step"><summary>Step 2 — magnitude from the reference angle</summary>
+      <div class="step-body"><p>\(\cos 45° = \sqrt2/2\) (equation 2.3.1).</p></div></details>
+    <details class="step"><summary>Step 3 — sign from the quadrant</summary>
+      <div class="step-body"><p>225° is in QIII, where only tangent is positive ("Take <strong>C</strong>alculus" hasn't happened yet) — cosine is negative there.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>\(\cos 225° = -\dfrac{\sqrt2}{2}\)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Getting the reference-angle <em>magnitude</em> exactly right, then forgetting to check the sign — or worse, assuming everything is positive because "the triangle's sides are all positive lengths." The triangle only ever tells you the magnitude. The sign is a separate step that depends entirely on the quadrant, and it's easy to skip when you're confident about the arithmetic. Always do both steps, every time: magnitude from the reference angle, sign from the quadrant.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="-1/2,-0.5">
+    <div class="label">Try it yourself</div>
+    <p>Find <code>sin(210°)</code> exactly.</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. -1/2" aria-label="sine of 210 degrees">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find <code>cos(30°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sqrt3/2\)</div></details></li>
+    <li>Find <code>sin(45°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sqrt2/2\)</div></details></li>
+    <li>Find the reference angle of <code>150°</code>, then use it to find <code>sin(150°)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Reference angle 30°; QII sine is positive: \(\sin150°=1/2\)</div></details></li>
+    <li>Find <code>cos(300°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">Reference angle 60°, QIV cosine positive: \(1/2\)</div></details></li>
+    <li>Find <code>sin(315°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">Reference angle 45°, QIV sine negative: \(-\sqrt2/2\)</div></details></li>
+    <li>Find <code>cos(150°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">Reference angle 30°, QII cosine negative: \(-\sqrt3/2\)</div></details></li>
+    <li class="tag">bonus — Find <code>sin(240°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">Reference angle 60°, QIII sine negative: \(-\sqrt3/2\)</div></details></li>
+    <li class="tag">bonus — Find <code>cos(-60°)</code> exactly. (Negative angle — measured clockwise, Chapter 1.)
+      <details class="answer"><summary></summary><div class="ans-body">\(-60°\) lands in the same place as \(300°\) (QIV), reference angle 60°, cosine positive: \(1/2\)</div></details></li>
+    <li class="tag">bonus — Which two quadrants give <code>cos θ</code> the same sign?
+      <details class="answer"><summary></summary><div class="ans-body">QI and QIV — both positive (from "All Students Take Calculus": A has all positive, C is cosine's quadrant).</div></details></li>
+    <li class="tag">bonus — Find <code>sin(135°)</code> and <code>cos(135°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">Reference angle 45°, QII: sine positive, cosine negative. \(\sin135°=\sqrt2/2\), \(\cos135°=-\sqrt2/2\)</div></details></li>
+    <li class="tag">challenge — Without computing sign, explain why <code>sin(150°) = sin(30°)</code> exactly (not just approximately), using the unit circle picture from Chapter 2.
+      <details class="answer"><summary></summary><div class="ans-body">150° and 30° are mirror images across the y-axis on the unit circle — same y-coordinate (height above the x-axis), opposite x-coordinates. Since \(\sin\theta\) is the y-coordinate (Chapter 2), reflecting across the y-axis leaves it unchanged, which is exactly what "same reference angle, same quadrant sign for sine in QI/QII" means geometrically.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-unit-circle.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-tan-cot-sec-csc.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 3 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:3", "content/m02-trigonometry/ch03-exact-values.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 2 — The Unit Circle — Sine and Cosine Defined | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 2 of 15</div>
+  <div class="eyebrow">Chapter 2 · concept:unit-circle, concept:sine-cosine-definition</div>
+  <h1>The Unit Circle — Sine and Cosine Defined</h1>
+  <p class="subtitle">Chapter 1 gave you the unit angles are measured in. This chapter gives you the actual definition of sine and cosine — the one that makes them computable, not just "something about a wave."</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every fact you'll learn about sine and cosine for the rest of this module — exact values, graphs, identities, equations — traces back to one picture: a circle of radius 1, centered at the origin. Sine and cosine aren't defined by a graph or a wave; the wave is a <em>consequence</em> of this circle, not the definition. Get the circle right and everything downstream gets easier to re-derive instead of memorize.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Unit circle</div>
+    <p>The <strong>unit circle</strong> is the circle centered at the origin with radius 1. Its equation is \(x^2+y^2=1\).</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Sine and cosine</div>
+    <p>Place an angle \(\theta\) in standard position (initial side on the positive x-axis, counterclockwise positive — Chapter 1's convention). Its terminal side crosses the unit circle at exactly one point. That point's coordinates are, <em>by definition</em>, cosine and sine of \(\theta\):</p>
+    <div class="eqn"><div class="eq-body">\[ \text{terminal point of } \theta = (\cos\theta,\ \sin\theta) \]</div><div class="eq-num" id="eq-2-2-1">(2.2.1)</div></div>
+    <p>The x-coordinate is \(\cos\theta\). The y-coordinate is \(\sin\theta\). That's the whole definition — no triangle, no calculator, just a point on a circle.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>angle: <input type="range" id="uc-slider" min="0" max="360" step="5" value="60"></label>
+  </div>
+  <div class="plot-wrap"><svg id="uc-svg" viewBox="0 0 280 280" width="280" height="280"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="uc-readout">θ = 60° → (cos θ, sin θ) = (0.500, 0.866)</span></div>
+  <script>
+  (function () {
+    const svg = document.getElementById("uc-svg");
+    const slider = document.getElementById("uc-slider");
+    const cx = 140, cy = 140, r = 100;
+    function update() {
+      const deg = parseInt(slider.value, 10);
+      const rad = (deg * Math.PI) / 180;
+      const cosT = Math.cos(rad), sinT = Math.sin(rad);
+      const x = cx + r * cosT, y = cy - r * sinT;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      svg.appendChild(MCPlot.el("line", { x1: 15, y1: cy, x2: 265, y2: cy, style: "stroke:var(--text-dim); stroke-width:1.5" }));
+      svg.appendChild(MCPlot.el("line", { x1: cx, y1: 15, x2: cx, y2: 265, style: "stroke:var(--text-dim); stroke-width:1.5" }));
+      svg.appendChild(MCPlot.el("circle", { cx, cy, r, style: "fill:none; stroke:var(--border); stroke-width:2" }));
+      svg.appendChild(MCPlot.el("line", { x1: x, y1: y, x2: x, y2: cy, style: "stroke:var(--mis-border); stroke-width:1.5; stroke-dasharray:4 3" }));
+      svg.appendChild(MCPlot.el("line", { x1: x, y1: y, x2: cx, y2: y, style: "stroke:var(--ex-border); stroke-width:1.5; stroke-dasharray:4 3" }));
+      svg.appendChild(MCPlot.el("line", { x1: cx, y1: cy, x2: x, y2: y, style: "stroke:var(--accent); stroke-width:2.5" }));
+      svg.appendChild(MCPlot.el("circle", { cx: x, cy: y, r: 4.5, style: "fill:var(--accent)" }));
+      const cosLabel = MCPlot.el("text", { x: x, y: cy + (sinT >= 0 ? 16 : -8), "text-anchor": "middle", style: "font-size:11px; fill:var(--mis-border); font-family:sans-serif; font-weight:600" });
+      cosLabel.textContent = "cos θ";
+      svg.appendChild(cosLabel);
+      const sinLabel = MCPlot.el("text", { x: cx + (cosT >= 0 ? -8 : 8), y: y + 4, "text-anchor": cosT >= 0 ? "end" : "start", style: "font-size:11px; fill:var(--ex-border); font-family:sans-serif; font-weight:600" });
+      sinLabel.textContent = "sin θ";
+      svg.appendChild(sinLabel);
+      document.getElementById("uc-readout").textContent = "θ = " + deg + "° → (cos θ, sin θ) = (" + cosT.toFixed(3) + ", " + sinT.toFixed(3) + ")";
+    }
+    slider.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block theorem">
+    <div class="label">Rule — Domain and range of sine and cosine</div>
+    <div class="eqn"><div class="eq-body">\[ -1 \le \cos\theta \le 1 \qquad \text{and} \qquad -1 \le \sin\theta \le 1 \quad \text{for every real } \theta \]</div><div class="eq-num" id="eq-2-2-2">(2.2.2)</div></div>
+    <p>The domain is <em>all</em> real numbers — any angle at all, including negatives and angles past a full turn, always lands on some point of the circle. The range is bounded to \([-1,1]\) for exactly the reason the diagram shows: the point can never leave a circle of radius 1, so neither coordinate can ever exceed 1 in absolute value.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the three easiest angles</div>
+    <p>Find \(\cos\theta\) and \(\sin\theta\) at \(\theta = 0\), \(\pi/2\), and \(\pi\) — straight from the circle, no computation needed.</p>
+    <details class="step" open><summary>Step 1 — θ = 0: the terminal side hasn't moved off the positive x-axis</summary>
+      <div class="step-body"><p>The point is \((1,0)\), so \(\cos 0 = 1\), \(\sin 0 = 0\).</p></div></details>
+    <details class="step"><summary>Step 2 — θ = π/2: a quarter turn, straight up the y-axis</summary>
+      <div class="step-body"><p>The point is \((0,1)\), so \(\cos(\pi/2) = 0\), \(\sin(\pi/2) = 1\).</p></div></details>
+    <details class="step"><summary>Step 3 — θ = π: a half turn, straight left</summary>
+      <div class="step-body"><p>The point is \((-1,0)\), so \(\cos\pi = -1\), \(\sin\pi = 0\).</p></div></details>
+    <details class="step"><summary>Worth memorizing</summary>
+      <div class="step-body"><p>These "quadrantal" angles are the anchor points everything else in this module gets checked against: \(\theta=0 \to (1,0)\), \(\theta=\pi/2 \to (0,1)\), \(\theta=\pi \to (-1,0)\).</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — the other two quadrantal angles</div>
+    <p>Find \(\cos\theta\) and \(\sin\theta\) at \(\theta = 3\pi/2\) and \(\theta = 2\pi\).</p>
+    <details class="step" open><summary>Step 1 — θ = 3π/2: three-quarters of a turn, straight down</summary>
+      <div class="step-body"><p>The point is \((0,-1)\), so \(\cos(3\pi/2) = 0\), \(\sin(3\pi/2) = -1\).</p></div></details>
+    <details class="step"><summary>Step 2 — θ = 2π: a full turn, back where you started</summary>
+      <div class="step-body"><p>The point is \((1,0)\) again — same as \(\theta=0\). So \(\cos(2\pi)=1\), \(\sin(2\pi)=0\). This "coming back around" behavior is exactly what Chapter 6 formalizes as periodicity.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Mixing up which coordinate is which — writing \(\cos\theta\) for the y-value or \(\sin\theta\) for the x-value. Don't try to memorize "cosine is x" as an arbitrary fact; re-derive it from the one anchor point you're least likely to forget: at \(\theta=0\) you're sitting exactly on the positive x-axis at \((1,0)\). \(\cos 0 = 1\) matches the x-coordinate, \(\sin 0 = 0\) matches the y-coordinate. If you ever blank on which is which mid-problem, check that anchor point first.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="-1">
+    <div class="label">Try it yourself</div>
+    <p>What is <code>cos(π)</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="e.g. -1" aria-label="cosine of pi">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>What are the coordinates of the point on the unit circle at <code>θ = 0</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\((1,0)\)</div></details></li>
+    <li>Using the unit circle, find <code>sin(π/2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(1\)</div></details></li>
+    <li>Using the unit circle, find <code>cos(3π/2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(0\)</div></details></li>
+    <li>What point on the unit circle corresponds to <code>θ = 2π</code>? Why is that not a coincidence?
+      <details class="answer"><summary></summary><div class="ans-body">\((1,0)\) — same as \(\theta=0\), because \(2\pi\) is exactly one full trip around the circle back to the start.</div></details></li>
+    <li>Is there any real number <code>θ</code> for which <code>cos θ = 2</code>? Explain using equation 2.2.2.
+      <details class="answer"><summary></summary><div class="ans-body">No. \(\cos\theta\) is an x-coordinate on a circle of radius 1, so it can never exceed 1 in absolute value.</div></details></li>
+    <li>Find <code>sin(π)</code> and <code>cos(0)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sin\pi=0\), \(\cos 0=1\)</div></details></li>
+    <li class="tag">bonus — If <code>cos θ = 0</code>, name two possible values of <code>θ</code> in <code>[0, 2π)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\pi/2\) and \(3\pi/2\)</div></details></li>
+    <li class="tag">bonus — A point on the unit circle is <code>(0, -1)</code>. Name one angle <code>θ</code> in <code>[0, 2π)</code> that produces it.
+      <details class="answer"><summary></summary><div class="ans-body">\(3\pi/2\)</div></details></li>
+    <li class="tag">bonus — True or false: every point on the unit circle equals <code>(cos θ, sin θ)</code> for some real <code>θ</code>, and every real <code>θ</code> produces a point on the unit circle.
+      <details class="answer"><summary></summary><div class="ans-body">True — that correspondence is exactly the definition in this chapter.</div></details></li>
+    <li class="tag">bonus — Without a calculator, explain why <code>sin θ</code> can never equal <code>1.5</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sin\theta\) is a y-coordinate on a circle of radius 1 — it's bounded to \([-1,1]\) by equation 2.2.2, no matter what \(\theta\) is.</div></details></li>
+    <li class="tag">challenge — Explain why <code>cos²θ + sin²θ = 1</code> must be true for <em>every</em> θ, using only the definition in this chapter (don't just cite it as a memorized fact).
+      <details class="answer"><summary></summary><div class="ans-body">\((\cos\theta,\sin\theta)\) is defined as a point lying on the unit circle \(x^2+y^2=1\). Substituting \(x=\cos\theta\) and \(y=\sin\theta\) into that equation gives \(\cos^2\theta+\sin^2\theta=1\) directly — it's not a separate fact, it's the circle's own equation restated. (This becomes Chapter 9's Pythagorean identity.)</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch01-angles-radians.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch03-exact-values.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 2 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:2", "content/m02-trigonometry/ch02-unit-circle.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — Transforming Sine &amp; Cosine — Amplitude, Period, Phase Shift | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 7 of 15</div>
+  <div class="eyebrow">Chapter 7 · concept:trig-amplitude-period-phase</div>
+  <h1>Transforming Sine &amp; Cosine — Amplitude, Period, Phase Shift</h1>
+  <p class="subtitle">Nothing new here structurally — this is Module 1's shift/stretch/reflection toolkit (Chapters 6–7 there) applied to sin and cos, plus one new wrinkle: stretching the x-axis changes the <em>period</em>, not just the shape's width.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Real waves — sound, light, tides, AC current, physics oscillations — are almost never plain <code>sin x</code>. They have their own height (amplitude), speed (period), starting point (phase shift), and baseline (vertical shift). This chapter is how you read all four off an equation, or build the equation from a description.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Theorem — General transformed sine</div>
+    <div class="eqn"><div class="eq-body">\[ y = A\sin\big(B(x-C)\big) + D \]</div><div class="eq-num" id="eq-2-7-1">(2.7.1)</div></div>
+    <ul>
+      <li><strong>Amplitude</strong> \(=|A|\) — a <a href="../m01-functions/ch07-transformations-stretch-reflect.html">vertical stretch/compression</a> (Module 1, concept:vertical-stretch-compression), same rule as any function.</li>
+      <li><strong>Period</strong> \(=\dfrac{2\pi}{|B|}\) — this one's new: stretching the x-axis by a factor doesn't just widen the graph, it changes how much x it takes to complete one cycle.</li>
+      <li><strong>Phase shift</strong> \(=C\) — a <a href="../m01-functions/ch06-transformations-shifts.html">horizontal shift</a> (Module 1, concept:horizontal-shift), just given a wave-specific name.</li>
+      <li><strong>Vertical shift</strong> \(=D\) — an ordinary <a href="../m01-functions/ch06-transformations-shifts.html">vertical shift</a> (Module 1, concept:vertical-shift).</li>
+    </ul>
+    <p>Everything except the period formula is literally Module 1's transformation rules — reused, not re-derived.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Period formula</div>
+    <div class="eqn"><div class="eq-body">\[ T = \frac{2\pi}{|B|} \]</div><div class="eq-num" id="eq-2-7-2">(2.7.2)</div></div>
+    <p>Why: the base wave <code>sin x</code> completes one cycle every time its input increases by \(2\pi\). In <code>sin(Bx)</code>, the input is scaled by \(B\) — so \(x\) itself only needs to increase by \(2\pi/B\) for \(Bx\) to increase by a full \(2\pi\). Bigger \(B\) means the wave repeats faster (shorter period); \(B\) between 0 and 1 stretches the wave out (longer period).</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>A: <input type="range" id="tr-a" min="-3" max="3" step="0.5" value="1"></label>
+    <label>B: <input type="range" id="tr-b" min="0.5" max="3" step="0.5" value="1"></label>
+    <label>phase (C): <input type="range" id="tr-c" min="-4" max="4" step="1" value="0"></label>
+    <label>D: <input type="range" id="tr-d" min="-3" max="3" step="0.5" value="0"></label>
+  </div>
+  <div class="plot-wrap"><svg id="tr-svg" viewBox="0 0 520 300" width="520" height="300"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="tr-readout"></span></div>
+  <script>
+  (function () {
+    const svg = document.getElementById("tr-svg");
+    const PI = Math.PI;
+    const aI = document.getElementById("tr-a"), bI = document.getElementById("tr-b"), cI = document.getElementById("tr-c"), dI = document.getElementById("tr-d");
+    const readout = document.getElementById("tr-readout");
+    function gcd(x, y) { return y === 0 ? x : gcd(y, x % y); }
+    function piFrac(n) {
+      if (n === 0) return "0";
+      const sign = n < 0 ? "-" : "";
+      const a = Math.abs(n);
+      const g = gcd(a, 4) || 1;
+      const rn = a / g, rd = 4 / g;
+      let s = rn === 1 ? "π" : rn + "π";
+      if (rd !== 1) s += "/" + rd;
+      return sign + s;
+    }
+    function update() {
+      const A = parseFloat(aI.value), B = parseFloat(bI.value), n = parseInt(cI.value, 10), D = parseFloat(dI.value);
+      const C = (n * PI) / 4;
+      const width = 520, height = 300, pad = 34;
+      const xMin = -2 * PI, xMax = 2 * PI;
+      const halfSpan = Math.abs(A) + 1;
+      const yMin = D - halfSpan - 0.5, yMax = D + halfSpan + 0.5;
+      const opts = { xMin, xMax, yMin, yMax, width, height, pad };
+      const { px, py } = MCPlot.mapper(opts);
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      svg.appendChild(MCPlot.el("line", { x1: px(xMin), y1: py(0), x2: px(xMax), y2: py(0), class: "plot-axis" }));
+      svg.appendChild(MCPlot.el("line", { x1: px(0), y1: py(yMin), x2: px(0), y2: py(yMax), class: "plot-axis" }));
+      const marks = [-2, -1.5, -1, -0.5, 0.5, 1, 1.5, 2];
+      const mlabels = ["-2π", "-3π/2", "-π", "-π/2", "π/2", "π", "3π/2", "2π"];
+      marks.forEach((m, i) => {
+        const xv = m * PI;
+        const t = MCPlot.el("text", { x: px(xv), y: py(0) + 15, "text-anchor": "middle", class: "plot-label" });
+        t.textContent = mlabels[i];
+        svg.appendChild(t);
+      });
+      svg.appendChild(MCPlot.el("line", { x1: px(xMin), y1: py(D + Math.abs(A)), x2: px(xMax), y2: py(D + Math.abs(A)), class: "plot-grid" }));
+      svg.appendChild(MCPlot.el("line", { x1: px(xMin), y1: py(D - Math.abs(A)), x2: px(xMax), y2: py(D - Math.abs(A)), class: "plot-grid" }));
+      MCPlot.plotFunction(svg, (x) => A * Math.sin(B * (x - C)) + D, opts, "plot-curve");
+      MCPlot.plotPoints(svg, [[C, D]], opts, "plot-point-alt");
+      const period = (2 * PI) / Math.abs(B || 1);
+      readout.textContent = "y = " + A + "·sin(" + B + "(x − " + piFrac(n) + ")) + " + D + "  |  amplitude " + Math.abs(A) + ", period ≈ " + period.toFixed(2) + ", phase shift " + piFrac(n) + ", vertical shift " + D;
+    }
+    [aI, bI, cI, dI].forEach((el) => el.addEventListener("input", update));
+    update();
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Dashed horizontal lines mark the max/min (amplitude); the marked point sits at the phase-shifted, vertically-shifted "start" of the cycle.</p>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Graph <code>y = 3sin(2x - π/2) + 1</code> by extracting all four parameters.</p>
+    <details class="step" open><summary>Step 1 — amplitude and vertical shift are direct</summary>
+      <div class="step-body"><p>\(A=3\) (amplitude 3), \(D=1\) (vertical shift up 1) — read straight off the front and back of the expression.</p></div></details>
+    <details class="step"><summary>Step 2 — period from B</summary>
+      <div class="step-body"><p>\(B=2\), so period \(T = 2\pi/2 = \pi\) (equation 2.7.2).</p></div></details>
+    <details class="step"><summary>Step 3 — phase shift: factor B out first</summary>
+      <div class="step-body"><p>The equation is given as \(\sin(2x - \pi/2)\), <strong>not</strong> already in the \(\sin(B(x-C))\) form. Factor the 2 out of the whole inside expression: \(2x-\dfrac{\pi}{2} = 2\left(x-\dfrac{\pi}{4}\right)\). So \(C=\pi/4\), not \(\pi/2\).</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Amplitude 3, period \(\pi\), phase shift \(\pi/4\) (right), vertical shift 1 (up). Max value \(3+1=4\), min value \(-3+1=-2\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Reading the phase shift directly off the number next to \(x\) inside the parentheses, without dividing by \(B\) first. In <code>sin(2x - π/2)</code>, it's tempting to say "phase shift = π/2" — but the theorem's form is \(\sin(B(x-C))\), a <em>factored</em> form, and \(2x-\pi/2\) is not yet factored. You must factor \(B\) out of the entire expression before \(C\) is whatever's left being subtracted from \(x\). Skipping this step is the single most common transformation error in this chapter.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="pi/2,π/2">
+    <div class="label">Try it yourself</div>
+    <p>What is the period of <code>y = cos(4x)</code>? (in terms of π, e.g. <code>pi/2</code>)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. pi/2" aria-label="period of cos 4x">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>State the amplitude, period, phase shift, and vertical shift of <code>y = 2sin(x - π) + 3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Amplitude 2, period \(2\pi\) (B=1), phase shift \(\pi\), vertical shift 3</div></details></li>
+    <li>State the period of <code>y = sin(3x)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2\pi/3\)</div></details></li>
+    <li>State the amplitude and vertical shift of <code>y = -4cos(x) - 2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Amplitude 4, vertical shift -2 (down 2)</div></details></li>
+    <li>Find the phase shift of <code>y = sin(2x + π)</code>. (Careful — factor first.)
+      <details class="answer"><summary></summary><div class="ans-body">\(2x+\pi = 2(x+\pi/2)\), so phase shift is \(-\pi/2\) (left \(\pi/2\)).</div></details></li>
+    <li>Write an equation for a sine curve with amplitude 5, period π, no phase shift, vertical shift -1.
+      <details class="answer"><summary></summary><div class="ans-body">Period \(\pi\) means \(B=2\pi/\pi=2\): \(y=5\sin(2x)-1\)</div></details></li>
+    <li>What is the maximum value of <code>y = 2sin(x) + 5</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(2+5=7\)</div></details></li>
+    <li class="tag">bonus — State the period of <code>y = cos(x/2)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(B=1/2\), period \(=2\pi/(1/2)=4\pi\)</div></details></li>
+    <li class="tag">bonus — Find the phase shift of <code>y = 4cos(3x - 3π)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(3x-3\pi=3(x-\pi)\), phase shift \(\pi\)</div></details></li>
+    <li class="tag">bonus — Write an equation for a cosine curve with amplitude 1, period \(4\pi\), phase shift \(\pi\), vertical shift 0.
+      <details class="answer"><summary></summary><div class="ans-body">\(B=2\pi/4\pi=1/2\): \(y=\cos\!\left(\dfrac12(x-\pi)\right)\)</div></details></li>
+    <li class="tag">bonus — What is the minimum value of <code>y = -3sin(x) + 2</code>, and at what phase does it occur relative to plain sine?
+      <details class="answer"><summary></summary><div class="ans-body">Minimum is \(-3+2=-1\). The negative A flips the wave, so the minimum happens where plain sin(x) would have its <em>maximum</em>.</div></details></li>
+    <li class="tag">challenge — Two waves are given: <code>y = sin(2x)</code> and <code>y = sin(2x - π)</code>. Find both periods and the phase shift between them, then explain why the second is just the first one reflected through the x-axis (same graph as <code>y = -sin(2x)</code>).
+      <details class="answer"><summary></summary><div class="ans-body">Both have period \(2\pi/2=\pi\). Phase shift of the second: \(2x-\pi=2(x-\pi/2)\), so shift \(\pi/2\) — exactly half a period. Shifting a sine wave by half its own period flips it upside down, which is why \(\sin(2x-\pi) = -\sin(2x)\) identically.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-graphing-sine-cosine.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-graphing-tangent.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 7 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:7", "content/m02-trigonometry/ch07-trig-transformations.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

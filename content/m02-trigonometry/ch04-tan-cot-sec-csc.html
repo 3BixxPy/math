@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 4 — Tangent, Cotangent, Secant, Cosecant | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 4 of 15</div>
+  <div class="eyebrow">Chapter 4 · concept:tan-cot-sec-csc-definitions, concept:trig-domain-restrictions</div>
+  <h1>Tangent, Cotangent, Secant, Cosecant</h1>
+  <p class="subtitle">Sine and cosine are the two primitive functions built directly from the unit circle. The other four trig functions aren't new ideas — every one of them is just a ratio built out of sine and cosine you already have.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>It can feel like four more things to memorize, but there's nothing new here conceptually — these four functions are all defined <em>in terms of</em> sine and cosine. Get the definitions solid now and Chapters 9–10's identities (which relate all six functions to each other) become algebra you can redo, not facts you have to trust.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Tangent and cotangent</div>
+    <div class="eqn"><div class="eq-body">\[ \tan\theta = \frac{\sin\theta}{\cos\theta}, \qquad \cot\theta = \frac{\cos\theta}{\sin\theta} = \frac{1}{\tan\theta} \]</div><div class="eq-num" id="eq-2-4-1">(2.4.1)</div></div>
+    <p>Tangent is the ratio of the y-coordinate to the x-coordinate of the unit-circle point — geometrically, the slope of the terminal side. Cotangent is tangent flipped upside down.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Secant and cosecant</div>
+    <div class="eqn"><div class="eq-body">\[ \sec\theta = \frac{1}{\cos\theta}, \qquad \csc\theta = \frac{1}{\sin\theta} \]</div><div class="eq-num" id="eq-2-4-2">(2.4.2)</div></div>
+    <p>Secant and cosecant are simply the reciprocals of cosine and sine. Together with 2.4.1, this gives all six trig functions built from just two primitives.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — Domain restrictions</div>
+    <p>You can't divide by zero, so wherever the denominator in a definition above hits zero, that function is undefined:</p>
+    <ul>
+      <li><code>tan θ</code> and <code>sec θ</code> are undefined wherever <code>cos θ = 0</code> — that's \(\theta = \pi/2 + k\pi\) for any integer \(k\) (i.e. 90°, 270°, and every 180° from there).</li>
+      <li><code>cot θ</code> and <code>csc θ</code> are undefined wherever <code>sin θ = 0</code> — that's \(\theta = k\pi\) (0°, 180°, 360°, ...).</li>
+    </ul>
+    <p>This is exactly why Chapter 8's graph of <code>y = tan x</code> has vertical asymptotes, not just a "steep" section.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Find <code>tan(60°)</code> and <code>sec(45°)</code> using Chapter 3's exact values.</p>
+    <details class="step" open><summary>Step 1 — tan(60°): divide sin by cos</summary>
+      <div class="step-body"><p>\(\tan60° = \dfrac{\sin60°}{\cos60°} = \dfrac{\sqrt3/2}{1/2} = \sqrt3\)</p></div></details>
+    <details class="step"><summary>Step 2 — sec(45°): reciprocal of cos</summary>
+      <div class="step-body"><p>\(\sec45° = \dfrac{1}{\cos45°} = \dfrac{1}{\sqrt2/2} = \dfrac{2}{\sqrt2} = \sqrt2\)</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — cotangent and cosecant</div>
+    <p>Find <code>cot(30°)</code> and <code>csc(60°)</code>.</p>
+    <details class="step" open><summary>Step 1 — cot(30°): divide cos by sin</summary>
+      <div class="step-body"><p>\(\cot30° = \dfrac{\cos30°}{\sin30°} = \dfrac{\sqrt3/2}{1/2} = \sqrt3\)</p></div></details>
+    <details class="step"><summary>Step 2 — csc(60°): reciprocal of sin</summary>
+      <div class="step-body"><p>\(\csc60° = \dfrac{1}{\sin60°} = \dfrac{1}{\sqrt3/2} = \dfrac{2}{\sqrt3} = \dfrac{2\sqrt3}{3}\)</p></div></details>
+    <details class="step"><summary>Notice</summary>
+      <div class="step-body"><p>\(\cot30° = \tan60°\) — both equal \(\sqrt3\). That's not a coincidence: 30° and 60° are complementary, and this pattern (cofunction of an angle equals the function of its complement) is a real identity you'll see used later, even though this course doesn't name it formally.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>The naming trap: <strong>secant is the reciprocal of cosine, not sine</strong> — and <strong>cosecant is the reciprocal of sine, not cosine</strong>. It's backwards from what the "co-" prefix seems to suggest. Sine and cosine are <em>cofunctions</em> of each other, but "cosecant" does not mean "reciprocal of cosine" — it means "the co-function's reciprocal," and sine's cofunction is cosine only in the sense of complementary angles, not in the reciprocal pairing. The actual reciprocal pairs are: sin↔csc, cos↔sec, tan↔cot. When in doubt, don't guess from the name — go back to equation 2.4.2.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="1">
+    <div class="label">Try it yourself</div>
+    <p>What is <code>tan(45°)</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" inputmode="numeric" placeholder="e.g. 1" aria-label="tangent of 45 degrees">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Find <code>sec(60°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">\(\sec60°=1/\cos60°=1/(1/2)=2\)</div></details></li>
+    <li>Find <code>csc(30°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">\(\csc30°=1/\sin30°=1/(1/2)=2\)</div></details></li>
+    <li>Find <code>cot(45°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">\(\cot45°=\cos45°/\sin45°=1\)</div></details></li>
+    <li>Find <code>tan(30°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">\(\tan30°=\sin30°/\cos30°=(1/2)/(\sqrt3/2)=1/\sqrt3=\sqrt3/3\)</div></details></li>
+    <li>At which angle(s) in <code>[0°, 360°)</code> is <code>tan θ</code> undefined?
+      <details class="answer"><summary></summary><div class="ans-body">90° and 270° (where cos θ = 0)</div></details></li>
+    <li>At which angle(s) in <code>[0°, 360°)</code> is <code>csc θ</code> undefined?
+      <details class="answer"><summary></summary><div class="ans-body">0° and 180° (where sin θ = 0)</div></details></li>
+    <li class="tag">bonus — Find <code>sec(120°)</code> exactly. (Use Chapter 3's sign rules.)
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos120°=-1/2\), so \(\sec120°=1/(-1/2)=-2\)</div></details></li>
+    <li class="tag">bonus — Find <code>cot(90°)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(\cos90°/\sin90°=0/1=0\)</div></details></li>
+    <li class="tag">bonus — Is it possible for <code>sec θ</code> to equal <code>0.5</code>? Explain using the definition.
+      <details class="answer"><summary></summary><div class="ans-body">No. \(\sec\theta=1/\cos\theta\), and \(|\cos\theta|\le1\) always, so \(|\sec\theta|\ge1\) always — it can never land strictly between -1 and 1.</div></details></li>
+    <li class="tag">bonus — Find <code>tan(135°)</code> exactly.
+      <details class="answer"><summary></summary><div class="ans-body">Reference angle 45°, QII: \(\sin135°=\sqrt2/2\), \(\cos135°=-\sqrt2/2\), so \(\tan135°=-1\)</div></details></li>
+    <li class="tag">challenge — Explain, from the definitions in 2.4.1–2.4.2, why <code>tan θ · cot θ = 1</code> for every θ where both are defined.
+      <details class="answer"><summary></summary><div class="ans-body">\(\tan\theta\cdot\cot\theta = \dfrac{\sin\theta}{\cos\theta}\cdot\dfrac{\cos\theta}{\sin\theta} = \dfrac{\sin\theta\cos\theta}{\cos\theta\sin\theta}=1\) — direct algebra from the quotient definitions, with no new fact needed.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch03-exact-values.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch05-right-triangle-trig.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 4 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:4", "content/m02-trigonometry/ch04-tan-cot-sec-csc.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

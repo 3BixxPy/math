@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 3 — Transforming Exponential Graphs | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 3 · Exponentials &amp; Logarithms</a> → Chapter 3 of 10</div>
+  <div class="eyebrow">Chapter 3 · concept:exponential-transformations</div>
+  <h1>Transforming Exponential Graphs</h1>
+  <p class="subtitle">Nothing new to learn here about <em>how</em> transformations work — Module 1, Chapter 6 already covered shifts in full generality. This chapter is just that same rule, applied to the new shape from Chapter 1, with one twist worth catching early: the asymptote moves too.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>The whole point of learning transformations once, generally, in Module 1 was to never have to re-derive them for every new function family. Exponentials are the first real test of that payoff: <code>concept:vertical-shift</code> and <code>concept:horizontal-shift</code> apply here completely unchanged. The only genuinely new fact is what a vertical shift does to an exponential's <em>asymptote</em> — something a parabola never had to worry about.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — General transformed exponential</div>
+    <div class="eqn"><div class="eq-body">\[ f(x) = a\cdot b^{\,x-h} + k \]</div><div class="eq-num" id="eq-3-3-1">(3.3.1)</div></div>
+    <p>Same shift rules as Module 1, Chapter 6: <code>h</code> shifts horizontally (right if <code>h &gt; 0</code>), <code>k</code> shifts vertically (up if <code>k &gt; 0</code>) — reused directly, not re-derived. <code>a</code> still stretches/reflects exactly as in Module 1, Chapter 7.</p>
+  </div>
+
+  <div class="block theorem">
+    <div class="label">Rule — The asymptote moves with k</div>
+    <div class="eqn"><div class="eq-body">\[ y = k \]</div><div class="eq-num" id="eq-3-3-2">(3.3.2)</div></div>
+    <p>The base exponential <code>bˣ</code> has asymptote <code>y=0</code> (Chapter 1). Adding <code>+k</code> shifts the <em>entire graph</em> up or down by <code>k</code> — asymptote included. So the transformed function's horizontal asymptote is <code>y = k</code>, not <code>y = 0</code>. A horizontal shift (the <code>h</code>) does <em>not</em> move the asymptote — it only slides points left/right along the same eventual height.</p>
+  </div>
+
+  <div class="live-diagram-controls">
+    <label>h: <input type="range" id="et-h" min="-4" max="4" step="1" value="2"></label>
+    <label>k: <input type="range" id="et-k" min="-4" max="4" step="1" value="1"></label>
+  </div>
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--ex-border)"></span>y = 2ˣ (baseline)</span><span><span class="swatch" style="background:var(--accent)"></span>y = 2^(x−h) + k</span></div>
+  <div class="plot-wrap"><svg id="et-svg" viewBox="0 0 320 320" width="320" height="320"></svg></div>
+  <div class="live-readout-wrap"><span class="live-readout" id="et-readout">y = 2^(x−2) + 1 — asymptote y=1</span></div>
+  <script>
+  (function () {
+    const hInput = document.getElementById("et-h");
+    const kInput = document.getElementById("et-k");
+    const opts = { xMin: -6, xMax: 6, yMin: -5, yMax: 9, width: 320, height: 320, pad: 26, xStep: 2, yStep: 2 };
+    const svg = document.getElementById("et-svg");
+    function update() {
+      const h = parseInt(hInput.value, 10);
+      const k = parseInt(kInput.value, 10);
+      MCPlot.drawAxes(svg, opts);
+      MCPlot.plotFunction(svg, (x) => Math.pow(2, x), opts, "plot-curve-alt");
+      MCPlot.plotFunction(svg, (x) => Math.pow(2, x - h) + k, opts, "plot-curve");
+      MCPlot.dashedLine(svg, opts.xMin, k, opts.xMax, k, opts);
+      document.getElementById("et-readout").textContent =
+        "y = 2^(x" + (h >= 0 ? "−" + h : "+" + Math.abs(h)) + ") " + (k >= 0 ? "+ " + k : "− " + Math.abs(k)) +
+        " — asymptote y=" + k;
+    }
+    hInput.addEventListener("input", update);
+    kInput.addEventListener("input", update);
+    update();
+  })();
+  </script>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Graph <code>y = 3^(x+2) − 1</code>: state its horizontal asymptote and y-intercept.</p>
+    <details class="step" open><summary>Step 1 — identify h and k by matching the general form a·b^(x−h)+k</summary>
+      <div class="step-body"><p>\(3^{x+2} = 3^{x-(-2)}\), so \(h=-2\) (shift left 2) and \(k=-1\) (shift down 1).</p></div></details>
+    <details class="step"><summary>Step 2 — the asymptote follows k directly</summary>
+      <div class="step-body"><p>Horizontal asymptote: \(y = -1\) (equation 3.3.2, not \(y=0\) — the vertical shift moved it).</p></div></details>
+    <details class="step"><summary>Step 3 — find the y-intercept by evaluating at x=0</summary>
+      <div class="step-body"><p>\(y = 3^{0+2}-1 = 3^2-1 = 9-1 = 8\). Y-intercept: \((0,8)\).</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Forgetting that the horizontal asymptote itself moves with a vertical shift — writing "asymptote <code>y=0</code>" out of habit for <em>any</em> exponential, even <code>y=5^x-3</code>. The base exponential's asymptote is <code>y=0</code> only when there's no <code>+k</code> at all. As soon as a vertical shift is present, the asymptote is <code>y=k</code>, full stop — read it directly off the equation, don't default to zero.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="-3,y=-3">
+    <div class="label">Try it yourself</div>
+    <p>What is the horizontal asymptote of <code>y = 5ˣ − 3</code>?</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. -3" aria-label="horizontal asymptote of y=5^x-3">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>State the horizontal asymptote of <code>y = 2ˣ + 5</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=5\)</div></details></li>
+    <li>State the horizontal asymptote of <code>y = 3^(x-4)</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=0\) — only a horizontal shift, no k term</div></details></li>
+    <li>Find the y-intercept of <code>y = 2ˣ + 3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(2^0+3=4\) → \((0,4)\)</div></details></li>
+    <li>Describe how <code>y = 4^(x-1)</code> relates to <code>y = 4ˣ</code>.
+      <details class="answer"><summary></summary><div class="ans-body">Shifted right 1 — same horizontal-shift rule as Module 1, Chapter 6.</div></details></li>
+    <li>Find the horizontal asymptote of <code>y = 7ˣ − 2</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=-2\)</div></details></li>
+    <li>Find the y-intercept of <code>y = 5^(x+1) − 3</code>.
+      <details class="answer"><summary></summary><div class="ans-body">\(5^{0+1}-3=5-3=2\) → \((0,2)\)</div></details></li>
+    <li class="tag">bonus — Write the equation of <code>y = 2ˣ</code> shifted left 3 and down 1.
+      <details class="answer"><summary></summary><div class="ans-body">\(y=2^{x+3}-1\)</div></details></li>
+    <li class="tag">bonus — Does a horizontal shift ever change the horizontal asymptote? Why or why not?
+      <details class="answer"><summary></summary><div class="ans-body">No — only the vertical shift (k) moves the asymptote. A horizontal shift only slides the curve's points left/right along the same eventual height.</div></details></li>
+    <li class="tag">bonus — Find the asymptote and y-intercept of <code>y = -2ˣ + 4</code> (the negative sign reflects the curve — Module 1, Chapter 7).
+      <details class="answer"><summary></summary><div class="ans-body">Asymptote \(y=4\); y-intercept: \(-2^0+4=-1+4=3\) → \((0,3)\)</div></details></li>
+    <li class="tag">bonus — Two students disagree about the asymptote of <code>y = 3^(x-5) + 2</code>: one says <code>y=0</code>, the other says <code>y=2</code>. Who's right, and why?
+      <details class="answer"><summary></summary><div class="ans-body">\(y=2\) is right — only \(k\) (the vertical shift) moves the asymptote; the "−5" is a horizontal shift and has no effect on it.</div></details></li>
+    <li class="tag">challenge — Find <code>a</code> so that <code>f(x) = a·(1/2)ˣ − 4</code> passes through the point <code>(0, -1)</code>. What is the resulting horizontal asymptote?
+      <details class="answer"><summary></summary><div class="ans-body">\(f(0)=a\cdot(1/2)^0-4=a-4=-1 \Rightarrow a=3\). So \(f(x)=3\cdot(1/2)^x-4\); asymptote \(y=-4\) (from the \(-4\), unaffected by the value of a).</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch02-natural-exponentials-e.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch04-logarithms-inverse.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 3 · Exponentials &amp; Logarithms</span>
+  <span>Chapter 3 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m03:3", "content/m03-exp-log/ch03-exponential-transformations.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

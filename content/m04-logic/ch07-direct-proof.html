@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 7 — Direct Proof | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 4 · Logic &amp; Proof Foundations</a> → Chapter 7 of 10</div>
+  <div class="eyebrow">Chapter 7 · concept:direct-proof, concept:even-odd-definitions</div>
+  <h1>Direct Proof</h1>
+  <p class="subtitle">Six chapters of vocabulary — connectives, conditionals, equivalence, quantifiers, sets — all in service of this: actually writing a proof. A direct proof is the plainest kind, and it's exactly the thing you do every time you trace a signal through a circuit you already trust.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>When you trace a signal through a schematic — this wire is high because that gate's inputs were high, which followed from this earlier stage, which followed from the given inputs — you're doing a direct proof. You start from what's given (the hypothesis, the input values), you apply known, already-verified rules one at a time (each gate's truth table, or a subcircuit you already proved correct), and you arrive at the output (the conclusion) with no gaps. A mathematical direct proof is that same chain, written in sentences instead of wires: assume p, apply definitions and established facts through valid steps, land on q.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Direct proof</div>
+    <p>To directly prove <code>p ⇒ q</code>: assume p is true, then use definitions, algebra, and previously established results — through a chain of valid implications — to show q must also be true. Each link in the chain has to be justified (a definition, a prior theorem, a valid algebraic step); "it looks right" is not a link.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Even and odd integers</div>
+    <div class="eqn"><div class="eq-body">\[ n \text{ is even} \iff n = 2k \text{ for some integer } k \]</div><div class="eq-num" id="eq-4-7-1">(4.7.1)</div></div>
+    <div class="eqn"><div class="eq-body">\[ n \text{ is odd} \iff n = 2k+1 \text{ for some integer } k \]</div><div class="eq-num" id="eq-4-7-2">(4.7.2)</div></div>
+    <p>These look almost too obvious to write down — but from here on, "even" and "odd" mean <em>exactly</em> these algebraic forms and nothing fuzzier. Every proof about even/odd numbers for the rest of this course starts by invoking 4.7.1 or 4.7.2 to turn a word into an equation you can actually manipulate.</p>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — template proof: the sum of two even integers is even</div>
+    <p>Claim: if <code>m</code> and <code>n</code> are even, then <code>m + n</code> is even. Each step below is labeled with its justification — that labeling <em>is</em> the proof, not decoration.</p>
+    <details class="step" open><summary>Step 1 — assume the hypothesis</summary>
+      <div class="step-body"><p>Let m and n be even integers.</p></div></details>
+    <details class="step"><summary>Step 2 — apply the definition of even (4.7.1) to each</summary>
+      <div class="step-body"><p>Since m is even, \(m=2j\) for some integer j. Since n is even, \(n=2k\) for some integer k. (Different letters — nothing says m and n use the <em>same</em> k.)</p></div></details>
+    <details class="step"><summary>Step 3 — add them and factor (algebra)</summary>
+      <div class="step-body"><p>\(m+n = 2j+2k = 2(j+k)\)</p></div></details>
+    <details class="step"><summary>Step 4 — recognize the form of 4.7.1</summary>
+      <div class="step-body"><p>\(j+k\) is an integer (integers are closed under addition), so \(m+n = 2\cdot(\text{integer})\) — exactly the form equation 4.7.1 requires.</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Therefore m+n is even. Every step followed from either a definition or plain algebra — no gap, and it works for <em>every</em> pair of even integers at once, not just an example pair.</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — if n is odd, then n² is odd</div>
+    <p>Claim: if <code>n</code> is odd, then <code>n²</code> is odd. (This exact claim comes back in Chapter 8, proved a completely different way — worth remembering.)</p>
+    <details class="step" open><summary>Step 1 — assume the hypothesis, apply the definition (4.7.2)</summary>
+      <div class="step-body"><p>Let n be odd. Then \(n = 2k+1\) for some integer k.</p></div></details>
+    <details class="step"><summary>Step 2 — square it</summary>
+      <div class="step-body"><p>\(n^2 = (2k+1)^2 = 4k^2+4k+1\)</p></div></details>
+    <details class="step"><summary>Step 3 — factor to expose the "2·(integer)+1" shape</summary>
+      <div class="step-body"><p>\(4k^2+4k+1 = 2(2k^2+2k)+1\)</p></div></details>
+    <details class="step"><summary>Result</summary>
+      <div class="step-body"><p>Let \(m = 2k^2+2k\) — an integer, since integers are closed under multiplication and addition. Then \(n^2 = 2m+1\), exactly the form equation 4.7.2 requires. So n² is odd.</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>"Proving" a general claim by checking one specific number: plugging in n=3, confirming 3² = 9 is odd, and declaring the claim proved. That confirms the claim for <em>one</em> input — it says nothing about the other infinitely many odd integers. Checking an example is useful for building confidence a claim is <em>plausible</em>, or for finding a counterexample that kills a false claim in one shot — but it can never establish a claim that's supposed to hold for every case, because no finite number of examples covers an infinite domain. Only reasoning about the general form (n=2k+1, an arbitrary representative, not a specific number) proves it. This is exactly the gap between "I tested it on a few inputs" and "I verified the circuit for all input combinations" — a truth table with all rows is a proof; five example rows is not.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2k,2k for some integer k">
+    <div class="label">Try it yourself</div>
+    <p>Fill in the blank: "If n is even, then n = ___ for some integer k."</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 2k" aria-label="fill in definition of even">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>Prove: if <code>n</code> is even, then <code>n + 1</code> is odd.
+      <details class="answer"><summary></summary><div class="ans-body">n=2k (def. even). n+1=2k+1, exactly the form of 4.7.2 ⟹ n+1 is odd.</div></details></li>
+    <li>Prove: if <code>n</code> is even, then <code>3n</code> is even.
+      <details class="answer"><summary></summary><div class="ans-body">n=2k. 3n=3(2k)=2(3k), and 3k is an integer ⟹ 3n is even by 4.7.1.</div></details></li>
+    <li>Prove: the product of two odd integers is odd.
+      <details class="answer"><summary></summary><div class="ans-body">m=2j+1, n=2k+1. mn=(2j+1)(2k+1)=4jk+2j+2k+1=2(2jk+j+k)+1, form of 4.7.2 ⟹ mn is odd.</div></details></li>
+    <li>Prove: if <code>n</code> is an integer, then <code>n² + n</code> is even. (Hint: consider n even and n odd as two separate cases.)
+      <details class="answer"><summary></summary><div class="ans-body">Case n even: n=2k, n²+n=4k²+2k=2(2k²+k), even. Case n odd: n=2k+1, n²+n=(2k+1)²+(2k+1)=4k²+6k+2=2(2k²+3k+1), even. Either way, n²+n is even.</div></details></li>
+    <li>Is "sum of two odd integers" even or odd? Prove it.
+      <details class="answer"><summary></summary><div class="ans-body">Even. m=2j+1, n=2k+1. m+n=2j+2k+2=2(j+k+1), form of 4.7.1.</div></details></li>
+    <li>Spot the gap: "Claim: n²−n is always even. Proof: 3²−3=6, even. QED." What's wrong, and what would a real proof need instead?
+      <details class="answer"><summary></summary><div class="ans-body">Checked exactly one value (n=3); doesn't establish the general claim. A real proof needs the even/odd case split like problem 4, working with a general n = 2k or 2k+1.</div></details></li>
+    <li class="tag">bonus — Prove: if <code>a</code> and <code>b</code> are both even, then <code>ab</code> is divisible by 4.
+      <details class="answer"><summary></summary><div class="ans-body">a=2j, b=2k. ab=4jk, and jk is an integer ⟹ ab=4·(integer), divisible by 4.</div></details></li>
+    <li class="tag">bonus — Prove: the sum of any three consecutive integers is divisible by 3. (Let the integers be n, n+1, n+2.)
+      <details class="answer"><summary></summary><div class="ans-body">n+(n+1)+(n+2)=3n+3=3(n+1), and n+1 is an integer ⟹ divisible by 3.</div></details></li>
+    <li class="tag">bonus — Prove: if <code>n</code> is odd, then <code>n + 2</code> is odd.
+      <details class="answer"><summary></summary><div class="ans-body">n=2k+1. n+2=2k+3=2(k+1)+1, form of 4.7.2 (with integer k+1) ⟹ odd.</div></details></li>
+    <li class="tag">bonus — Why does the proof of "sum of two evens is even" use two different letters (j and k) instead of writing both as 2k?
+      <details class="answer"><summary></summary><div class="ans-body">m and n are only known to individually be even — nothing says they share the same "multiplier." Writing both as 2k would silently (and wrongly) assume m=n.</div></details></li>
+    <li class="tag">challenge — Prove: if <code>n</code> is even, then <code>n³</code> is even, <em>without</em> splitting into cases — using only the definition and algebra, in the same style as the sum-of-evens template.
+      <details class="answer"><summary></summary><div class="ans-body">n=2k (def. even). \(n^3=(2k)^3=8k^3=2(4k^3)\), and \(4k^3\) is an integer ⟹ n³ is even by 4.7.1.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch06-sets-and-logic.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch08-contrapositive-contradiction.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 4 · Logic &amp; Proof Foundations</span>
+  <span>Chapter 7 / 10</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m04:7", "content/m04-logic/ch07-direct-proof.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>

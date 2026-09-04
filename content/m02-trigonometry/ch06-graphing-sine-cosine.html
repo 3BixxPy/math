@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ch. 6 — Graphing y = sin x and y = cos x | Math Curriculum</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/styles.css?v=7">
+<script src="../../assets/plot.js?v=7"></script>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">∑ Math Curriculum</a>
+    <nav><a href="../../index.html">Today</a><a href="../../review.html">Review</a><a href="../../roadmap.html">Roadmap</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../../roadmap.html">Module 2 · Trigonometry</a> → Chapter 6 of 15</div>
+  <div class="eyebrow">Chapter 6 · concept:periodic-functions, concept:sine-cosine-graphs</div>
+  <h1>Graphing y = sin x and y = cos x</h1>
+  <p class="subtitle">The diagnostic's "something about a wave" was pointing at this graph. Now it gets an equation, a precise period, and marked coordinates instead of a vague shape.</p>
+
+  <div class="block intuition">
+    <div class="label">Why this matters</div>
+    <p>Every value you computed by hand in Chapters 2–4 is one point on this graph. Plotting them in order — as the angle sweeps around the unit circle over and over — is what produces the wave. The wave isn't a new idea; it's the same circle unrolled along an x-axis.</p>
+  </div>
+
+  <div class="block definition">
+    <div class="label">Definition — Periodic function</div>
+    <p>A function \(f\) is <strong>periodic</strong> with period \(p\) if \(f(x+p)=f(x)\) for every \(x\), and \(p\) is the smallest positive number for which that's true. Since going all the way around the unit circle (\(2\pi\) radians) always lands back on the same point (Chapter 2), sine and cosine repeat every \(2\pi\):</p>
+    <div class="eqn"><div class="eq-body">\[ \sin(x+2\pi) = \sin x \]</div><div class="eq-num" id="eq-2-6-1">(2.6.1)</div></div>
+    <p>The same holds for cosine: \(\cos(x+2\pi)=\cos x\). Both have period exactly \(2\pi\) — no smaller number works for every \(x\).</p>
+  </div>
+
+  <div class="plot-legend"><span><span class="swatch" style="background:var(--accent)"></span>y = sin x</span><span><span class="swatch" style="background:var(--ex-border)"></span>y = cos x</span></div>
+  <div class="plot-wrap"><svg id="sc-svg" viewBox="0 0 520 260" width="520" height="260"></svg></div>
+  <script>
+  (function () {
+    const svg = document.getElementById("sc-svg");
+    const PI = Math.PI;
+    const opts = { xMin: -2 * PI, xMax: 2 * PI, yMin: -1.4, yMax: 1.4, width: 520, height: 260, pad: 30 };
+    const { px, py } = MCPlot.mapper(opts);
+    svg.appendChild(MCPlot.el("line", { x1: px(opts.xMin), y1: py(0), x2: px(opts.xMax), y2: py(0), class: "plot-axis" }));
+    svg.appendChild(MCPlot.el("line", { x1: px(0), y1: py(opts.yMin), x2: px(0), y2: py(opts.yMax), class: "plot-axis" }));
+    const marks = [-2, -1.5, -1, -0.5, 0.5, 1, 1.5, 2];
+    const labels = ["-2π", "-3π/2", "-π", "-π/2", "π/2", "π", "3π/2", "2π"];
+    marks.forEach((m, i) => {
+      const xv = m * PI;
+      svg.appendChild(MCPlot.el("line", { x1: px(xv), y1: py(opts.yMin), x2: px(xv), y2: py(opts.yMax), class: "plot-grid" }));
+      const t = MCPlot.el("text", { x: px(xv), y: py(0) + 15, "text-anchor": "middle", class: "plot-label" });
+      t.textContent = labels[i];
+      svg.appendChild(t);
+    });
+    [-1, 1].forEach((yv) => {
+      svg.appendChild(MCPlot.el("line", { x1: px(opts.xMin), y1: py(yv), x2: px(opts.xMax), y2: py(yv), class: "plot-grid" }));
+      const t = MCPlot.el("text", { x: px(0) - 6, y: py(yv) + 3, "text-anchor": "end", class: "plot-label" });
+      t.textContent = String(yv);
+      svg.appendChild(t);
+    });
+    MCPlot.plotFunction(svg, Math.sin, opts, "plot-curve");
+    MCPlot.plotFunction(svg, Math.cos, opts, "plot-curve-alt");
+    const keyXs = [0, PI / 2, PI, 3 * PI / 2, 2 * PI, -PI / 2, -PI, -3 * PI / 2, -2 * PI];
+    MCPlot.plotPoints(svg, keyXs.map((x) => [x, Math.sin(x)]), opts, "plot-point");
+  })();
+  </script>
+  <p class="subtitle" style="text-align:center; margin-top:-.6rem;">Marked points are y = sin x at its key x-values — 0, π/2, π, 3π/2, 2π, and their negative mirrors.</p>
+
+  <div class="block example">
+    <div class="label">Worked example</div>
+    <p>Read the amplitude, period, zeros, maximum, and minimum directly off the graph of <code>y = sin x</code>.</p>
+    <details class="step" open><summary>Step 1 — amplitude: how far the wave swings from its midline</summary>
+      <div class="step-body"><p>The graph never goes above 1 or below -1, and its midline is \(y=0\). Amplitude \(=1\).</p></div></details>
+    <details class="step"><summary>Step 2 — period: the x-distance before the shape repeats</summary>
+      <div class="step-body"><p>The pattern from \(x=0\) to \(x=2\pi\) repeats exactly — period \(=2\pi\) (equation 2.6.1).</p></div></details>
+    <details class="step"><summary>Step 3 — zeros: where the curve crosses y = 0</summary>
+      <div class="step-body"><p>\(x = 0, \pi, 2\pi, -\pi, -2\pi, \ldots\) — every multiple of \(\pi\).</p></div></details>
+    <details class="step"><summary>Step 4 — max and min</summary>
+      <div class="step-body"><p>Maximum \(y=1\) at \(x=\pi/2\) (and every \(2\pi\) after); minimum \(y=-1\) at \(x=3\pi/2\) (or equivalently \(-\pi/2\)).</p></div></details>
+  </div>
+
+  <div class="block example">
+    <div class="label">Worked example — comparing the two curves</div>
+    <p>Using the graph, describe how <code>y = cos x</code> relates to <code>y = sin x</code>.</p>
+    <details class="step" open><summary>Step 1 — compare their starting values at x = 0</summary>
+      <div class="step-body"><p>\(\sin0=0\) (crosses the midline); \(\cos0=1\) (starts at its maximum).</p></div></details>
+    <details class="step"><summary>Step 2 — compare the shapes</summary>
+      <div class="step-body"><p>The two curves have identical shape, amplitude, and period — cosine's graph is just sine's graph shifted left by \(\pi/2\). (Chapter 7 makes this precise as a phase shift.)</p></div></details>
+  </div>
+
+  <div class="block mistake">
+    <div class="label">Common mistake</div>
+    <p>Mixing up which curve starts at a maximum. <strong>Cosine</strong> starts at its maximum (\(\cos0=1\)) — sine starts at the <em>midline</em> going up (\(\sin0=0\)). If you only remember one anchor fact, remember \(\sin0=0\): sine passes through the origin. Everything else about the shape can be re-derived from the unit circle points in Chapter 2 if you forget.</p>
+  </div>
+
+  <div class="block practice checker" data-answers="2pi,2π">
+    <div class="label">Try it yourself</div>
+    <p>What is the period of <code>y = sin x</code>, in terms of π? (type e.g. <code>2pi</code>)</p>
+    <div class="row">
+      <input type="text" class="checker-input" placeholder="e.g. 2pi" aria-label="period of sine">
+      <button class="btn checker-btn" type="button">Check</button>
+    </div>
+    <p class="checker-feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Practice</h2>
+  <ol class="problems">
+    <li>What is the amplitude of <code>y = cos x</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(1\)</div></details></li>
+    <li>Where does <code>y = cos x</code> equal zero, for <code>x</code> in <code>[0, 2π]</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(x=\pi/2\) and \(x=3\pi/2\)</div></details></li>
+    <li>At what x-value does <code>y = cos x</code> reach its minimum, for <code>x</code> in <code>[0, 2π]</code>?
+      <details class="answer"><summary></summary><div class="ans-body">\(x=\pi\)</div></details></li>
+    <li>Is <code>y = sin x</code> increasing or decreasing on the interval <code>(π/2, π)</code>?
+      <details class="answer"><summary></summary><div class="ans-body">Decreasing — it's falling from its max at π/2 toward zero at π.</div></details></li>
+    <li>Sketch mentally: for <code>x</code> in <code>[-2π, 0]</code>, at what x-value does <code>y = sin x</code> reach its maximum?
+      <details class="answer"><summary></summary><div class="ans-body">\(x=-3\pi/2\) (equivalent to \(\pi/2\) one period earlier)</div></details></li>
+    <li>True or false: <code>sin(x + 2π) = sin(x)</code> for every real x. Justify briefly.
+      <details class="answer"><summary></summary><div class="ans-body">True — equation 2.6.1, since adding \(2\pi\) is one full trip around the unit circle back to the same point.</div></details></li>
+    <li class="tag">bonus — Is <code>sin(3π)</code> equal to <code>sin(π)</code>? Explain using periodicity.
+      <details class="answer"><summary></summary><div class="ans-body">Yes — \(3\pi = \pi + 2\pi\), one full period later, so \(\sin(3\pi)=\sin(\pi)=0\).</div></details></li>
+    <li class="tag">bonus — Is <code>4π</code> also a valid period of <code>y = sin x</code> (i.e. does <code>sin(x+4π)=sin(x)</code>)? Is it <em>the</em> period?
+      <details class="answer"><summary></summary><div class="ans-body">The identity holds (it's two full periods), but it's not <em>the</em> period — "the period" means the smallest such positive number, which is \(2\pi\).</div></details></li>
+    <li class="tag">bonus — For <code>x</code> in <code>[0, 2π]</code>, at how many x-values does <code>y = sin x</code> equal <code>0</code>?
+      <details class="answer"><summary></summary><div class="ans-body">Three: \(x=0,\pi,2\pi\)</div></details></li>
+    <li class="tag">bonus — Which function, sin or cos, is an even function (symmetric about the y-axis), based on the graph?
+      <details class="answer"><summary></summary><div class="ans-body">cos x — its graph is a mirror image across the y-axis (\(\cos(-x)=\cos x\)). sin x is odd instead (\(\sin(-x)=-\sin x\)).</div></details></li>
+    <li class="tag">challenge — Using only the unit circle (Chapter 2), explain why <code>sin(-x) = -sin(x)</code> for every x — this is exactly what makes the graph of sine symmetric about the origin.
+      <details class="answer"><summary></summary><div class="ans-body">Angle \(-x\) is the mirror image of angle \(x\) reflected across the x-axis on the unit circle: same x-coordinate, opposite y-coordinate. Since \(\sin\theta\) is the y-coordinate, \(\sin(-x)=-\sin(x)\) follows directly from the reflection — no graph-reading required, just the definition.</div></details></li>
+  </ol>
+
+  <div id="chapter-done-card"></div>
+
+  <div id="ask-ai-card"></div>
+
+  <div class="row" style="margin-top:2rem;">
+    <a class="btn secondary" href="ch05-right-triangle-trig.html">← Previous chapter</a>
+    <a class="btn secondary" href="../../index.html">Dashboard</a>
+    <a class="btn secondary" href="ch07-trig-transformations.html">Next chapter →</a>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <span>Module 2 · Trigonometry</span>
+  <span>Chapter 6 / 15</span>
+</footer>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../assets/app.js?v=7"></script>
+<script>MC.renderMath(document.body); MC.initCheckers(document.body); MC.initChapterDone("m02:6", "content/m02-trigonometry/ch06-graphing-sine-cosine.html"); MC.initAskAi("ask-ai-card");</script>
+</body>
+</html>
